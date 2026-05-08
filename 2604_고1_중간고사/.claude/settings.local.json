@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Kids/70_HighSchool/**)",
+      "Read(//c/Kids/**)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(python -c \"import json; json.load\\(open\\('C:/Users/admin/.claude/settings.json'\\)\\); print\\('OK: valid JSON'\\)\")",
+      "Bash(python -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "Bash(magick -version)",
+      "Bash(convert -version)",
+      "Bash(ffmpeg -version)",
+      "Bash(mkdir -p 01_capture/figs)",
+      "Bash(python -c \"from PIL import Image; im=Image.open\\(r'01_capture/20260426_수1.jpg'\\); print\\('수1:', im.size\\); im=Image.open\\(r'01_capture/20260426_수4.jpg'\\); print\\('수4:', im.size\\)\")",
+      "Bash(mkdir -p \"c:/Kids/70_HighSchool/2604_고1_중간고사/.claude/skills/math-error-note\")",
+      "Bash(mkdir -p \"c:/Kids/70_HighSchool/2604_고1_중간고사/.claude/skills/math-practice\")",
+      "Bash(mkdir -p \"c:/Kids/70_HighSchool/2604_고1_중간고사/.claude/agents\")",
+      "Bash(mv \"C:\\\\Kids\\\\70_HighSchool\\\\2604_고1_중간고사\\\\.gitignore\" \"C:\\\\Kids\\\\70_HighSchool\\\\.gitignore\" && echo \"done\")",
+      "Bash(git add *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Kids\\70_HighSchool"
+    ]
+  }
+}

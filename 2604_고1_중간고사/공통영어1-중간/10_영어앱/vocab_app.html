@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>어휘 드릴 — 공통영어1</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#4361EE;--purple:#7c3aed;--green:#16a34a;--amber:#d97706;--cyan:#0891b2;--red:#dc2626;
+      --bg:#f8fafc;--surface:#ffffff;--border:#e2e8f0;--text:#1e293b;--muted:#64748b;--light:#f1f5f9;
+      --org:#4361EE;--cog:#7c3aed;--bio:#16a34a;--soc:#d97706;--tech:#0891b2;--sci:#dc2626;
+    }
+    html,body{height:100%;background:var(--bg);font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);overflow:hidden}
+    body{display:flex;flex-direction:column;max-width:480px;margin:0 auto;height:100dvh}
+
+    /* Header */
+    .app-header{padding:12px 16px 8px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+    .app-title{font-size:16px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:6px}
+    .app-title span{font-size:12px;font-weight:400;color:var(--muted)}
+
+    /* Cluster filter */
+    .cluster-bar{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;background:var(--surface);
+      border-bottom:1px solid var(--border);flex-shrink:0;scrollbar-width:none}
+    .cluster-bar::-webkit-scrollbar{display:none}
+    .chip{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;
+      border:1.5px solid var(--border);background:var(--light);color:var(--muted);white-space:nowrap;transition:all .15s}
+    .chip[data-cls="all"]{--c:#1e293b}
+    .chip[data-cls="org"]{--c:var(--org)} .chip[data-cls="cog"]{--c:var(--cog)}
+    .chip[data-cls="bio"]{--c:var(--bio)} .chip[data-cls="soc"]{--c:var(--soc)}
+    .chip[data-cls="tech"]{--c:var(--tech)} .chip[data-cls="sci"]{--c:var(--sci)}
+    .chip.active{border-color:var(--c,var(--blue));background:var(--c,var(--blue));color:#fff}
+
+    /* Main scroll area */
+    .main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    .view{display:none;padding:16px}
+    .view.active{display:block}
+
+    /* Bottom nav */
+    .bottom-nav{display:flex;background:var(--surface);border-top:1px solid var(--border);flex-shrink:0}
+    .nav-btn{flex:1;padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:2px;
+      cursor:pointer;border:none;background:none;color:var(--muted);font-size:10px;font-weight:600;transition:color .15s}
+    .nav-btn .icon{font-size:20px;line-height:1}
+    .nav-btn.active{color:var(--blue)}
+
+    /* ===== BROWSE VIEW ===== */
+    .word-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .word-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;
+      padding:14px 12px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+    .word-card:active{transform:scale(.97)}
+    .word-card.learned::after{content:'✓';position:absolute;top:6px;right:8px;font-size:11px;color:var(--green);font-weight:700}
+    .wc-word{font-size:16px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.2}
+    .wc-pos{font-size:11px;color:var(--muted);margin-bottom:8px}
+    .cls-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
+    .wc-cls-label{font-size:10px;font-weight:600;display:flex;align-items:center}
+
+    /* Word detail panel */
+    .detail-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;
+      align-items:flex-end;max-width:480px;margin:auto}
+    .detail-overlay.open{display:flex}
+    .detail-panel{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-height:80vh;
+      overflow-y:auto;padding:24px 20px 32px;animation:slideUp .2s ease}
+    @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .dp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+    .dp-word{font-size:26px;font-weight:800;color:var(--text)}
+    .dp-pos{font-size:13px;color:var(--muted);margin-top:2px}
+    .dp-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--light);
+      cursor:pointer;font-size:18px;line-height:1;color:var(--muted)}
+    .dp-meaning{font-size:20px;font-weight:700;margin-bottom:4px}
+    .dp-meaning-en{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px;line-height:1.4}
+    .dp-example-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px}
+    .dp-example{font-size:14px;line-height:1.6;color:var(--text);background:var(--light);
+      border-radius:10px;padding:12px 14px;margin-bottom:16px}
+    .dp-example em{font-style:normal;font-weight:700;color:var(--blue)}
+    .dp-meta{display:flex;gap:8px;align-items:center;margin-bottom:20px}
+    .dp-src-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--light);color:var(--muted)}
+    .dp-cls-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px}
+    .dp-learn-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s}
+    .dp-learn-btn.unlearned{background:var(--blue);color:#fff}
+    .dp-learn-btn.learned{background:var(--light);color:var(--green)}
+
+    /* ===== QUIZ VIEW ===== */
+    .quiz-start{text-align:center;padding:32px 0}
+    .quiz-pool-info{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+    .quiz-pool-info strong{color:var(--text)}
+    .start-btn{background:var(--blue);color:#fff;border:none;border-radius:14px;padding:16px 40px;
+      font-size:16px;font-weight:700;cursor:pointer;transition:all .15s}
+    .start-btn:active{transform:scale(.97)}
+    .mode-toggle{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+    .mode-btn{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--light);
+      color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+    .mode-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+    /* Quiz session */
+    .quiz-session{display:none}
+    .quiz-progress{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+    .qp-bar{flex:1;height:6px;background:var(--light);border-radius:3px;overflow:hidden}
+    .qp-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s}
+    .qp-text{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+    .quiz-score-chip{font-size:12px;font-weight:700;padding:3px 10px;background:var(--light);border-radius:20px;color:var(--green)}
+    .quiz-card{background:var(--surface);border:2px solid var(--border);border-radius:16px;
+      padding:28px 20px;text-align:center;margin-bottom:20px;min-height:120px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .qc-prompt{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+    .qc-word{font-size:30px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .qc-pos{font-size:13px;color:var(--muted)}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+    .opt-btn{padding:14px 10px;border-radius:12px;border:2px solid var(--border);background:var(--surface);
+      font-size:14px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;line-height:1.3;text-align:center}
+    .opt-btn:active{transform:scale(.97)}
+    .opt-btn.correct{background:#f0fdf4;border-color:var(--green);color:var(--green)}
+    .opt-btn.wrong{background:#fef2f2;border-color:var(--red);color:var(--red)}
+    .opt-btn:disabled{cursor:default}
+    .quiz-feedback{background:var(--light);border-radius:12px;padding:14px;margin-bottom:14px;display:none}
+    .qf-result{font-size:13px;font-weight:700;margin-bottom:6px}
+    .qf-result.ok{color:var(--green)} .qf-result.ng{color:var(--red)}
+    .qf-example{font-size:13px;line-height:1.6;color:var(--text)}
+    .qf-example em{font-style:normal;font-weight:700;color:var(--blue)}
+    .quiz-next-btn{width:100%;padding:14px;border-radius:12px;border:none;background:var(--blue);
+      color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:none}
+
+    /* Quiz end */
+    .quiz-end{display:none;text-align:center;padding:20px 0}
+    .qe-score{font-size:52px;font-weight:900;color:var(--blue);margin-bottom:4px}
+    .qe-label{font-size:14px;color:var(--muted);margin-bottom:24px}
+    .qe-breakdown{background:var(--light);border-radius:14px;padding:16px;margin-bottom:24px;text-align:left}
+    .qe-row{display:flex;justify-content:space-between;padding:5px 0;font-size:14px;border-bottom:1px solid var(--border)}
+    .qe-row:last-child{border-bottom:none}
+    .qe-row .v{font-weight:700}
+    .qe-actions{display:flex;gap:10px}
+    .qe-btn{flex:1;padding:13px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer}
+    .qe-btn.primary{background:var(--blue);color:#fff}
+    .qe-btn.secondary{background:var(--light);color:var(--text)}
+
+    /* Reverse mode card */
+    .qc-meaning-display{font-size:17px;font-weight:600;color:var(--text);line-height:1.4;padding:0 8px}
+    .qc-hint{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* ===== STATS VIEW ===== */
+    .stats-overview{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+    .stat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center}
+    .sc-val{font-size:26px;font-weight:800;color:var(--blue)}
+    .sc-label{font-size:11px;color:var(--muted);margin-top:2px}
+    .stats-section-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;
+      letter-spacing:.05em;margin-bottom:12px;margin-top:4px}
+    .cluster-stat{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .cs-label{font-size:13px;font-weight:700;width:44px;flex-shrink:0}
+    .cs-bar-wrap{flex:1;height:8px;background:var(--light);border-radius:4px;overflow:hidden}
+    .cs-bar-fill{height:100%;border-radius:4px;transition:width .5s}
+    .cs-count{font-size:12px;font-weight:600;color:var(--muted);width:44px;text-align:right;flex-shrink:0}
+    .reset-btn{display:block;width:100%;margin-top:24px;padding:12px;border-radius:12px;
+      border:1.5px solid var(--red);background:none;color:var(--red);font-size:14px;font-weight:700;cursor:pointer}
+
+    /* Helpers */
+    .empty-state{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">📖 어휘 드릴 <span>공통영어1 · 중간고사 지문</span></div>
+</div>
+
+<div class="cluster-bar" id="clusterBar">
+  <button class="chip active" data-cls="all">전체</button>
+  <button class="chip" data-cls="org">조직·리더십</button>
+  <button class="chip" data-cls="cog">인지·창의</button>
+  <button class="chip" data-cls="bio">생물·진화</button>
+  <button class="chip" data-cls="soc">사회·규범</button>
+  <button class="chip" data-cls="tech">기술·정책</button>
+  <button class="chip" data-cls="sci">건강·과학</button>
+</div>
+
+<div class="main">
+  <!-- BROWSE -->
+  <div id="viewBrowse" class="view active">
+    <div class="word-grid" id="wordGrid"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="viewQuiz" class="view">
+    <div class="quiz-start" id="quizStart">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="modeForward" onclick="setMode('forward')">단어 → 뜻</button>
+        <button class="mode-btn" id="modeReverse" onclick="setMode('reverse')">뜻 → 단어</button>
+      </div>
+      <div class="quiz-pool-info" id="quizPoolInfo"></div>
+      <button class="start-btn" onclick="startQuiz()">퀴즈 시작 →</button>
+    </div>
+
+    <div class="quiz-session" id="quizSession">
+      <div class="quiz-progress">
+        <div class="qp-bar"><div class="qp-fill" id="qpFill" style="width:0%"></div></div>
+        <div class="qp-text" id="qpText">1 / 10</div>
+        <div class="quiz-score-chip" id="quizScoreChip">0점</div>
+      </div>
+      <div class="quiz-card" id="quizCard">
+        <div class="qc-prompt" id="qcPrompt">이 단어의 뜻은?</div>
+        <div class="qc-word" id="qcWord"></div>
+        <div class="qc-pos" id="qcPos"></div>
+        <div class="qc-meaning-display" id="qcMeaning" style="display:none"></div>
+        <div class="qc-hint" id="qcHint" style="display:none"></div>
+      </div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback">
+        <div class="qf-result" id="qfResult"></div>
+        <div class="qf-example" id="qfExample"></div>
+      </div>
+      <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">다음 →</button>
+    </div>
+
+    <div class="quiz-end" id="quizEnd">
+      <div class="qe-score" id="qeScore"></div>
+      <div class="qe-label" id="qeLabel"></div>
+      <div class="qe-breakdown" id="qeBreakdown"></div>
+      <div class="qe-actions">
+        <button class="qe-btn secondary" onclick="resetQuizView()">돌아가기</button>
+        <button class="qe-btn primary" onclick="startQuiz()">다시 하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div id="viewStats" class="view">
+    <div class="stats-overview">
+      <div class="stat-card"><div class="sc-val" id="stTotal">0</div><div class="sc-label">전체 단어</div></div>
+      <div class="stat-card"><div class="sc-val" id="stSeen" style="color:var(--amber)">0</div><div class="sc-label">학습 완료</div></div>
+      <div class="stat-card"><div class="sc-val" id="stLearned" style="color:var(--green)">0</div><div class="sc-label">숙지 (2회↑)</div></div>
+    </div>
+    <div class="stats-section-title">클러스터별 진도</div>
+    <div id="clusterStats"></div>
+    <button class="reset-btn" onclick="resetProgress()">초기화 (진도 삭제)</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <button class="nav-btn active" id="navBrowse" onclick="switchTab('browse')">
+    <span class="icon">📚</span>단어장
+  </button>
+  <button class="nav-btn" id="navQuiz" onclick="switchTab('quiz')">
+    <span class="icon">✏️</span>퀴즈
+  </button>
+  <button class="nav-btn" id="navStats" onclick="switchTab('stats')">
+    <span class="icon">📊</span>통계
+  </button>
+</div>
+
+<!-- Detail overlay -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detailPanel">
+    <div class="dp-header">
+      <div>
+        <div class="dp-word" id="dpWord"></div>
+        <div class="dp-pos" id="dpPos"></div>
+      </div>
+      <button class="dp-close" onclick="closeDetailDirect()">×</button>
+    </div>
+    <div class="dp-cls-badge" id="dpClsBadge" style="display:inline-block;margin-bottom:14px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px"></div>
+    <div class="dp-meaning" id="dpMeaning"></div>
+    <div class="dp-meaning-en" id="dpMeaningEn"></div>
+    <div class="dp-example-label">예문 (시험 지문)</div>
+    <div class="dp-example" id="dpExample"></div>
+    <div class="dp-meta"><span class="dp-src-badge" id="dpSrc"></span></div>
+    <button class="dp-learn-btn" id="dpLearnBtn" onclick="toggleLearned()"></button>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const CLS_INFO = {
+  org: {label:'조직·리더십', color:'var(--org)'},
+  cog: {label:'인지·창의',   color:'var(--cog)'},
+  bio: {label:'생물·진화',   color:'var(--bio)'},
+  soc: {label:'사회·규범',   color:'var(--soc)'},
+  tech:{label:'기술·정책',   color:'var(--tech)'},
+  sci: {label:'건강·과학',   color:'var(--sci)'},
+};
+
+const VOCAB = [
+  // ─── 조직·리더십 (org) ───────────────────────────────────────
+  {id:1,  word:"absolute",      pos:"adj",   meaning:"절대적인",          meaning_en:"not dependent on anything else; unconditional",
+   example:"Nothing about an organization's strategy or business model is <em>absolute</em>.", src:"Q2", cls:"org"},
+  {id:2,  word:"disposable",    pos:"adj",   meaning:"처분 가능한; 소모적인", meaning_en:"able to be thrown away; not permanent or essential",
+   example:"They provide continuity and identity when everything else is <em>disposable</em>.", src:"Q2", cls:"org"},
+  {id:3,  word:"continuity",    pos:"n",     meaning:"연속성; 지속성",      meaning_en:"the unbroken and consistent existence over time",
+   example:"They provide <em>continuity</em> and identity when everything else is disposable.", src:"Q2", cls:"org"},
+  {id:4,  word:"negotiable",    pos:"adj",   meaning:"협상 가능한",         meaning_en:"open to discussion, modification, or change",
+   example:"People understand that everything else is <em>negotiable</em>.", src:"Q2", cls:"org"},
+  {id:5,  word:"adaptive",      pos:"adj",   meaning:"적응하는; 적응력 있는", meaning_en:"able to adjust effectively to different conditions",
+   example:"Organizations with the strongest principles often have the highest <em>adaptive</em> capacity.", src:"Q3", cls:"org"},
+  {id:6,  word:"retain",        pos:"v",     meaning:"유지하다; 보유하다",   meaning_en:"to continue to have; to keep in one's possession",
+   example:"Retaining principles and values during the process of change is essential.", src:"Q3", cls:"org"},
+  {id:7,  word:"anchor",        pos:"n",     meaning:"닻; 의지가 되는 것",  meaning_en:"something that provides stability or security",
+   example:"Retaining values during change is essential to provide an <em>anchor</em>.", src:"Q3", cls:"org"},
+  {id:8,  word:"comprehensive", pos:"adj",   meaning:"포괄적인; 종합적인",  meaning_en:"including all elements; thorough",
+   example:"These cases represent organizational change in its <em>comprehensive</em> and supreme category.", src:"Q3", cls:"org"},
+  {id:9,  word:"reinvent",      pos:"v",     meaning:"재창조하다",          meaning_en:"to change something so that it seems entirely new",
+   example:"Burn the house when it's time to <em>reinvent</em> the company.", src:"Q3", cls:"org"},
+  {id:10, word:"renovate",      pos:"v",     meaning:"개조하다; 보수하다",   meaning_en:"to restore a building to a good state of repair",
+   example:"You are proposing a plan to <em>renovate</em> our city's great historic landmark.", src:"Q7", cls:"org"},
+  {id:11, word:"landmark",      pos:"n",     meaning:"역사적 명소; 랜드마크", meaning_en:"a building or site of historical importance",
+   example:"The plan aims to renovate our city's great historic <em>landmark</em>, the Silverlight Theater.", src:"Q7", cls:"org"},
+  {id:12, word:"preserve",      pos:"v",     meaning:"보존하다; 유지하다",   meaning_en:"to maintain in its original or existing state",
+   example:"Explore alternatives that will <em>preserve</em> the character of the Silverlight Theater.", src:"Q7", cls:"org"},
+  {id:13, word:"utilize",       pos:"v",     meaning:"활용하다; 이용하다",   meaning_en:"to make practical and effective use of",
+   example:"Sports organizations <em>utilized</em> radio to enhance their profits.", src:"Q20", cls:"org"},
+  {id:14, word:"surpass",       pos:"v",     meaning:"능가하다; 뛰어넘다",  meaning_en:"to exceed or be greater than",
+   example:"The invention that soon followed and <em>surpassed</em> radio remains the most significant medium.", src:"Q20", cls:"org"},
+  {id:15, word:"formidable",    pos:"adj",   meaning:"강력한; 위압적인",    meaning_en:"inspiring fear or respect through being impressively powerful",
+   example:"Television provided an incredibly <em>formidable</em> and profitable union between sports and the public.", src:"Q20", cls:"org"},
+  {id:16, word:"patronage",     pos:"n",     meaning:"후원; 지지",          meaning_en:"financial support given by a patron",
+   example:"Radio provided the driving force to secure the era of <em>patronage</em>.", src:"Q20", cls:"org"},
+  {id:17, word:"evident",       pos:"adj",   meaning:"명백한; 분명한",      meaning_en:"clearly seen or understood; obvious",
+   example:"The notion that 'a picture is worth a thousand words' became <em>evident</em> with the invention.", src:"Q20", cls:"org"},
+
+  // ─── 인지·창의·철학 (cog) ──────────────────────────────────────
+  {id:18, word:"unfold",        pos:"v",     meaning:"펼쳐지다; 전개되다",  meaning_en:"to open out or reveal gradually",
+   example:"You can't know everything about how your new life or career might <em>unfold</em>.", src:"Q1", cls:"cog"},
+  {id:19, word:"emerge",        pos:"v",     meaning:"나타나다; 드러나다",   meaning_en:"to become apparent or known; to come out",
+   example:"You just need to keep at it until the picture <em>emerges</em>.", src:"Q1", cls:"cog"},
+  {id:20, word:"gradually",     pos:"adv",   meaning:"점점; 서서히",        meaning_en:"slowly, over a long period of time",
+   example:"Accept that the full picture is going to emerge <em>gradually</em> rather than instantly.", src:"Q1", cls:"cog"},
+  {id:21, word:"creativity",    pos:"n",     meaning:"창의성",              meaning_en:"the ability to produce original and imaginative ideas",
+   example:"The technique was developed to help writers and artists overcome a loss of <em>creativity</em>.", src:"Q4", cls:"cog"},
+  {id:22, word:"overcome",      pos:"v",     meaning:"극복하다",            meaning_en:"to succeed in dealing with a problem or difficulty",
+   example:"The technique was developed to help writers <em>overcome</em> a loss of creativity.", src:"Q4", cls:"cog"},
+  {id:23, word:"self-evident",  pos:"adj",   meaning:"자명한; 명백히 분명한", meaning_en:"not needing to be demonstrated or explained; obvious",
+   example:"Descartes hoped to base all knowledge on <em>self-evident</em> propositions.", src:"Q15", cls:"cog"},
+  {id:24, word:"proposition",   pos:"n",     meaning:"명제; 제안",           meaning_en:"a statement that expresses a judgment or opinion",
+   example:"He hoped to base all knowledge on self-evident <em>propositions</em>.", src:"Q15", cls:"cog"},
+  {id:25, word:"priority",      pos:"n",     meaning:"우선순위; 우선권",     meaning_en:"the condition of being more important than others",
+   example:"Descartes thought that reason should take <em>priority</em> over observation.", src:"Q15", cls:"cog"},
+  {id:26, word:"conform",       pos:"v",     meaning:"따르다; 순응하다",     meaning_en:"to comply with rules or standards; to be similar to expected",
+   example:"If the evidence of our senses did not <em>conform</em> to reason, they were likely in error.", src:"Q15", cls:"cog"},
+  {id:27, word:"mislead",       pos:"v",     meaning:"오도하다; 잘못 인도하다", meaning_en:"to cause someone to have a wrong impression",
+   example:"Descartes was aware that his senses frequently <em>misled</em> him.", src:"Q15", cls:"cog"},
+  {id:28, word:"certainty",     pos:"n",     meaning:"확실성; 확신",         meaning_en:"the state of being sure about something",
+   example:"This reflects the philosophical quest for <em>certainty</em> that goes back to René Descartes.", src:"Q15", cls:"cog"},
+  {id:29, word:"justify",       pos:"v",     meaning:"정당화하다; 입증하다", meaning_en:"to show or prove to be right or reasonable",
+   example:"Knowledge aims to be proven knowledge, <em>justified</em> by evidence and reason.", src:"Q15", cls:"cog"},
+  {id:30, word:"perspective",   pos:"n",     meaning:"관점; 시각",           meaning_en:"a particular attitude toward or way of regarding something",
+   example:"Brooks's experiment sounds like a blast or a nightmare, depending on your <em>perspective</em>.", src:"Q18", cls:"cog"},
+  {id:31, word:"convert",       pos:"v",     meaning:"전환하다; 변환하다",   meaning_en:"to change from one form, system, or use to another",
+   example:"The decision helped them <em>convert</em> the energy into something positive, even useful.", src:"Q18", cls:"cog"},
+  {id:32, word:"anxiety",       pos:"n",     meaning:"불안; 걱정",           meaning_en:"a feeling of worry, nervousness, or unease",
+   example:"Brooks's studies show how stress and <em>anxiety</em> change based on what we tell ourselves.", src:"Q18", cls:"cog"},
+  {id:33, word:"expertise",     pos:"n",     meaning:"전문성; 전문 지식",    meaning_en:"expert skill or knowledge in a particular field",
+   example:"Creativity requires some level of <em>expertise</em>, but expertise and creativity are different things.", src:"논술3", cls:"cog"},
+  {id:34, word:"hinder",        pos:"v",     meaning:"방해하다; 저해하다",   meaning_en:"to make it difficult for something to happen",
+   example:"In some cases expertise can actually <em>hinder</em> creative ability of individuals.", src:"논술3", cls:"cog"},
+  {id:35, word:"diminish",      pos:"v",     meaning:"감소하다; 약해지다",   meaning_en:"to make or become less",
+   example:"As expertise grows, creativity sometimes <em>diminishes</em>.", src:"논술3", cls:"cog"},
+  {id:36, word:"insight",       pos:"n",     meaning:"통찰; 깨달음",         meaning_en:"an accurate and deep understanding of something",
+   example:"Sometimes the best <em>insights</em> come from those outside a particular field.", src:"논술3", cls:"cog"},
+  {id:37, word:"overlook",      pos:"v",     meaning:"간과하다; 못 보고 넘기다", meaning_en:"to fail to notice or consider",
+   example:"When too heavily invested in a task, we may tend to <em>overlook</em> the obvious.", src:"논술3", cls:"cog"},
+  {id:38, word:"rationale",     pos:"n",     meaning:"근거; 이유",           meaning_en:"the logical basis or reasons for a course of action",
+   example:"The <em>rationale</em> is that in order to be truly creative, one must master a field.", src:"논술3", cls:"cog"},
+
+  // ─── 생물·진화 (bio) ──────────────────────────────────────────
+  {id:39, word:"camouflage",    pos:"v/n",   meaning:"위장하다; 위장",       meaning_en:"to hide by making something look like its surroundings",
+   example:"An octopus can change its color, pattern, and texture to <em>camouflage</em> itself.", src:"Q10", cls:"bio"},
+  {id:40, word:"texture",       pos:"n",     meaning:"질감; 결",             meaning_en:"the feel, appearance, or consistency of a surface",
+   example:"An octopus can change its color, pattern, and <em>texture</em> almost instantly.", src:"Q10", cls:"bio"},
+  {id:41, word:"rival",         pos:"v",     meaning:"필적하다; 경쟁하다",   meaning_en:"to be comparable to in quality or extent",
+   example:"In terms of speed and diversity of colors, no other animal can <em>rival</em> octopuses.", src:"Q10", cls:"bio"},
+  {id:42, word:"detection",     pos:"n",     meaning:"탐지; 감지",           meaning_en:"the action of detecting the presence of something",
+   example:"The main purpose of these changes is to avoid <em>detection</em> by their hunters or prey.", src:"Q10", cls:"bio"},
+  {id:43, word:"prey",          pos:"n",     meaning:"먹이; 피식자",         meaning_en:"an animal hunted or caught by another for food",
+   example:"When an octopus encounters its <em>prey</em>, it must decide very quickly which color to choose.", src:"Q10", cls:"bio"},
+  {id:44, word:"sufficient",    pos:"adj",   meaning:"충분한",               meaning_en:"enough for a particular purpose",
+   example:"An octopus has gained <em>sufficient</em> knowledge of surrounding animals to survive.", src:"Q10", cls:"bio"},
+  {id:45, word:"reproduce",     pos:"v",     meaning:"번식하다; 재생하다",   meaning_en:"to produce offspring; to create a copy",
+   example:"They survived and <em>reproduced</em> better than before, and their genes spread.", src:"Q11", cls:"bio"},
+  {id:46, word:"anatomy",       pos:"n",     meaning:"해부학; 신체 구조",    meaning_en:"the branch of science studying bodily structure",
+   example:"There were changes in <em>anatomy</em>, physiology, ecology, life history, psychology, and society.", src:"Q11", cls:"bio"},
+  {id:47, word:"physiology",    pos:"n",     meaning:"생리학; 생리 기능",    meaning_en:"the branch of biology dealing with normal functions of organisms",
+   example:"There were changes in anatomy, <em>physiology</em>, ecology, life history, psychology, and society.", src:"Q11", cls:"bio"},
+  {id:48, word:"fossil",        pos:"n",     meaning:"화석",                 meaning_en:"the preserved remains of a prehistoric organism in rock",
+   example:"<em>Fossil</em> evidence indicates that this dependence arose at the beginning of human evolution.", src:"Q11", cls:"bio"},
+  {id:49, word:"evolution",     pos:"n",     meaning:"진화",                 meaning_en:"the process by which organisms develop over time",
+   example:"This dependence arose at the start of human <em>evolution</em>.", src:"Q11", cls:"bio"},
+  {id:50, word:"predator",      pos:"n",     meaning:"포식자",               meaning_en:"an animal that naturally preys on other animals",
+   example:"Traveling with shells made the octopuses more exposed to <em>predators</em>.", src:"Q16", cls:"bio"},
+  {id:51, word:"shelter",       pos:"n",     meaning:"피신처; 보금자리",     meaning_en:"a place that provides protection from danger or bad weather",
+   example:"Octopuses piled coconut shells as a <em>shelter</em>.", src:"Q16", cls:"bio"},
+  {id:52, word:"expose",        pos:"v",     meaning:"노출시키다",            meaning_en:"to put in a vulnerable or dangerous situation",
+   example:"Traveling with shells forced them to walk slowly, making them more <em>exposed</em> to predators.", src:"Q16", cls:"bio"},
+
+  // ─── 사회·규범·심리 (soc) ──────────────────────────────────────
+  {id:53, word:"empathic",      pos:"adj",   meaning:"공감하는",             meaning_en:"showing an ability to understand and share others' feelings",
+   example:"Listening in an active and <em>empathic</em> way makes mentees develop a clearer understanding.", src:"Q5", cls:"soc"},
+  {id:54, word:"tempting",      pos:"adj",   meaning:"유혹적인; 마음이 끌리는", meaning_en:"appealing to do something, even if it may be unwise",
+   example:"Guide your mentee toward their own answers, no matter how <em>tempting</em> it may be to provide them yourself.", src:"Q5", cls:"soc"},
+  {id:55, word:"bond",          pos:"n",     meaning:"유대; 결속",           meaning_en:"a close connection or relationship",
+   example:"Mentors who speak more tend to build stronger personal <em>bonds</em> over time.", src:"Q5", cls:"soc"},
+  {id:56, word:"intensive",     pos:"adj",   meaning:"집약적인; 집중적인",   meaning_en:"highly concentrated; involving great effort in a short time",
+   example:"Many urban centers obtained food from <em>intensive</em> irrigated agriculture.", src:"Q6", cls:"soc"},
+  {id:57, word:"subsistence",   pos:"n",     meaning:"생계; 자급",           meaning_en:"the action of maintaining oneself at a minimum level",
+   example:"This type of primitive <em>subsistence</em> system has a particularly high output per unit of land.", src:"Q6", cls:"soc"},
+  {id:58, word:"surplus",       pos:"n",     meaning:"잉여; 과잉",           meaning_en:"an amount of something left over when requirements are met",
+   example:"Even if the <em>surplus</em> per family is small, the total surplus within a small area will be large.", src:"Q6", cls:"soc"},
+  {id:59, word:"oversight",     pos:"n",     meaning:"실수; 간과; 감독",     meaning_en:"an unintentional failure to notice or do something",
+   example:"I hope this unfortunate <em>oversight</em> does not damage the warm relationship.", src:"Q9", cls:"soc"},
+  {id:60, word:"offense",       pos:"n",     meaning:"불쾌함; 기분 나쁨",    meaning_en:"an act of causing displeasure or resentment",
+   example:"I certainly meant no <em>offense</em>.", src:"Q9", cls:"soc"},
+  {id:61, word:"prompt",        pos:"v",     meaning:"유발하다; 자극하다",   meaning_en:"to cause someone to take a particular action",
+   example:"There is something in human nature that <em>prompts</em> us to think of our actions as uniquely ours.", src:"Q12", cls:"soc"},
+  {id:62, word:"distinctive",   pos:"adj",   meaning:"특징적인; 독특한",     meaning_en:"characteristic of one person or thing; distinguishable",
+   example:"We think of our actions as the <em>distinctive</em> issue of something uniquely ours.", src:"Q12", cls:"soc"},
+  {id:63, word:"conformity",    pos:"n",     meaning:"순응; 일치",           meaning_en:"compliance with standards; behavior that matches social expectations",
+   example:"Our actions are performances executed in <em>conformity</em> to widely accepted social rules.", src:"Q12", cls:"soc"},
+  {id:64, word:"indulge",       pos:"v",     meaning:"탐닉하다; 마음껏 하다", meaning_en:"to allow oneself to enjoy a pleasure",
+   example:"We <em>indulge</em> the conceit that these rules are our own brilliant accomplishments.", src:"Q12", cls:"soc"},
+  {id:65, word:"accomplishment",pos:"n",     meaning:"업적; 성취",           meaning_en:"something achieved successfully, especially by effort",
+   example:"We indulge the conceit that social rules are our own brilliant <em>accomplishments</em>.", src:"Q12", cls:"soc"},
+  {id:66, word:"conceit",       pos:"n",     meaning:"착각; 자만심",         meaning_en:"an excessively favorable self-opinion; a fanciful notion",
+   example:"We indulge the <em>conceit</em> that social rules are our own brilliant accomplishments.", src:"Q12", cls:"soc"},
+  {id:67, word:"norms",         pos:"n",     meaning:"규범; 기준",           meaning_en:"standard or typical patterns of behavior in a group",
+   example:"Social <em>norms</em> are about the invisible rules that guide your behavior every day.", src:"논술2", cls:"soc"},
+  {id:68, word:"imitate",       pos:"v",     meaning:"모방하다; 흉내내다",   meaning_en:"to follow as a model; to copy",
+   example:"We don't choose our earliest habits, we <em>imitate</em> them.", src:"논술2", cls:"soc"},
+  {id:69, word:"accumulate",    pos:"v",     meaning:"축적하다; 모으다",     meaning_en:"to gather together an increasing amount of something",
+   example:"Elders are believed to have <em>accumulated</em> the knowledge and wisdom needed to preserve social order.", src:"논술4", cls:"soc"},
+  {id:70, word:"reverence",     pos:"n",     meaning:"경외심; 깊은 존경",    meaning_en:"deep respect for someone or something",
+   example:"There is also a <em>reverence</em> of filial piety, the respect for the elderly.", src:"논술4", cls:"soc"},
+  {id:71, word:"cognitive",     pos:"adj",   meaning:"인지적인; 인식의",     meaning_en:"relating to the mental processes of acquiring knowledge",
+   example:"All societies have their own <em>cognitive</em> police officers who define the cognitive orientation of the people.", src:"논술4", cls:"soc"},
+  {id:72, word:"orientation",   pos:"n",     meaning:"방향; 방침; 성향",     meaning_en:"one's basic attitude, beliefs, or feelings; direction",
+   example:"Cognitive officers define the fundamental cognitive <em>orientation</em> of the people.", src:"논술4", cls:"soc"},
+
+  // ─── 기술·경제·정책 (tech) ──────────────────────────────────────
+  {id:73, word:"allocate",      pos:"v",     meaning:"배분하다; 할당하다",   meaning_en:"to distribute resources for a particular purpose",
+   example:"We have to make choices about how to <em>allocate</em> our limited resources.", src:"Q13", cls:"tech"},
+  {id:74, word:"wilderness",    pos:"n",     meaning:"황야; 미개척지",       meaning_en:"an uncultivated, uninhabited, natural area",
+   example:"We have vast forests but not enough to provide all of the wood, all of the <em>wilderness</em>.", src:"Q13", cls:"tech"},
+  {id:75, word:"accessible",    pos:"adj",   meaning:"접근 가능한",          meaning_en:"able to be reached or used; easy to obtain",
+   example:"We have forests but not enough to provide all the <em>accessible</em> recreation that we wish.", src:"Q13", cls:"tech"},
+  {id:76, word:"innovation",    pos:"n",     meaning:"혁신",                 meaning_en:"a new method, idea, product, or improvement",
+   example:"Not all <em>innovations</em> that improve human living standards show up in revenue and profits.", src:"Q14", cls:"tech"},
+  {id:77, word:"accrue",        pos:"v",     meaning:"누적되다; 발생하다",   meaning_en:"to accumulate or be received over time",
+   example:"Some innovations <em>accrue</em> directly to consumers.", src:"Q14", cls:"tech"},
+  {id:78, word:"paradoxical",   pos:"adj",   meaning:"역설적인",             meaning_en:"seemingly absurd or contradictory but possibly true",
+   example:"Product improvements have the <em>paradoxical</em> effect of reducing industry revenue.", src:"Q14", cls:"tech"},
+  {id:79, word:"revenue",       pos:"n",     meaning:"수입; 매출",           meaning_en:"income generated from business activities",
+   example:"If the number of people buying a song doubles, <em>revenue</em> will still fall by 50 percent.", src:"Q14", cls:"tech"},
+  {id:80, word:"adverse",       pos:"adj",   meaning:"불리한; 부정적인",     meaning_en:"preventing success; harmful",
+   example:"Building codes can reduce the <em>adverse</em> impacts of hazards.", src:"Q17", cls:"tech"},
+  {id:81, word:"hazard",        pos:"n",     meaning:"위험 요소",            meaning_en:"a danger or risk, especially to safety",
+   example:"Building codes can reduce the adverse impacts of <em>hazards</em>.", src:"Q17", cls:"tech"},
+  {id:82, word:"detach",        pos:"v",     meaning:"분리되다; 떼어내다",   meaning_en:"to separate or remove from a larger whole",
+   example:"Hurricane clips may prevent roofs from <em>detaching</em> from buildings during high winds.", src:"Q17", cls:"tech"},
+  {id:83, word:"integrity",     pos:"n",     meaning:"완전함; 무결성; 성실함", meaning_en:"the state of being whole and undivided; moral uprightness",
+   example:"Earthquake codes are not designed to maintain structural <em>integrity</em> after a large earthquake.", src:"Q17", cls:"tech"},
+  {id:84, word:"habitability",  pos:"n",     meaning:"거주 가능성",          meaning_en:"the condition of being suitable for people to live in",
+   example:"Earthquake codes are designed to prevent collapse, not to ensure <em>habitability</em>.", src:"Q17", cls:"tech"},
+  {id:85, word:"inequity",      pos:"n",     meaning:"불공평; 불평등",       meaning_en:"lack of fairness or justice in the distribution of something",
+   example:"Policy is vulnerable to <em>inequity</em> in its application across society.", src:"Q17", cls:"tech"},
+  {id:86, word:"enforce",       pos:"v",     meaning:"시행하다; 집행하다",   meaning_en:"to compel compliance with a law or rule",
+   example:"Building codes may be ignored or not <em>enforced</em>.", src:"Q17", cls:"tech"},
+  {id:87, word:"productivity",  pos:"n",     meaning:"생산성",               meaning_en:"the effectiveness of effort, especially in producing goods",
+   example:"Labor <em>productivity</em> is particularly high with irrigated agriculture.", src:"Q6", cls:"tech"},
+
+  // ─── 건강·과학 (sci) ──────────────────────────────────────────
+  {id:88, word:"sensitivity",   pos:"n",     meaning:"민감도; 감수성",       meaning_en:"the quality of being responsive to external stimuli",
+   example:"Supertasters show greater <em>sensitivity</em> to specific sweet and bitter tastes.", src:"Q19", cls:"sci"},
+  {id:89, word:"perceive",      pos:"v",     meaning:"인식하다; 지각하다",   meaning_en:"to become aware of something through the senses or mind",
+   example:"These differences in how people <em>perceive</em> taste affect their food choices.", src:"Q19", cls:"sci"},
+  {id:90, word:"cardiovascular",pos:"adj",   meaning:"심혈관의",             meaning_en:"relating to the heart and blood vessels",
+   example:"Supertasters tend to eat less high-fat food, lowering their risk of <em>cardiovascular</em> disease.", src:"Q19", cls:"sci"},
+  {id:91, word:"consumption",   pos:"n",     meaning:"소비; 섭취",           meaning_en:"the action of using up a resource or eating/drinking something",
+   example:"Supertasters tend to dislike many vegetables, leading to lower vegetable <em>consumption</em>.", src:"Q19", cls:"sci"},
+  {id:92, word:"addicted",      pos:"adj",   meaning:"중독된",               meaning_en:"physically or mentally dependent on a substance",
+   example:"Supertasters have a stronger negative reaction to smoking, reducing risk of becoming <em>addicted</em> to nicotine.", src:"Q19", cls:"sci"},
+  {id:93, word:"well-being",    pos:"n",     meaning:"복지; 안녕",           meaning_en:"the state of being comfortable, healthy, and happy",
+   example:"People as a whole will be much better off in terms of <em>well-being</em>.", src:"Q14", cls:"sci"},
+  {id:94, word:"implication",   pos:"n",     meaning:"함의; 시사점",         meaning_en:"a conclusion that can be drawn from something although not directly stated",
+   example:"The <em>implication</em> was that if our senses did not conform to reason, they were in error.", src:"Q15", cls:"sci"},
+  {id:95, word:"straightforward",pos:"adj",  meaning:"간단한; 직접적인",     meaning_en:"easy to do or understand; not complicated",
+   example:"Sometimes it will be <em>straightforward</em> to fit pieces together, at other times it will take more effort.", src:"Q1", cls:"sci"},
+];
+
+// ===================== STATE =====================
+let progress = JSON.parse(localStorage.getItem('eng_vocab_progress') || '{}');
+let currentFilter = 'all';
+let quizMode = 'forward';   // 'forward' = word→meaning, 'reverse' = meaning→word
+let quizWords = [], quizIdx = 0, quizScore = 0, quizAnswered = false;
+let detailWordId = null;
+
+function saveProgress() {
+  localStorage.setItem('eng_vocab_progress', JSON.stringify(progress));
+}
+function getWordProgress(id) {
+  return progress[id] || {seen:0, correct:0};
+}
+function isLearned(id) {
+  return getWordProgress(id).correct >= 2;
+}
+
+// ===================== FILTER =====================
+function setFilter(cls) {
+  currentFilter = cls;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.cls === cls));
+  if (document.getElementById('viewBrowse').classList.contains('active')) renderBrowse();
+  updateQuizPoolInfo();
+}
+
+document.getElementById('clusterBar').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) setFilter(e.target.dataset.cls);
+});
+
+// ===================== TAB NAV =====================
+function switchTab(tab) {
+  ['browse','quiz','stats'].forEach(t => {
+    document.getElementById('view' + cap(t)).classList.toggle('active', t === tab);
+    document.getElementById('nav' + cap(t)).classList.toggle('active', t === tab);
+  });
+  if (tab === 'browse') renderBrowse();
+  if (tab === 'quiz')   { resetQuizView(); updateQuizPoolInfo(); }
+  if (tab === 'stats')  renderStats();
+}
+function cap(s) { return s[0].toUpperCase() + s.slice(1); }
+
+// ===================== BROWSE =====================
+function getFilteredVocab() {
+  return currentFilter === 'all' ? VOCAB : VOCAB.filter(v => v.cls === currentFilter);
+}
+
+function renderBrowse() {
+  const list = getFilteredVocab();
+  const grid = document.getElementById('wordGrid');
+  if (!list.length) { grid.innerHTML = '<div class="empty-state">표시할 단어가 없습니다.</div>'; return; }
+  const clsColor = cls => `var(--${cls})`;
+  grid.innerHTML = list.map(v => `
+    <div class="word-card${isLearned(v.id)?' learned':''}" onclick="openDetail(${v.id})">
+      <div class="wc-word">${v.word}</div>
+      <div class="wc-pos">${v.pos}</div>
+      <div class="wc-cls-label" style="color:${clsColor(v.cls)}">
+        <span class="cls-dot" style="background:${clsColor(v.cls)}"></span>${CLS_INFO[v.cls].label}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===================== DETAIL =====================
+function openDetail(id) {
+  const v = VOCAB.find(w => w.id === id);
+  detailWordId = id;
+  document.getElementById('dpWord').textContent = v.word;
+  document.getElementById('dpPos').textContent = v.pos;
+  const ci = CLS_INFO[v.cls];
+  const badge = document.getElementById('dpClsBadge');
+  badge.textContent = ci.label;
+  badge.style.background = ci.color + '20';
+  badge.style.color = ci.color;
+  document.getElementById('dpMeaning').textContent = v.meaning;
+  document.getElementById('dpMeaning').style.color = `var(--${v.cls})`;
+  document.getElementById('dpMeaningEn').textContent = v.meaning_en;
+  document.getElementById('dpExample').innerHTML = v.example;
+  document.getElementById('dpSrc').textContent = v.src;
+  updateDetailLearnBtn();
+  document.getElementById('detailOverlay').classList.add('open');
+}
+function updateDetailLearnBtn() {
+  const btn = document.getElementById('dpLearnBtn');
+  if (isLearned(detailWordId)) {
+    btn.textContent = '✓ 숙지 완료';
+    btn.className = 'dp-learn-btn learned';
+  } else {
+    btn.textContent = '✓ 알았어 (숙지 표시)';
+    btn.className = 'dp-learn-btn unlearned';
+  }
+}
+function toggleLearned() {
+  if (!progress[detailWordId]) progress[detailWordId] = {seen:1, correct:0};
+  const p = progress[detailWordId];
+  if (isLearned(detailWordId)) {
+    p.correct = 0;
+  } else {
+    p.correct = 2;
+    if (!p.seen) p.seen = 1;
+  }
+  saveProgress();
+  updateDetailLearnBtn();
+  renderBrowse();
+}
+function closeDetail(e) {
+  if (e.target === document.getElementById('detailOverlay')) closeDetailDirect();
+}
+function closeDetailDirect() {
+  document.getElementById('detailOverlay').classList.remove('open');
+}
+
+// ===================== QUIZ =====================
+function setMode(m) {
+  quizMode = m;
+  document.getElementById('modeForward').classList.toggle('active', m === 'forward');
+  document.getElementById('modeReverse').classList.toggle('active', m === 'reverse');
+  updateQuizPoolInfo();
+}
+
+function updateQuizPoolInfo() {
+  const pool = getFilteredVocab();
+  const cluster = currentFilter === 'all' ? '전체' : CLS_INFO[currentFilter].label;
+  document.getElementById('quizPoolInfo').innerHTML =
+    `<strong>${cluster}</strong> 클러스터 · <strong>${pool.length}</strong>개 단어<br>정답 횟수가 적은 단어부터 10개 출제`;
+}
+
+function startQuiz() {
+  const pool = getFilteredVocab();
+  if (pool.length < 4) { alert('퀴즈에는 최소 4개 단어가 필요합니다.'); return; }
+  const sorted = [...pool].sort((a, b) => {
+    const pa = getWordProgress(a.id).correct;
+    const pb = getWordProgress(b.id).correct;
+    return pa - pb + (Math.random() * 0.5 - 0.25);
+  });
+  quizWords = sorted.slice(0, Math.min(10, pool.length));
+  quizIdx = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById('quizStart').style.display = 'none';
+  document.getElementById('quizSession').style.display = 'block';
+  document.getElementById('quizEnd').style.display = 'none';
+  showQuestion();
+}
+
+function showQuestion() {
+  quizAnswered = false;
+  const w = quizWords[quizIdx];
+  const total = quizWords.length;
+  document.getElementById('qpFill').style.width = ((quizIdx / total) * 100) + '%';
+  document.getElementById('qpText').textContent = (quizIdx + 1) + ' / ' + total;
+  document.getElementById('quizScoreChip').textContent = quizScore + '점';
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('quizNextBtn').style.display = 'none';
+
+  if (quizMode === 'forward') {
+    document.getElementById('qcPrompt').textContent = '이 단어의 뜻은?';
+    document.getElementById('qcWord').textContent = w.word;
+    document.getElementById('qcPos').textContent = w.pos;
+    document.getElementById('qcWord').style.display = '';
+    document.getElementById('qcPos').style.display = '';
+    document.getElementById('qcMeaning').style.display = 'none';
+    document.getElementById('qcHint').style.display = 'none';
+  } else {
+    document.getElementById('qcPrompt').textContent = '이 뜻에 해당하는 단어는?';
+    document.getElementById('qcWord').style.display = 'none';
+    document.getElementById('qcPos').style.display = 'none';
+    document.getElementById('qcMeaning').textContent = w.meaning;
+    document.getElementById('qcMeaning').style.display = '';
+    document.getElementById('qcHint').textContent = '(' + w.pos + ')';
+    document.getElementById('qcHint').style.display = '';
+  }
+
+  // Generate options
+  const allWords = VOCAB;
+  const wrong = shuffle(allWords.filter(x => x.id !== w.id)).slice(0, 3);
+  const options = shuffle([w, ...wrong]);
+  const container = document.getElementById('quizOptions');
+  container.innerHTML = options.map(opt => {
+    const label = quizMode === 'forward' ? opt.meaning : opt.word;
+    return `<button class="opt-btn" data-id="${opt.id}" onclick="selectAnswer(${opt.id}, ${w.id})">${label}</button>`;
+  }).join('');
+}
+
+function selectAnswer(selectedId, correctId) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const isCorrect = selectedId === correctId;
+  const w = quizWords[quizIdx];
+  if (!progress[correctId]) progress[correctId] = {seen:0, correct:0};
+  progress[correctId].seen++;
+  if (isCorrect) { progress[correctId].correct++; quizScore++; }
+  saveProgress();
+
+  document.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.disabled = true;
+    const btnId = parseInt(btn.dataset.id);
+    if (btnId === correctId) btn.classList.add('correct');
+    else if (btnId === selectedId && !isCorrect) btn.classList.add('wrong');
+  });
+
+  // Highlight answer in example
+  const exHighlight = w.example; // already has <em> tags
+  const fb = document.getElementById('quizFeedback');
+  fb.style.display = 'block';
+  const res = document.getElementById('qfResult');
+  res.className = 'qf-result ' + (isCorrect ? 'ok' : 'ng');
+  res.textContent = isCorrect ? '✓ 정답!' : '✗ 오답 — 정답: ' + (quizMode === 'forward' ? w.meaning : w.word);
+  document.getElementById('qfExample').innerHTML = exHighlight;
+
+  document.getElementById('quizScoreChip').textContent = quizScore + '점';
+  document.getElementById('quizNextBtn').style.display = 'block';
+  document.getElementById('quizNextBtn').textContent = quizIdx + 1 < quizWords.length ? '다음 →' : '결과 보기';
+}
+
+function nextQuestion() {
+  quizIdx++;
+  if (quizIdx >= quizWords.length) showQuizEnd();
+  else showQuestion();
+}
+
+function showQuizEnd() {
+  document.getElementById('quizSession').style.display = 'none';
+  document.getElementById('quizEnd').style.display = 'block';
+  const total = quizWords.length;
+  const pct = Math.round((quizScore / total) * 100);
+  document.getElementById('qeScore').textContent = quizScore + '/' + total;
+  const msgs = ['한 번 더!', '계속 연습해봐요!', '잘 하고 있어요!', '훌륭해요!', '완벽해요! 🎉'];
+  document.getElementById('qeLabel').textContent = msgs[Math.floor(pct / 25)] || '완벽해요! 🎉';
+  const correct = quizWords.filter(w => getWordProgress(w.id).correct >= 2);
+  document.getElementById('qeBreakdown').innerHTML = [
+    {k:'이번 정답', v: quizScore + '개'},
+    {k:'숙지 완료 단어', v: correct.length + '개'},
+    {k:'전체 진도', v: getOverallStats().learnedPct + '%'},
+  ].map(r => `<div class="qe-row"><span>${r.k}</span><span class="v">${r.v}</span></div>`).join('');
+}
+
+function resetQuizView() {
+  document.getElementById('quizStart').style.display = 'block';
+  document.getElementById('quizSession').style.display = 'none';
+  document.getElementById('quizEnd').style.display = 'none';
+  updateQuizPoolInfo();
+}
+
+// ===================== STATS =====================
+function getOverallStats() {
+  const total = VOCAB.length;
+  let seen = 0, learned = 0;
+  VOCAB.forEach(v => {
+    const p = getWordProgress(v.id);
+    if (p.seen > 0) seen++;
+    if (p.correct >= 2) learned++;
+  });
+  return {total, seen, learned, learnedPct: Math.round((learned/total)*100)};
+}
+
+function renderStats() {
+  const {total, seen, learned} = getOverallStats();
+  document.getElementById('stTotal').textContent = total;
+  document.getElementById('stSeen').textContent = seen;
+  document.getElementById('stLearned').textContent = learned;
+
+  const container = document.getElementById('clusterStats');
+  container.innerHTML = Object.entries(CLS_INFO).map(([cls, info]) => {
+    const words = VOCAB.filter(v => v.cls === cls);
+    const learnedCount = words.filter(v => isLearned(v.id)).length;
+    const pct = words.length ? Math.round((learnedCount / words.length) * 100) : 0;
+    return `
+      <div class="cluster-stat">
+        <div class="cs-label" style="color:${info.color}">${info.label.split('·')[0]}</div>
+        <div class="cs-bar-wrap">
+          <div class="cs-bar-fill" style="width:${pct}%;background:${info.color}"></div>
+        </div>
+        <div class="cs-count">${learnedCount}/${words.length}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function resetProgress() {
+  if (confirm('모든 학습 진도를 초기화하시겠습니까?')) {
+    progress = {};
+    saveProgress();
+    renderBrowse();
+    renderStats();
+  }
+}
+
+// ===================== UTILS =====================
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+// ===================== INIT =====================
+renderBrowse();
+updateQuizPoolInfo();
+</script>
+</body>
+</html>

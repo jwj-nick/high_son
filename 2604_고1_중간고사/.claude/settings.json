@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.desmos.com)",
+      "WebFetch(domain:jsxgraph.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:geogebra.github.io)",
+      "Edit(/.claude/skills/math-figure/**)"
+    ]
+  }
+}
