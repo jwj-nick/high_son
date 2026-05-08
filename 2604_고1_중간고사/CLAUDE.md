@@ -184,6 +184,7 @@
 |---|---|
 | [MASTER_PLAN.md](MASTER_PLAN.md) | 6단계 워크플로우, 트래커, 변경 이력 |
 | [APP_PRINCIPLES.md](APP_PRINCIPLES.md) | ⭐ 앱 설계 원칙 — 문제/풀이 페이지 구분, 리뷰어 체크리스트 |
+| [APP_HOSTING.md](APP_HOSTING.md) | ⭐ 앱 배포·인덱싱 원칙 — 파일명 규칙, mobile/desktop 대응, 배포 워크플로우 |
 | [app_dev_env/](app_dev_env/) | 앱 개발 환경 — 기술 결정(ADR), MCP 계획, 로드맵 |
 | [cht_log/](cht_log/) | 세션별 작업 로그 (MMDD_session.md) |
 | [공통수학1-중간/](공통수학1-중간/) | 수학 — 02_text 정본 6개, 10_오답노트 Q13~Q20 |
