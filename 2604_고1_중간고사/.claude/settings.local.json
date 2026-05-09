@@ -16,10 +16,22 @@
       "Bash(mkdir -p \"c:/Kids/70_HighSchool/2604_고1_중간고사/.claude/skills/math-practice\")",
       "Bash(mkdir -p \"c:/Kids/70_HighSchool/2604_고1_중간고사/.claude/agents\")",
       "Bash(mv \"C:\\\\Kids\\\\70_HighSchool\\\\2604_고1_중간고사\\\\.gitignore\" \"C:\\\\Kids\\\\70_HighSchool\\\\.gitignore\" && echo \"done\")",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(mkdir -p \"C:\\\\Nick\\\\30_Apps\\\\jwj-nick.github.io\\\\high1\\\\science\" \"C:\\\\Nick\\\\30_Apps\\\\jwj-nick.github.io\\\\high1\\\\math\" && echo \"dirs created\")",
+      "Bash(python -m http.server 8787)",
+      "Bash(ipconfig)",
+      "Bash(python3 -)",
+      "Bash(python -c ' *)",
+      "Bash(ls \"C:\\\\Users\\\\admin\\\\.claude\\\\projects\\\\c--Kids-70-HighSchool-2604--1-----\\\\memory\\\\\" 2>/dev/null || echo \"empty\")",
+      "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory\" 2>/dev/**)",
+      "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory/**)"
     ],
     "additionalDirectories": [
-      "C:\\Kids\\70_HighSchool"
+      "C:\\Kids\\70_HighSchool",
+      "C:\\Nick\\30_Apps\\jwj-nick.github.io\\high1",
+      "C:\\Nick\\30_Apps\\jwj-nick.github.io"
     ]
   }
 }
