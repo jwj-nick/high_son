@@ -2,7 +2,7 @@
 - https://jwj-nick.github.io/high1/index.html (화학, 수학 오답)
 - https://github.com/jwj-nick/2604_high_1_1
 
-todo - 세준이가 github (로그인해보기) and github app 에 모두 접근하고, local 에 clone 까지
+todo - 세준이가 github (로그인해보기) and github app 에 모두 접근하고, local 에 clone 까지? 하나의   
 
 todo - app env syncup
  - agent : app-reviewer
