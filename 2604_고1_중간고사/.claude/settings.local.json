@@ -26,7 +26,10 @@
       "Bash(python -c ' *)",
       "Bash(ls \"C:\\\\Users\\\\admin\\\\.claude\\\\projects\\\\c--Kids-70-HighSchool-2604--1-----\\\\memory\\\\\" 2>/dev/null || echo \"empty\")",
       "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory\" 2>/dev/**)",
-      "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory/**)"
+      "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory/**)",
+      "Bash(python *)",
+      "WebFetch(domain:product.kyobobook.co.kr)",
+      "WebFetch(domain:www.aladin.co.kr)"
     ],
     "additionalDirectories": [
       "C:\\Kids\\70_HighSchool",
