@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 360" font-family="'Noto Sans KR', 'Malgun Gothic', sans-serif">
+  <!-- 배경 -->
+  <rect width="1400" height="360" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <text x="700" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#0f1f3d">
+    축구 전술의 진화 — "작용과 반작용"의 100년
+  </text>
+
+  <!-- 메인 타임라인 (수평선) -->
+  <line x1="80" y1="200" x2="1320" y2="200" stroke="#0f1f3d" stroke-width="4"/>
+
+  <!-- 화살표 끝 -->
+  <polygon points="1320,200 1305,192 1305,208" fill="#0f1f3d"/>
+
+  <!-- 4개 노드 -->
+  <!-- Node 1: WM (1930s) -->
+  <circle cx="220" cy="200" r="18" fill="#1f4e79"/>
+  <text x="220" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="white">1</text>
+  <text x="220" y="170" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1f3d">1930s</text>
+  <text x="220" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">WM 시스템</text>
+  <text x="220" y="270" text-anchor="middle" font-size="13" fill="#333">아스널, 채프만</text>
+  <text x="220" y="290" text-anchor="middle" font-size="13" fill="#333">수비·공격 균형</text>
+  <text x="220" y="310" text-anchor="middle" font-size="13" fill="#333">의 첫 구조화</text>
+
+  <!-- Node 2: Total Football (1970s) -->
+  <circle cx="540" cy="200" r="18" fill="#c97316"/>
+  <text x="540" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="white">2</text>
+  <text x="540" y="170" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1f3d">1970s</text>
+  <text x="540" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">토털풋볼</text>
+  <text x="540" y="270" text-anchor="middle" font-size="13" fill="#333">네덜란드, 크루이프</text>
+  <text x="540" y="290" text-anchor="middle" font-size="13" fill="#333">모든 선수가</text>
+  <text x="540" y="310" text-anchor="middle" font-size="13" fill="#333">모든 위치를</text>
+
+  <!-- Node 3: Gegenpressing (2010s) -->
+  <circle cx="860" cy="200" r="18" fill="#a23b3b"/>
+  <text x="860" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="white">3</text>
+  <text x="860" y="170" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1f3d">2010s</text>
+  <text x="860" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">티키타카·게겐프레싱</text>
+  <text x="860" y="270" text-anchor="middle" font-size="13" fill="#333">바르셀로나(펩) /</text>
+  <text x="860" y="290" text-anchor="middle" font-size="13" fill="#333">도르트문트·리버풀(클롭)</text>
+  <text x="860" y="310" text-anchor="middle" font-size="13" fill="#333">즉시 재압박</text>
+
+  <!-- Node 4: AI/Data (2020s) -->
+  <circle cx="1180" cy="200" r="18" fill="#2e7d32"/>
+  <text x="1180" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="white">4</text>
+  <text x="1180" y="170" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1f3d">2020s</text>
+  <text x="1180" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">데이터·AI 축구</text>
+  <text x="1180" y="270" text-anchor="middle" font-size="13" fill="#333">AI 분석, xG, 영상</text>
+  <text x="1180" y="290" text-anchor="middle" font-size="13" fill="#333">150년치 경기를</text>
+  <text x="1180" y="310" text-anchor="middle" font-size="13" fill="#333">24시간에 시뮬레이션</text>
+
+  <!-- 캡션 -->
+  <text x="700" y="345" text-anchor="middle" font-size="14" font-style="italic" fill="#555">
+    한 시대의 정답이 다음 시대의 새로운 질문이 된다 — 다쓰오카 아유무, 『축구 전술 혁명』
+  </text>
+</svg>

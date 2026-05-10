@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" font-family="'Noto Sans KR', 'Malgun Gothic', sans-serif">
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <text x="600" y="35" text-anchor="middle" font-size="22" font-weight="700" fill="#0f1f3d">
+    시대를 대표하는 3가지 포메이션 — 같은 11명, 다른 사고
+  </text>
+
+  <!-- 공통 그라운드 함수 (3개 반복) -->
+  <!-- 그라운드 1: WM (3-2-2-3) -->
+  <g transform="translate(40,80)">
+    <rect x="0" y="0" width="340" height="380" fill="#e8f4ea" stroke="#1b5e20" stroke-width="3"/>
+    <line x1="0" y1="190" x2="340" y2="190" stroke="#1b5e20" stroke-width="2" stroke-dasharray="6,6"/>
+    <circle cx="170" cy="190" r="40" fill="none" stroke="#1b5e20" stroke-width="2"/>
+    <text x="170" y="20" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">WM (3-2-2-3) · 1930s</text>
+
+    <!-- 골키퍼 -->
+    <circle cx="170" cy="350" r="10" fill="#0f1f3d"/>
+    <!-- 수비 3 -->
+    <circle cx="80" cy="300" r="10" fill="#1f4e79"/>
+    <circle cx="170" cy="300" r="10" fill="#1f4e79"/>
+    <circle cx="260" cy="300" r="10" fill="#1f4e79"/>
+    <!-- MF 2 (W의 아래) -->
+    <circle cx="120" cy="240" r="10" fill="#1f4e79"/>
+    <circle cx="220" cy="240" r="10" fill="#1f4e79"/>
+    <!-- MF 2 (M의 위) -->
+    <circle cx="120" cy="160" r="10" fill="#c97316"/>
+    <circle cx="220" cy="160" r="10" fill="#c97316"/>
+    <!-- 공격 3 -->
+    <circle cx="80" cy="100" r="10" fill="#a23b3b"/>
+    <circle cx="170" cy="100" r="10" fill="#a23b3b"/>
+    <circle cx="260" cy="100" r="10" fill="#a23b3b"/>
+
+    <text x="170" y="368" text-anchor="middle" font-size="12" fill="#333">균형의 시작</text>
+  </g>
+
+  <!-- 그라운드 2: 4-3-3 토털풋볼 -->
+  <g transform="translate(430,80)">
+    <rect x="0" y="0" width="340" height="380" fill="#e8f4ea" stroke="#1b5e20" stroke-width="3"/>
+    <line x1="0" y1="190" x2="340" y2="190" stroke="#1b5e20" stroke-width="2" stroke-dasharray="6,6"/>
+    <circle cx="170" cy="190" r="40" fill="none" stroke="#1b5e20" stroke-width="2"/>
+    <text x="170" y="20" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">4-3-3 (토털풋볼) · 1970s</text>
+
+    <!-- 골키퍼 -->
+    <circle cx="170" cy="350" r="10" fill="#0f1f3d"/>
+    <!-- 수비 4 -->
+    <circle cx="60" cy="290" r="10" fill="#1f4e79"/>
+    <circle cx="135" cy="290" r="10" fill="#1f4e79"/>
+    <circle cx="205" cy="290" r="10" fill="#1f4e79"/>
+    <circle cx="280" cy="290" r="10" fill="#1f4e79"/>
+    <!-- MF 3 -->
+    <circle cx="100" cy="200" r="10" fill="#c97316"/>
+    <circle cx="170" cy="220" r="10" fill="#c97316"/>
+    <circle cx="240" cy="200" r="10" fill="#c97316"/>
+    <!-- 공격 3 -->
+    <circle cx="80" cy="110" r="10" fill="#a23b3b"/>
+    <circle cx="170" cy="100" r="10" fill="#a23b3b"/>
+    <circle cx="260" cy="110" r="10" fill="#a23b3b"/>
+    <!-- 화살표 (위치 교환) -->
+    <path d="M 95 110 Q 130 60 165 110" fill="none" stroke="#a23b3b" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <path d="M 175 110 Q 215 60 250 110" fill="none" stroke="#a23b3b" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+    <text x="170" y="368" text-anchor="middle" font-size="12" fill="#333">위치의 자유 — 모두가 모든 곳을</text>
+  </g>
+
+  <!-- 그라운드 3: 4-3-3 게겐프레싱 (압박 라인 표시) -->
+  <g transform="translate(820,80)">
+    <rect x="0" y="0" width="340" height="380" fill="#e8f4ea" stroke="#1b5e20" stroke-width="3"/>
+    <line x1="0" y1="190" x2="340" y2="190" stroke="#1b5e20" stroke-width="2" stroke-dasharray="6,6"/>
+    <circle cx="170" cy="190" r="40" fill="none" stroke="#1b5e20" stroke-width="2"/>
+    <text x="170" y="20" text-anchor="middle" font-size="18" font-weight="700" fill="#0f1f3d">게겐프레싱 (4-3-3) · 2010s</text>
+
+    <!-- 압박 영역 (상대 진영 표시) -->
+    <rect x="20" y="50" width="300" height="120" fill="#a23b3b" fill-opacity="0.15"/>
+    <text x="170" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#a23b3b">↑ 상대 진영에서 빼앗긴 즉시 재압박 ↑</text>
+
+    <!-- 골키퍼 -->
+    <circle cx="170" cy="350" r="10" fill="#0f1f3d"/>
+    <!-- 수비 4 (높은 라인 — 하이라인) -->
+    <circle cx="60" cy="260" r="10" fill="#1f4e79"/>
+    <circle cx="135" cy="260" r="10" fill="#1f4e79"/>
+    <circle cx="205" cy="260" r="10" fill="#1f4e79"/>
+    <circle cx="280" cy="260" r="10" fill="#1f4e79"/>
+    <!-- MF 3 (전진) -->
+    <circle cx="100" cy="180" r="10" fill="#c97316"/>
+    <circle cx="170" cy="200" r="10" fill="#c97316"/>
+    <circle cx="240" cy="180" r="10" fill="#c97316"/>
+    <!-- 공격 3 -->
+    <circle cx="80" cy="100" r="10" fill="#a23b3b"/>
+    <circle cx="170" cy="90" r="10" fill="#a23b3b"/>
+    <circle cx="260" cy="100" r="10" fill="#a23b3b"/>
+    <!-- 압박 화살표 -->
+    <path d="M 80 100 L 110 130" stroke="#a23b3b" stroke-width="2" marker-end="url(#arr)"/>
+    <path d="M 170 90 L 170 130" stroke="#a23b3b" stroke-width="2" marker-end="url(#arr)"/>
+    <path d="M 260 100 L 230 130" stroke="#a23b3b" stroke-width="2" marker-end="url(#arr)"/>
+
+    <text x="170" y="368" text-anchor="middle" font-size="12" fill="#333">즉시 재압박 — 빼앗긴 자리에서 되찾는다</text>
+  </g>
+
+  <!-- 화살표 마커 정의 -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a23b3b"/>
+    </marker>
+  </defs>
+
+  <!-- 캡션 -->
+  <text x="600" y="490" text-anchor="middle" font-size="13" font-style="italic" fill="#555">
+    같은 11명, 다른 위치 · 다른 사고 — 전술은 시대의 산물이다
+  </text>
+</svg>
