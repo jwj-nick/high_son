@@ -83,6 +83,18 @@
   .idea-icon { font-size: 20px; flex-shrink: 0; }
   .idea-title { font-weight: 700; margin-bottom: 3px; }
   .idea-desc { color: #555; }
+
+  .area-header { background: #4a235a; color: #f1c40f; padding: 9px 14px; border-radius: 8px; margin: 16px 0 10px; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
+  .area-header:first-child { margin-top: 0; }
+  .reform-idea { background: #fafafa; border-left: 4px solid #d4ac0d; border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 10px; }
+  .ri-title { font-weight: 700; font-size: 14px; color: #2c3e50; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .ri-icon { font-size: 18px; }
+  .ri-row { font-size: 13px; line-height: 1.7; margin: 5px 0; padding-left: 2px; }
+  .ri-row .label { display: inline-block; min-width: 38px; font-weight: 700; font-size: 10px; text-align: center; padding: 2px 8px; border-radius: 10px; margin-right: 6px; vertical-align: middle; letter-spacing: 0.5px; }
+  .ri-row .label.scene { background: #fadbd8; color: #c0392b; }
+  .ri-row .label.cure  { background: #d5f5e3; color: #1e8449; }
+  .ri-row .label.hope  { background: #fdebd0; color: #b9770e; }
+  .ri-memo { font-size: 12px; color: #555; padding: 6px 10px; background: #fff8e1; border-radius: 6px; margin-top: 8px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -233,21 +245,21 @@
       <div class="step-num">1</div>
       <div>
         <div class="step-title">첫 문장 — 토지·재정 문제</div>
-        <div class="step-desc">권문세족의 농장 확대와 불교 사원의 토지 독점 → 국가 재정 파탄</div>
+        <div class="step-desc">"고려 말 권문세족은 대농장을 점유하여 토지를 겸병하였고, 불교 사원도 토지와 노비를 독점하여 국가 재정이 파탄에 이르렀다."</div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div>
         <div class="step-title">두 번째 문장 — 정치·안보 문제</div>
-        <div class="step-desc">원 간섭으로 왕권 약화 + 왜구·홍건적 침입 → 민생 피폐</div>
+        <div class="step-desc">"원의 간섭으로 왕권은 약화되었고, 왜구와 홍건적의 침입으로 민생은 피폐해졌다."</div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div>
         <div class="step-title">마지막 문장 — Q3과 연결</div>
-        <div class="step-desc">정도전은 이 위기를 고려 체제 안에서는 해결 불가능하다고 판단했다</div>
+        <div class="step-desc">"정도전은 이러한 고려의 위기는 새 나라 건국 없이는 해결할 수 없다고 판단하였다."</div>
       </div>
     </div>
   </div>
@@ -256,7 +268,7 @@
     <h2>✏️ 직접 써보기 (글자 수 카운터)</h2>
     <p style="font-size:12px; color:#888; margin-bottom:8px;">아래에 써보세요. 120~160자 범위에 들어오면 초록색으로 변합니다.</p>
     <textarea id="ta2" class="counter-area" placeholder="Q2 답변을 여기에 써보세요..." oninput="countChars('ta2','cnt2')"></textarea>
-    <div><span id="cnt2" class="cnt-display">0자</span><span style="font-size:12px; color:#aaa; margin-left:8px;">목표: 120~160자</span></div>
+    <div><span id="cnt2" class="cnt-display">0자</span><span style="font-size:12px; color:#aaa; margin-left:8px;">목표: 두 수치 모두 120~160자 (초록 = 안전)</span></div>
     <div class="warn-box" style="margin-top:10px;">
       ⚠️ 글자수는 공백·구두점 포함 기준입니다. 학교 기준이 다를 경우 모범답안 앱의 수치를 참고하세요.
     </div>
@@ -315,14 +327,21 @@
       <div class="step-num">1</div>
       <div>
         <div class="step-title">첫 문장 — 과전법 (가장 중요)</div>
-        <div class="step-desc">"과전법을 실시하여 경기 지역 토지를 관리에게 수조권으로 나누어주고, 사망 시 반납하게 하여 토지 겸병을 억제하였다."</div>
+        <div class="step-desc">"정도전은 과전법을 실시하여 경기 토지를 관리에게 수조권으로 지급하고 사망 시 반납하게 해 토지 겸병을 억제하였다."</div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div>
-        <div class="step-title">두 번째 문장 — 정치·이념 개혁</div>
-        <div class="step-desc">"또한 재상 중심 정치를 주장하여 왕의 독단을 견제하고, 『불씨잡변』을 써서 불교 폐단을 비판하며 성리학을 통치 이념으로 확립하고자 하였다."</div>
+        <div class="step-title">두 번째 문장 — 군사·정치 개혁</div>
+        <div class="step-desc">"또한 사병을 혁파해 군사권을 일원화하고, 재상 중심 정치를 주장하여 왕의 독단을 견제하였다."</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">세 번째 문장 — 이념 개혁</div>
+        <div class="step-desc">"『불씨잡변』으로 불교 폐단을 비판하고 성리학을 통치 이념으로 확립하였다."</div>
       </div>
     </div>
   </div>
@@ -330,7 +349,7 @@
   <div class="card">
     <h2>✏️ 직접 써보기 (글자 수 카운터)</h2>
     <textarea id="ta3" class="counter-area" placeholder="Q3 답변을 여기에 써보세요..." oninput="countChars('ta3','cnt3')"></textarea>
-    <div><span id="cnt3" class="cnt-display">0자</span><span style="font-size:12px; color:#aaa; margin-left:8px;">목표: 120~160자</span></div>
+    <div><span id="cnt3" class="cnt-display">0자</span><span style="font-size:12px; color:#aaa; margin-left:8px;">목표: 두 수치 모두 120~160자 (초록 = 안전)</span></div>
   </div>
 </div>
 
@@ -374,36 +393,57 @@
   </div>
 
   <div class="card">
-    <h2>브레인스토밍 — 어떤 개혁안을 쓸까?</h2>
-    <div class="idea-grid">
-      <div class="idea-card">
-        <div class="idea-icon">🏫</div>
-        <div>
-          <div class="idea-title">공교육 제도 도입</div>
-          <div class="idea-desc">귀족만 학문을 독점 → 신분 관계없이 국가 학교 설치, 능력으로 관직 임용</div>
-        </div>
-      </div>
-      <div class="idea-card">
-        <div class="idea-icon">⚖️</div>
-        <div>
-          <div class="idea-title">종교 재산 상한 법제화</div>
-          <div class="idea-desc">불교 사원 토지 독점 → 법으로 상한선 설정, 초과분 국가 환수</div>
-        </div>
-      </div>
-      <div class="idea-card">
-        <div class="idea-icon">🌾</div>
-        <div>
-          <div class="idea-title">농민 보호법</div>
-          <div class="idea-desc">귀족의 고리대금·강제 노역 → 이자율 제한, 최저 생계 보장</div>
-        </div>
-      </div>
-      <div class="idea-card">
-        <div class="idea-icon">🛡️</div>
-        <div>
-          <div class="idea-title">국방 의무 훈련</div>
-          <div class="idea-desc">왜구에 무력한 군사 → 일정 연령 이상 군사 훈련 의무화</div>
-        </div>
-      </div>
+    <h2>브레인스토밍 — 5개 후보 (3개 영역)</h2>
+    <p style="font-size:13px; color:#666; margin-bottom:12px;">아래 5개 중 <strong>2개를 골라</strong> Q4 답안에 활용. <strong>같은 영역에서 두 개를 고르지 말고, 다른 영역에서 하나씩</strong> 고르면 시야가 넓어 보인다.</p>
+
+    <div class="area-header">📚 영역 1 — 교육·지식</div>
+
+    <div class="reform-idea">
+      <div class="ri-title"><span class="ri-icon">📜</span> 백성 문자 도입 (한글 격)</div>
+      <div class="ri-row"><span class="label scene">풍경</span>한자만 있어 양반만 글을 읽는다. 농민은 자기 토지 문서도 못 읽어 속는다.</div>
+      <div class="ri-row"><span class="label cure">처방</span>며칠이면 배울 수 있는 새 문자 창제 + 전국 보급 + 기초 교육.</div>
+      <div class="ri-row"><span class="label hope">희망</span>글이 권력의 도구에서 모두의 도구가 되는 사회.</div>
+      <div class="ri-memo">⭐ 50년 뒤 세종이 한 한글 창제를 미리 제안 — "세종보다 앞선 발상" 강력 카드</div>
+    </div>
+
+    <div class="reform-idea">
+      <div class="ri-title"><span class="ri-icon">🏫</span> 향교(지방 공립학교) 전국 의무화</div>
+      <div class="ri-row"><span class="label scene">풍경</span>가난한 평민의 자식은 공부할 곳이 없다. 능력 있어도 세상에 나가지 못한다.</div>
+      <div class="ri-row"><span class="label cure">처방</span>모든 군현에 향교 설치 의무화. 신분 무관 입학. 가난한 학생은 학비·식비 국가 지원.</div>
+      <div class="ri-row"><span class="label hope">희망</span>"타고난 신분"이 아닌 "노력한 결과"가 인생을 결정하는 사회.</div>
+      <div class="ri-memo">정도전은 성균관(서울 1개)만 했음. "전국화"가 차별화 포인트.</div>
+    </div>
+
+    <div class="area-header">🍚 영역 2 — 복지·안전</div>
+
+    <div class="reform-idea">
+      <div class="ri-title"><span class="ri-icon">🏥</span> 의창(흉년 식량) 의무화 + 혜민서(무료 의료)</div>
+      <div class="ri-row"><span class="label scene">풍경</span>흉년 한 번에 마을 절반이 굶어 죽는다. 병들면 약값이 없어 죽는다.</div>
+      <div class="ri-row"><span class="label cure">처방</span>모든 군현 의창에 평년 곡식 비축 의무화 → 흉년 무료 배급. 혜민서 설치 → 가난한 백성 무료 진료.</div>
+      <div class="ri-row"><span class="label hope">희망</span>"재해가 곧 죽음"이 아닌 사회. 국가가 살리는 그물망.</div>
+      <div class="ri-memo">"복지는 사치가 아니라 국가의 본질"이라는 주장의 토대.</div>
+    </div>
+
+    <div class="reform-idea">
+      <div class="ri-title"><span class="ri-icon">🛡️</span> 해안·국경 마을 자위대</div>
+      <div class="ri-row"><span class="label scene">풍경</span>왜구가 들이닥치면 마을 전체가 약탈된다. 국가군은 너무 멀고, 귀족 사병은 자기 가문만 지킨다.</div>
+      <div class="ri-row"><span class="label cure">처방</span>해안·국경 마을마다 청년 의무 자위대 조직. 국가가 무기·훈련 지원. 사병이 아닌 마을 공동체 소속.</div>
+      <div class="ri-row"><span class="label hope">희망</span>백성이 자기 마을을 지키는 자존감 있는 사회.</div>
+      <div class="ri-memo">정도전의 사병 혁파를 백성 차원에서 보완하는 발상.</div>
+    </div>
+
+    <div class="area-header">💰 영역 3 — 경제</div>
+
+    <div class="reform-idea">
+      <div class="ri-title"><span class="ri-icon">⚖️</span> 농민 부채 탕감 + 고리대 상한제</div>
+      <div class="ri-row"><span class="label scene">풍경</span>한 번 빚을 지면 이자가 이자를 낳아, 자식 대까지 노비로 팔려 간다.</div>
+      <div class="ri-row"><span class="label cure">처방</span>일정 기간 이상 갚지 못한 부채 무효화. 고리대 이자율 연 30% 이하 법제화. 위반 시 채권 자동 무효.</div>
+      <div class="ri-row"><span class="label hope">희망</span>한 번 실패해도 다시 일어설 수 있는 사회.</div>
+      <div class="ri-memo">"한 번의 가난이 영원이 되어선 안 된다."</div>
+    </div>
+
+    <div class="info-box" style="margin-top:14px;">
+      💡 추천 조합: <strong>📜 백성 문자 + ⚖️ 부채 탕감</strong> (지식·경제) 또는 <strong>🏥 의창·혜민서 + 📜 백성 문자</strong> (복지·교육) — 영역 다른 2개 선택이 핵심.
     </div>
   </div>
 
@@ -477,12 +517,18 @@ function goTo(n) {
 
 function countChars(taId, cntId) {
   const val = document.getElementById(taId).value;
-  const n   = val.length;
+  const total = val.length;
+  const noSpace = val.replace(/\s/g, '').length;
   const el  = document.getElementById(cntId);
-  el.textContent = n + '자';
-  if (n >= 120 && n <= 160) {
+  el.textContent = total + '자 (공백제외 ' + noSpace + '자)';
+  // 둘 중 하나라도 120-160 안에 있으면 초록
+  const okTotal = total >= 120 && total <= 160;
+  const okNoSpace = noSpace >= 120 && noSpace <= 160;
+  if (okTotal && okNoSpace) {
     el.style.background = '#eafaf1'; el.style.color = '#27ae60';
-  } else if (n > 0) {
+  } else if (okTotal || okNoSpace) {
+    el.style.background = '#fff9e6'; el.style.color = '#f39c12';
+  } else if (total > 0) {
     el.style.background = '#fdecea'; el.style.color = '#e74c3c';
   } else {
     el.style.background = '#f0f0f0'; el.style.color = '#888';
