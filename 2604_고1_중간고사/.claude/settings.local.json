@@ -31,7 +31,9 @@
       "WebFetch(domain:product.kyobobook.co.kr)",
       "WebFetch(domain:www.aladin.co.kr)",
       "Bash(curl -s http://localhost:8791/1sem_perf_viete.html)",
-      "Bash(python3 /tmp/check_html.py)"
+      "Bash(python3 /tmp/check_html.py)",
+      "Bash(git commit *)",
+      "Bash(gh repo *)"
     ],
     "additionalDirectories": [
       "C:\\Kids\\70_HighSchool",
