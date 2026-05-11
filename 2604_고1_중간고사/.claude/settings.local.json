@@ -29,7 +29,9 @@
       "Read(//c/Users/admin/.claude/projects/c--Kids-70-HighSchool-2604--1-----/memory/**)",
       "Bash(python *)",
       "WebFetch(domain:product.kyobobook.co.kr)",
-      "WebFetch(domain:www.aladin.co.kr)"
+      "WebFetch(domain:www.aladin.co.kr)",
+      "Bash(curl -s http://localhost:8791/1sem_perf_viete.html)",
+      "Bash(python3 /tmp/check_html.py)"
     ],
     "additionalDirectories": [
       "C:\\Kids\\70_HighSchool",

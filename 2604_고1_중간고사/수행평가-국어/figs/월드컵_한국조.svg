@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Noto Sans KR', 'Malgun Gothic', sans-serif">
+  <rect width="800" height="420" fill="#f0f4f8"/>
+
+  <!-- 헤더 배경 -->
+  <rect x="0" y="0" width="800" height="88" fill="#0f1f3d"/>
+  <text x="400" y="32" text-anchor="middle" font-size="22" font-weight="700" fill="white">2026 FIFA 월드컵</text>
+  <text x="400" y="54" text-anchor="middle" font-size="13" fill="#b0c4de">2026.6.11 ~ 7.19 · 미국·캐나다·멕시코 3국 공동 개최</text>
+  <text x="400" y="74" text-anchor="middle" font-size="12" fill="#7890b0">사상 최초 48개국 참가</text>
+
+  <!-- ─── 왼쪽 패널: A조 ─── -->
+
+  <!-- A조 헤더 -->
+  <rect x="20" y="105" width="220" height="38" rx="7" fill="#c97316"/>
+  <text x="130" y="130" text-anchor="middle" font-size="17" font-weight="700" fill="white">A조 (GROUP A)</text>
+
+  <!-- 팀 1: 멕시코 (개최국) -->
+  <rect x="20" y="152" width="220" height="46" rx="7" fill="white" stroke="#ccc" stroke-width="1.5"/>
+  <rect x="20" y="152" width="6" height="46" rx="3" fill="#006847"/>
+  <text x="40" y="175" font-size="13" font-weight="600" fill="#333">멕시코</text>
+  <text x="40" y="191" font-size="11" fill="#888">MEX · 개최국</text>
+
+  <!-- 팀 2: 대한민국 (강조) -->
+  <rect x="20" y="206" width="220" height="46" rx="7" fill="#1b5e20"/>
+  <rect x="20" y="206" width="6" height="46" rx="3" fill="#c8e6c9"/>
+  <text x="40" y="229" font-size="14" font-weight="700" fill="white">대한민국</text>
+  <text x="40" y="246" font-size="11" fill="#c8e6c9">KOR · 주장 손흥민</text>
+
+  <!-- 팀 3: 남아프리카공화국 -->
+  <rect x="20" y="260" width="220" height="46" rx="7" fill="white" stroke="#ccc" stroke-width="1.5"/>
+  <rect x="20" y="260" width="6" height="46" rx="3" fill="#007A4D"/>
+  <text x="40" y="283" font-size="13" font-weight="600" fill="#333">남아프리카공화국</text>
+  <text x="40" y="299" font-size="11" fill="#888">RSA</text>
+
+  <!-- 팀 4: 유럽 PO 승자 (미정) -->
+  <rect x="20" y="314" width="220" height="46" rx="7" fill="white" stroke="#bbb" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="20" y="314" width="6" height="46" rx="3" fill="#aaa"/>
+  <text x="40" y="337" font-size="13" fill="#777">유럽 PO 승자</text>
+  <text x="40" y="353" font-size="11" fill="#aaa">TBD · 미정</text>
+
+  <!-- ─── 오른쪽 패널: 경기 일정 ─── -->
+
+  <!-- 섹션 제목 -->
+  <text x="270" y="128" font-size="15" font-weight="700" fill="#0f1f3d">대한민국 경기 일정</text>
+  <line x1="270" y1="134" x2="785" y2="134" stroke="#0f1f3d" stroke-opacity="0.15" stroke-width="1"/>
+
+  <defs>
+    <clipPath id="m1"><rect x="270" y="143" width="510" height="72" rx="8"/></clipPath>
+    <clipPath id="m2"><rect x="270" y="225" width="510" height="72" rx="8"/></clipPath>
+    <clipPath id="m3"><rect x="270" y="307" width="510" height="72" rx="8"/></clipPath>
+  </defs>
+
+  <!-- 경기 1: 6/11 vs 유럽 PO 승자 -->
+  <rect x="270" y="143" width="510" height="72" rx="8" fill="white" stroke="#0f1f3d" stroke-width="1.5"/>
+  <!-- 날짜 박스 (클립으로 왼쪽 둥근 모서리 처리) -->
+  <rect x="270" y="143" width="82" height="72" fill="#0f1f3d" clip-path="url(#m1)"/>
+  <text x="311" y="174" text-anchor="middle" font-size="16" font-weight="700" fill="white">6/11</text>
+  <text x="311" y="194" text-anchor="middle" font-size="11" fill="#b0c4de">목</text>
+  <!-- 경기 정보 -->
+  <text x="368" y="166" font-size="14" font-weight="700" fill="#0f1f3d">대한민국 vs 유럽 PO 승자</text>
+  <text x="368" y="184" font-size="12" fill="#555">과달라하라, 멕시코</text>
+  <text x="368" y="202" font-size="11" fill="#888">조별리그 1차전 · A조</text>
+
+  <!-- 경기 2: 6/18 vs 멕시코 -->
+  <rect x="270" y="225" width="510" height="72" rx="8" fill="white" stroke="#c97316" stroke-width="1.5"/>
+  <rect x="270" y="225" width="82" height="72" fill="#c97316" clip-path="url(#m2)"/>
+  <text x="311" y="256" text-anchor="middle" font-size="16" font-weight="700" fill="white">6/18</text>
+  <text x="311" y="276" text-anchor="middle" font-size="11" fill="#fff3e0">목</text>
+  <text x="368" y="248" font-size="14" font-weight="700" fill="#0f1f3d">대한민국 vs 멕시코</text>
+  <text x="368" y="266" font-size="12" fill="#555">과달라하라, 멕시코 (개최국 홈)</text>
+  <text x="368" y="284" font-size="11" fill="#888">조별리그 2차전 · A조</text>
+
+  <!-- 경기 3: 6/24 vs 남아프리카공화국 -->
+  <rect x="270" y="307" width="510" height="72" rx="8" fill="white" stroke="#1b5e20" stroke-width="1.5"/>
+  <rect x="270" y="307" width="82" height="72" fill="#1b5e20" clip-path="url(#m3)"/>
+  <text x="311" y="338" text-anchor="middle" font-size="16" font-weight="700" fill="white">6/24</text>
+  <text x="311" y="358" text-anchor="middle" font-size="11" fill="#c8e6c9">수</text>
+  <text x="368" y="330" font-size="14" font-weight="700" fill="#0f1f3d">대한민국 vs 남아프리카공화국</text>
+  <text x="368" y="348" font-size="12" fill="#555">몬테레이, 멕시코</text>
+  <text x="368" y="366" font-size="11" fill="#888">조별리그 3차전 · A조</text>
+
+  <!-- 하단 배너 -->
+  <rect x="20" y="392" width="760" height="22" rx="6" fill="#0f1f3d"/>
+  <text x="400" y="408" text-anchor="middle" font-size="12" fill="#b0c4de">주장 손흥민 (LAFC) · 출처: FIFA 공식 / 대한축구협회</text>
+</svg>
