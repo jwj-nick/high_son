@@ -167,14 +167,26 @@
 
 ## 스킬 & 에이전트
 
+### ✅ 구현 완료
+
 | 명령 | 파일 | 동작 |
 |---|---|---|
 | `/se_figcrop Q16 수학` | `.claude/skills/se_figcrop/SKILL.md` | 시험지 jpg에서 그림 crop → .md 삽입 |
 | `/se_math_error_note Q12` | `.claude/skills/se_math_error_note/SKILL.md` | 수학 오답노트 .md + HTML 앱 생성 |
 | `/se_math_practice Q12` | `.claude/skills/se_math_practice/SKILL.md` | 연습문제 3×3=9개 생성 |
 | `/se_math_figure Q16` | `.claude/skills/se_math_figure/SKILL.md` | 그림 있는 문제 → SVG(문제) + JSXGraph(풀이) |
-| "수학 오답 Q12, Q13 처리해줘" | `.claude/agents/math-error-workflow.md` | error-note→figure→practice→검증 순 실행 |
-| "Q16 앱 검토해줘" | `.claude/agents/app-reviewer.md` | APP_PRINCIPLES 기준 앱 품질 검토 |
+| `/se_science_chem_card` | `.claude/skills/se_science_chem_card/SKILL.md` | 과학 개념 카드 생성 |
+| "수학 오답 Q12, Q13 처리해줘" | `.claude/agents/se_agent_math_error_workflow.md` | error-note→figure→practice→검증 순 실행 |
+| "Q16 앱 검토해줘" | `.claude/agents/se_agent_app_reviewer.md` | APP_PRINCIPLES 기준 앱 품질 검토 |
+| "사회 step3 도와줘" | `.claude/agents/se_agent_subject_helper.md` | 자연어 → skill 분기 라우터 |
+
+### 🔶 SKILL.md 뼈대 완성 (콘텐츠 의뢰 시 즉시 실행 가능)
+
+| 명령 | 파일 | 동작 |
+|---|---|---|
+| `/se_perf_eval_step 사회 과제 step3` | `.claude/skills/se_perf_eval_step/SKILL.md` | Step형 수행평가 앱 골격 생성 |
+| `/se_perf_eval_person 정도전 한국사` | `.claude/skills/se_perf_eval_person/SKILL.md` | 인물 수행평가 3앱 (가이드·모범·심화) |
+| `/se_person_research 정도전` | `.claude/skills/se_person_research/SKILL.md` | 인물 데이터 .md 생성 (sub-skill) |
 
 ---
 
