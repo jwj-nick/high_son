@@ -1,16 +1,16 @@
 ---
-name: math-error-note
-description: 수학 오답노트를 생성한다. 문제 번호를 받아 02_text에서 원문을 읽고, 7섹션 .md 오답노트와 단계별 풀이 HTML 앱을 만든다. 호출 예시 — "Q12 오답노트", "/math-error-note Q12", "/math-error-note Q13 수학".
+name: se_math_error_note
+description: 수학 오답노트를 생성한다. 문제 번호를 받아 02_text에서 원문을 읽고, 7섹션 .md 오답노트와 단계별 풀이 HTML 앱을 만든다. 호출 예시 — "Q12 오답노트", "/se_math_error_note Q12", "/se_math_error_note Q13 수학".
 ---
 
-# math-error-note — 수학 오답노트 생성 스킬
+# se_math_error_note — 수학 오답노트 생성 스킬
 
 ## 인자 형태
 ```
-/math-error-note               # 인터랙티브 (문제 번호 물어봄)
-/math-error-note Q12           # 수학 기본 (과목 생략 시 공통수학1)
-/math-error-note Q12 수학      # 과목 명시
-/math-error-note Q12 수학 ④    # 내가 쓴 답까지 명시
+/se_math_error_note               # 인터랙티브 (문제 번호 물어봄)
+/se_math_error_note Q12           # 수학 기본 (과목 생략 시 공통수학1)
+/se_math_error_note Q12 수학      # 과목 명시
+/se_math_error_note Q12 수학 ④    # 내가 쓴 답까지 명시
 ```
 
 ## 디렉토리 매핑
@@ -122,7 +122,7 @@ description: 수학 오답노트를 생성한다. 문제 번호를 받아 02_tex
   - JSXGraph 슬라이더를 page-0에 배치 금지
   - 그림: 원본 시험지 구도의 정적 SVG 사용 (축 눈금 수치 없음)
 
-**시각화 판단 — `/math-figure` 실행 기준** (아래 중 하나라도 해당하면 반드시 실행):
+**시각화 판단 — `/se_math_figure` 실행 기준** (아래 중 하나라도 해당하면 반드시 실행):
 
 | 조건 | 예시 |
 |---|---|
@@ -140,7 +140,7 @@ description: 수학 오답노트를 생성한다. 문제 번호를 받아 02_tex
 ## 파일 명명 규약
 - 오답노트 .md: `Q<번호>_<주제키워드>.md`
 - 앱: `Q<번호>_app.html`
-- 연습문제: `Q<번호>_practice.md` (math-practice 스킬 담당)
+- 연습문제: `Q<번호>_practice.md` (se_math_practice 스킬 담당)
 
 ## 주의
 - 원본 JPG는 절대 수정·삭제하지 않음

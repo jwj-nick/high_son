@@ -1,15 +1,15 @@
 ---
-name: math-practice
-description: 수학 오답 문제에 대해 연습 문제를 3카테고리(쉬운/비슷한/응용) × 3문제씩 생성한다. 각 문제는 풀이 전략·정답·단계별 힌트를 포함한다. 호출 예시 — "Q12 연습문제", "/math-practice Q12", "/math-practice Q12 수학".
+name: se_math_practice
+description: 수학 오답 문제에 대해 연습 문제를 3카테고리(쉬운/비슷한/응용) × 3문제씩 생성한다. 각 문제는 풀이 전략·정답·단계별 힌트를 포함한다. 호출 예시 — "Q12 연습문제", "/se_math_practice Q12", "/se_math_practice Q12 수학".
 ---
 
-# math-practice — 수학 연습 문제 생성 스킬
+# se_math_practice — 수학 연습 문제 생성 스킬
 
 ## 인자 형태
 ```
-/math-practice                 # 인터랙티브
-/math-practice Q12             # 수학 기본 (과목 생략 시 공통수학1)
-/math-practice Q12 수학        # 과목 명시
+/se_math_practice                 # 인터랙티브
+/se_math_practice Q12             # 수학 기본 (과목 생략 시 공통수학1)
+/se_math_practice Q12 수학        # 과목 명시
 ```
 
 ## 절차

@@ -1,9 +1,9 @@
 ---
-name: figcrop
-description: 시험지 캡쳐 jpg에서 그림/도식 영역만 잘라 02_text 마크다운에 첨부한다. 호출 예시 — "Q16 도형 crop", "수학 Q3 그래프 잘라줘", "/figcrop Q16 수학 좌표평면". 입력이 시험 문제 그림 영역과 관련되면 트리거. 사용자가 좌표를 명시하지 않으면 Claude가 페이지 레이아웃을 보고 추정한 후 결과를 시각 확인하여 미세조정한다.
+name: se_figcrop
+description: 시험지 캡쳐 jpg에서 그림/도식 영역만 잘라 02_text 마크다운에 첨부한다. 호출 예시 — "Q16 도형 crop", "수학 Q3 그래프 잘라줘", "/se_figcrop Q16 수학 좌표평면". 입력이 시험 문제 그림 영역과 관련되면 트리거. 사용자가 좌표를 명시하지 않으면 Claude가 페이지 레이아웃을 보고 추정한 후 결과를 시각 확인하여 미세조정한다.
 ---
 
-# figcrop — 시험지 그림 영역 crop & embed
+# se_figcrop — 시험지 그림 영역 crop & embed
 
 ## 환경
 - Python 3.14 + Pillow 12.1 (확인됨)
@@ -12,10 +12,10 @@ description: 시험지 캡쳐 jpg에서 그림/도식 영역만 잘라 02_text �
 
 ## 인자 형태
 ```
-/figcrop                              # 인터랙티브 (Nick에게 정보 요청)
-/figcrop Q16 수학                      # 좌표는 Claude가 추정
-/figcrop Q16 수학 좌표평면              # + 짧은 설명
-/figcrop Q16 수학 좌표평면 100,400,800,1100  # + 정확한 좌표 (x1,y1,x2,y2)
+/se_figcrop                              # 인터랙티브 (Nick에게 정보 요청)
+/se_figcrop Q16 수학                      # 좌표는 Claude가 추정
+/se_figcrop Q16 수학 좌표평면              # + 짧은 설명
+/se_figcrop Q16 수학 좌표평면 100,400,800,1100  # + 정확한 좌표 (x1,y1,x2,y2)
 ```
 
 ## 절차

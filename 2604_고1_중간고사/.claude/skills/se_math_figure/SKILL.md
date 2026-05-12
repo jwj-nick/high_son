@@ -1,8 +1,8 @@
-# /math-figure — 수학 그래프 Native 렌더링 스킬
+# /se_math_figure — 수학 그래프 Native 렌더링 스킬
 
 ## 언제 사용하나
 
-`/math-figure Q16` 처럼 호출. 오답노트 app.html의 `<img>` 캡쳐를 **Native HTML 인터랙티브 그래프**로 교체.
+`/se_math_figure Q16` 처럼 호출. 오답노트 app.html의 `<img>` 캡쳐를 **Native HTML 인터랙티브 그래프**로 교체.
 
 - **정적 그림** (좌표, 점, 선만 필요): Pure SVG 생성
 - **탐구형** (슬라이더로 파라미터 변화 관찰): JSXGraph 인터랙티브 보드 생성

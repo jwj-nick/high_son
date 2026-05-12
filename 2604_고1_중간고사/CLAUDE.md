@@ -95,18 +95,18 @@
    - **(A) 자동:** Claude가 대략 영역(예: 상하 1/3, 좌우 1/2)을 추정 → crop → 결과 확인 → 미세조정
    - **(B) 수동:** 사용자가 캡쳐 도구로 직접 잘라 `01_capture/figs/`에 저장 → Claude가 .md에 annotation
 
-**향후 개선:** `/figcrop` 스킬 작성 검토. 입력 = 원본 jpg + 페이지 + 영역 명세 / 출력 = crop된 jpg + .md 자동 삽입.
+**향후 개선:** `/se_figcrop` 스킬 작성 검토. 입력 = 원본 jpg + 페이지 + 영역 명세 / 출력 = crop된 jpg + .md 자동 삽입.
 
 ### 3단계: 오답노트 ⭐ (핵심 단계)
 
-> **이 단계가 이 프로젝트의 핵심이다.** `/math-error-note` 스킬과 `/math-practice` 스킬, 그리고 `math-error-workflow` 에이전트를 사용한다.
+> **이 단계가 이 프로젝트의 핵심이다.** `/se_math_error_note` 스킬과 `/se_math_practice` 스킬, 그리고 `se_agent_math_error_workflow` 에이전트를 사용한다.
 
 #### 스킬 사용법
 | 명령 | 동작 |
 |---|---|
-| `/math-error-note Q12` | Q12 오답노트 .md + 단계별 풀이 HTML 앱 생성 |
-| `/math-practice Q12` | Q12 연습문제 9개 (🟢×3, 🟡×3, 🔴×3) 생성 |
-| `/math-figure Q16` | 그림 있는 문제 → 문제 페이지: 정적 SVG / 풀이 페이지: JSXGraph 슬라이더 |
+| `/se_math_error_note Q12` | Q12 오답노트 .md + 단계별 풀이 HTML 앱 생성 |
+| `/se_math_practice Q12` | Q12 연습문제 9개 (🟢×3, 🟡×3, 🔴×3) 생성 |
+| `/se_math_figure Q16` | 그림 있는 문제 → 문제 페이지: 정적 SVG / 풀이 페이지: JSXGraph 슬라이더 |
 | 에이전트: "수학 오답 Q12, Q13 처리해줘" | 두 스킬을 순서대로 실행 + todo/study.md 업데이트 |
 | 에이전트: "Q16 앱 검토해줘" | APP_PRINCIPLES 기준 앱 품질 검토, 위반 항목 보고 |
 
@@ -169,10 +169,10 @@
 
 | 명령 | 파일 | 동작 |
 |---|---|---|
-| `/figcrop Q16 수학` | `.claude/skills/figcrop/SKILL.md` | 시험지 jpg에서 그림 crop → .md 삽입 |
-| `/math-error-note Q12` | `.claude/skills/math-error-note/SKILL.md` | 수학 오답노트 .md + HTML 앱 생성 |
-| `/math-practice Q12` | `.claude/skills/math-practice/SKILL.md` | 연습문제 3×3=9개 생성 |
-| `/math-figure Q16` | `.claude/skills/math-figure/SKILL.md` | 그림 있는 문제 → SVG(문제) + JSXGraph(풀이) |
+| `/se_figcrop Q16 수학` | `.claude/skills/se_figcrop/SKILL.md` | 시험지 jpg에서 그림 crop → .md 삽입 |
+| `/se_math_error_note Q12` | `.claude/skills/se_math_error_note/SKILL.md` | 수학 오답노트 .md + HTML 앱 생성 |
+| `/se_math_practice Q12` | `.claude/skills/se_math_practice/SKILL.md` | 연습문제 3×3=9개 생성 |
+| `/se_math_figure Q16` | `.claude/skills/se_math_figure/SKILL.md` | 그림 있는 문제 → SVG(문제) + JSXGraph(풀이) |
 | "수학 오답 Q12, Q13 처리해줘" | `.claude/agents/math-error-workflow.md` | error-note→figure→practice→검증 순 실행 |
 | "Q16 앱 검토해줘" | `.claude/agents/app-reviewer.md` | APP_PRINCIPLES 기준 앱 품질 검토 |
 

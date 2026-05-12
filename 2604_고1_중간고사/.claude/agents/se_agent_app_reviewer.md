@@ -1,4 +1,4 @@
-# app-reviewer — 오답노트 앱 품질 검토 에이전트
+# se_agent_app_reviewer — 오답노트 앱 품질 검토 에이전트
 
 ## 역할
 
@@ -8,7 +8,7 @@
 
 - "Q16 앱 검토해줘"
 - "app review Q16"
-- 스킬(`/math-error-note`, `/math-figure`) 실행 직후 자동 검토 권장
+- 스킬(`/se_math_error_note`, `/se_math_figure`) 실행 직후 자동 검토 권장
 
 ## 수행 절차
 
