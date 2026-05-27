@@ -71,7 +71,15 @@
       "Bash(git -C \"C:/Nick/30_Apps/jwj-nick.github.io\" remote -v)",
       "Bash(git -C \"C:/kids/70_HighSchool\" remote -v)",
       "Bash(git -C \"C:/kids/70_HighSchool\" log --oneline -5)",
-      "Bash(git -C \"C:/kids/70_HighSchool\" add \"2605_Subject_Selection/\")"
+      "Bash(git -C \"C:/kids/70_HighSchool\" add \"2605_Subject_Selection/\")",
+      "Bash(git -C C:/kids/70_HighSchool commit -m ' *)",
+      "Bash(git -C \"C:/kids/70_HighSchool\" push origin main)",
+      "Bash(cp -r \"C:/kids/70_HighSchool/2605_Subject_Selection/04_career\" \"C:/Nick/30_Apps/jwj-nick.github.io/high1/path_1_1/\")",
+      "Bash(cp -r \"C:/kids/70_HighSchool/2605_Subject_Selection/06_univ_data\" \"C:/Nick/30_Apps/jwj-nick.github.io/high1/path_1_1/\")",
+      "Bash(cp -r \"C:/kids/70_HighSchool/2605_Subject_Selection/03_analysis\" \"C:/Nick/30_Apps/jwj-nick.github.io/high1/path_1_1/\")",
+      "Bash(git -C \"C:/Nick/30_Apps/jwj-nick.github.io\" add high1/index.html high1/path_1_1/)",
+      "Bash(git -C C:/Nick/30_Apps/jwj-nick.github.io commit -m ' *)",
+      "Bash(git -C \"C:/Nick/30_Apps/jwj-nick.github.io\" push origin main)"
     ],
     "additionalDirectories": [
       "C:\\Kids\\70_HighSchool",

@@ -33,7 +33,9 @@
       "Bash(curl -s http://localhost:8791/1sem_perf_viete.html)",
       "Bash(python3 /tmp/check_html.py)",
       "Bash(git commit *)",
-      "Bash(gh repo *)"
+      "Bash(gh repo *)",
+      "Bash(sed -i -e 's|/concept-review|/se_concept_review|g' -e 's|/math-error-note|/se_math_error_note|g' -e 's|/math-figure|/se_math_figure|g' -e 's|/math-practice|/se_math_practice|g' -e 's|/story-write|/se_story_write|g' -e 's|/type-explorer|/se_type_explorer|g' -e 's|/unit-plan|/se_unit_plan|g' -e 's|/unit-review|/se_unit_review|g' -e 's|/ncc_audit_app|/se_ncc_audit_app|g' -e 's|/ncc_audit_concept|/se_ncc_audit_concept|g' -e 's|/ncc_audit_math|/se_ncc_audit_math|g' -e 's|/ncc_audit_problem|/se_ncc_audit_problem|g' -e 's|/ncc_audit_story|/se_ncc_audit_story|g' -e 's|/video-make|/se_video_make|g' -e 's|`unit-orchestrator`|`se_agent_unit_orchestrator`|g' -e 's|`type-explorer`|`se_type_explorer`|g' CLAUDE.md)",
+      "Bash(grep -c \"^| \\\\`/se_\" CLAUDE.md)"
     ],
     "additionalDirectories": [
       "C:\\Kids\\70_HighSchool",
