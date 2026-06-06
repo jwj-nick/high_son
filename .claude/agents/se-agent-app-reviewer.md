@@ -1,10 +1,10 @@
 ---
-name: se_agent_app_reviewer
+name: se-agent-app-reviewer
 description: 오답노트·수행평가·인물 등 모든 영역의 앱을 APP_PRINCIPLES + 40_PRINCIPLES 기준으로 검토하는 에이전트. 수학 앱(Qnn_app.html), 수행평가 앱(step*.html), 인물 앱(guide/model/deep.html) 모두 지원.
 tools: [Read, Write, Edit, Bash, Glob, Grep]
 ---
 
-# se_agent_app_reviewer — 앱 품질 검토 에이전트
+# se-agent-app-reviewer — 앱 품질 검토 에이전트
 
 ## 역할
 

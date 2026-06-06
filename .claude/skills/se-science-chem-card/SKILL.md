@@ -1,4 +1,11 @@
-# SKILL: /se_science_chem_card [substance_id | atom_element]
+---
+name: se-science-chem-card
+description: 통합과학1 화학결합·원자모형 학습 카드를 생성한다. 물질ID 또는 원소 기호를 받아 chem_bond_app.html / atom_model_app.html 배열에 카드를 추가하거나 전체 재생성한다. 호출 예시 — "NaCl 카드", "/se-science-chem-card nacl", "/se-science-chem-card atom:na", "/se-science-chem-card all".
+---
+
+# se-science-chem-card — 화학결합·원자모형 학습 카드 스킬
+
+용법: `/se-science-chem-card [substance_id | atom_element]`
 
 ## 목적
 통합과학1 화학결합·원자모형 학습 카드를 생성한다.
@@ -10,11 +17,11 @@
 ## 입력 형식
 
 ```
-/se_science_chem_card nacl          ← 화학결합 물질 카드
-/se_science_chem_card h2
-/se_science_chem_card all           ← 22종 전체 화학결합 앱 재생성
-/se_science_chem_card atom:na       ← 원자모형 카드 (원소 기호)
-/se_science_chem_card atom:all      ← 10종 전체 원자모형 앱 재생성
+/se-science-chem-card nacl          ← 화학결합 물질 카드
+/se-science-chem-card h2
+/se-science-chem-card all           ← 22종 전체 화학결합 앱 재생성
+/se-science-chem-card atom:na       ← 원자모형 카드 (원소 기호)
+/se-science-chem-card atom:all      ← 10종 전체 원자모형 앱 재생성
 ```
 
 ---

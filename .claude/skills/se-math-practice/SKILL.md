@@ -1,15 +1,15 @@
 ---
-name: se_math_practice
-description: 수학 오답 문제에 대해 연습 문제를 3카테고리(쉬운/비슷한/응용) × 3문제씩 생성한다. 각 문제는 풀이 전략·정답·단계별 힌트를 포함한다. 호출 예시 — "Q12 연습문제", "/se_math_practice Q12", "/se_math_practice Q12 수학".
+name: se-math-practice
+description: 수학 오답 문제에 대해 연습 문제를 3카테고리(쉬운/비슷한/응용) × 3문제씩 생성한다. 각 문제는 풀이 전략·정답·단계별 힌트를 포함한다. 호출 예시 — "Q12 연습문제", "/se-math-practice Q12", "/se-math-practice Q12 수학".
 ---
 
-# se_math_practice — 수학 연습 문제 생성 스킬
+# se-math-practice — 수학 연습 문제 생성 스킬
 
 ## 인자 형태
 ```
-/se_math_practice                 # 인터랙티브
-/se_math_practice Q12             # 수학 기본 (과목 생략 시 공통수학1)
-/se_math_practice Q12 수학        # 과목 명시
+/se-math-practice                 # 인터랙티브
+/se-math-practice Q12             # 수학 기본 (과목 생략 시 공통수학1)
+/se-math-practice Q12 수학        # 과목 명시
 ```
 
 ## 절차
@@ -99,7 +99,7 @@ description: 수학 오답 문제에 대해 연습 문제를 3카테고리(쉬�
 - 상세 뷰: 탭 3개 — 문제판 / 정답판 / 풀이판
 - P[] 데이터 배열: `{id, cat, catLabel, title, sub, why, prob, ansVal, ansDetail, ansCheck, sol}`
 
-**practice_app.html APP_PRINCIPLES 준수** — [APP_PRINCIPLES.md](../../../APP_PRINCIPLES.md):
+**practice_app.html APP_PRINCIPLES 준수** — [APP_PRINCIPLES.md](APP_PRINCIPLES.md):
 - `prob` 필드: 문제만 표시, 슬라이더·JSXGraph 금지
 - `why` (왜 이 문제인가): **정답판(ans 탭)**에만 표시, 문제판에는 없음
 - "Q{N}의 설정에서..." 참조 문제: `prob` 필드에 정적 `<img>` 참조 이미지 포함

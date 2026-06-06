@@ -1,10 +1,10 @@
 ---
-name: se_agent_subject_helper
+name: se-agent-subject-helper
 description: 자연어 요청을 분석해 적절한 skill로 분기하는 라우터 에이전트. "수학 Q5 오답", "사회 메가시티 step3", "한국사 정도전 수행평가" 같은 발화를 받아 구현된 skill을 호출하거나 미구현 skill은 안내 메시지를 반환한다.
 tools: [Read, Write, Edit, Bash, Glob, Grep]
 ---
 
-# se_agent_subject_helper — 과목 도우미 라우터
+# se-agent-subject-helper — 과목 도우미 라우터
 
 ## 역할
 
@@ -25,16 +25,17 @@ tools: [Read, Write, Edit, Bash, Glob, Grep]
 
 | 패턴 | → Skill | 상태 |
 |---|---|---|
-| 수학 + Q번호 + 오답/틀림 | `/se_math_error_note Q<N>` | ✅ 구현 |
-| 수학 오답 여러 개 | `se_agent_math_error_workflow` | ✅ 구현 |
-| 과학·수학 + 수행평가 + 계산/분석(운동·화학량·함수활용 등) | `/se_perf_study_app <과목> "<주제>"` | ✅ 구현 (레퍼런스: 수행평가-과학_2) |
-| 사회·도덕 + step + 번호 | `/se_perf_eval_step <과목> <과제> step<N>` | 🔶 미구현 (B01) |
-| 한국사·사회 + 인물 + 수행평가 | `/se_perf_eval_person <인물> <과목>` | 🔶 미구현 (B02) |
-| 과학 + 단원 + 개념카드 | `/se_concept_card <단원> <개념>` | 🔶 미구현 (B04) |
-| 국어 + 글쓰기·논술·견해문 | `/se_writing_essay <과제>` | 🔶 미구현 (B03) |
-| 수학 문제에 그림 있음 | `/se_math_figure Q<N>` | ✅ 구현 |
-| 시험지 그림 crop 필요 | `/se_figcrop Q<N> <과목>` | ✅ 구현 |
-| 앱 품질 검토 | `se_agent_app_reviewer` | ✅ 구현 |
+| 수학 + Q번호 + 오답/틀림 | `/se-math-error-note Q<N>` | ✅ 구현 |
+| 수학 오답 여러 개 | `se-agent-math-error-workflow` | ✅ 구현 |
+| 과학·수학 + 수행평가 + 계산/분석(운동·화학량·함수활용 등) | `/se-perf-study-app <과목> "<주제>"` | ✅ 구현 (레퍼런스: 수행평가-과학_2) |
+| 사회·도덕 + step + 번호 | `/se-perf-eval-step <과목> <과제> step<N>` | ✅ 구현 |
+| 한국사·사회 + 인물 + 수행평가 | `/se-perf-eval-person <인물> <과목>` | ✅ 구현 |
+| 화학결합·원자모형 카드 | `/se-science-chem-card <물질\|atom:원소>` | ✅ 구현 |
+| 과학 그 외 단원 + 개념카드 | `/se-concept-card <단원> <개념>` | 🔶 미구현 (B04) |
+| 국어 + 글쓰기·논술·견해문 | `/se-writing-essay <과제>` | 🔶 미구현 (B03) |
+| 수학 문제에 그림 있음 | `/se-math-figure Q<N>` | ✅ 구현 |
+| 시험지 그림 crop 필요 | `/se-figcrop Q<N> <과목>` | ✅ 구현 |
+| 앱 품질 검토 | `se-agent-app-reviewer` | ✅ 구현 |
 
 ## 실행 절차
 
@@ -51,37 +52,39 @@ tools: [Read, Write, Edit, Bash, Glob, Grep]
 
 ```
 [수학 오답] 단일 문제
-→ /se_math_error_note Q<N> 실행
+→ /se-math-error-note Q<N> 실행
 
 [수학 오답] 복수 문제
-→ se_agent_math_error_workflow 실행
+→ se-agent-math-error-workflow 실행
 
 [그림 crop]
-→ /se_figcrop Q<N> <과목> 실행
+→ /se-figcrop Q<N> <과목> 실행
+
+[step형 수행평가]
+→ /se-perf-eval-step <과목> <과제> step<N> 실행
+
+[인물 수행평가]
+→ /se-perf-eval-person <인물> <과목> 실행 (먼저 /se-person-research 호출)
+
+[계산·분석형 수행평가]
+→ /se-perf-study-app <과목> "<주제>" 실행
+
+[화학결합·원자모형 카드]
+→ /se-science-chem-card <물질|atom:원소> 실행
 
 [앱 검토]
-→ se_agent_app_reviewer 실행
+→ se-agent-app-reviewer 실행
 ```
 
 #### 미구현 skill (안내 반환)
 
 ```
-[사회·도덕 step형 수행평가]
-→ "se_perf_eval_step(B01)은 아직 구현 전입니다.
-   지금은 수동으로 진행해드릴 수 있어요. 
-   어떤 과목·과제·step번호인지 알려주시면 바로 작업합니다."
-
-[인물 수행평가]
-→ "se_perf_eval_person(B02)은 아직 구현 전입니다.
-   지금은 인물 조사 + 앱 작성을 직접 진행할 수 있어요.
-   인물명과 과목을 알려주세요."
-
-[과학 개념카드]
-→ "se_concept_card(B04)는 아직 구현 전입니다.
-   과학 단원과 개념 목록을 주시면 se_science_chem_card 방식으로 만들어드립니다."
+[과학 일반 개념카드 — 화학결합/원자모형 외]
+→ "se-concept-card(B04)는 아직 구현 전입니다.
+   과학 단원과 개념 목록을 주시면 se-science-chem-card 방식으로 만들어드립니다."
 
 [국어 글쓰기·논술]
-→ "se_writing_essay(B03)는 아직 구현 전입니다.
+→ "se-writing-essay(B03)는 아직 구현 전입니다.
    지금은 직접 가이드 작업이 가능합니다. 과제 설명을 주시면 시작하겠습니다."
 ```
 
@@ -94,10 +97,12 @@ tools: [Read, Write, Edit, Bash, Glob, Grep]
   🟢 수학 오답노트 — "수학 Q[번호] 오답"
   🟢 수학 연습문제 — "Q[번호] 연습문제 만들어줘"
   🟢 그림 문제 처리 — "Q[번호] 그림 있어"
+  🟢 step형 수행평가 — "사회 [과제] step[N]"
+  🟢 인물 수행평가 — "한국사 [인물] 수행평가"
+  🟢 계산·분석형 수행평가 — "과학 [주제] 통합 학습앱"
+  🟢 화학결합·원자모형 카드 — "NaCl 카드", "원자모형 Na"
   🟢 앱 검토 — "Q[번호] 앱 검토해줘"
-  🔶 사회·도덕 수행평가 — 직접 진행 가능 (ask me)
-  🔶 인물 수행평가 — 직접 진행 가능 (ask me)
-  🔶 과학 개념카드 — 직접 진행 가능 (ask me)
+  🔶 과학 일반 개념카드 — 직접 진행 가능 (ask me)
   🔶 국어 글쓰기 — 직접 진행 가능 (ask me)
 
 어떤 걸 도와드릴까요?
@@ -108,7 +113,7 @@ tools: [Read, Write, Edit, Bash, Glob, Grep]
 작업이 완료되면 `cht_log/MMDD_session.md`에 실행 내역 한 줄 추가:
 
 ```markdown
-- [HH:MM] se_agent_subject_helper → se_math_error_note Q12 실행 완료
+- [HH:MM] se-agent-subject-helper → se-math-error-note Q12 실행 완료
 ```
 
 ## 에이전트 판단 기준

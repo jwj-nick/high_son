@@ -1,24 +1,24 @@
 ---
-name: se_perf_study_app
+name: se-perf-study-app
 description: 계산·분석형 수행평가용 "통합 학습 앱" 생성기. 과목·주제·공지를 받아 개념(애니메이션)·공식카드(단위)·이론깊이(유도)·몸풀기·도전문제(점진공개)·실전점검을 갖춘 단일 HTML 학습 앱을 만든다. 과학_2 물체의 운동(perf3_motion) 패턴 일반화. step형(보고서)·person형(인물)과 구분 — 이건 "데이터로 계산·분석하는 시험" 대비용.
 ---
 
-# se_perf_study_app — 계산·분석형 수행평가 통합 학습 앱
+# se-perf-study-app — 계산·분석형 수행평가 통합 학습 앱
 
 ## 언제 쓰나 (다른 perf 스킬과 구분)
 | 스킬 | 수행평가 성격 | 산출물 |
 |---|---|---|
-| **se_perf_study_app** (이것) | **데이터로 계산·분석** (과학 운동/화학량, 수학 활용) | 단일 통합 학습 앱 (개념+연습+점진풀이) |
-| se_perf_eval_step | 보고서/논술 다단계 작성 | step별 양식 가이드 앱 |
-| se_perf_eval_person | 역사·사회 인물 | 가이드·모범·심화 3앱 |
+| **se-perf-study-app** (이것) | **데이터로 계산·분석** (과학 운동/화학량, 수학 활용) | 단일 통합 학습 앱 (개념+연습+점진풀이) |
+| se-perf-eval-step | 보고서/논술 다단계 작성 | step별 양식 가이드 앱 |
+| se-perf-eval-person | 역사·사회 인물 | 가이드·모범·심화 3앱 |
 
 → "교실에서 주어진 수치로 풀고 과정을 서술"하는 시험이면 **이 스킬**.
 
 ## 호출 형식
 ```
-/se_perf_study_app <과목> "<주제>"
-예: /se_perf_study_app 과학 "물체의 운동"
-    /se_perf_study_app 수학 "함수의 활용"
+/se-perf-study-app <과목> "<주제>"
+예: /se-perf-study-app 과학 "물체의 운동"
+    /se-perf-study-app 수학 "함수의 활용"
 ```
 
 ## 입력 → 출력
@@ -79,7 +79,7 @@ description: 계산·분석형 수행평가용 "통합 학습 앱" 생성기. �
 2. KaTeX 한글-수식 스캔 (정규식 `\$([^$\n]+)\$` 중 한글 포함, `\text{` 제외).
 3. `cp` → `high1/<subject>/1sem_perf_<topic>.html`, `index.html` 카드 추가(영어 파일명).
 4. **두 리포 push**: public(`jwj-nick.github.io`) + private(`high_son`).
-5. `se_agent_app_reviewer`로 개념 정확성 + APP_PRINCIPLES 검토.
+5. `se-agent-app-reviewer`로 개념 정확성 + APP_PRINCIPLES 검토.
 
 ### 5단계: todo/study 갱신
 - `todo.md` 체크, `study.md §약점 태그` 추가. 보류 항목(교과서 사진 등) 명시.

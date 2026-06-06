@@ -1,20 +1,20 @@
 ---
-name: se_person_research
-description: 역사·사회 인물을 조사해 표준 데이터 .md를 생성하는 sub-skill. se_perf_eval_person과 MathTelling se_story_write가 공통으로 호출한다. 신뢰 출처(교과서·학술자료) 기반, 위키 단독 사용 금지.
+name: se-person-research
+description: 역사·사회 인물을 조사해 표준 데이터 .md를 생성하는 sub-skill. se-perf-eval-person이 호출하며, MathTelling 프로젝트의 인물 서사 스킬(se-people-narrate)과도 공유 가능한 후보. 신뢰 출처(교과서·학술자료) 기반, 위키 단독 사용 금지.
 ---
 
-# se_person_research — 인물 리서치 공통 sub-skill
+# se-person-research — 인물 리서치 공통 sub-skill
 
 ## 호출 형식
 
 ```
-/se_person_research <인물명>
+/se-person-research <인물명>
 
 예시:
-/se_person_research 정도전
-/se_person_research 에라토스테네스
-/se_person_research 류성룡
-/se_person_research 마틴루터킹
+/se-person-research 정도전
+/se-person-research 에라토스테네스
+/se-person-research 류성룡
+/se-person-research 마틴루터킹
 ```
 
 ## 출력
@@ -99,7 +99,7 @@ description: 역사·사회 인물을 조사해 표준 데이터 .md를 생성�
 ### 3단계: 수행평가 활용 포인트 추출
 
 Q형 질문(예: 정도전 Q1~Q5)에 맞춰 답안 방향 1~2줄 기술.
-→ se_perf_eval_person 이 이 섹션을 앱 콘텐츠로 직접 사용.
+→ se-perf-eval-person 이 이 섹션을 앱 콘텐츠로 직접 사용.
 
 ---
 

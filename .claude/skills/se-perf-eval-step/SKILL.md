@@ -1,19 +1,19 @@
 ---
-name: se_perf_eval_step
+name: se-perf-eval-step
 description: 수행평가 다단계 Step형 도우미 앱 생성기. 과목·과제명·step번호를 받아 탭 기반 HTML 가이드 앱(개요+양식+모범답안) 골격을 자동 생성한다. P03 패턴(사회 메가시티 step3~6) 일반화.
 ---
 
-# se_perf_eval_step — 수행평가 다단계 Step 도우미
+# se-perf-eval-step — 수행평가 다단계 Step 도우미
 
 ## 호출 형식
 
 ```
-/se_perf_eval_step <과목> <과제명> <step번호>
+/se-perf-eval-step <과목> <과제명> <step번호>
 
 예시:
-/se_perf_eval_step 사회 메가시티 step3
-/se_perf_eval_step 도덕 미디어윤리 step2
-/se_perf_eval_step 사회 기후변화 step4
+/se-perf-eval-step 사회 메가시티 step3
+/se-perf-eval-step 도덕 미디어윤리 step2
+/se-perf-eval-step 사회 기후변화 step4
 ```
 
 ## 입력 → 출력
@@ -108,7 +108,7 @@ Step 번호에 따른 기본 색 (사회 메가시티 패턴 기반):
 
 ### 5단계: 품질 검토
 
-생성 후 se_agent_app_reviewer 호출:
+생성 후 se-agent-app-reviewer 호출:
 - `40_PRINCIPLES/perf_eval.md` 기준 검토
 - PE1~PE8 항목 체크
 
@@ -144,7 +144,7 @@ Step 번호에 따른 기본 색 (사회 메가시티 패턴 기반):
 - 모범답안 (교과 내용 판단 필요)
 - 채점 기준 배점 (안내문 기반만 가능)
 - 좋은 예/나쁜 예 (사례 판단 필요)
-- 그림·지도가 필요한 경우 (se_figcrop 별도 실행)
+- 그림·지도가 필요한 경우 (se-figcrop 별도 실행)
 
 ---
 

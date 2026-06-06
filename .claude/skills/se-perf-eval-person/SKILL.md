@@ -1,19 +1,19 @@
 ---
-name: se_perf_eval_person
-description: 인물 수행평가용 3앱 세트 생성기. 가이드(학습 모드)·모범답안(명확 모드)·심화(사색 모드) 3앱을 se_person_research 데이터 위에 합성한다. P04 패턴(정도전 한국사 수행평가) 일반화.
+name: se-perf-eval-person
+description: 인물 수행평가용 3앱 세트 생성기. 가이드(학습 모드)·모범답안(명확 모드)·심화(사색 모드) 3앱을 se-person-research 데이터 위에 합성한다. P04 패턴(정도전 한국사 수행평가) 일반화.
 ---
 
-# se_perf_eval_person — 인물 수행평가 3앱 도우미
+# se-perf-eval-person — 인물 수행평가 3앱 도우미
 
 ## 호출 형식
 
 ```
-/se_perf_eval_person <인물명> <과목> [과제포맷]
+/se-perf-eval-person <인물명> <과목> [과제포맷]
 
 예시:
-/se_perf_eval_person 정도전 한국사 Q1Q5형
-/se_perf_eval_person 류성룡 한국사
-/se_perf_eval_person 마틴루터킹 사회
+/se-perf-eval-person 정도전 한국사 Q1Q5형
+/se-perf-eval-person 류성룡 한국사
+/se-perf-eval-person 마틴루터킹 사회
 ```
 
 ## 출력 (3개 HTML 단일 파일)
@@ -33,7 +33,7 @@ description: 인물 수행평가용 3앱 세트 생성기. 가이드(학습 모�
 ```
 수행평가-<과목>/인물_<이름>.md 존재 여부 확인
   있음 → 읽기
-  없음 → /se_person_research <인물명> 먼저 실행
+  없음 → /se-person-research <인물명> 먼저 실행
 ```
 
 ### 2단계: 과제 포맷 파악

@@ -1,15 +1,20 @@
-# /se_math_figure — 수학 그래프 Native 렌더링 스킬
+---
+name: se-math-figure
+description: 수학 그래프를 네이티브 HTML로 렌더링한다. 정적 SVG 또는 JSXGraph 인터랙티브 보드를 생성하여 오답노트 app.html의 <img> 캡쳐를 대체한다. page-0(문제)은 정적 SVG, page-1~N(풀이)은 JSXGraph lazy init. 호출 예시 — "Q16 그래프", "/se-math-figure Q16", "/se-math-figure Q16 수학 좌표평면".
+---
+
+# se-math-figure — 수학 그래프 Native 렌더링 스킬
 
 ## 언제 사용하나
 
-`/se_math_figure Q16` 처럼 호출. 오답노트 app.html의 `<img>` 캡쳐를 **Native HTML 인터랙티브 그래프**로 교체.
+`/se-math-figure Q16` 처럼 호출. 오답노트 app.html의 `<img>` 캡쳐를 **Native HTML 인터랙티브 그래프**로 교체.
 
 - **정적 그림** (좌표, 점, 선만 필요): Pure SVG 생성
 - **탐구형** (슬라이더로 파라미터 변화 관찰): JSXGraph 인터랙티브 보드 생성
 
 ## APP_PRINCIPLES 적용 규칙 ⭐
 
-> 전체 원칙: [APP_PRINCIPLES.md](../../../APP_PRINCIPLES.md)
+> 전체 원칙: [APP_PRINCIPLES.md](APP_PRINCIPLES.md)
 
 | 페이지 | 그림 형식 | 금지 사항 |
 |---|---|---|
