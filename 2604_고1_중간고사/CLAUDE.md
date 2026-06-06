@@ -176,6 +176,7 @@
 | `/se_math_practice Q12` | `.claude/skills/se_math_practice/SKILL.md` | 연습문제 3×3=9개 생성 |
 | `/se_math_figure Q16` | `.claude/skills/se_math_figure/SKILL.md` | 그림 있는 문제 → SVG(문제) + JSXGraph(풀이) |
 | `/se_science_chem_card` | `.claude/skills/se_science_chem_card/SKILL.md` | 과학 개념 카드 생성 |
+| `/se_perf_study_app 과학 "물체의 운동"` | `.claude/skills/se_perf_study_app/SKILL.md` | 계산·분석형 수행평가 통합 학습 앱(개념애니+공식단위+이론유도+점진풀이). 레퍼런스: `수행평가-과학_2/` |
 | "수학 오답 Q12, Q13 처리해줘" | `.claude/agents/se_agent_math_error_workflow.md` | error-note→figure→practice→검증 순 실행 |
 | "Q16 앱 검토해줘" | `.claude/agents/se_agent_app_reviewer.md` | APP_PRINCIPLES 기준 앱 품질 검토 |
 | "사회 step3 도와줘" | `.claude/agents/se_agent_subject_helper.md` | 자연어 → skill 분기 라우터 |

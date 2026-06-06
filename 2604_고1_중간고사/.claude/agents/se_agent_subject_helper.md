@@ -27,6 +27,7 @@ tools: [Read, Write, Edit, Bash, Glob, Grep]
 |---|---|---|
 | 수학 + Q번호 + 오답/틀림 | `/se_math_error_note Q<N>` | ✅ 구현 |
 | 수학 오답 여러 개 | `se_agent_math_error_workflow` | ✅ 구현 |
+| 과학·수학 + 수행평가 + 계산/분석(운동·화학량·함수활용 등) | `/se_perf_study_app <과목> "<주제>"` | ✅ 구현 (레퍼런스: 수행평가-과학_2) |
 | 사회·도덕 + step + 번호 | `/se_perf_eval_step <과목> <과제> step<N>` | 🔶 미구현 (B01) |
 | 한국사·사회 + 인물 + 수행평가 | `/se_perf_eval_person <인물> <과목>` | 🔶 미구현 (B02) |
 | 과학 + 단원 + 개념카드 | `/se_concept_card <단원> <개념>` | 🔶 미구현 (B04) |
