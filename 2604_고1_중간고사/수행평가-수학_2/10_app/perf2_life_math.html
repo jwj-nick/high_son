@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생활 속 수학 탐구 프로젝트 — 공통수학1 수행평가</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})"></script>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#fff; --ink:#1e293b; --sub:#64748b; --line:#e2e8f0;
+    --blue:#2563eb; --blue-d:#1e40af; --green:#16a34a; --green-bg:#f0fdf4;
+    --amber:#d97706; --amber-bg:#fffbeb; --red:#dc2626; --red-bg:#fef2f2;
+    --purple:#7c3aed; --purple-bg:#f5f3ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;
+    background:#f1f5f9;color:var(--ink);line-height:1.7;-webkit-text-size-adjust:100%}
+  a{color:var(--blue)}
+
+  /* breadcrumb */
+  .crumb{background:#f8fafc;border-bottom:1px solid var(--line);padding:7px 16px;font-size:12px;
+    display:flex;align-items:center;gap:5px}
+  .crumb a{color:var(--sub);text-decoration:none}
+  .crumb a.cur{color:var(--blue);font-weight:600}
+  .crumb span{color:#cbd5e1}
+
+  /* hero */
+  .hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:26px 18px 22px;text-align:center}
+  .hero .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+    border-radius:20px;padding:3px 13px;font-size:12px;margin-bottom:10px}
+  .hero h1{font-size:21px;font-weight:800;letter-spacing:-.3px}
+  .hero p{font-size:13px;opacity:.9;margin-top:6px}
+
+  /* tabs */
+  .tabs{position:sticky;top:0;z-index:50;display:flex;background:#1e293b;overflow-x:auto;
+    scrollbar-width:none;-ms-overflow-style:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:13px 16px;color:#94a3b8;font-size:13.5px;font-weight:600;cursor:pointer;
+    border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;transition:.15s}
+  .tab.active{color:#fff;border-bottom-color:#60a5fa}
+  .tab:hover{color:#cbd5e1}
+
+  /* page */
+  .wrap{max-width:780px;margin:0 auto;padding:22px 16px 60px}
+  .page{display:none}
+  .page.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .card h2{font-size:18px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .card h3{font-size:15px;font-weight:700;margin:16px 0 8px;color:var(--blue-d)}
+  .card p{font-size:14px;margin-bottom:8px}
+  .lead{color:var(--sub);font-size:13px;margin-bottom:14px}
+
+  .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;
+    background:var(--blue);color:#fff;font-size:14px;font-weight:800;flex-shrink:0}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:center}
+  th{background:#f8fafc;font-weight:700}
+  td.l,th.l{text-align:left}
+
+  .quote{background:#f8fafc;border-left:4px solid #94a3b8;padding:12px 14px;font-size:13px;
+    color:#475569;border-radius:0 8px 8px 0;margin:10px 0}
+
+  .box{border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px}
+  .box.g{background:var(--green-bg);border:1px solid #bbf7d0}
+  .box.a{background:var(--amber-bg);border:1px solid #fde68a}
+  .box.r{background:var(--red-bg);border:1px solid #fecaca}
+  .box.b{background:#eff6ff;border:1px solid #bfdbfe}
+  .box.p{background:var(--purple-bg);border:1px solid #ddd6fe}
+  .box .t{font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+  .box.g .t{color:var(--green)} .box.a .t{color:var(--amber)} .box.r .t{color:var(--red)}
+  .box.b .t{color:var(--blue-d)} .box.p .t{color:var(--purple)}
+
+  /* step reveal */
+  .step{border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden}
+  .step-h{background:#f8fafc;padding:11px 14px;font-weight:700;font-size:14px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:8px;user-select:none}
+  .step-h:hover{background:#f1f5f9}
+  .step-h .arr{transition:.2s;color:var(--sub);font-size:12px}
+  .step.open .step-h .arr{transform:rotate(90deg)}
+  .step-b{display:none;padding:13px 15px;font-size:13.5px;border-top:1px solid var(--line)}
+  .step.open .step-b{display:block}
+  .why{font-size:12.5px;color:var(--sub);background:#f8fafc;border-radius:6px;padding:7px 10px;margin-top:8px}
+  .why b{color:var(--amber)}
+
+  .ans{background:#ecfdf5;border:2px solid #6ee7b7;border-radius:10px;padding:13px 15px;text-align:center;
+    font-size:16px;font-weight:800;color:#065f46;margin:10px 0}
+
+  .fig{width:100%;border:1px solid var(--line);border-radius:10px;margin:10px 0;display:block}
+  .figcap{font-size:12px;color:var(--sub);text-align:center;margin:-4px 0 12px}
+
+  /* box grid (2번) */
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0}
+  .bcell{border:1px solid var(--line);border-radius:10px;padding:11px;cursor:pointer;transition:.15s;background:#fff}
+  .bcell:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(37,99,235,.12)}
+  .bcell .bn{font-weight:800;color:var(--blue);font-size:13px}
+  .bcell .bq{font-size:11.5px;color:#475569;margin:5px 0;line-height:1.5;min-height:48px}
+  .bcell .bv{font-size:13px;font-weight:700;color:#0f172a;display:none}
+  .bcell.show .bv{display:block}
+  .bcell.show{background:#f0f9ff;border-color:#7dd3fc}
+  .bcell .hint{font-size:10.5px;color:var(--sub)}
+
+  .pill{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 9px;
+    font-size:11px;font-weight:700;margin:2px 3px 2px 0}
+
+  /* concept formula cards */
+  .fcard{border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin:9px 0;background:#fff}
+  .fcard .ft{font-weight:800;font-size:14px;color:var(--blue-d);margin-bottom:5px}
+  .fcard .fe{font-size:14px;margin:6px 0}
+  .fcard .fd{font-size:12.5px;color:var(--sub)}
+
+  /* practice */
+  .prob{border:1px solid var(--line);border-radius:10px;padding:14px;margin:11px 0;background:#fff}
+  .prob .ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;gap:8px}
+  .prob .pno{font-weight:800;font-size:13px}
+  .lv{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:5px}
+  .lv.e{background:var(--green-bg);color:var(--green)}
+  .lv.m{background:var(--amber-bg);color:var(--amber)}
+  .lv.h{background:var(--red-bg);color:var(--red)}
+  .prob .pq{font-size:13.5px;margin-bottom:9px}
+  .tgl{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:10px 15px;font-size:13px;
+    font-weight:700;cursor:pointer;min-height:44px}
+  .tgl:hover{background:var(--blue-d)}
+  .sol{display:none;margin-top:10px;padding:11px 13px;background:#f8fafc;border-radius:8px;font-size:13px;
+    border:1px solid var(--line)}
+  .sol.open{display:block}
+
+  /* checklist */
+  .chk{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .chk:last-child{border-bottom:none}
+  .chk input{margin-top:4px;width:17px;height:17px;flex-shrink:0;accent-color:var(--blue)}
+
+  /* process timeline */
+  .card ul{margin:6px 0 8px 18px}
+  .card li{font-size:13.5px;margin:5px 0}
+  .rd-q{background:#eff6ff;border-left:4px solid var(--blue);padding:11px 14px;border-radius:0 8px 8px 0;
+    font-size:13.5px;margin-bottom:12px;color:#334155}
+  .rd-q b{color:var(--blue-d)}
+  .chip{display:inline-block;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;border-radius:6px;
+    padding:3px 9px;font-size:11px;margin:2px 4px 2px 0;font-weight:600}
+  .commit{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;background:#1e293b;color:#a5b4fc;
+    padding:1px 7px;border-radius:5px}
+
+  /* flowchart */
+  .flow-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid var(--line);
+    border-radius:10px;background:#fcfcfd;padding:6px}
+  .flow-scroll svg{display:block;min-width:600px}
+  .fl-box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}
+  .fl-box-t{font-family:sans-serif;font-size:11px;font-weight:600;fill:#1e293b}
+  .fl-id{font-family:sans-serif;font-size:11px;font-weight:800;fill:#2563eb}
+  .fl-arrow{stroke:#94a3b8;stroke-width:1.8;fill:none;marker-end:url(#ah)}
+  .fl-lab{font-family:sans-serif;font-size:11px;font-weight:600;fill:#475569}
+  .fl-dest-t{font-family:sans-serif;font-size:12px;font-weight:700;fill:#fff}
+  .fl-start{fill:#dc2626}
+  .show-path .fl-arrow.cor{stroke:#16a34a;stroke-width:3;marker-end:url(#ahg)}
+  .show-path .fl-lab.cor{fill:#16a34a;font-weight:800}
+  .show-path .fl-box.onpath{stroke:#16a34a;stroke-width:2.6}
+
+  @media(max-width:640px){
+    .hero h1{font-size:18px}
+    .card{padding:16px}
+    .bgrid{grid-template-columns:repeat(2,1fr)}
+    .bcell .bq{min-height:auto}
+  }
+</style>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">고1</a><span>›</span>
+  <a href="index.html">Math_1_1</a><span>›</span>
+  <a class="cur">생활 속 수학 탐구</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">공통수학1 · 논술형 수행평가 · 15점</div>
+  <h1>생활 속 수학 탐구 프로젝트</h1>
+  <p>📅 2026년 6월 10일(수) 수업시간 · 연립부등식 + 경우의 수</p>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" data-t="0">📋 개요</button>
+  <button class="tab" data-t="1">① 나트륨·부등식</button>
+  <button class="tab" data-t="2">② 고궁·경우의수</button>
+  <button class="tab" data-t="3">📐 개념 정리</button>
+  <button class="tab" data-t="5">🧪 예상문제</button>
+  <button class="tab" data-t="4">✏️ 연습·점검</button>
+  <button class="tab" data-t="6">🎬 제작과정</button>
+</div>
+
+<div class="wrap">
+
+<!-- ===================== TAB 0 : 개요 ===================== -->
+<section class="page active" data-p="0">
+  <div class="card">
+    <h2>📋 수행평가 개요</h2>
+    <p class="lead">"생활 속 수학"을 주제로 한 <b>논술형</b> 평가입니다. 정답뿐 아니라 <b>풀이 과정·근거 서술</b>이 점수에 들어갑니다.</p>
+    <table>
+      <tr><th class="l">항목</th><th class="l">내용</th></tr>
+      <tr><td class="l">과목</td><td class="l">공통수학1</td></tr>
+      <tr><td class="l">유형</td><td class="l">논술형 (풀이 과정 서술)</td></tr>
+      <tr><td class="l">배점</td><td class="l">15점</td></tr>
+      <tr><td class="l">일시</td><td class="l"><b>2026년 6월 10일(수)</b> 수업시간</td></tr>
+      <tr><td class="l">범위</td><td class="l">연립일차부등식 · 순열 · 조합</td></tr>
+    </table>
+    <div class="box a">
+      <div class="t">⚠️ 이 자료는 <b>예시문항</b></div>
+      여기 정리된 문제는 선생님이 배부한 <b>연습용 예시문항</b>입니다. 실전은 형식은 같고 숫자·상황만 바뀔 가능성이 큽니다. <b>풀이 방법(사고 흐름)</b>을 익히는 데 집중하세요.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 두 문항이 묻는 것</h2>
+    <h3>① 나트륨·에너지 — 연립일차부등식</h3>
+    <p>실제 영양 데이터로 <b>부등식 2개를 세우고 공통 범위</b>를 구합니다. 단위 환산(100g당→1g당), 반올림 처리가 함정.</p>
+    <h3>② 고궁 투어 — 순열·조합</h3>
+    <p>9개 박스의 <b>경우의 수를 각각 계산</b>해 화살표를 따라가 도착 고궁을 찾고, 도착지를 바꾸도록 문제를 <b>변형(창작)</b>합니다.</p>
+  </div>
+
+  <div class="card">
+    <h2>🏆 채점 포인트 (논술)</h2>
+    <div class="box g">
+      <div class="t">✅ 점수 받는 답안</div>
+      ① 미지수 정의("간식 A를 $x$ g라 하면…") ② 식의 근거를 문장으로 ③ 계산 과정 모두 표기 ④ 단위·반올림 정확
+    </div>
+    <div class="box r">
+      <div class="t">❌ 감점되는 답안</div>
+      답만 쓰기 / 부등식 방향 실수 / 단위 환산 누락 / "왜 이 식인지" 설명 없음
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 1 : 1번 ===================== -->
+<section class="page" data-p="1">
+  <div class="card">
+    <h2><span class="num">1</span> 나트륨 섭취량 — 연립부등식</h2>
+    <p class="lead">아래는 원본 예시문항입니다. 먼저 스스로 풀어본 뒤 단계별 풀이를 펼쳐 확인하세요.</p>
+    <img class="fig" src="figs/perf2_p1.jpg" alt="1번 원본 문제 (지문·표)">
+    <img class="fig" src="figs/perf2_p2.jpg" alt="간식 A·B 영양정보">
+    <p class="figcap">▲ 원본 예시문항 (지문 + 표 + 간식 A·B 영양정보)</p>
+
+    <h3>핵심 데이터</h3>
+    <table>
+      <tr><th>구분</th><th>17세 여(은경)</th></tr>
+      <tr><td class="l">에너지 필요량</td><td>2,000 kcal/일</td></tr>
+      <tr><td class="l">나트륨 충분섭취</td><td>1,500 mg/일</td></tr>
+    </table>
+    <table>
+      <tr><th>100g당</th><th>간식 A</th><th>간식 B</th></tr>
+      <tr><td class="l">열량</td><td>237 kcal</td><td>97 kcal</td></tr>
+      <tr><td class="l">나트륨</td><td>50 mg</td><td>43 mg</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>(1) 간식으로 보충할 양</h2>
+    <p>은경(17세 여)이 하루 세 끼 <b>500 kcal · 460 mg</b>씩 먹을 때, 간식으로 보충할 에너지·나트륨은?</p>
+
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 1 — 하루 필요량 확인</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        17세 <b>여학생</b> → 표에서 에너지 $2000$ kcal, 나트륨 $1500$ mg.
+        <div class="why"><b>왜?</b> 성별·나이를 표와 정확히 매칭해야 함. 남(2700)과 헷갈리면 전부 틀림.</div>
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 2 — 세 끼 합계</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        에너지 $500\times3 = 1500$ kcal, 나트륨 $460\times3 = 1380$ mg.
+        <div class="why"><b>왜?</b> "끼니"는 세 끼. ×3을 빠뜨리는 실수 주의.</div>
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 3 — 보충량 = 필요량 − 세끼</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        에너지 $2000-1500 = 500$ kcal, 나트륨 $1500-1380 = 120$ mg.
+        <div class="ans">에너지 500 kcal, 나트륨 120 mg</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>(2) 간식 A의 섭취량 범위 <span class="pill">논술 핵심</span></h2>
+    <p>(1)의 값 <b>이하</b>로, 간식 A·B를 <b>합쳐 250g</b> 섭취. 간식 A의 양 범위를 논술하시오. (반올림 소수 첫째 자리)</p>
+
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 1 — 미지수 설정</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        간식 A $= x$ g 라 하면 간식 B $=(250-x)$ g. 단 $0\le x\le 250$.
+        <div class="why"><b>왜?</b> 변수를 하나로 통일해야 부등식 1개 변수로 풀린다. <b>이 정의 문장이 논술 점수의 시작.</b></div>
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 2 — 에너지 부등식</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        $\dfrac{237}{100}x+\dfrac{97}{100}(250-x)\le 500$<br>
+        $2.37x+242.5-0.97x\le 500 \Rightarrow 1.40x\le 257.5 \Rightarrow x\le 183.92\ldots$
+        <div class="why"><b>왜 /100?</b> 표는 <b>100g당</b> 값 → 1g당은 값÷100. 환산 안 하면 전부 틀림.</div>
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 3 — 나트륨 부등식</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        $\dfrac{50}{100}x+\dfrac{43}{100}(250-x)\le 120$<br>
+        $0.50x+107.5-0.43x\le 120 \Rightarrow 0.07x\le 12.5 \Rightarrow x\le 178.57\ldots$
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>STEP 4 — 공통 범위 & 반올림</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        두 상한 $183.9$ vs $178.6$ 중 <b>더 작은 쪽</b>이 두 조건을 모두 만족 → $x\le 178.6$. $x\ge0$과 합치면:
+        <div class="ans">0 ≤ x ≤ 178.6 (g)</div>
+        <div class="why"><b>왜 작은 쪽?</b> "이하" 두 조건을 <b>동시에</b> 만족해야 하므로 교집합 = 더 빡빡한(작은) 상한.</div>
+      </div>
+    </div>
+
+    <div class="box r">
+      <div class="t">❌ 흔한 실수 3가지</div>
+      ① /100 환산 누락 &nbsp; ② 큰 상한(183.9)을 답으로 &nbsp; ③ $(250-x)$ 부호 정리 실수
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 2 : 2번 ===================== -->
+<section class="page" data-p="2">
+  <div class="card">
+    <h2><span class="num">2</span> 고궁 투어 — 경우의 수</h2>
+    <p class="lead">각 박스의 경우의 수를 계산 → 그 값과 같은 <b>화살표 라벨</b>을 따라 이동 → 도착 고궁을 찾습니다.</p>
+    <img class="fig" src="figs/perf2_p3.jpg" alt="2번 원본 플로우차트">
+    <p class="figcap">▲ 원본 플로우차트 (화살표 연결은 이 그림을 기준으로 대조하세요)</p>
+  </div>
+
+  <div class="card">
+    <h2>🔢 9개 박스 경우의 수</h2>
+    <p class="lead">각 박스를 눌러 정답 식·값을 확인하세요. <b>먼저 스스로 계산!</b></p>
+    <div class="bgrid" id="bgrid"></div>
+    <div class="box b">
+      <div class="t">📍 도착 고궁</div>
+      1행 끝 → <b>덕수궁</b> · 2행 끝 → <b>창덕궁</b> · 3행 끝 → <b>경복궁</b> · 최하단 → <b>창경궁</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>(1) 도착지 말하기</h2>
+    <p>각 박스 값과 같은 화살표를 따라가면 도착하는 고궁을 <b>경로와 함께</b> 설명합니다.</p>
+    <div class="box g">
+      <div class="t">✅ 예시 경로</div>
+      <b>①→②→⑤→⑧→창경궁</b><br>
+      ① $2\times5!$ 따라 ②로 → ② $_6\mathrm{P}_3$ 따라 ⑤로 → ⑤ $3!\times2!$ 따라 ⑧로 → ⑧ → 창경궁
+    </div>
+    <div class="box a">
+      <div class="t">⚠️ 주의</div>
+      박스 <b>값(식)은 확정</b>이지만, 박스 사이 화살표 연결(특히 ⑤→⑧ 대각선)은 위 원본 그림으로 직접 대조하세요.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>(2) 도착지를 창덕궁으로 바꾸기 <span class="pill">창작·논술</span></h2>
+    <p>경로 중 한 박스의 <b>문제 자체를 변형</b>해 그 경우의 수가 <b>다른 화살표 라벨과 일치</b>하도록 만들면 경로가 바뀝니다.</p>
+    <div class="box p">
+      <div class="t">💡 예시답안</div>
+      ▸ <b>①→②→⑤→⑥→창덕궁</b> : ⑤번 문제를 변형해 작성<br>
+      ▸ <b>①→②→③→창덕궁</b> : ②번 문제를 변형해 작성
+    </div>
+    <h3>변형 전략</h3>
+    <div class="box b">
+      1. 목표 고궁(창덕궁)으로 가는 화살표 <b>라벨 값</b>을 먼저 확인<br>
+      2. 그 값이 나오도록 박스의 <b>인원수·선택수·조건(이웃/끝/묶음)</b>을 조정<br>
+      3. 변형한 문제 문장을 <b>완성된 문장</b>으로 다시 쓰기<br>
+      4. "변형 후 경우의 수 = OOO 이므로 화살표 △를 따라 창덕궁 도착" 이라고 <b>근거 서술</b>
+    </div>
+    <div class="box a">
+      <div class="t">예: ⑤ 변형</div>
+      "A,B 포함 4명 일렬, A,B <b>이웃</b>" $(=3!\times2!=12)$ → "5편 중 2편 순서대로" 같은 값($_5\mathrm{P}_2=20$)에 맞춰 인원/조건 조정.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 3 : 개념 ===================== -->
+<section class="page" data-p="3">
+  <div class="card">
+    <h2>📐 연립일차부등식</h2>
+    <div class="fcard">
+      <div class="ft">기본 전략</div>
+      <div class="fd">① 미지수 1개로 통일 → ② 조건마다 부등식 → ③ <b>공통 범위(교집합)</b> → ④ "이하/이상" 동시 만족은 더 빡빡한 쪽</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">단위 환산</div>
+      <div class="fe">$100\text{g당 } a \;\Rightarrow\; 1\text{g당 } \dfrac{a}{100}$</div>
+      <div class="fd">표가 "100g당"이면 반드시 ÷100 후 $x$(g)에 곱한다.</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">두 변수 합이 고정</div>
+      <div class="fe">$A+B=250 \;\Rightarrow\; B=250-x$</div>
+      <div class="fd">합이 일정하면 변수 1개로 줄여 부등식을 단순화.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔢 순열 · 조합</h2>
+    <div class="fcard">
+      <div class="ft">순열 (순서 O)</div>
+      <div class="fe">$_n\mathrm{P}_r=\dfrac{n!}{(n-r)!}$</div>
+      <div class="fd">"일렬로", "순서대로", "줄 세우기" → 순서가 의미 있음</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">조합 (순서 X)</div>
+      <div class="fe">$_n\mathrm{C}_r=\dfrac{n!}{r!\,(n-r)!}$</div>
+      <div class="fd">"뽑기", "택하기", "고르기" → 순서 무관</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">한쪽 끝 고정</div>
+      <div class="fe">$2\times(n-1)!$</div>
+      <div class="fd">특정인이 한 끝(왼/오 2가지) → 나머지 $(n-1)!$ 배열</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">양쪽 끝 고정</div>
+      <div class="fe">$2!\times(n-2)!$</div>
+      <div class="fd">A,B가 양 끝(서로 자리 2!) → 가운데 $(n-2)!$</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">이웃하여 서기</div>
+      <div class="fe">(묶음 포함 전체)$!\times$(묶음 내부)$!$</div>
+      <div class="fd">이웃끼리 한 덩어리로 묶고, 덩어리 내부 순서 따로</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">같은 것을 일부에 붙이기</div>
+      <div class="fe">$_n\mathrm{C}_r$</div>
+      <div class="fd">"똑같은 메모 3장을 5권 중에" → 붙일 자리 <b>선택</b>이므로 조합</div>
+    </div>
+    <div class="fcard">
+      <div class="ft">크기 다른 두 묶음 나누기</div>
+      <div class="fe">$_n\mathrm{C}_r$ (한 번만)</div>
+      <div class="fd">7송이→3·4 묶음: 3송이만 고르면 나머지는 자동 → $_7\mathrm{C}_3$. 같은 크기면 추가로 ÷2!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 4 : 연습 ===================== -->
+<section class="page" data-p="4">
+  <div class="card">
+    <h2>✏️ 자가 연습 9문제</h2>
+    <p class="lead">🟢 쉬운 · 🟡 중간 · 🔴 응용. 풀이를 적은 뒤 "정답·풀이 보기"로 확인하세요.</p>
+    <div id="probs"></div>
+  </div>
+
+  <div class="card">
+    <h2>📝 실전 논술 체크리스트</h2>
+    <p class="lead">시험 당일, 답안 제출 전 스스로 체크.</p>
+    <div id="checks"></div>
+  </div>
+
+  <div class="card">
+    <h2>🗂️ 자료 위치</h2>
+    <p style="font-size:13px">정리 본문 · 학습 노트는 프로젝트 폴더에 있습니다.</p>
+    <div class="box b" style="font-size:12.5px">
+      <code>02_text/예시문항.md</code> — 전문 + 풀이<br>
+      <code>02_text/예상문제.md</code> — 예상문제 4개<br>
+      <code>study.md</code> — 약점 태그·개념 정리<br>
+      <code>PLAN.md</code> — 전체 계획·일정
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 5 : 예상문제 ===================== -->
+<section class="page" data-p="5">
+  <div class="card">
+    <h2>🧪 실전 예상문제</h2>
+    <div class="box a">
+      <div class="t">📌 사용법</div>
+      실전은 예시문항과 <b>형식이 같고 소재·숫자만</b> 바뀝니다. 아래는 같은 사고 흐름을 연습하기 위한 예상문제입니다. <b>먼저 스스로 풀고</b> 풀이를 펼쳐 확인하세요. (연립부등식 ×2, 경우의 수 ×2)
+    </div>
+  </div>
+
+  <!-- 연립부등식 예상 ① -->
+  <div class="card">
+    <h2><span class="num">1</span> 연립부등식 — 운동 보충제</h2>
+    <p>운동선수 <b>민수</b>는 하루 에너지 <b>2,800 kcal</b>, 단백질 <b>120 g</b>이 필요하다. 세 끼 식사로 에너지 700 kcal, 단백질 30 g씩 섭취하고 부족분은 보충제로 채운다.</p>
+    <table>
+      <tr><th>100g당</th><th>보충제 P</th><th>보충제 Q</th></tr>
+      <tr><td class="l">열량</td><td>400 kcal</td><td>250 kcal</td></tr>
+      <tr><td class="l">단백질</td><td>20 g</td><td>10 g</td></tr>
+    </table>
+    <p><b>(1)</b> 보충제로 채워야 할 에너지·단백질의 양은?<br>
+    <b>(2)</b> (1) 값 이하로 P, Q를 합쳐 <b>200 g</b> 섭취할 때 P의 범위는? (반올림 소수 첫째)</p>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>풀이 (1)</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        에너지 $2800-700\times3 = 700$ kcal, 단백질 $120-30\times3 = 30$ g.
+        <div class="ans">에너지 700 kcal, 단백질 30 g</div>
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>풀이 (2)</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        $P=x$, $Q=200-x$.<br>
+        에너지: $4x+2.5(200-x)\le700 \Rightarrow 1.5x\le200 \Rightarrow x\le133.3$<br>
+        단백질: $0.2x+0.1(200-x)\le30 \Rightarrow 0.1x\le10 \Rightarrow x\le100$<br>
+        공통(더 작은 상한):
+        <div class="ans">0 ≤ x ≤ 100 (g)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 연립부등식 예상 ② -->
+  <div class="card">
+    <h2><span class="num">2</span> 연립부등식 — 텃밭 비료 혼합</h2>
+    <p>텃밭에 비료 A, B를 <b>합쳐 300 g</b> 뿌린다. 해롭지 않으려면 질소 <b>42 g 이하</b>, 칼륨 <b>60 g 이하</b>여야 한다.</p>
+    <table>
+      <tr><th>100g당</th><th>비료 A</th><th>비료 B</th></tr>
+      <tr><td class="l">질소</td><td>20 g</td><td>10 g</td></tr>
+      <tr><td class="l">칼륨</td><td>5 g</td><td>25 g</td></tr>
+    </table>
+    <p><b>(1)</b> A를 $x$ g 쓸 때 질소·칼륨 총량을 식으로?<br>
+    <b>(2)</b> A의 양 $x$의 범위는?</p>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>풀이 (1)</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        $B=300-x$. 질소 $=0.2x+0.1(300-x)$, 칼륨 $=0.05x+0.25(300-x)$.
+      </div>
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>풀이 (2)</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        질소: $0.2x+0.1(300-x)\le42 \Rightarrow 0.1x+30\le42 \Rightarrow x\le120$<br>
+        칼륨: $0.05x+0.25(300-x)\le60 \Rightarrow -0.2x+75\le60 \Rightarrow x\ge75$
+        <div class="ans">75 ≤ x ≤ 120 (g)</div>
+        <div class="why"><b>주의!</b> 칼륨 조건은 부등호가 뒤집혀 <b>하한</b>이 생김(양방향 범위). B가 칼륨이 많아 B를 줄여야 하므로 A에 하한 발생.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경우의수 예상 ① -->
+  <div class="card">
+    <h2><span class="num">3</span> 경우의 수 — 축제 부스 투어</h2>
+    <p class="lead">출발점에서 시작해 각 박스의 경우의 수를 계산하고, 그 값과 같은 <b>화살표(식)</b>를 따라 이동하면 도착하는 부스를 찾으시오. <b>(실전 2번과 동일 형식 · 스스로 완결되는 문제)</b></p>
+    <div class="flow-scroll"><div id="flow_m1"></div></div>
+    <p style="font-size:12px;color:var(--sub)">※ 박스 안 식 없음 → 직접 계산. 화살표 위 식과 같은 값을 따라가세요. (좌우로 스크롤)</p>
+    <button class="tgl" onclick="revealFlow('m1',this)">(1) 도착지·정답 경로 보기</button>
+    <div class="sol" id="sol_m1">
+      <b>경로:</b> 출발 → ㉠ → ㉡ → ㉣ → <b>과학부</b><br>
+      ㉠ $5!=120$ <b>↓</b> → ㉡ $_8\mathrm{C}_3=56$ <b>→</b> → ㉣ $_7\mathrm{P}_3=210$ <b>↓</b> → 과학부
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>(2) 도착지가 <b>음악부</b>가 되도록 변형</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        ㉣을 "7명 중 <b>3명을 뽑는</b> 방법의 수"($_7\mathrm{C}_3=35$)로 바꾸면, ㉣에서 $_7\mathrm{C}_3$ 화살표(→㉥)를 타고 ㉥ $_6\mathrm{C}_2=15$ → 음악부 도착.
+        <div class="why"><b>경로:</b> 출발→㉠→㉡→㉣(변형)→㉥→음악부 / <b>전략:</b> 목표 부스로 가는 화살표 라벨 값이 나오도록 박스를 변형.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경우의수 예상 ② -->
+  <div class="card">
+    <h2><span class="num">4</span> 경우의 수 — 여행 코스 (확장 유형)</h2>
+    <p class="lead">원순열·같은 것이 있는 순열·자연수 만들기 등 <b>변형 유형</b>이 섞인 플로우차트. 같은 방식으로 도착 장소를 찾으시오.</p>
+    <div class="flow-scroll"><div id="flow_m2"></div></div>
+    <p style="font-size:12px;color:var(--sub)">※ ㉠ 자연수 만들기는 맨 앞자리 0 제외 주의. ㉥ 두 자리 정수는 순서 O(₉P₂). (좌우로 스크롤)</p>
+    <button class="tgl" onclick="revealFlow('m2',this)">(1) 도착지·정답 경로 보기</button>
+    <div class="sol" id="sol_m2">
+      <b>경로:</b> 출발 → ㉠ → ㉢ → ㉣ → ㉥ → <b>해변</b><br>
+      ㉠ $4{\times}4{\times}3=48$ <b>→</b> ㉢ $\frac{4!}{2!}=12$ <b>↓</b> ㉣ $_4\mathrm{C}_2{\times}_3\mathrm{C}_2=18$ <b>→</b> ㉥ $_9\mathrm{P}_2=72$(두 자리 정수) <b>→</b> 해변
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>(2) 도착지가 <b>산</b>이 되도록 변형</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        ㉣을 "서로 다른 6개 중 <b>2개를 뽑는</b> 방법의 수"($_6\mathrm{C}_2=15$)로 바꾸면, ㉣에서 $_6\mathrm{C}_2$ 화살표(↓)를 타고 바로 산 도착.
+        <div class="why"><b>경로:</b> 출발→㉠→㉢→㉣(변형)→산</div>
+      </div>
+    </div>
+    <div class="box a">
+      <div class="t">⚠️ 시험 범위 주의</div>
+      ㉡ <b>원순열</b> $(n-1)!$ · ㉢ <b>같은 것이 있는 순열</b> $\dfrac{n!}{p!\,q!}$ 은 <b>확률과통계</b> 단원(고2) 내용으로, 공통수학1 시험 범위 밖일 수 있습니다. <b>심화 참고용</b>이며, 시험 범위 내 추가 연습은 아래 <b>③ 도서관 미션</b>을 푸세요.
+    </div>
+  </div>
+
+  <!-- 경우의수 예상 ③ (시험범위 내) -->
+  <div class="card">
+    <h2><span class="num">5</span> 경우의 수 — 도서관 미션 <span class="pill">시험범위 내</span></h2>
+    <p class="lead">공통수학1 순열·조합만 사용한 플로우차트. 같은 방식으로 도착 장소를 찾으시오.</p>
+    <p style="font-size:12px;color:var(--sub)">※ 박스는 문제만 → 직접 계산. 화살표 식과 같은 값을 따라가세요. (좌우로 스크롤)</p>
+    <div class="flow-scroll"><div id="flow_m3"></div></div>
+    <button class="tgl" onclick="revealFlow('m3',this)">(1) 도착지·정답 경로 보기</button>
+    <div class="sol" id="sol_m3">
+      <b>경로:</b> 출발 → ㉠ → ㉢ → ㉣ → <b>매점</b><br>
+      ㉠ $_7\mathrm{P}_3=210$ <b>→</b> ㉢ $_5\mathrm{C}_2=10$ <b>↓</b> ㉣ $3!\times2!=12$ <b>↓</b> 매점
+    </div>
+    <div class="step" onclick="tg(this)">
+      <div class="step-h"><span>(2) 도착지가 <b>후문</b>이 되도록 변형</span><span class="arr">▶</span></div>
+      <div class="step-b">
+        ㉣을 "4명을 <b>일렬로 배열</b>"($4!=24$)로 바꾸면, ㉣에서 $4!$ 화살표(→㉥)를 타고 ㉥ $2!\times4!=48$ → 후문.
+        <div class="why"><b>경로:</b> 출발→㉠→㉢→㉣(변형)→㉥→후문</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 6 : 제작과정 ===================== -->
+<section class="page" data-p="6">
+  <div class="card">
+    <h2>🎬 이 앱이 만들어진 과정</h2>
+    <p class="lead">아빠(Nick)와 <b>Claude Code</b>가 대화로 주고받으며 이 앱을 완성한 실제 기록입니다. AI에게 일을 맡기는 방법을 보여주는 예시예요.</p>
+    <div class="box b">
+      <div class="t">💡 Claude Code란?</div>
+      터미널에서 <b>대화만으로</b> 파일을 읽고·만들고·고치고, 그림(시험지 사진)도 직접 보고, GitHub에 배포까지 하는 AI 코딩 도구. 이 앱의 모든 글·코드·그림 정리가 대화로 만들어졌어요.
+    </div>
+    <div class="box p">
+      <div class="t">🤝 협업 방식</div>
+      사람 말은 <code>(Nick)</code>, AI 답은 <code>(Claude)</code> 접두어로 <b>.md 파일에 차곡차곡</b> 쌓아요. 채팅과 파일을 함께 쓰는 "파일 기반 비동기 소통".
+    </div>
+  </div>
+
+  <div id="rounds-tl"></div>
+
+  <div class="card">
+    <h2>🎓 아이에게 — AI를 잘 쓰는 6가지</h2>
+    <div id="lessons"></div>
+    <div class="box g" style="margin-top:12px">
+      <div class="t">한 줄 요약</div>
+      <b>구체적으로 시키고 · 중간 결과를 확인하고 · 피드백으로 고치고 · AI의 답도 검증한다.</b>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* ---- tabs ---- */
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelector(`.page[data-p="${b.dataset.t}"]`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ---- step reveal ---- */
+function tg(el){el.classList.toggle('open')}
+
+/* ---- 9 boxes ---- */
+const boxes=[
+  {n:'①',q:'A 포함 6명 일렬, A가 <b>한쪽 끝</b>',v:'2 × 5! = 240',h:'한끝 고정'},
+  {n:'②',q:'책 6권 중 3권 택해 <b>일렬로</b> 꽂기',v:'₆P₃ = 120',h:'순서 O'},
+  {n:'③',q:'9명 중 4명 <b>뽑기</b>',v:'₉C₄ = 126',h:'순서 X'},
+  {n:'④',q:'책 5권에 <b>똑같은</b> 메모 3장 붙이기',v:'₅C₃ = 10',h:'자리 선택'},
+  {n:'⑤',q:'4명 일렬, A·B <b>이웃</b>',v:'3! × 2! = 12',h:'묶음'},
+  {n:'⑥',q:'영화 5편 중 2편 <b>순서대로</b>',v:'₅P₂ = 20',h:'순서 O'},
+  {n:'⑦',q:'꽃 7송이 → 3·4 <b>두 묶음</b>',v:'₇C₃ = 35',h:'묶음 나누기'},
+  {n:'⊕',q:'책 6권 중 2권 <b>택하기</b> (보조)',v:'₆C₂ = 15',h:'순서 X'},
+  {n:'⑧',q:'6명 일렬, A·B <b>양쪽 끝</b>',v:'2! × 4! = 48',h:'양끝 고정'},
+];
+document.getElementById('bgrid').innerHTML=boxes.map((b,i)=>`
+  <div class="bcell" onclick="this.classList.toggle('show')">
+    <div class="bn">${b.n} <span class="hint">${b.h}</span></div>
+    <div class="bq">${b.q}</div>
+    <div class="bv">${b.v}</div>
+    <div class="hint" style="margin-top:4px">${b.v?'탭하여 정답 ▾':''}</div>
+  </div>`).join('');
+
+/* ---- flowchart renderer ---- */
+function drawFlow(mount,cfg){
+  const OX=64,OY=82,CW=248,CH=150,BW=152,BH=66,DW=120,DH=54;
+  const P=(r,c)=>({x:OX+c*CW,y:OY+r*CH});
+  const N={};
+  for(const id in cfg.boxes){const b=cfg.boxes[id],p=P(b.r,b.c);
+    N[id]={x:p.x,y:p.y,w:BW,h:BH,cx:p.x+BW/2,cy:p.y+BH/2};}
+  for(const id in cfg.dests){const d=cfg.dests[id],p=P(d.r,d.c),y=p.y+(BH-DH)/2;
+    N[id]={x:p.x,y:y,w:DW,h:DH,cx:p.x+DW/2,cy:y+DH/2,dest:1,color:d.color};}
+  let mc=0,mr=0;
+  [].concat(Object.values(cfg.boxes),Object.values(cfg.dests)).forEach(o=>{mc=Math.max(mc,o.c);mr=Math.max(mr,o.r);});
+  const W=OX+mc*CW+DW+24, H=OY+mr*CH+BH+18;
+  const onp=new Set([cfg.start]);
+  cfg.arrows.forEach(a=>{if(a.cor){onp.add(a.from);onp.add(a.to);}});
+  const wrap=(s,m)=>{const w=s.split(' '),L=[];let c='';
+    w.forEach(x=>{if((c+' '+x).trim().length>m){if(c)L.push(c);c=x;}else c=(c?c+' ':'')+x;});
+    if(c)L.push(c);return L;};
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" xmlns="http://www.w3.org/2000/svg">`;
+  s+=`<defs><marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/></marker><marker id="ahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs>`;
+  cfg.arrows.forEach(a=>{
+    const f=N[a.from],t=N[a.to];let x1,y1,x2,y2,lx,ly,anc;
+    if(a.dir==='right'){x1=f.x+f.w;y1=f.cy;x2=t.x;y2=t.cy;lx=(x1+x2)/2;ly=Math.min(y1,y2)-7;anc='middle';}
+    else{x1=f.cx;y1=f.y+f.h;x2=t.cx;y2=t.y;lx=x1+8;ly=(y1+y2)/2;anc='start';}
+    const cc=a.cor?' cor':'';
+    s+=`<line class="fl-arrow${cc}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    s+=`<text class="fl-lab${cc}" x="${lx}" y="${ly}" text-anchor="${anc}">${a.exp}</text>`;
+  });
+  for(const id in cfg.boxes){const n=N[id];const op=onp.has(id)?' onpath':'';
+    s+=`<rect class="fl-box${op}" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="9"/>`;
+    const lines=wrap(cfg.boxes[id].t,12);const y0=n.cy-(lines.length-1)*7+4;
+    s+=`<text class="fl-box-t" x="${n.cx}" y="${y0}" text-anchor="middle">${lines.map((ln,i)=>`<tspan x="${n.cx}" dy="${i?14:0}">${ln}</tspan>`).join('')}</text>`;
+    s+=`<text class="fl-id" x="${n.x+8}" y="${n.y+16}">${id}</text>`;
+  }
+  for(const id in cfg.dests){const n=N[id];
+    s+=`<rect class="fl-dest" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="26" fill="${n.color}"/>`;
+    s+=`<text class="fl-dest-t" x="${n.cx}" y="${n.cy+4}" text-anchor="middle">${id}</text>`;
+  }
+  const st=N[cfg.start];
+  s+=`<rect class="fl-start" x="${st.cx-28}" y="22" width="56" height="28" rx="6"/>`;
+  s+=`<text x="${st.cx}" y="40" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="sans-serif">출발</text>`;
+  s+=`<line class="fl-arrow cor" x1="${st.cx}" y1="50" x2="${st.cx}" y2="${st.y}"/>`;
+  s+=`</svg>`;
+  document.getElementById(mount).innerHTML=s;
+}
+function revealFlow(id,btn){
+  const sol=document.getElementById('sol_'+id);sol.classList.toggle('open');
+  const svg=document.querySelector('#flow_'+id+' svg');if(svg)svg.classList.toggle('show-path');
+  btn.textContent=sol.classList.contains('open')?'(1) 정답 숨기기':'(1) 도착지·정답 경로 보기';
+}
+drawFlow('flow_m1',{
+  start:'㉠',
+  boxes:{
+    '㉠':{r:0,c:0,t:'서로 다른 책 5권을 일렬로 꽂기'},
+    '㉢':{r:0,c:1,t:'5명 일렬, 특정 2명 이웃'},
+    '㉤':{r:0,c:2,t:'색연필 6자루 중 4자루 일렬'},
+    '㉡':{r:1,c:0,t:'8명 중 당번 3명 뽑기'},
+    '㉣':{r:1,c:1,t:'7명 중 1·2·3등 뽑기'},
+    '㉥':{r:1,c:2,t:'6명을 2명·4명 두 조로'},
+  },
+  dests:{'미술부':{r:0,c:3,color:'#2563eb'},'음악부':{r:1,c:3,color:'#7c3aed'},'과학부':{r:2,c:1,color:'#16a34a'}},
+  arrows:[
+    {from:'㉠',dir:'down',exp:'5!',to:'㉡',cor:true},
+    {from:'㉠',dir:'right',exp:'₅P₂',to:'㉢'},
+    {from:'㉡',dir:'right',exp:'₈C₃',to:'㉣',cor:true},
+    {from:'㉡',dir:'down',exp:'₈C₂',to:'과학부'},
+    {from:'㉣',dir:'down',exp:'₇P₃',to:'과학부',cor:true},
+    {from:'㉣',dir:'right',exp:'₇C₃',to:'㉥'},
+    {from:'㉢',dir:'right',exp:'4!×2!',to:'㉤'},
+    {from:'㉢',dir:'down',exp:'4!',to:'㉣'},
+    {from:'㉤',dir:'right',exp:'₆P₄',to:'미술부'},
+    {from:'㉤',dir:'down',exp:'₆C₄',to:'㉥'},
+    {from:'㉥',dir:'right',exp:'₆C₂',to:'음악부'},
+  ]
+});
+drawFlow('flow_m2',{
+  start:'㉠',
+  boxes:{
+    '㉠':{r:0,c:0,t:'0~4 중 서로 다른 3개로 세 자리 자연수'},
+    '㉢':{r:0,c:1,t:'MOON의 4문자 일렬 배열'},
+    '㉤':{r:0,c:2,t:'6명 일렬, A·B 양 끝'},
+    '㉡':{r:1,c:0,t:'5명이 원탁에 앉기'},
+    '㉣':{r:1,c:1,t:'남4·여3 중 남2·여2 뽑기'},
+    '㉥':{r:1,c:2,t:'1~9 중 2개로 두 자리 정수 만들기'},
+  },
+  dests:{'한옥마을':{r:0,c:3,color:'#2563eb'},'해변':{r:1,c:3,color:'#0891b2'},'산':{r:2,c:1,color:'#16a34a'}},
+  arrows:[
+    {from:'㉠',dir:'right',exp:'4×4×3',to:'㉢',cor:true},
+    {from:'㉠',dir:'down',exp:'₅P₂',to:'㉡'},
+    {from:'㉢',dir:'down',exp:'4!÷2!',to:'㉣',cor:true},
+    {from:'㉢',dir:'right',exp:'4!',to:'㉤'},
+    {from:'㉣',dir:'right',exp:'₄C₂×₃C₂',to:'㉥',cor:true},
+    {from:'㉣',dir:'down',exp:'₆C₂',to:'산'},
+    {from:'㉥',dir:'right',exp:'₉P₂',to:'해변',cor:true},
+    {from:'㉥',dir:'down',exp:'₉C₂',to:'산'},
+    {from:'㉡',dir:'right',exp:'(5-1)!',to:'㉣'},
+    {from:'㉤',dir:'down',exp:'2!×4!',to:'㉥'},
+    {from:'㉤',dir:'right',exp:'5!',to:'한옥마을'},
+  ]
+});
+drawFlow('flow_m3',{
+  start:'㉠',
+  boxes:{
+    '㉠':{r:0,c:0,t:'7명 중 3명 뽑아 일렬로 세우기'},
+    '㉢':{r:0,c:1,t:'서로 다른 5권 중 2권 뽑기'},
+    '㉤':{r:0,c:2,t:'8명 중 청소 4명 뽑기'},
+    '㉡':{r:1,c:0,t:'6명 일렬, 특정인 맨 앞'},
+    '㉣':{r:1,c:1,t:'4명 일렬, A·B 이웃'},
+    '㉥':{r:1,c:2,t:'6명 일렬, A·B 양 끝'},
+  },
+  dests:{'정문':{r:0,c:3,color:'#2563eb'},'후문':{r:1,c:3,color:'#7c3aed'},'매점':{r:2,c:1,color:'#16a34a'}},
+  arrows:[
+    {from:'㉠',dir:'right',exp:'₇P₃',to:'㉢',cor:true},
+    {from:'㉠',dir:'down',exp:'₇C₃',to:'㉡'},
+    {from:'㉢',dir:'down',exp:'₅C₂',to:'㉣',cor:true},
+    {from:'㉢',dir:'right',exp:'₅P₂',to:'㉤'},
+    {from:'㉣',dir:'down',exp:'3!×2!',to:'매점',cor:true},
+    {from:'㉣',dir:'right',exp:'4!',to:'㉥'},
+    {from:'㉡',dir:'right',exp:'5!',to:'㉣'},
+    {from:'㉡',dir:'down',exp:'6!',to:'매점'},
+    {from:'㉤',dir:'right',exp:'₈C₄',to:'정문'},
+    {from:'㉤',dir:'down',exp:'₈C₅',to:'㉥'},
+    {from:'㉥',dir:'right',exp:'2!×4!',to:'후문'},
+    {from:'㉥',dir:'down',exp:'₆C₃',to:'매점'},
+  ]
+});
+
+/* ---- practice ---- */
+const probs=[
+  {lv:'e',t:'🟢 L1',q:'서로 다른 책 4권 중 2권을 택해 일렬로 꽂는 방법의 수는?',s:'순서 O → $_4\\mathrm{P}_2 = 4\\times3 = \\mathbf{12}$'},
+  {lv:'e',t:'🟢 L2',q:'학생 7명 중 3명을 뽑는 방법의 수는?',s:'순서 X → $_7\\mathrm{C}_3 = \\dfrac{7\\cdot6\\cdot5}{3!} = \\mathbf{35}$'},
+  {lv:'e',t:'🟢 L3',q:'간식 1g당 열량이 2 kcal일 때, $x$ g의 열량을 식으로?',s:'$2x$ kcal. (100g당 200kcal이면 1g당 2kcal)'},
+  {lv:'m',t:'🟡 M1',q:'5명이 일렬로 설 때 특정 1명이 맨 앞에 서는 경우의 수는?',s:'맨 앞 고정 → 나머지 $4! = \\mathbf{24}$'},
+  {lv:'m',t:'🟡 M2',q:'A,B 포함 5명 일렬, A와 B가 이웃하는 경우의 수는?',s:'AB 묶음 → $4!\\times2! = 24\\times2 = \\mathbf{48}$'},
+  {lv:'m',t:'🟡 M3',q:'간식 A($x$ g)와 B($150-x$ g)의 1g당 나트륨이 각각 0.4mg, 0.2mg. 나트륨 총합 $\\le 50$mg 부등식과 $x$ 범위는?',s:'$0.4x+0.2(150-x)\\le50 \\Rightarrow 0.2x\\le20 \\Rightarrow x\\le100$. 따라서 $0\\le x\\le \\mathbf{100}$'},
+  {lv:'h',t:'🔴 H1',q:'A,B 포함 6명 일렬, A,B가 양 끝에 서는 경우의 수는?',s:'양끝 A·B 자리 $2!$, 가운데 4명 $4!$ → $2!\\times4! = \\mathbf{48}$'},
+  {lv:'h',t:'🔴 H2',q:'간식 A($x$ g)·B($250-x$ g) 합 250g. 1g당 열량 A 2.4, B 1.0. 열량 $\\le480$ <b>그리고</b> 1g당 당류 A 0.06,B 0 당류 $\\le12$ 동시 만족 $x$ 범위는?',s:'열량: $2.4x+1.0(250-x)\\le480\\Rightarrow1.4x\\le230\\Rightarrow x\\le164.2$. 당류: $0.06x\\le12\\Rightarrow x\\le200$. 공통 → $0\\le x\\le\\mathbf{164.2}$ (작은 상한)'},
+  {lv:'h',t:'🔴 H3',q:'(변형) 도착지를 바꾸려 한다. "9명 중 4명 뽑기"($_9\\mathrm{C}_4=126$)를 "$_n\\mathrm{C}_2=15$"가 되도록 문제를 바꾸려면 $n$은?',s:'$_n\\mathrm{C}_2=\\dfrac{n(n-1)}{2}=15 \\Rightarrow n(n-1)=30 \\Rightarrow n=\\mathbf{6}$. "6명 중 2명 뽑기"로 변형.'},
+];
+document.getElementById('probs').innerHTML=probs.map((p,i)=>`
+  <div class="prob">
+    <div class="ph"><span class="pno">${p.t}</span><span class="lv ${p.lv}">${p.lv==='e'?'쉬움':p.lv==='m'?'중간':'응용'}</span></div>
+    <div class="pq">${p.q}</div>
+    <button class="tgl" onclick="const s=this.nextElementSibling;s.classList.toggle('open');this.textContent=s.classList.contains('open')?'닫기':'정답·풀이 보기'">정답·풀이 보기</button>
+    <div class="sol">${p.s}</div>
+  </div>`).join('');
+
+/* ---- checklist ---- */
+const checks=[
+  '미지수를 문장으로 정의했는가? ("간식 A를 x g라 하면…")',
+  '단위 환산(100g당→1g당) 했는가?',
+  '부등식 방향(≤, ≥)이 맞는가?',
+  '두 조건의 공통 범위(더 작은 상한)를 골랐는가?',
+  '반올림 자리(소수 첫째)를 지켰는가?',
+  '순열/조합을 올바로 구분했는가? (순서 O/X)',
+  '특수 조건(끝·이웃·묶음) 식을 맞게 적용했는가?',
+  '각 식의 "왜 이 식인지" 근거를 한 문장씩 썼는가?',
+];
+document.getElementById('checks').innerHTML=checks.map(c=>`
+  <label class="chk"><input type="checkbox"><span>${c}</span></label>`).join('');
+
+/* ---- process timeline ---- */
+const rounds=[
+  {n:1,title:'요청 — 캡쳐 확인 & 계획',
+   q:'수행평가 준비하려는데 시험지 캡쳐를 figure_1st/에 넣어뒀어. 내용 확인하고 어떻게 진행할지 계획 세워줘.',
+   did:['시험지 사진 3장을 <b>멀티모달 Read</b>로 직접 판독','1번(나트륨·연립부등식)·2번(고궁·경우의 수) 문제 구조 분석','폴더 구조 + 5단계 진행안 제안'],
+   ref:['figure_1st/수학수행2-1~3.jpg','CLAUDE.md (프로젝트 규약)','기존 수행평가-수학 폴더']},
+  {n:2,title:'요청 — 완성형 앱 + 사이트 연결',
+   q:'최종적으로 1~5까지 정리 다 된 앱으로. high1 사이트에 새 카드로 연결되게.',
+   did:['앱 <b>설계 원칙</b>과 <b>배포 규칙</b> 학습','기존 앱·허브 인덱스 구조 파악'],
+   ref:['APP_PRINCIPLES.md','APP_HOSTING.md','high1/index.html · math/index.html','기존 viete 앱']},
+  {n:3,title:'⚠️ 피드백 — 분석만 말고 파일 만들며 진행',
+   q:'진행이 안 되는 것 같아. 파일·디렉토리가 안 생겼는데? 중간중간 결과물 만들며 진행해줘. (계획·로그 파일도 둘 것)',
+   did:['피드백 즉시 수용: "분석만 X → 만들며 진행"','경우의 수 9개 박스 값 <b>전부 손계산·검증</b>','디렉토리 + 계획/할일/학습/이슈/세션로그 파일 생성','예시문항 본문 정리(02_text) → 5탭 앱 제작 → 배포 + 카드 추가','이 피드백을 <b>AI 기억(memory)</b>에 저장 → 다음부터 자동 적용'],
+   ref:['멀티모달 Read','APP_PRINCIPLES/HOSTING','Claude 영구 메모리'],
+   note:'사람이 진행 "방식"을 교정하면 AI는 바로 반영해야 한다.',commit:'e682ba8'},
+  {n:4,title:'요청 — 예상문제 추가',
+   q:'실전은 이 패턴인데 소재·숫자만 달라져. 연립부등식·경우의 수 예제를 각 2개씩 더 만들어줘.',
+   did:['숫자가 깔끔히 떨어지도록 설계한 <b>예상문제 4개</b> 작성','앱에 🧪 예상문제 탭 추가'],
+   ref:['02_text/예시문항.md (패턴 참조)','순열·조합 교육과정'],commit:'bea9faf'},
+  {n:5,title:'요청 — 경우의 수를 완결형으로 시각화',
+   q:'경우의 수 예상문제는 문제 자체가 스스로 완결되도록 visualize 해줘.',
+   did:['<b>SVG 플로우차트 렌더러</b>(drawFlow) 직접 작성','박스=문제·화살표=식 → 추적형 그래프로 교체','"정답 경로 보기" 하이라이트 + <b>node 헤드리스 검증</b>'],
+   ref:['원본 2번 플로우차트 사진','SVG · JavaScript'],
+   note:'첫 배포 커밋은 명령어 문법 오류로 실패 → 원인 찾아 재커밋. (실수도 숨기지 않고 기록)',commit:'d720622'},
+  {n:6,title:'요청 — 계획부터 말해봐 + 검증',
+   q:'어떤 식으로 할지 계획을 먼저 얘기해봐.',
+   did:['3트랙 계획 제시 후 <b>선택지로 합의</b>(렌더검증/품질검토/예상문제+1)','자동 기하·구조 린트 실행','<b>검토 에이전트</b>(app-reviewer) 2회 실행','지적을 취사선택 — 유효(분수 모호·시험범위·터치타겟) 반영 / 무효(예시경로·분기라벨) 근거 들어 기각','시험범위 내 ③ 도서관 미션 플로우차트 추가'],
+   ref:['APP_PRINCIPLES.md','app-reviewer 에이전트','node 린트 스크립트'],
+   note:'AI(검토 에이전트)의 지적도 무조건 수용 X → 검증 후 채택/기각.',commit:'c8eb550'},
+  {n:7,title:'요청 — 제작과정 문서화 (지금 이 탭)',
+   q:'이 제작 과정을 문서로 만들어줘. 아이에게 Claude Code 실전 예시로 보여주고 싶어. 앱 탭으로 넣어도 좋고.',
+   did:['대화 라운드별 <b>질문·작업·참조자료</b>를 타임라인으로 정리','이 "제작과정" 탭과 제작과정.md 문서 생성'],
+   ref:['세션 로그(cht_log/0531_session.md)','이 대화 전체']},
+];
+document.getElementById('rounds-tl').innerHTML=rounds.map(r=>`
+  <div class="card">
+    <h2><span class="num">${r.n}</span> ${r.title}</h2>
+    <div class="rd-q">💬 <b>(Nick)</b> “${r.q}”</div>
+    <h3>Claude가 한 일</h3>
+    <ul>${r.did.map(d=>`<li>${d}</li>`).join('')}</ul>
+    <h3>참조한 자료·도구</h3>
+    <div>${r.ref.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+    ${r.note?`<div class="box a" style="margin-top:11px"><div class="t">✦ 포인트</div>${r.note}</div>`:''}
+    ${r.commit?`<p style="font-size:11px;color:var(--sub);margin-top:9px">배포 기록 <span class="commit">${r.commit}</span></p>`:''}
+  </div>`).join('');
+
+const lessons=[
+  ['🎯 구체적으로 시켜라','"앱 만들어줘"보다 "1~5 정리된 앱을, 사이트 새 카드로"처럼 결과물·조건을 분명히.'],
+  ['👀 중간 결과를 확인하라','파일이 실제로 생겼는지 보라. 안 보이면 "왜 안 만들어?"라고 바로 물어라.'],
+  ['🔁 피드백으로 고쳐라','마음에 안 들면 즉시 교정 요청 → AI는 방향을 바꾼다.'],
+  ['🗺️ 계획부터 맞춰라','큰 작업은 "어떻게 할 건지 먼저 말해봐"로 방향을 합의한 뒤 시작.'],
+  ['🔍 AI의 답도 검증하라','AI가 만든 코드·AI의 검토 의견조차 다시 확인. 틀린 지적은 근거 들어 거른다.'],
+  ['📝 실수는 기록·수정하라','커밋 실패·오류도 숨기지 말고 원인 찾아 고치고 로그에 남긴다.'],
+];
+document.getElementById('lessons').innerHTML=lessons.map((l,i)=>`
+  <div style="display:flex;gap:11px;padding:10px 0;border-bottom:${i<lessons.length-1?'1px solid var(--line)':'none'}">
+    <div style="font-size:15px;font-weight:800;color:var(--blue);flex-shrink:0">${i+1}</div>
+    <div><div style="font-weight:700;font-size:14px">${l[0]}</div>
+    <div style="font-size:13px;color:#475569;margin-top:2px">${l[1]}</div></div>
+  </div>`).join('');
+</script>
+</body>
+</html>
