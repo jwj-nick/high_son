@@ -17,8 +17,11 @@
 - [x] 앱 v1→v2: 6탭 + 용어 38개 + **다크/라이트 토글** `10_app/perf_korhist2.html`
 - [x] 공개 배포 + git push → **라이브** https://jwj-nick.github.io/high1/korean/1sem_perf_modern_terms.html
 - [x] 검증: live HTTP 200, node --check OK, 새 용어·테마 마커 확인
-- [ ] (선택) 자료4 지도·자료 사진 figcrop → 플래시카드 시각 보강
-- [ ] (선택) app-reviewer 검토
+- [x] 자료4 강화도 전개 지도 figcrop → 병인양요·신미양요 플래시카드 첨부
+- [x] 🔀 짝 구분 모드(헷갈림 8쌍) + 오답 시 두 구분 포인트 비교
+- [x] 실전 모드 단어은행 옵션(50개 제시 단어 목록에서 고르기)
+- [x] app-reviewer 검토 → 개수 38 통일·터치타겟 44px·짝 피드백·죽은코드 반영
+- [ ] (선택) 자료1 백인의 짐 등 추가 사료 figcrop
 
 ## 메모
 - 정답은 **1개만** — 표기(맞춤법) 정확도가 점수 가른다. 26개↑ = 만점.
