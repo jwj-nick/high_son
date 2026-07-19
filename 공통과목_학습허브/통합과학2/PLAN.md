@@ -1,0 +1,52 @@
+# PLAN — 통합과학2 전과정 학습 허브 (고1 2학기)
+
+> 통합과학1의 자매 트랙. 같은 8원칙(`../CONTENT_PRINCIPLES.md`) + 허브 패턴 + **PhET 적극 활용**(2학기는 PhET 강함).
+> 전체 목차·PhET 매핑 SSOT = `../통합과학_전체목차.md`. 2028 수능 범위.
+> 파일 prefix `sci2_`. 배포 `high1/science/`(sci1_*와 동일 폴더, 형제). 허브=`sci2_hub.html`.
+> 상태: ✅배포 · 🟡제작완료 · ⬜예정.
+
+## 단원 지도 + PhET
+### Ⅳ. 변화와 다양성
+| 단원 | 앱 | 상태 | ⭐PhET |
+|---|---|---|---|
+| 산화·환원 | `sci2_redox.html` | ⬜ | Balancing Equations, Reactants&Products |
+| **산·염기·중화** | `sci2_acidbase.html` | 🟡 **이번** | **pH Scale ✔ · Acid-Base Solutions ✔** |
+| 지질시대·화석 | `sci2_geotime.html` | ⬜ | (자작) |
+| 진화·생물다양성 | `sci2_evolution.html` | 🟡 신규 | **Natural Selection ✔** |
+
+### Ⅴ. 환경과 에너지
+| 단원 | 앱 | 상태 | ⭐PhET |
+|---|---|---|---|
+| 생태계와 환경 | `sci2_ecosystem.html` | ⬜ | Natural Selection |
+| 에너지 전환·발전 | `sci2_energy.html` | 🟡 신규 | **Energy Skate Park ✔ · Faraday's Law ✔** |
+| 기후변화·탄소중립 | `sci2_climate.html` | 🟡 신규 | **Greenhouse Effect ✔** |
+
+### Ⅵ. 과학과 미래 사회
+| 단원 | 앱 | 상태 | PhET |
+|---|---|---|---|
+| 과학기술과 인류 문명 | `sci2_civilization.html` | ⬜ | (자작) |
+| 미래 과학기술·지속가능 | `sci2_future.html` | ⬜ | (자작) |
+
+## 빌드 순서 (PhET 강한 것 우선)
+1. 🟡 산·염기·중화 (pH Scale + Acid-Base 임베드) ← 이번
+2. 진화·생물다양성 (Natural Selection)
+3. 에너지 전환·발전 (Energy Forms/Skate Park/Faraday)
+4. 기후변화 (Greenhouse Effect)
+5. 산화·환원
+6. 생태계
+7~9. 지질시대·과학문명·미래기술
+
+## 규약
+- 콘텐츠: 교과서 없으면 표준 커리큘럼 기준 제작 + 명시. 실물 받으면 보정.
+- PhET: `…_all.html?locale=ko` iframe + 새 탭 fallback + lazy. 검증 게이트 = `se-agent-app-reviewer`.
+
+## 변경 이력
+| 날짜 | 내용 |
+|---|---|
+| 2026-07-19 | 통합과학2 트랙 착수(Nick 지시). PLAN·허브(`sci2_hub`)·**산·염기·중화 랩 `sci2_acidbase` 완성**: 지시약 인터랙티브·pH 슬라이더·중화 시뮬 자작 + **PhET pH Scale·Acid-Base Solutions 2종 임베드** + 퀴즈10. JS 통과, PhET URL 200 확인 |
+| 2026-07-19 | 산염기 랩 app-reviewer: **🔴 0, 지시약색·pH분류·중화 전부 정확**. 반영 — 🟡 **중화 시뮬 로직 수정**(방울당 pH+1 → 5방울 정확히 pH7 중화점, 축하 메시지를 중성과 일치), 🟢 pH0 예시(하수구세정제→배터리액, pH13 중복 해소)·산염기 표에 만능지시약 행 추가. 교차링크(sci1_bond_lab)·breadcrumb는 배포 형제 레이아웃에서 정상 = 유지. JS 재통과 |
+| 2026-07-19 | **진화·생물다양성 랩 `sci2_evolution.html` 제작**: 변이·자연선택·진화 3단계, **자작 나방 세대 시뮬**(오염/청정 환경 토글 → 세대별 어두운/밝은 나방 비율 변화, 공업암화) + **PhET Natural Selection 임베드**(토끼) + 종분화·생물다양성3수준 + 항생제내성/용불용설 오개념 + 퀴즈10. JS 통과, 허브 카드 연결 |
+| 2026-07-19 | 진화 랩 app-reviewer: **🔴 0, 자연선택vs용불용설·후추나방·시뮬로직 정확**(오염/청정 검산 통과). 반영 — 🟡 변이 원인(돌연변이·유전자재조합 무작위) 한줄 추가(반라마르크 완결)·PhET 미션 3개로·대기청정법(1956) 실화 추가, 🟢 reset이 환경도 초기화·hook "나방 집단이". JS 재통과 |
+| 2026-07-19 | **에너지 전환·발전 랩 `sci2_energy.html` 제작**: 에너지 형태·전환 카드(8장치) + 보존/열효율 + **자작 전자기유도 시뮬**(자석 넣기/빼기/멈춤→전류계 반응, "정지 시 전류 없음") + 발전종류·전력수송 + **PhET Energy Skate Park·Faraday's Law 2종 임베드** + 퀴즈10. JS 통과, 허브 카드 연결 |
+| 2026-07-19 | 에너지 랩 app-reviewer: **🔴 0, 전자기유도·전환사슬·전력수송·태양전지구분 정확**. 반영 — 🟡 유도 버튼 화살표 방향 SVG와 일치(넣기➡/빼기⬅)·열효율 100%불가에 **전기난로(열 목적) 예외 단서** 추가, 🟢 Faraday 미션 3개로·유도 세기(빠르게/많이감기) 한줄·죽은코드 제거. JS 재통과 |
+| 2026-07-19 | **기후변화·탄소중립 랩 `sci2_climate.html` 제작**: **자작 온실효과 슬라이더**(CO₂ 280~560ppm→산업화전 대비 기온상승·하늘색·되돌림 적외선 화살표) + 온실효과 두얼굴/오해·온난화 원인·영향·되먹임·탄소중립 + **PhET The Greenhouse Effect 임베드** + 킬링곡선 + 퀴즈10. "모든 단원이 만나는" 통합 인사이트. JS 통과, 허브 카드 연결. app-reviewer 검토 대기 |
