@@ -164,7 +164,7 @@ $ARGUMENTS
 
 ## 4. 프로젝트 settings.local.json 확인
 
-`C:\Kids\70_HighSchool\2604_고1_중간고사\.claude\settings.local.json` 은 이미 repo에 포함.  
+`C:\Kids\70_HighSchool\26_High_1-1\.claude\settings.local.json` 은 이미 repo에 포함.  
 단, `additionalDirectories` 경로가 현재 기기와 다르면 수정:
 
 ```json

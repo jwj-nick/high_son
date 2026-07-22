@@ -7,7 +7,7 @@ description: 시험지 캡쳐 jpg에서 그림/도식 영역만 잘라 02_text �
 
 ## 환경
 - Python 3.14 + Pillow 12.1 (확인됨)
-- 작업 루트: `C:/Kids/70_HighSchool/2604_고1_중간고사/`
+- 작업 루트: `C:/Kids/70_HighSchool/26_High_1-1/`
 - 폴더 규약: `<과목>-중간/01_capture/` 원본 jpg, `<과목>-중간/01_capture/figs/` crop 결과, `<과목>-중간/02_text/` 그룹 .md (정본)
 
 ## 인자 형태
