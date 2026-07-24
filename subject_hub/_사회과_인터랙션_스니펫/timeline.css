@@ -1,0 +1,31 @@
+/* 사회과 공유 위젯 — 🕰️ 연표 CSS [정본 SSOT]  (앱에 인라인, 데모는 link)
+ * 색 변수(--sub,--line 등)는 각 앱의 :root를 따름. 없으면 아래 fallback. */
+.tl-wrap{--tl-sub:var(--sub,#64748b);--tl-line:var(--line,#e2e8f0)}
+.tl-scroll{overflow-x:auto;overflow-y:hidden;padding:8px 0 6px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.tl-scroll::-webkit-scrollbar{height:8px}
+.tl-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:20px}
+.tl-track{position:relative;height:300px;min-width:100%}
+.tl-axis{position:absolute;top:50%;left:0;width:100%;height:3px;background:#cbd5e1;transform:translateY(-50%);z-index:1}
+.tl-era{position:absolute;top:22px;height:calc(100% - 44px);border:1px dashed;border-radius:12px;z-index:0}
+.tl-era-lb{position:absolute;top:5px;left:9px;font-size:11px;font-weight:800;letter-spacing:.2px}
+.tl-ev{position:absolute;top:0;height:100%;width:0;padding:0;border:none;background:none;cursor:pointer;z-index:2;font:inherit}
+.tl-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 0 0 1px var(--c);display:grid;place-items:center;font-size:10px;line-height:1;z-index:3;transition:transform .15s}
+.tl-ev.key .tl-dot{box-shadow:0 0 0 1px var(--c),0 0 0 4px #fcd34d}
+.tl-card{position:absolute;left:50%;transform:translateX(-50%);width:118px;background:#fff;border:1.5px solid var(--tl-line);border-radius:10px;padding:7px 6px;box-shadow:0 1px 4px rgba(0,0,0,.07);text-align:center;transition:.12s}
+.tl-ev.up .tl-card{bottom:calc(50% + 24px)}
+.tl-ev.down .tl-card{top:calc(50% + 24px)}
+.tl-ev.up .tl-card::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);width:2px;height:16px;background:var(--c)}
+.tl-ev.down .tl-card::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);width:2px;height:16px;background:var(--c)}
+.tl-yr{display:block;font-weight:800;color:var(--c);font-size:12px}
+.tl-lb{display:block;font-size:12px;line-height:1.35;margin-top:2px;color:#1e293b}
+.tl-ev:hover .tl-card{border-color:var(--c);box-shadow:0 3px 10px rgba(0,0,0,.13)}
+.tl-ev:hover .tl-dot{transform:translate(-50%,-50%) scale(1.15)}
+.tl-ev.sel .tl-card{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
+.tl-ev.sel .tl-dot{transform:translate(-50%,-50%) scale(1.3)}
+.tl-detail{margin-top:14px;background:#f8fafc;border:1px solid var(--tl-line);border-radius:12px;padding:15px 17px;min-height:78px}
+.tl-d-hint{color:var(--tl-sub);font-size:13px;text-align:center;padding:8px 0}
+.tl-d-head{font-weight:800;font-size:16px;margin-bottom:2px}
+.tl-d-yr{font-size:12.5px;color:var(--tl-sub);margin-bottom:9px}
+.tl-note{color:#94a3b8}
+.tl-d-body{font-size:13.5px;line-height:1.75}
+@media (max-width:640px){.tl-card{width:104px}.tl-track{height:290px}}

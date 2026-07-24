@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🕰️ 연표 위젯 데모 — 사회과 공유 스니펫</title>
+<link rel="stylesheet" href="timeline.css">
+<style>
+  :root{--ink:#1e293b;--sub:#64748b;--line:#e2e8f0;--blue:#2563eb}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI','Malgun Gothic',sans-serif;background:#f1f5f9;color:var(--ink);line-height:1.7;padding:20px}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:20px;margin-bottom:4px}
+  .note{color:var(--sub);font-size:13px;margin-bottom:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+  .lead{color:var(--sub);font-size:13px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🕰️ 연표(타임라인) 위젯 — 데모</h1>
+  <p class="note">정본 <code>timeline.js</code> + <code>timeline.css</code> 로컬 검증용. 데이터셋 = 한국사1 Ⅰ.고대(선사~후삼국). <b>사건 클릭 → 상세, 시대 띠 배경, 위/아래 교대 배치.</b></p>
+  <div class="card tl-wrap">
+    <p class="lead">고조선 건국부터 고려의 후삼국 통일까지. 시대(선사·삼국·남북국)를 배경 띠로, 나라별 색으로 구분.</p>
+    <div id="tl"></div>
+  </div>
+</div>
+<script src="timeline.js"></script>
+<script>
+var GODAE_EVENTS=[
+ {year:-2333,icon:'🏛️',cat:'era',key:true,label:'고조선 건국',note:'삼국유사 전승',detail:'단군왕검이 세운 우리 역사 최초의 국가. 청동기 문화를 바탕으로 성립했고, <b>8조법</b>으로 사회 질서를 유지했다(현재 3개 조항만 전함 — 생명·노동력·사유재산을 중시한 사회였음을 보여준다).'},
+ {year:-108,icon:'⚔️',cat:'era',label:'고조선 멸망',note:'한 무제 침입',detail:'한 무제의 침략으로 왕검성이 함락되며 멸망. 이후 한이 일부 지역에 군현을 설치했다. 이 무렵 <b>철기 문화</b>가 널리 퍼지며 부여·고구려·삼한 등 여러 나라가 성장한다.'},
+ {year:-57,icon:'🐔',cat:'silla',label:'신라 건국',note:'전통 연도',detail:'박혁거세가 사로국(신라)을 세웠다고 전한다. 초기에는 박·석·김 세 성씨가 번갈아 왕위를 이었고, 삼국 중 <b>가장 늦게</b> 중앙집권 국가로 발전했다.'},
+ {year:-37,icon:'🏇',cat:'go',label:'고구려 건국',note:'전통 연도',detail:'주몽(동명성왕)이 졸본에서 건국. 산악 지대에서 일찍부터 정복 활동을 벌였고, 뒤에 삼국 중 <b>가장 넓은 영토</b>와 강한 군사력을 갖추게 된다.'},
+ {year:-18,icon:'🏯',cat:'baekje',label:'백제 건국',note:'전통 연도',detail:'고구려에서 내려온 온조가 한강 유역(위례성)에 건국. <b>한강</b>의 교통·농업 이점 덕에 삼국 중 <b>가장 먼저</b> 전성기를 맞는다.'},
+ {year:372,icon:'☸️',cat:'go',label:'고구려 불교 수용',note:'소수림왕',detail:'소수림왕이 불교를 받아들이고 태학을 세우며 율령을 반포했다 — 중앙집권 체제의 사상·제도적 기틀. (백제 384년, 신라는 527년 이차돈 순교 뒤 공인.)'},
+ {year:371,icon:'👑',cat:'baekje',key:true,label:'백제 전성기',note:'근초고왕·4세기',detail:'근초고왕(재위 346~375) 때 백제 최전성기. 마한을 통합하고 371년 평양성을 공격해 <b>고구려 고국원왕을 전사</b>시켰으며, 중국 남조·왜와 활발히 교류했다. 삼국 중 가장 먼저 전성기를 맞은 나라가 백제다.'},
+ {year:414,icon:'🗿',cat:'go',key:true,label:'광개토대왕비',note:'장수왕이 건립',detail:'광개토대왕(재위 391~412)은 만주와 한강 이북까지 영토를 크게 넓혔다. 아들 <b>장수왕</b>이 그 업적을 기려 비를 세우고(414), 427년 평양 천도 뒤 남진 정책으로 475년 한강 유역을 차지(백제 한성 함락)한다.'},
+ {year:553,icon:'👑',cat:'silla',key:true,label:'신라 전성기',note:'진흥왕·6세기',detail:'진흥왕이 한강 유역을 모두 차지(553)하고 대가야를 병합(562), 함경도까지 진출했다(순수비). <b>한강 확보</b>로 중국과 직접 교류하는 길을 열어 훗날 삼국통일의 기반이 된다.'},
+ {year:612,icon:'🌊',cat:'go',key:true,label:'살수대첩',note:'을지문덕',detail:'수 양제의 대군이 침입하자 <b>을지문덕</b>이 살수(청천강)에서 대파했다. 무리한 원정은 수 멸망의 한 원인이 되었다.'},
+ {year:645,icon:'🏰',cat:'go',label:'안시성 싸움',note:'당 태종 침입',detail:'당 태종의 침입을 안시성에서 성주·군민이 끝내 막아냈다. 고구려가 동북아 강국임을 다시 보여준 방어전.'},
+ {year:660,icon:'⚔️',cat:'baekje',label:'백제 멸망',note:'나당 연합',detail:'신라·당 연합군에 의해 사비성이 함락되며 멸망. 이후 복신·도침 등이 부흥 운동을 벌였으나 실패했다.'},
+ {year:668,icon:'⚔️',cat:'go',label:'고구려 멸망',note:'나당 연합',detail:'거듭된 전쟁과 지배층 분열 속에 평양성이 함락되며 멸망. 검모잠 등이 부흥 운동을 벌였다.'},
+ {year:676,icon:'🎉',cat:'silla',key:true,label:'신라 삼국통일',note:'매소성·기벌포',detail:'신라가 당을 매소성(675)·기벌포(676)에서 몰아내고 삼국통일을 완성했다. 외세를 끌어들인 한계·대동강 이북 상실이라는 비판도 있으나, <b>우리 민족 최초의 통일</b>이다.'},
+ {year:698,icon:'🐉',cat:'balhae',key:true,label:'발해 건국',note:'대조영',detail:'고구려 유민 <b>대조영</b>이 고구려 계승을 내세워 건국(처음엔 진국). 뒤에 "해동성국"이라 불릴 만큼 번성했고, 남쪽 통일신라와 함께 <b>남북국 시대</b>를 이룬다.'},
+ {year:828,icon:'⛵',cat:'silla',label:'청해진 설치',note:'장보고',detail:'장보고가 완도에 청해진을 세워 해적을 소탕하고 당-신라-일본을 잇는 해상 무역을 장악했다. "해상왕"으로 불린다.'},
+ {year:900,icon:'🏴',cat:'era',label:'후백제 건국',note:'견훤',detail:'견훤이 완산주(전주)에 후백제를 세웠다. 이듬해 궁예가 후고구려(901)를 세우며 <b>후삼국 시대</b>가 열린다.'},
+ {year:926,icon:'❄️',cat:'balhae',label:'발해 멸망',note:'거란 침입',detail:'거란(요)의 침입으로 멸망. 유민 일부가 고려로 넘어왔다 — 고려가 발해를 <b>동족</b>으로 여긴 근거가 된다.'},
+ {year:936,icon:'👑',cat:'era',key:true,label:'고려, 후삼국 통일',note:'왕건',detail:'왕건이 신라의 항복(935)을 받고 후백제를 정복(936)하여 후삼국을 통일했다. 발해 유민까지 아우르며 실질적 <b>민족 재통일</b>을 이룬다 → 다음 단원(고려)으로 이어진다.'}
+];
+var GODAE_ERAS=[
+ {from:-2333,to:-108,label:'선사·고조선',color:'#b45309'},
+ {from:-57,to:668,label:'삼국 시대',color:'#2563eb'},
+ {from:676,to:936,label:'남북국·후삼국',color:'#15803d'}
+];
+Timeline.init(document.getElementById('tl'),{events:GODAE_EVENTS,eras:GODAE_ERAS});
+</script>
+</body>
+</html>
