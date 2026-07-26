@@ -31,6 +31,7 @@
 
 | 항목 | 상태 |
 |---|---|
-| taxonomy | ⬜ S2 착수 예정 |
-| weakness_db | ⬜ S2 |
-| retest | ⬜ S2 |
+| taxonomy | ✅ v1.0 — 3축(내용×원인×확신도), 원인 C1~C8, 과목 6종 프로파일 |
+| weakness_db | ✅ v1.0 스키마 + 빈 `entries.json`. 실데이터 투입은 S4 리허설 |
+| retest | ✅ v1.0 정책(사다리 1/3/7/16/35, 하루 8문항, 교차 강제). `daily/` 생성 스킬은 미구현 |
+| 스킬 연결 | ✅ `se-error-note`(전 과목, 루트 `.claude/skills/`)가 노트 생성 → 태그 → DB 기록 → 재출제 스케줄까지 담당 |

@@ -1,0 +1,172 @@
+{
+  "schema": "exam_track/taxonomy/causes",
+  "version": "1.0",
+  "updated": "2026-07-26",
+  "note": "오답의 '원인' 정본. 내용 태그(과목:단원)와 직교한다. 사람이 읽는 설명은 같은 폴더 README.md 참조.",
+
+  "confidence": [
+    {
+      "id": "sure",
+      "label": "확신",
+      "meaning": "맞다고 확신하고 골랐는데 틀림",
+      "diagnosis": "오개념(misconception). 가장 위험하다 — 스스로는 안다고 믿고 있으므로 다시 공부하지 않는다.",
+      "policy": { "first_interval_days": 1, "require_correct_streak": 2, "priority": 1 }
+    },
+    {
+      "id": "half",
+      "label": "반신반의",
+      "meaning": "둘 중 하나로 좁혔는데 틀린 쪽을 고름",
+      "diagnosis": "구별 실패. 지식은 있으나 경계가 흐리다.",
+      "policy": { "first_interval_days": 2, "require_correct_streak": 2, "priority": 2 }
+    },
+    {
+      "id": "guess",
+      "label": "찍음",
+      "meaning": "모르고 찍었다 (맞았어도 기록한다)",
+      "diagnosis": "지식 부재. 먼저 배우고 나서 재출제해야 의미가 있다.",
+      "policy": { "first_interval_days": 1, "require_correct_streak": 2, "priority": 2, "requires_learning_first": true }
+    },
+    {
+      "id": "timeout",
+      "label": "시간부족",
+      "meaning": "풀 수 있었는데 못 풀었거나 급하게 처리함",
+      "diagnosis": "전략·속도 문제. 재출제보다 실전 타이머 훈련이 먼저다.",
+      "policy": { "first_interval_days": 7, "require_correct_streak": 1, "priority": 3 }
+    }
+  ],
+
+  "causes": [
+    {
+      "id": "C1",
+      "label": "문제해석",
+      "desc": "발문·조건을 놓치거나 잘못 읽음",
+      "signals": ["'적절하지 않은' 부정형을 놓침", "단서 조건 하나를 빠뜨림", "구하라는 것과 다른 값을 답함", "단위·범위 지정을 무시"],
+      "remedy": "발문에서 '구할 것'과 '조건'을 먼저 표시하고 푸는 습관. 다 풀고 발문에 되돌아가 대조.",
+      "retest_bias_days": 0,
+      "cross_subject_flag": true
+    },
+    {
+      "id": "C2",
+      "label": "지식부재",
+      "desc": "해당 개념·사실을 아예 모름",
+      "signals": ["용어 자체가 처음", "공식·연도·규칙을 모름"],
+      "remedy": "먼저 학습(개념 앱·교과서) → 그 다음 재출제. 학습 없이 재출제하면 다시 찍는다.",
+      "retest_bias_days": 0,
+      "requires_learning_first": true
+    },
+    {
+      "id": "C3",
+      "label": "지식혼동",
+      "desc": "비슷한 둘 이상을 구별하지 못함",
+      "signals": ["A와 B를 바꿔 씀", "인물·용어·법칙이 헷갈림", "시기를 뒤바꿈"],
+      "remedy": "⚖️ 구별 훈련 — 헷갈리는 쌍을 나란히 놓고 '차이 한 줄' 쓰기. 단독 암기 반복은 효과 낮음.",
+      "retest_bias_days": -1,
+      "pair_required": true,
+      "cross_subject_flag": true
+    },
+    {
+      "id": "C4",
+      "label": "적용실패",
+      "desc": "개념은 아는데 이 상황에 쓰지 못함 (전이 실패)",
+      "signals": ["배운 유형과 겉모습이 달라지자 못 품", "어떤 도구를 꺼낼지 결정하지 못함"],
+      "remedy": "같은 개념·다른 외형의 변형문제. '이 문제가 어떤 유형인지' 먼저 말해보기.",
+      "retest_bias_days": 1
+    },
+    {
+      "id": "C5",
+      "label": "실행오류",
+      "desc": "방향은 맞았는데 처리 과정에서 틀림",
+      "signals": ["계산·부호·전개 실수", "옮겨 적기 오류", "단위·유효숫자"],
+      "remedy": "개념 재학습 불필요. 검산 루틴과 자기 실수 유형 체크리스트. 반복되면 '실수'가 아니라 습관이다.",
+      "retest_bias_days": 3
+    },
+    {
+      "id": "C6",
+      "label": "시간전략",
+      "desc": "실력이 아니라 배분·순서 문제",
+      "signals": ["뒤쪽 문제를 못 봄", "한 문제에 매달림", "마지막에 몰아서 찍음"],
+      "remedy": "실전 타이머 + 문제 순서 전략. 개별 재출제 우선순위는 낮춘다.",
+      "retest_bias_days": 7,
+      "low_priority": true
+    },
+    {
+      "id": "C7",
+      "label": "자료해석",
+      "desc": "표·그래프·사료·지문에서 필요한 정보를 못 뽑음",
+      "signals": ["그래프 축·단위를 잘못 읽음", "사료의 시기·주체를 못 특정", "지문에 근거가 있는데 못 찾음"],
+      "remedy": "자료에 직접 표시하며 읽기(밑줄·화살표). 선택지마다 '근거 위치'를 지목하게 한다.",
+      "retest_bias_days": 0,
+      "cross_subject_flag": true
+    },
+    {
+      "id": "C8",
+      "label": "순서·연대",
+      "desc": "사건·절차의 시간 순서 감각 부재",
+      "signals": ["나열 문제에서 순서를 뒤바꿈", "인과 선후를 반대로 봄", "실험 절차 순서 오류"],
+      "remedy": "🕰️ 연표·플로우에 직접 배열해보기. 개별 암기보다 '무엇 다음에 무엇'의 연결 학습.",
+      "retest_bias_days": 0,
+      "subjects": ["한국사", "사회", "과학"]
+    }
+  ],
+
+  "subject_profiles": {
+    "수학": {
+      "dominant": ["C5", "C1", "C4"],
+      "note": "절차·조건 중심. 다시 풀어보면 검증된다.",
+      "specializations": {
+        "C1": ["정의역·범위 조건 누락", "'모든/어떤' 한정 오독"],
+        "C4": ["접근법 선택 실패(어떤 정리를 쓸지)"],
+        "C5": ["부호", "전개·이항", "검산 누락"]
+      }
+    },
+    "과학": {
+      "dominant": ["C3", "C5", "C7"],
+      "note": "개념 오해와 계산이 섞인다. 둘을 분리해 진단해야 처치가 갈린다.",
+      "specializations": {
+        "C3": ["비슷한 법칙·용어 혼동"],
+        "C5": ["단위 환산", "유효숫자"],
+        "C7": ["그래프 기울기·면적 의미"]
+      }
+    },
+    "한국사": {
+      "dominant": ["C3", "C7", "C8", "C1"],
+      "note": "다시 풀기보다 '구별 훈련'이 약이다. 부정형 함정과 연대 감각이 핵심.",
+      "specializations": {
+        "C3": ["인물 혼동", "유사 정책·기구 혼동", "왕대 혼동"],
+        "C7": ["사료의 시기·주체 특정", "지도·통계 해석"],
+        "C8": ["사건 선후", "같은 시기 병렬 사건"],
+        "C1": ["부정형(옳지 않은 것) 함정"]
+      }
+    },
+    "사회": {
+      "dominant": ["C3", "C7", "C4"],
+      "note": "개념·관점 구별과 사례 적용이 중심.",
+      "specializations": {
+        "C3": ["유사 개념 구별(정의관·관점 등)"],
+        "C4": ["개념을 새 사례에 적용"],
+        "C7": ["통계·그래프 해석"]
+      }
+    },
+    "국어": {
+      "dominant": ["C7", "C1", "C3"],
+      "note": "지문 의존 — 오답노트 형태 자체가 다르다. '근거 문장'을 반드시 함께 기록한다.",
+      "specializations": {
+        "C7": ["근거 문장 찾기 실패", "선택지-지문 대조 실패"],
+        "C1": ["'적절하지 않은' 등 발문 조건"],
+        "C3": ["개념어 혼동(음운변동·표현법 등)"]
+      },
+      "extra_fields": ["passage_ref", "evidence_sentence"]
+    },
+    "영어": {
+      "dominant": ["C2", "C3", "C7", "C4"],
+      "note": "어휘 부재와 구문 오해를 구별해야 처치가 갈린다.",
+      "specializations": {
+        "C2": ["어휘 모름"],
+        "C3": ["구문 구조 오해"],
+        "C7": ["지문 근거 찾기"],
+        "C4": ["추론·함축"]
+      },
+      "extra_fields": ["passage_ref", "unknown_words"]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "exam_track/weakness_db/entries",
+  "version": "1.0",
+  "updated": "2026-07-26",
+  "note": "약점 누적 DB. 레코드 규격·불변규칙은 같은 폴더 README.md 참조. 정렬: exam.date → subject → q. 삭제 금지(mastered로 남긴다).",
+  "counts": { "total": 0, "scheduled": 0, "mastered": 0 },
+  "entries": []
+}
