@@ -27,6 +27,14 @@
       "policy": { "first_interval_days": 1, "require_correct_streak": 2, "priority": 2, "requires_learning_first": true }
     },
     {
+      "id": "unknown",
+      "label": "미기록",
+      "meaning": "확신도를 묻지 못했거나 기억이 남아있지 않음 (과거 데이터 소급 입력 등)",
+      "diagnosis": "진단 불가. 3축 중 한 축이 비어 있으므로 우선순위가 부정확하다.",
+      "policy": { "first_interval_days": 2, "require_correct_streak": 2, "priority": 2 },
+      "note": "S4 리허설에서 발견 — 과거 오답노트 9건 전부 확신도가 없었다. 신규 오답은 반드시 수집한다."
+    },
+    {
       "id": "timeout",
       "label": "시간부족",
       "meaning": "풀 수 있었는데 못 풀었거나 급하게 처리함",
@@ -111,8 +119,8 @@
 
   "subject_profiles": {
     "수학": {
-      "dominant": ["C5", "C1", "C4"],
-      "note": "절차·조건 중심. 다시 풀어보면 검증된다.",
+      "dominant": ["C4", "C1", "C5"],
+      "note": "절차·조건 중심이라 다시 풀면 검증된다. ⚠️ S4 리허설(1학기 중간 Q12~Q20 9건) 결과 예상과 달랐다 — 지배 원인은 C5(계산실수)가 아니라 **C4(적용실패: 어떤 전략을 꺼낼지 결정 못 함)** 였다. 9건 중 6건이 C4 primary. 처치가 '검산 연습'이 아니라 '유형 판별 연습'이어야 한다는 뜻.",
       "specializations": {
         "C1": ["정의역·범위 조건 누락", "'모든/어떤' 한정 오독"],
         "C4": ["접근법 선택 실패(어떤 정리를 쓸지)"],

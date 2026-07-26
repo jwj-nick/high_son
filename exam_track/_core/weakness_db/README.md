@@ -25,8 +25,10 @@
     "scope": "공통수학1"
   },
   "q": "Q12",
-  "result": "wrong",                    // wrong | guess_correct (찍어서 맞음도 기록)
-  "points": 5.3,                        // 배점 (선택)
+  "format": "선다",                      // 선다 | 선다(합답형) | 논술형 | 서술형
+  "result": "wrong",                    // wrong | partial | guess_correct (찍어서 맞음도 기록)
+  "points": 5.3,                        // 배점 — 우선순위 보정에 쓴다(목적함수가 '실점 최소화'이므로)
+  "gaps": ["my_answer", "confidence"],  // 비어 있는 정보를 숨기지 않고 명시한다 (S4에서 추가)
 
   "topic": ["수학:다항식", "수학:나머지정리"],   // 내용 축
   "cause": {
