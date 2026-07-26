@@ -1,7 +1,7 @@
 # CONTENT PRINCIPLES — 고등학생 과목 학습앱 콘텐츠 원칙
 
 > **이 문서는 아들(고등학생)을 위한 과목 학습앱의 "무엇을·어떻게 가르칠까"를 규정한다.**
-> 짝 문서: [APP_PRINCIPLES.md](../26_High_1-1/APP_PRINCIPLES.md)(앱 UX·구조·점진공개) · [APP_HOSTING.md](../26_High_1-1/APP_HOSTING.md)(배포).
+> 짝 문서: [APP_PRINCIPLES.md](../exam_track/26_High_1-1/APP_PRINCIPLES.md)(앱 UX·구조·점진공개) · [APP_HOSTING.md](../exam_track/26_High_1-1/APP_HOSTING.md)(배포).
 > 이 문서 = **콘텐츠·교수설계**, 저 둘 = **구조·기술**. 세 문서를 함께 지킨다.
 > 출처: Nick 지시(2026-07-19). 모든 단원 앱은 이 원칙을 만족해야 하고, `se-agent-app-reviewer`가 이 체크리스트로 검토한다.
 
@@ -97,8 +97,8 @@
 | 문서 | 역할 |
 |---|---|
 | **CONTENT_PRINCIPLES.md** (이 파일) | 콘텐츠·교수설계 원칙 |
-| [APP_PRINCIPLES.md](../26_High_1-1/APP_PRINCIPLES.md) | 앱 UX·구조·점진공개 |
-| [APP_HOSTING.md](../26_High_1-1/APP_HOSTING.md) | 배포·인덱싱·모바일 |
+| [APP_PRINCIPLES.md](../exam_track/26_High_1-1/APP_PRINCIPLES.md) | 앱 UX·구조·점진공개 |
+| [APP_HOSTING.md](../exam_track/26_High_1-1/APP_HOSTING.md) | 배포·인덱싱·모바일 |
 | [통합과학1/PLAN.md](통합과학1/PLAN.md) | 통합과학1 단원 지도·진행 |
 | 스킬 `se-perf-study-app` | 통합 학습앱 생성 엔진(perf3_motion 패턴) |
 
