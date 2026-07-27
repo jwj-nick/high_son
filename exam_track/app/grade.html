@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>채점 입력</title>
+<style>
+  :root{
+    --bg:#F4F6F8; --card:#FFFFFF; --card2:#F9FAFB;
+    --ink:#182029; --ink2:#4E5A67; --ink3:#828D99;
+    --line:#E1E6EB;
+    --accent:#3E5C76; --accent-soft:#E8EEF4;
+    --ok:#2A7A57; --ok-soft:#E6F3ED;
+    --miss:#BB5334; --miss-soft:#FBEDE8;
+    --luck:#9A6B12; --luck-soft:#FCF1DC;
+    --r:10px;
+    --sans:"Segoe UI","Malgun Gothic",-apple-system,system-ui,sans-serif;
+    --mono:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#12161B; --card:#191F26; --card2:#1E252D;
+      --ink:#E5E9ED; --ink2:#A3ADB8; --ink3:#79838E;
+      --line:#2A323B;
+      --accent:#7FA6C6; --accent-soft:#1C2833;
+      --ok:#5CBB8C; --ok-soft:#152720;
+      --miss:#E08A68; --miss-soft:#2D1D17;
+      --luck:#D6A544; --luck-soft:#2A2213;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+
+  header{margin-bottom:12px}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  h1{margin:2px 0 4px;font-size:22px;letter-spacing:-.02em}
+  .sub{font-size:13.5px;color:var(--ink2)}
+
+  nav{display:flex;gap:5px;margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:4px;overflow-x:auto}
+  nav button{flex:1 0 auto;min-height:40px;min-width:60px;border:none;background:none;color:var(--ink2);font:inherit;font-size:13.5px;font-weight:600;border-radius:7px;cursor:pointer;padding:6px 10px;white-space:nowrap}
+  nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+  nav button .b{display:block;font-family:var(--mono);font-size:10px;color:var(--ink3);font-weight:400}
+  nav button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+  .hint{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:13px;color:var(--ink2);margin-bottom:12px}
+  .hint b{color:var(--ink)}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-family:var(--mono);font-size:11.5px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .sw{width:12px;height:12px;border-radius:4px;border:1px solid var(--line);display:inline-block}
+  .sw.o{background:var(--ok)} .sw.x{background:var(--miss)} .sw.l{background:var(--luck)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:8px;margin-bottom:14px}
+  .qb{position:relative;min-height:56px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;font:inherit;font-family:var(--mono);font-size:15px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
+  .qb[data-s="correct"]{background:var(--ok);border-color:var(--ok);color:#fff}
+  .qb[data-s="wrong"]{background:var(--miss);border-color:var(--miss);color:#fff}
+  .qb[data-s="guess_correct"]{background:var(--luck);border-color:var(--luck);color:#fff}
+  .qb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .qb .dot{position:absolute;top:4px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .qb[data-s] .dot{background:#fff;opacity:.7}
+
+  .sum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .sum div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;text-align:center}
+  .sum .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+  .sum .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+
+  h2{font-size:15px;margin:18px 0 8px}
+  .cf{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:10px}
+  .cf.wrong{border-left:3px solid var(--miss)}
+  .cf.guess_correct{border-left:3px solid var(--luck)}
+  .cf .q{font-family:var(--mono);font-weight:700;font-size:15px}
+  .cf .lab{font-size:12.5px;color:var(--ink3);margin:6px 0 6px}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .row button{min-height:42px;border:1px solid var(--line);background:var(--card2);color:var(--ink2);font:inherit;font-size:12.5px;font-weight:600;border-radius:8px;cursor:pointer;padding:2px}
+  .row button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .row button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+  .copybox{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:16px}
+  .copybox textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:8px;background:var(--card2);color:var(--ink);font-family:var(--mono);font-size:12.5px;padding:10px;resize:vertical}
+  .copybox button{margin-top:8px;width:100%;min-height:46px;border:none;border-radius:8px;background:var(--miss);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+  .empty{text-align:center;color:var(--ink3);padding:28px 10px;font-size:14px}
+  footer{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--ink3);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker" id="term">—</span>
+    <h1>채점 입력</h1>
+    <span class="sub">시험지 보면서 번호를 탭하면 끝. 오래 걸리면 안 하게 되니까 최대한 빠르게.</span>
+  </header>
+
+  <nav role="tablist" id="tabs"></nav>
+
+  <div class="hint">
+    번호를 탭할 때마다 <b>맞음 → 틀림 → 찍맞 → 없음</b> 순으로 바뀐다.
+    <b>찍맞</b>은 <em>찍었는데 맞은 것</em> — 이것도 모르는 거라서 꼭 기록한다.
+    <div class="legend">
+      <span><i class="sw o"></i>맞음</span>
+      <span><i class="sw x"></i>틀림</span>
+      <span><i class="sw l"></i>찍맞</span>
+      <span><i class="sw"></i>미채점</span>
+      <span>• 점 = 오답노트 있음</span>
+    </div>
+  </div>
+
+  <div class="sum" id="sum"></div>
+  <div class="grid" id="grid"></div>
+
+  <div id="confs"></div>
+
+  <div class="copybox" id="copybox" hidden>
+    <div style="font-size:13.5px;color:var(--ink2);margin-bottom:8px">아래를 복사해서 채팅에 붙여넣으면 오답노트와 약점 DB에 반영된다.</div>
+    <textarea id="out" readonly></textarea>
+    <button id="copybtn" onclick="copyOut()">채점 결과 복사</button>
+  </div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script src="subjects.js"></script>
+<script>
+(function(){
+  "use strict";
+  var G = window.GRADE_DATA;
+  var host = document.getElementById('grid');
+  if (!G || !G.subjects || !G.subjects.length){
+    host.innerHTML = '<div class="empty">subjects.js를 찾지 못했습니다.<br><code>python exam_track/tools/build_grade.py</code> 를 먼저 실행하세요.</div>';
+    return;
+  }
+
+  var CYCLE = [null, 'correct', 'wrong', 'guess_correct'];
+  var CONF  = [['sure','확신'],['half','반신반의'],['guess','찍음'],['timeout','시간부족']];
+  var LABEL = { correct:'맞음', wrong:'틀림', guess_correct:'찍맞' };
+  var cur = 0;
+  var KEY = 'grade:' + G.term;
+  var st = load();
+
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+  function S(){ return G.subjects[cur]; }
+  function slot(){ var n=S().name; return st[n] || (st[n] = {mark:{}, conf:{}}); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  function tabs(){
+    document.getElementById('term').textContent = G.term;
+    document.getElementById('tabs').innerHTML = G.subjects.map(function(s,i){
+      var d = st[s.name] || {mark:{}};
+      var n = Object.keys(d.mark||{}).filter(function(k){ return d.mark[k]; }).length;
+      return '<button role="tab" aria-selected="' + (i===cur) + '" data-i="' + i + '">' +
+        esc(s.name) + '<span class="b">' + n + '/' + s.questions.length + '</span></button>';
+    }).join('');
+  }
+
+  function render(){
+    var s = S(), d = slot();
+    host.innerHTML = s.questions.map(function(q){
+      var m = d.mark[q] || '';
+      var noted = s.already_noted.indexOf(q) >= 0;
+      return '<button class="qb" data-q="' + q + '"' + (m ? ' data-s="' + m + '"' : '') +
+        ' aria-label="Q' + q + ' ' + (LABEL[m]||'미채점') + '">' + q +
+        (noted ? '<i class="dot"></i>' : '') + '</button>';
+    }).join('');
+
+    var vals = s.questions.map(function(q){ return d.mark[q]; });
+    var c = function(v){ return vals.filter(function(x){ return x===v; }).length; };
+    document.getElementById('sum').innerHTML =
+      tile('맞음', c('correct')) + tile('틀림', c('wrong')) +
+      tile('찍맞', c('guess_correct')) + tile('미채점', vals.filter(function(x){return !x;}).length);
+
+    var need = s.questions.filter(function(q){
+      return d.mark[q]==='wrong' || d.mark[q]==='guess_correct'; });
+    document.getElementById('confs').innerHTML = need.length
+      ? '<h2>답할 때 확신도 (' + need.length + '문항)</h2>' +
+        '<div class="hint" style="margin-bottom:10px">확신하고 틀린 건 <b>오개념</b>이라 가장 급하다. 찍은 건 <b>모르는 것</b>이라 학습부터 해야 한다. 이 한 번의 선택이 다음 복습 순서를 정한다.</div>' +
+        need.map(function(q){
+          var v = d.conf[q];
+          return '<div class="cf ' + d.mark[q] + '"><span class="q">Q' + q + '</span> ' +
+            '<span style="font-size:12.5px;color:var(--ink3)">' + LABEL[d.mark[q]] + '</span>' +
+            '<div class="lab">답할 때 어느 쪽이었어?</div><div class="row">' +
+            CONF.map(function(cf){
+              return '<button data-cq="' + q + '" data-cv="' + cf[0] + '" aria-pressed="' + (v===cf[0]) + '">' + cf[1] + '</button>';
+            }).join('') + '</div></div>';
+        }).join('')
+      : '';
+
+    tabs(); out();
+  }
+  function tile(k,v){ return '<div><div class="k">' + k + '</div><div class="v">' + v + '</div></div>'; }
+
+  function out(){
+    var s = S(), d = slot();
+    var wrong = [], luck = [], marked = 0;
+    s.questions.forEach(function(q){
+      var m = d.mark[q]; if (m) marked++;
+      var cf = d.conf[q] ? '(' + (CONF.filter(function(c){return c[0]===d.conf[q];})[0]||['','?'])[1] + ')' : '';
+      if (m === 'wrong') wrong.push('Q' + q + cf);
+      if (m === 'guess_correct') luck.push('Q' + q + cf);
+    });
+    var box = document.getElementById('copybox');
+    box.hidden = marked === 0;
+    var lines = ['채점 ' + G.term + ' / ' + s.name];
+    lines.push('틀림: ' + (wrong.join(' ') || '없음'));
+    if (luck.length) lines.push('찍어서 맞음: ' + luck.join(' '));
+    lines.push('채점한 문항: ' + marked + '/' + s.questions.length);
+    document.getElementById('out').value = lines.join('\n');
+    document.getElementById('copybtn').textContent =
+      '채점 결과 복사 (' + s.name + ' ' + marked + '/' + s.questions.length + ')';
+  }
+
+  document.addEventListener('click', function(ev){
+    var t = ev.target.closest('nav button[data-i]');
+    if (t){ cur = +t.getAttribute('data-i'); render(); return; }
+
+    var b = ev.target.closest('.qb');
+    if (b){
+      var q = b.getAttribute('data-q'), d = slot();
+      var i = CYCLE.indexOf(d.mark[q] || null);
+      var nx = CYCLE[(i + 1) % CYCLE.length];
+      if (nx) d.mark[q] = nx; else { delete d.mark[q]; delete d.conf[q]; }
+      save(); render(); return;
+    }
+
+    var c = ev.target.closest('button[data-cq]');
+    if (c){
+      var qq = c.getAttribute('data-cq'), v = c.getAttribute('data-cv'), dd = slot();
+      dd.conf[qq] = (dd.conf[qq] === v ? null : v);
+      save(); render();
+    }
+  });
+
+  window.copyOut = function(){
+    var t = document.getElementById('out');
+    t.select(); t.setSelectionRange(0, 99999);
+    var done = function(){ var b=document.getElementById('copybtn'), o=b.textContent;
+      b.textContent='복사했어 ✓'; setTimeout(function(){ b.textContent=o; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(done, function(){ try{document.execCommand('copy');done();}catch(e){} });
+    else { try{ document.execCommand('copy'); done(); }catch(e){} }
+  };
+
+  render();
+  document.getElementById('foot').textContent =
+    G.subjects.reduce(function(a,s){ return a + s.questions.length; }, 0) + '문항 · ' + G.term + ' · 로컬 저장';
+})();
+</script>
+</body>
+</html>

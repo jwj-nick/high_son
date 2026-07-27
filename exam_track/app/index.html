@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내신 — 시작</title>
+<style>
+  :root{
+    --bg:#F4F6F8; --card:#FFFFFF; --ink:#182029; --ink2:#4E5A67; --ink3:#828D99;
+    --line:#E1E6EB; --accent:#3E5C76; --miss:#BB5334;
+    --sans:"Segoe UI","Malgun Gothic",-apple-system,system-ui,sans-serif;
+    --mono:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#12161B; --card:#191F26; --ink:#E5E9ED; --ink2:#A3ADB8; --ink3:#79838E;
+           --line:#2A323B; --accent:#7FA6C6; --miss:#E08A68; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+  .wrap{max-width:560px;margin:0 auto;padding:32px 16px 48px}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+  h1{margin:4px 0 6px;font-size:26px;letter-spacing:-.02em}
+  .sub{color:var(--ink2);font-size:14px;margin-bottom:26px}
+  a.tile{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
+         border-radius:12px;padding:20px;margin-bottom:14px;border-left:4px solid var(--c)}
+  a.tile:hover{border-color:var(--c)}
+  a.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .t1{--c:var(--miss)} .t2{--c:var(--accent)}
+  .tile .h{font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .tile .w{font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .tile .d{font-size:13.5px;color:var(--ink2);margin-top:6px}
+  .flow{font-family:var(--mono);font-size:12px;color:var(--ink3);text-align:center;margin:22px 0 0;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">exam_track</span>
+  <h1>내신</h1>
+  <p class="sub">틀린 것을 정확한 시점에 다시 만나게 하는 게 전부다.</p>
+
+  <a class="tile t1" href="grade.html">
+    <div class="w">시험 직후</div>
+    <div class="h">채점 입력</div>
+    <div class="d">시험지 보면서 번호를 탭. 맞음·틀림·찍맞 + 답할 때 확신도까지. 여기가 비면 아래도 안 돌아간다.</div>
+  </a>
+
+  <a class="tile t2" href="retest.html">
+    <div class="w">평소</div>
+    <div class="h">오늘의 재시험</div>
+    <div class="d">약점 DB가 오늘 풀 문항을 뽑아준다. 하루 8문항, 1·3·7·16·35일 간격.</div>
+  </a>
+
+  <p class="flow">채점 입력 → 오답노트 → 약점 DB<br>↓<br>1 · 3 · 7 · 16 · 35일 뒤 다시</p>
+</div>
+</body>
+</html>

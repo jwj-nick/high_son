@@ -85,7 +85,7 @@ exam_track ◀────────────── subject_hub            
 | [`../00_META/LEARNING_DESIGN.md`](../00_META/LEARNING_DESIGN.md) | ⭐ 상위 SSOT — 두 갈래 설계 논의 |
 | [`CONTENT_PRINCIPLES.md`](CONTENT_PRINCIPLES.md) | 콘텐츠 8원칙 |
 | `{과목}/PLAN.md` | 과목별 단원 지도·진행 |
-| [`사회과_고난도문제_PLAN.md`](사회과_고난도문제_PLAN.md) | 🟡 **내신 갈래로 이관 검토 중** (시험대비 성격) |
+| ~~사회과_고난도문제_PLAN.md~~ | ✅ **내신 갈래로 이관 완료** (2026-07-27) → [`../exam_track/problem_bank/PLAN.md`](../exam_track/problem_bank/PLAN.md). 시험 대비는 이 갈래의 일이 아니다 |
 
 ## 변경 이력
 | 날짜 | 내용 |

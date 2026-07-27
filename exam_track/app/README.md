@@ -3,19 +3,37 @@
 > Vercel 없이 **지금 바로 쓸 수 있는** 버전. 나중에 Tier 2(비공개 배포)로 옮길 때 이 앱을 그대로 올리고 **쓰기와 AI만** 얹는다 — 다시 만들지 않는다.
 > 상위 계약: [`../CLAUDE.md`](../CLAUDE.md) · 데이터 정본: [`../_core/`](../_core/)
 
+## 두 화면
+
+| 파일 | 언제 쓰나 |
+|---|---|
+| **`grade.html`** — 채점 입력 | **시험 직후.** 시험지 보면서 번호를 탭해 맞음/틀림/찍맞 + 확신도 기록 |
+| **`retest.html`** — 오늘의 재시험 | **평소.** 약점 DB가 뽑아준 문항을 다시 품 |
+
+앞의 것이 **입력단**, 뒤의 것이 **출력단**이다. 채점 결과가 없으면 재시험도 없다.
+
 ## 쓰는 법
 
 ```bash
-# 1) 오늘 치 데이터 생성
-python exam_track/tools/build_retest.py            # 또는  ... build_retest.py 2026-08-12
+# 1) 데이터 생성
+python exam_track/tools/build_grade.py             # 문항 목록 → subjects.js (학기 바뀔 때만)
+python exam_track/tools/build_retest.py            # 오늘의 재시험 → data.js (필요할 때마다)
 
 # 2) 열기 — 둘 다 됨
-#    (a) exam_track/app/retest.html 을 브라우저로 바로 열기 (data.js가 script 태그라 file:// 에서도 동작)
+#    (a) 브라우저로 파일 직접 열기 (데이터가 script 태그라 file:// 에서도 동작)
 #    (b) 폰에서 볼 때는 로컬 서버:
-python -m http.server 8000        # → http://<PC-IP>:8000/exam_track/app/retest.html
+python -m http.server 8000        # → http://<PC-IP>:8000/exam_track/app/
 ```
 
-## 화면
+## 채점 입력기 (`grade.html`)
+
+과목 탭 → 문항 번호 탭 → **맞음 → 틀림 → 찍맞 → 없음** 순환. 틀린 문항에만 확신도 4지선다가 펼쳐진다.
+
+> **왜 이 도구를 먼저 만들었나** — 5과목 모두 `todo.md`에 `채점 결과 입력 ⏳ 대기`가 **2026-04-26부터 3개월째** 걸려 있었다. 시험지 텍스트화는 끝났는데 정오 정보가 없어서 오답노트도, 약점 DB도, 재출제도 시작할 수 없었다. **입력 마찰이 병목이었다.** 번호 탭 몇 번으로 끝나면 실제로 하게 된다.
+
+> **찍어서 맞은 것(찍맞)을 따로 받는 이유** — 정답률은 실력을 과대평가한다. 찍어서 맞은 건 모르는 것이고, 다음 시험에선 틀린다.
+
+## 재시험 화면 (`retest.html`)
 
 | 탭 | 내용 |
 |---|---|
