@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>고난도 문제은행</title>
+<style>
+  :root{
+    --bg:#F4F6F8; --card:#FFFFFF; --card2:#F9FAFB;
+    --ink:#182029; --ink2:#4E5A67; --ink3:#828D99;
+    --line:#E1E6EB;
+    --accent:#3E5C76; --accent-soft:#E8EEF4;
+    --ok:#2A7A57; --ok-soft:#E6F3ED;
+    --miss:#BB5334; --miss-soft:#FBEDE8;
+    --luck:#9A6B12; --luck-soft:#FCF1DC;
+    --r:10px;
+    --sans:"Segoe UI","Malgun Gothic",-apple-system,system-ui,sans-serif;
+    --mono:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#12161B; --card:#191F26; --card2:#1E252D;
+      --ink:#E5E9ED; --ink2:#A3ADB8; --ink3:#79838E;
+      --line:#2A323B;
+      --accent:#7FA6C6; --accent-soft:#1C2833;
+      --ok:#5CBB8C; --ok-soft:#152720;
+      --miss:#E08A68; --miss-soft:#2D1D17;
+      --luck:#D6A544; --luck-soft:#2A2213;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+
+  header{margin-bottom:12px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+  h1{margin:2px 0 2px;font-size:20px;letter-spacing:-.02em}
+  .sub{font-size:13px;color:var(--ink2)}
+  .bar{height:5px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0 16px}
+  .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px}
+  .qhead{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .pill{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+  .pill.lv{background:var(--miss-soft);color:var(--miss)}
+  .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+  .stem{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px;text-wrap:pretty}
+  .mat{background:var(--card2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin-bottom:14px;font-size:14.5px;line-height:1.75}
+  .mat .tr{display:block;margin-top:6px;font-size:13px;color:var(--ink2)}
+
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;min-height:48px;padding:11px 13px;border:1px solid var(--line);background:var(--card2);color:var(--ink);border-radius:9px;font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer}
+  .opt .n{font-family:var(--mono);font-weight:700;color:var(--ink3);flex:none}
+  .opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+  .opt[data-r="right"]{border-color:var(--ok);background:var(--ok-soft)}
+  .opt[data-r="wrong"]{border-color:var(--miss);background:var(--miss-soft)}
+  .opt:disabled{cursor:default}
+  .opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .ask{margin-top:16px;font-size:13.5px;color:var(--ink2)}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+  .row button{min-height:44px;border:1px solid var(--line);background:var(--card2);color:var(--ink2);font:inherit;font-size:12.5px;font-weight:600;border-radius:8px;cursor:pointer;padding:2px}
+  .row button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .row button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+  .go{margin-top:14px;width:100%;min-height:50px;border:none;border-radius:9px;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+  .go:disabled{background:var(--line);color:var(--ink3);cursor:default}
+
+  .fb{margin-top:14px;border-radius:9px;padding:14px;font-size:14px;line-height:1.65}
+  .fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+  .fb.wrong{background:var(--miss-soft);border:1px solid var(--miss)}
+  .fb h3{margin:0 0 6px;font-size:15px}
+  .fb .dx{background:var(--card);border-radius:7px;padding:10px 12px;margin:10px 0;font-size:13.5px}
+  .fb .dx b{font-family:var(--mono);font-size:12px}
+  .fb .tr2{margin-top:10px;font-size:13.5px;color:var(--ink2)}
+  .fb .tr2 b{color:var(--ink)}
+
+  .end{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;text-align:center}
+  .end .big{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+  .sum div{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px}
+  .sum .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+  .sum .v{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+  textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:8px;background:var(--card2);color:var(--ink);font-family:var(--mono);font-size:12px;padding:10px;resize:vertical;text-align:left}
+  .copy{margin-top:8px;width:100%;min-height:48px;border:none;border-radius:8px;background:var(--miss);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+  .again{margin-top:8px;width:100%;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--card2);color:var(--ink2);font:inherit;font-size:14px;cursor:pointer}
+  .empty{text-align:center;color:var(--ink3);padding:36px 10px}
+  footer{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--ink3);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker" id="kick">문제은행</span>
+    <h1 id="title">—</h1>
+    <span class="sub" id="sub"></span>
+  </header>
+  <div class="bar"><i id="prog"></i></div>
+  <div id="stage"></div>
+  <footer id="foot"></footer>
+</div>
+
+<script src="data/kh2_01.js"></script>
+<script>
+(function(){
+  "use strict";
+  var S = window.BANK_SET;
+  var stage = document.getElementById('stage');
+  if (!S || !S.items || !S.items.length){
+    stage.innerHTML = '<div class="empty">문항 데이터를 찾지 못했습니다.</div>'; return;
+  }
+
+  var CONF = [['sure','확신'],['half','반신반의'],['guess','찍음'],['timeout','시간부족']];
+  var KEY = 'bank:' + S.id;
+  var log = load();          // { itemId: {pick, correct, conf, cause} }
+  var order = [], idx = 0, picked = null, conf = null, shown = false;
+
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(log)); }catch(e){} }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  // 보기 셔플 — 정답 위치는 indexOf로 재추적한다
+  function prep(it){
+    var opts = it.o.slice();
+    var right = opts[it.a];
+    for (var i = opts.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = opts[i]; opts[i] = opts[j]; opts[j] = t;
+    }
+    return { opts: opts, a: opts.indexOf(right) };
+  }
+
+  function start(){
+    order = S.items.map(function(it){ return { it: it, v: prep(it) }; });
+    idx = 0; picked = null; conf = null; shown = false;
+    document.getElementById('kick').textContent = S.subject + ' · ' + S.unit;
+    document.getElementById('title').textContent = S.title;
+    document.getElementById('sub').textContent = S.items.length + '문항 · 고른 답에서 원인까지 함께 본다';
+    render();
+  }
+
+  function render(){
+    if (idx >= order.length) return finish();
+    var cur = order[idx], it = cur.it, v = cur.v;
+    document.getElementById('prog').style.width = (idx / order.length * 100) + '%';
+
+    var html = '<div class="qcard">' +
+      '<div class="qhead"><span class="pill">' + esc(it.type) + '</span>' +
+      '<span class="pill lv">' + esc(it.level) + '</span>' +
+      '<span class="cnt">' + (idx + 1) + ' / ' + order.length + '</span></div>' +
+      '<div class="stem">' + it.stem + '</div>' +
+      (it.material ? '<div class="mat">' + it.material + '</div>' : '') +
+      '<div class="opts">' + v.opts.map(function(o, i){
+        var mark = '';
+        if (shown) mark = (i === v.a) ? ' data-r="right"' : (i === picked ? ' data-r="wrong"' : '');
+        return '<button class="opt" data-i="' + i + '"' + mark +
+          ' aria-pressed="' + (picked === i) + '"' + (shown ? ' disabled' : '') + '>' +
+          '<span class="n">' + '①②③④⑤'.charAt(i) + '</span><span>' + esc(o.t) + '</span></button>';
+      }).join('') + '</div>';
+
+    if (!shown){
+      html += '<div class="ask">답할 때 어느 쪽이었어?</div><div class="row">' +
+        CONF.map(function(c){
+          return '<button data-c="' + c[0] + '" aria-pressed="' + (conf === c[0]) + '">' + c[1] + '</button>';
+        }).join('') + '</div>' +
+        '<button class="go" id="submit"' + (picked === null || !conf ? ' disabled' : '') + '>' +
+        (picked === null ? '답을 고르세요' : (!conf ? '확신도를 고르세요' : '제출')) + '</button>';
+    } else {
+      var right = picked === v.a;
+      var chosen = v.opts[picked] || {};
+      html += '<div class="fb ' + (right ? 'right' : 'wrong') + '">' +
+        '<h3>' + (right ? (conf === 'guess' ? '맞았지만 찍었어' : '맞았어') : '틀렸어') + '</h3>' +
+        '<div>' + esc(it.solve.key) + '</div>';
+      if (!right && chosen.why){
+        html += '<div class="dx"><b>왜 ' + '①②③④⑤'.charAt(picked) + '를 골랐나 — ' +
+          esc(chosen.cause || '') + '</b><br>' + esc(chosen.why) + '</div>';
+      }
+      if (right && conf === 'guess'){
+        html += '<div class="dx"><b>찍어서 맞음</b><br>모르는 것으로 기록해 둘게. 다음에 다시 물어볼 거야.</div>';
+      }
+      if (it.solve.trap) html += '<div class="tr2"><b>함정</b> — ' + esc(it.solve.trap) + '</div>';
+      html += '</div>' +
+        '<button class="go" id="next">' + (idx + 1 < order.length ? '다음 문항' : '결과 보기') + '</button>';
+    }
+    html += '</div>';
+    stage.innerHTML = html;
+  }
+
+  document.addEventListener('click', function(ev){
+    var o = ev.target.closest('.opt');
+    if (o && !shown){ picked = +o.getAttribute('data-i'); render(); return; }
+    var c = ev.target.closest('button[data-c]');
+    if (c && !shown){ conf = c.getAttribute('data-c'); render(); return; }
+    if (ev.target.id === 'submit'){ submit(); return; }
+    if (ev.target.id === 'next'){ idx++; picked = null; conf = null; shown = false; render(); return; }
+    if (ev.target.id === 'restart'){ localStorage.removeItem(KEY); log = {}; start(); return; }
+    if (ev.target.id === 'copybtn'){ copyOut(); }
+  });
+
+  function submit(){
+    var cur = order[idx], it = cur.it, v = cur.v;
+    var right = picked === v.a;
+    var chosen = v.opts[picked] || {};
+    log[it.id] = {
+      correct: right, conf: conf,
+      cause: right ? null : (chosen.cause || null),
+      type: it.type, unit: S.unit
+    };
+    save(); shown = true; render();
+  }
+
+  function finish(){
+    document.getElementById('prog').style.width = '100%';
+    var ids = S.items.map(function(i){ return i.id; });
+    var done = ids.filter(function(i){ return log[i]; });
+    var right = done.filter(function(i){ return log[i].correct; });
+    var luck  = right.filter(function(i){ return log[i].conf === 'guess'; });
+    var wrong = done.filter(function(i){ return !log[i].correct; });
+
+    var byCause = {};
+    wrong.forEach(function(i){ var c = log[i].cause || '미분류'; byCause[c] = (byCause[c]||0)+1; });
+    var causeLine = Object.keys(byCause).sort(function(a,b){ return byCause[b]-byCause[a]; })
+      .map(function(c){ return c + ' ' + byCause[c] + '건'; }).join(' · ');
+
+    var lines = ['문제은행 결과 ' + S.id + ' / ' + S.subject + ' ' + S.title];
+    lines.push('맞음 ' + right.length + ' / ' + done.length + (luck.length ? ' (찍맞 ' + luck.length + ')' : ''));
+    if (wrong.length){
+      lines.push('틀림:');
+      wrong.forEach(function(i){
+        lines.push('- ' + i + ' 원인 ' + (log[i].cause || '?') + ' 확신도 ' + (log[i].conf || '?'));
+      });
+    }
+    if (luck.length){
+      lines.push('찍어서 맞음:');
+      luck.forEach(function(i){ lines.push('- ' + i); });
+    }
+
+    stage.innerHTML = '<div class="end">' +
+      '<div class="big">' + right.length + ' / ' + done.length + '</div>' +
+      '<div class="sum">' +
+        '<div><div class="k">맞음</div><div class="v">' + (right.length - luck.length) + '</div></div>' +
+        '<div><div class="k">찍맞</div><div class="v">' + luck.length + '</div></div>' +
+        '<div><div class="k">틀림</div><div class="v">' + wrong.length + '</div></div>' +
+      '</div>' +
+      (causeLine ? '<div style="font-size:13.5px;color:var(--ink2);margin-bottom:12px">틀린 원인 — <b>' + esc(causeLine) + '</b></div>' : '') +
+      '<div style="font-size:13.5px;color:var(--ink2);margin-bottom:8px">아래를 복사해서 아빠에게 보내면 약점 DB에 기록하고 복습 일정을 잡아줄게.</div>' +
+      '<textarea id="out" readonly>' + esc(lines.join('\n')) + '</textarea>' +
+      '<button class="copy" id="copybtn">결과 복사</button>' +
+      '<button class="again" id="restart">처음부터 다시 풀기</button>' +
+      '</div>';
+  }
+
+  function copyOut(){
+    var t = document.getElementById('out');
+    t.select(); t.setSelectionRange(0, 99999);
+    var b = document.getElementById('copybtn'), o = b.textContent;
+    var done = function(){ b.textContent = '복사했어 ✓'; setTimeout(function(){ b.textContent = o; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(done, function(){ try{document.execCommand('copy');done();}catch(e){} });
+    else { try{ document.execCommand('copy'); done(); }catch(e){} }
+  }
+
+  start();
+  document.getElementById('foot').textContent =
+    S.id + ' · ' + S.items.length + '문항 · 근거 ' + S.source_app;
+})();
+</script>
+</body>
+</html>
