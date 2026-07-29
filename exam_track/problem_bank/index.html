@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>고난도 문제은행 — 세트 고르기</title>
+<style>
+  :root{
+    --bg:#F4F6F8; --card:#FFFFFF; --card2:#F9FAFB;
+    --ink:#182029; --ink2:#4E5A67; --ink3:#828D99;
+    --line:#E1E6EB;
+    --accent:#3E5C76; --accent-soft:#E8EEF4;
+    --ok:#2A7A57; --miss:#BB5334;
+    --r:10px;
+    --sans:"Segoe UI","Malgun Gothic",-apple-system,system-ui,sans-serif;
+    --mono:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#12161B; --card:#191F26; --card2:#1E252D;
+      --ink:#E5E9ED; --ink2:#A3ADB8; --ink3:#79838E;
+      --line:#2A323B;
+      --accent:#7FA6C6; --accent-soft:#1C2833;
+      --ok:#5CBB8C; --miss:#E08A68;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:24px 14px 44px}
+  .back{display:inline-block;margin-bottom:6px;font-size:12.5px;color:var(--ink3);text-decoration:none}
+  .back:hover{color:var(--accent)}
+  .kicker{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+  h1{margin:2px 0 4px;font-size:22px;letter-spacing:-.02em}
+  .sub{font-size:13.5px;color:var(--ink2);margin-bottom:20px}
+
+  .grp{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:18px 0 8px}
+  a.set{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
+        border-radius:var(--r);padding:15px 16px;margin-bottom:10px}
+  a.set:hover{border-color:var(--accent)}
+  a.set:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .st{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+  .sr{font-size:13px;color:var(--ink2);margin-top:2px}
+  .meta{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+  .pill{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+  .stat{font-family:var(--mono);font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums;margin-left:auto}
+  .stat b{color:var(--ink2)}
+  .pbar{height:4px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+  .pbar i{display:block;height:100%;background:var(--accent);width:0}
+  .none{color:var(--ink3);font-size:13px}
+  footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--ink3);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../app/index.html">← 내신 시작 화면</a>
+  <span class="kicker">problem_bank</span>
+  <h1>고난도 문제은행</h1>
+  <p class="sub">단원을 골라 풀면 바로 채점되고, 고른 오답에서 <b>왜 그걸 골랐는지</b>까지 짚어준다.</p>
+  <div id="list"></div>
+  <footer id="foot"></footer>
+</div>
+
+<script src="data/sets.js"></script>
+<script>
+(function(){
+  "use strict";
+  var SETS = window.BANK_SETS || [];
+  var list = document.getElementById('list');
+  if (!SETS.length){ list.innerHTML = '<p class="none">등록된 세트가 없습니다.</p>'; return; }
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  function stat(id){
+    var log;
+    try { log = JSON.parse(localStorage.getItem('bank:' + id)) || {}; } catch(e){ log = {}; }
+    var keys = Object.keys(log), right = 0;
+    keys.forEach(function(k){ if (log[k] && log[k].correct) right++; });
+    return { done: keys.length, right: right };
+  }
+
+  var html = '', course = null;
+  SETS.forEach(function(s){
+    if (s.course !== course){ course = s.course; html += '<div class="grp">' + esc(course) + '</div>'; }
+    var st = stat(s.id);
+    var pct = s.n ? Math.round(st.done / s.n * 100) : 0;
+    html += '<a class="set" href="bank.html?set=' + encodeURIComponent(s.id) + '">' +
+      '<div class="st">' + esc(s.title) + '</div>' +
+      '<div class="sr">' + esc(s.range) + '</div>' +
+      '<div class="meta"><span class="pill">' + esc(s.n) + '문항</span>' +
+      '<span class="stat">' + (st.done
+          ? '푼 문항 <b>' + st.done + '</b> · 맞음 <b>' + st.right + '</b>'
+          : '아직 안 풀었음') + '</span></div>' +
+      '<div class="pbar"><i style="width:' + pct + '%"></i></div>' +
+      '</a>';
+  });
+  list.innerHTML = html;
+
+  var total = SETS.reduce(function(a, s){ return a + (s.n || 0); }, 0);
+  document.getElementById('foot').textContent = SETS.length + '세트 · 총 ' + total + '문항';
+})();
+</script>
+</body>
+</html>

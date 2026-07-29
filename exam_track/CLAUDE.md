@@ -70,8 +70,8 @@ exam_track/
 
 | 컴포넌트 | 상태 |
 |---|---|
-| ① 출제 — 단원별 문항 세트 | 🟨 **착수** — [`problem_bank/PLAN.md`](problem_bank/PLAN.md) |
-| ② 풀이·자동채점 앱 | ⬜ 제작 예정 |
+| ① 출제 — 단원별 문항 세트 | 🟨 **진행** — 한국사2 Ⅰ·Ⅱ 24문항. [`problem_bank/PLAN.md`](problem_bank/PLAN.md) |
+| ② 풀이·자동채점 앱 | ✅ [`problem_bank/index.html`](problem_bank/index.html)(세트 선택) + `bank.html?set=` |
 | ③ 약점 DB (3축 태그·재출제 상태) | ✅ v1.1 — 수학 9건(리허설) |
 | ④ 재출제 — 생성기 + 앱 | ✅ [`app/retest.html`](app/retest.html) · [`tools/build_retest.py`](tools/build_retest.py) |
 
