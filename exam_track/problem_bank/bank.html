@@ -219,6 +219,9 @@
     log[it.id] = {
       correct: right, conf: conf,
       cause: right ? null : (chosen.cause || null),
+      // 셔플 전 원본 인덱스. 같은 원인 코드를 쓰는 보기가 여럿일 때(순서배열 등)
+      // 어느 보기를 골랐는지 이것 없이는 되짚을 수 없다.
+      oi: it.o.indexOf(chosen),
       type: it.type, unit: S.unit
     };
     save(); shown = true; render();
@@ -242,7 +245,9 @@
     if (wrong.length){
       lines.push('틀림:');
       wrong.forEach(function(i){
-        lines.push('- ' + i + ' 원인 ' + (log[i].cause || '?') + ' 확신도 ' + (log[i].conf || '?'));
+        var oi = log[i].oi;
+        var mark = (oi >= 0 && oi < 5) ? ' 보기' + '①②③④⑤'.charAt(oi) : '';
+        lines.push('- ' + i + mark + ' 원인 ' + (log[i].cause || '?') + ' 확신도 ' + (log[i].conf || '?'));
       });
     }
     if (luck.length){

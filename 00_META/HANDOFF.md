@@ -45,8 +45,9 @@ S1 구조 ✅ → S2 내신코어 ✅ → S4 리허설 ✅ → L1~L4 로컬 ✅ 
 
 ```
 ① 출제              ② 풀이·자동채점         ③ 오답 기록            ④ 재출제
-Claude가 단원별  →  아이가 bank.html에서  →  약점 DB(3축 태그)  →  retest.html
-+ 보기별 원인코드     확신도까지 즉시 수집      원인 자동 진단          1·3·7·16·35일
+Claude가 단원별  →  아이가 bank.html에서  →  ingest_result.py   →  retest.html
++ 보기별 원인코드     확신도까지 즉시 수집      → 약점 DB(3축)         1·3·7·16·35일
+                     결과 텍스트 복사          원인·일정 자동 산정
 ```
 
 **핵심 장치 = 보기별 원인 매핑.** 오답 보기마다 `cause` 코드를 심어둔다. 아이가 ③을 고르면 "틀렸다"가 아니라 **"C3 — 갑오개혁과 혼동"** 이 진단된다. 3축 태깅(내용×원인×확신도)의 원인 축이 이걸로 자동화된다.
@@ -73,10 +74,11 @@ Claude가 단원별  →  아이가 bank.html에서  →  약점 DB(3축 태그)
 |---|---|---|---|
 | **1** | **아이 반응 확인 → 난이도·해설 톤 조정** | Nick 피드백 | 소 |
 | **2** | 문제은행 **팩트 검증 게이트** (정답키 + 오답 근거) | Nick의 서브에이전트 호출 승인 | 소 |
-| **3** | 결과 텍스트 → **약점 DB 기록** (첫 실사용) | 아이가 풀어야 함 | 소 |
+| **3** | 결과 텍스트 → **약점 DB 기록** (첫 실사용) | 아이가 풀어야 함 · 도구는 준비됨(`ingest_result.py`) | 소 |
 | **4** | **다음 단원 출제** — ~~한국사2 Ⅱ~~ ✅ → **Ⅲ 현대** → 한국사1 → 통합사회 → 과학·수학 | 1·2 반영 후 | 대 (단원당 10~12문항) |
 | ~~5~~ | ~~문제은행 세트 선택 화면~~ | ✅ 2026-07-29 — `data/sets.js` 레지스트리 + `index.html` + `bank.html?set=` | — |
-| **6** | `se-retest-daily` 채점 반영 자동화 (지금은 Claude가 손으로 DB 수정) | — | 중 |
+| **6** | 재시험 앱에서 **그 문항을 실제로 다시 풀게** 하기 (지금은 링크만 준다) | — | 중 |
+| ~~6a~~ | ~~결과 → DB 반영 자동화 (Claude가 손으로 수정)~~ | ✅ 2026-08-04 — `tools/ingest_result.py` | — |
 | **7** | 부모 주간 요약 (원인 분포·반복 오답·오개념) | 데이터 축적 | 중 |
 | **8** | **V — Vercel**: 쓰기 경로(KV vs GitHub API) + AI 튜터(힌트 사다리·설명해보기) + Tier2 배포 | Nick의 Vercel 셋업 | 대 |
 
@@ -105,7 +107,11 @@ Claude가 단원별  →  아이가 bank.html에서  →  약점 DB(3축 태그)
 ## 8. 명령어
 
 ```bash
-# 오늘의 재시험 생성 (약점 DB → app/data.js + _core/retest/daily/<날짜>.md)
+# ① 아이가 보낸 문제은행 결과 텍스트 → 약점 DB 반영 (신규 등록·재오답 갱신·학습대기 판정)
+python exam_track/tools/ingest_result.py result.txt --dry-run   # 먼저 확인
+python exam_track/tools/ingest_result.py result.txt             # 반영
+
+# ② 오늘의 재시험 생성 (약점 DB → app/data.js + _core/retest/daily/<날짜>.md)
 python exam_track/tools/build_retest.py            # 또는 ... 2026-08-12
 
 # 학교 시험지 문항 목록 추출 (학기 바뀔 때만, 현재 미사용 경로)
@@ -144,7 +150,7 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 │   ├─ app/                 index · bank진입 · retest · grade · data.js(생성물)
 │   ├─ problem_bank/        PLAN.md · index.html(세트선택) · bank.html?set=
 │   │   └─ data/            sets.js(레지스트리) · kh2_01.js · kh2_02.js
-│   ├─ tools/               build_retest.py · build_grade.py
+│   ├─ tools/               ingest_result.py(결과→DB) · build_retest.py · build_grade.py
 │   ├─ 26_High_1-1/         1학기 (02_text 5과목 109문항, 수학 오답노트 9) — 출제 참고자료
 │   └─ 2607_High1_Final/    비어 있음
 └─ subject_hub/             ★ 흥미 NCC — 단원 학습앱 (전 과목 배포 완료)
@@ -168,5 +174,6 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-04 | **`tools/ingest_result.py` 신설** — 결과 텍스트를 파싱해 약점 DB에 반영(신규/재오답/학습대기 판정, 확신도×원인으로 첫 due 산정). bank.html 결과 텍스트에 **고른 보기 번호** 추가 — 같은 원인 코드를 쓰는 보기가 여럿일 때 되짚기 위해. 문제은행 두 세트 **사실 검증 게이트 실행** |
 | 2026-07-29 | 한국사2 Ⅱ단원 `kh2_02` 12문항 출제. 세트 레지스트리(`data/sets.js`)·선택 화면 도입 → **§5-5 완료**. `topics.json` 한국사1/2 분리 + `한국사:일제강점기` 추가 |
 | 2026-07-28 | 생성. S1~L4 + 입력단 전환·파일럿 완료 시점 기준. 남은 작업 8건·Nick 대기 4건 정리 |
