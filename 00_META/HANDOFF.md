@@ -116,9 +116,14 @@ python exam_track/tools/build_retest.py            # 또는 ... 2026-08-12
 # 학교 시험지 문항 목록 추출 (학기 바뀔 때만, 현재 미사용 경로)
 python exam_track/tools/build_grade.py
 
-# 앱 검증 (커밋 전 필수)
+# 문제은행 세트 기계 검사 (커밋 전 필수)
+python exam_track/tools/check_bank.py          # 또는 ... kh2_03
+
+# 앱(HTML) 검증
 node --check <추출한 인라인 JS>     # 또는 아래 스캐너
 ```
+
+⚠️ **기계 검사는 정답키·복수정답을 못 잡는다.** 실측으로 확인됐다 — kh2_03의 치명 2건(복수정답)은 스키마·문법을 전부 통과했다. 새 세트는 **반드시 검증 게이트(에이전트)를 통과시킨다.** 절차·프롬프트는 [`problem_bank/REVIEW.md`](../exam_track/problem_bank/REVIEW.md).
 
 검증 스캐너 (인라인 JS 문법 + `<한글` 잘림 + 태그 균형):
 ```python
@@ -149,7 +154,8 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 │   ├─ app/                 index · bank진입 · retest · grade · data.js(생성물)
 │   ├─ problem_bank/        PLAN.md(작성규칙) · REVIEW.md(검증이력) · index.html · bank.html?set=
 │   │   └─ data/            sets.js(레지스트리) · kh2_01 · kh2_02 · kh2_03
-│   ├─ tools/               ingest_result.py(결과→DB) · build_retest.py · build_grade.py
+│   ├─ tools/               check_bank.py(세트 검사) · ingest_result.py(결과→DB)
+│   │                       build_retest.py · build_grade.py
 │   ├─ 26_High_1-1/         1학기 (02_text 5과목 109문항, 수학 오답노트 9) — 출제 참고자료
 │   └─ 2607_High1_Final/    비어 있음
 └─ subject_hub/             ★ 흥미 NCC — 단원 학습앱 (전 과목 배포 완료)
@@ -168,11 +174,15 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 | 재시험 화면에 원인·정답 노출 | 인출이 재인이 된다. 답하기 전엔 절대 표시 금지 |
 | 정답 보기에 `cause` 붙이기 | 정답 역추적 누출. 검증 스크립트가 잡는다 |
 | 브라우저 스크린샷 시도 | 확장프로그램이 `file://`·localhost 차단. 육안 확인은 Nick에게 위임 |
+| 발문에 시기 한정을 넣고 보기를 다시 안 봄 | **복수정답**이 된다. kh2_03에서 2건. 기계 검사는 통과시킨다 |
+| 편한 대비쌍을 여러 문항에 복사 | "간선↔직선(1987)"이 1952 발췌 개헌을 지우고 세트 내부 모순을 만들었다 |
+| 진단 품질을 기계로 검사하려 함 | C3 혼동쌍 키워드 검사 = **28건 전부 오탐.** 뜻이 아니라 키워드에 맞춰 쓰게 된다 |
 | bash `cd` 후 경로 | 셸 cwd가 유지된다. 스크립트는 `cd /c/Kids/70_HighSchool &&` 로 시작할 것 |
 
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-04 | **kh2_03 2차 게이트 — 치명 2건(복수정답) 포함 15건 반영.** 기계 검사를 `tools/check_bank.py`로 고정. 교훈 5건 승격. 36문항 전량 검증 완료 |
 | 2026-08-04 | **한국사2 Ⅲ `kh2_03` 12문항 → 한국사2 3/3 완료(36문항).** 검증 게이트에서 나온 교훈 8건을 `PLAN.md` 작성 규칙으로 승격해 적용 — 원인 코드가 C1~C8 여섯 종으로 퍼졌다 |
 | 2026-08-04 | **`tools/ingest_result.py` 신설** — 결과 텍스트를 파싱해 약점 DB에 반영(신규/재오답/학습대기 판정, 확신도×원인으로 첫 due 산정). bank.html 결과 텍스트에 **고른 보기 번호** 추가 — 같은 원인 코드를 쓰는 보기가 여럿일 때 되짚기 위해. 문제은행 두 세트 **사실 검증 게이트 실행** |
 | 2026-07-29 | 한국사2 Ⅱ단원 `kh2_02` 12문항 출제. 세트 레지스트리(`data/sets.js`)·선택 화면 도입 → **§5-5 완료**. `topics.json` 한국사1/2 분리 + `한국사:일제강점기` 추가 |
