@@ -105,28 +105,60 @@
 
 <script src="data/sets.js"></script>
 <script>
-// ?set=<id> 로 세트를 고른다. 없거나 모르는 id면 첫 세트.
+// ?set=<id>            한 세트 풀기
+// ?set=a,b&only=q1,q2  재시험 모드 — 여러 세트에서 지정한 문항만, 준 순서 그대로
+//
 // file:// 에서도 동작해야 하므로 fetch가 아니라 파싱 중 document.write로 불러온다.
+// 각 데이터 파일이 window.BANK_SET에 덮어쓰므로, 하나 읽을 때마다 곧바로 옮겨 담는다.
 (function(){
   var list = window.BANK_SETS || [];
-  var q = (location.search.match(/[?&]set=([\w-]+)/) || [])[1];
-  var ok = list.some(function(s){ return s.id === q; });
-  var id = ok ? q : (list[0] && list[0].id);
-  if (id) document.write('<scr' + 'ipt src="data/' + id + '.js"><\/scr' + 'ipt>');
+  var known = {}; list.forEach(function(s){ known[s.id] = 1; });
+  var raw = (location.search.match(/[?&]set=([\w,-]+)/) || [])[1] || '';
+  var ids = raw.split(',').filter(function(x){ return known[x]; });
+  if (!ids.length) ids = list.length ? [list[0].id] : [];
+  ids.forEach(function(id){
+    document.write('<scr' + 'ipt src="data/' + id + '.js"><\/scr' + 'ipt>');
+    document.write('<scr' + 'ipt>window.LOADED=window.LOADED||{};' +
+      'window.LOADED["' + id + '"]=window.BANK_SET;<\/scr' + 'ipt>');
+  });
 })();
 </script>
 <script>
 (function(){
   "use strict";
-  var S = window.BANK_SET;
+  var LOADED = window.LOADED || {};
   var stage = document.getElementById('stage');
-  if (!S || !S.items || !S.items.length){
+
+  // 재시험 모드 — only에 적힌 문항만, 적힌 순서 그대로.
+  // 순서는 build_retest.py가 교차(과목·topic)를 풀어 정한 것이므로 흐트러뜨리지 않는다.
+  var only = (location.search.match(/[?&]only=([\w,-]+)/) || [])[1];
+  var RETEST = !!only;
+
+  var byId = {}, setOf = {};
+  Object.keys(LOADED).forEach(function(sid){
+    var s = LOADED[sid]; if (!s || !s.items) return;
+    s.items.forEach(function(it){ byId[it.id] = it; setOf[it.id] = s; });
+  });
+
+  var S, ITEMS;
+  if (RETEST){
+    ITEMS = only.split(',').map(function(q){ return byId[q]; }).filter(Boolean);
+    var first = ITEMS.length ? setOf[ITEMS[0].id] : null;
+    S = { id: 'retest', subject: first ? first.subject : '', unit: '오늘의 재시험',
+          title: '오늘의 재시험', items: ITEMS,
+          source_app: Object.keys(LOADED).join(' · ') };
+  } else {
+    S = LOADED[Object.keys(LOADED)[0]];
+    ITEMS = S && S.items;
+  }
+
+  if (!S || !ITEMS || !ITEMS.length){
     stage.innerHTML = '<div class="empty">문항 데이터를 찾지 못했습니다.</div>'; return;
   }
 
   var CONF = [['sure','확신'],['half','반신반의'],['guess','찍음'],['timeout','시간부족']];
-  var KEY = 'bank:' + S.id;
-  var log = load();          // { itemId: {pick, correct, conf, cause} }
+  var KEY = 'bank:' + (RETEST ? 'retest:' + (window.RETEST_DAY || 'x') : S.id);
+  var log = load();          // { itemId: {correct, conf, cause, oi} }
   var order = [], idx = 0, picked = null, conf = null, shown = false;
 
   function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
@@ -146,11 +178,15 @@
   }
 
   function start(){
-    order = S.items.map(function(it){ return { it: it, v: prep(it) }; });
+    order = ITEMS.map(function(it){ return { it: it, v: prep(it) }; });
     idx = 0; picked = null; conf = null; shown = false;
-    document.getElementById('kick').textContent = S.subject + ' · ' + S.unit;
+    document.getElementById('kick').textContent = RETEST ? '복습 · 간격 반복' : (S.subject + ' · ' + S.unit);
     document.getElementById('title').textContent = S.title;
-    document.getElementById('sub').textContent = S.items.length + '문항 · 고른 답에서 원인까지 함께 본다';
+    document.getElementById('sub').textContent = ITEMS.length + '문항 · ' +
+      (RETEST ? '전에 틀렸던 것. 이번엔 맞히면 다음은 더 나중에 물어볼게'
+              : '고른 답에서 원인까지 함께 본다');
+    var back = document.querySelector('.back');
+    if (back && RETEST){ back.textContent = '← 오늘의 재시험'; back.href = '../app/retest.html'; }
     render();
   }
 
@@ -222,14 +258,14 @@
       // 셔플 전 원본 인덱스. 같은 원인 코드를 쓰는 보기가 여럿일 때(순서배열 등)
       // 어느 보기를 골랐는지 이것 없이는 되짚을 수 없다.
       oi: it.o.indexOf(chosen),
-      type: it.type, unit: S.unit
+      type: it.type, unit: (setOf[it.id] || S).unit
     };
     save(); shown = true; render();
   }
 
   function finish(){
     document.getElementById('prog').style.width = '100%';
-    var ids = S.items.map(function(i){ return i.id; });
+    var ids = ITEMS.map(function(i){ return i.id; });
     var done = ids.filter(function(i){ return log[i]; });
     var right = done.filter(function(i){ return log[i].correct; });
     var luck  = right.filter(function(i){ return log[i].conf === 'guess'; });
@@ -240,7 +276,8 @@
     var causeLine = Object.keys(byCause).sort(function(a,b){ return byCause[b]-byCause[a]; })
       .map(function(c){ return c + ' ' + byCause[c] + '건'; }).join(' · ');
 
-    var lines = ['문제은행 결과 ' + S.id + ' / ' + S.subject + ' ' + S.title];
+    var sure = right.filter(function(i){ return log[i].conf !== 'guess'; });
+    var lines = [(RETEST ? '재시험 결과 ' : '문제은행 결과 ') + S.id + ' / ' + S.subject + ' ' + S.title];
     lines.push('맞음 ' + right.length + ' / ' + done.length + (luck.length ? ' (찍맞 ' + luck.length + ')' : ''));
     if (wrong.length){
       lines.push('틀림:');
@@ -253,6 +290,11 @@
     if (luck.length){
       lines.push('찍어서 맞음:');
       luck.forEach(function(i){ lines.push('- ' + i); });
+    }
+    // 맞힌 것도 보낸다 — 재시험에서 이게 있어야 간격 사다리가 앞으로 나간다.
+    if (sure.length){
+      lines.push('맞음:');
+      sure.forEach(function(i){ lines.push('- ' + i + ' 확신도 ' + (log[i].conf || '?')); });
     }
 
     stage.innerHTML = '<div class="end">' +
@@ -281,7 +323,7 @@
 
   start();
   document.getElementById('foot').textContent =
-    S.id + ' · ' + S.items.length + '문항 · 근거 ' + S.source_app;
+    S.id + ' · ' + ITEMS.length + '문항 · 근거 ' + S.source_app;
 })();
 </script>
 </body>

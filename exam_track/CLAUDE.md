@@ -72,8 +72,8 @@ exam_track/
 |---|---|
 | ① 출제 — 단원별 문항 세트 | 🟨 **진행** — 한국사2 Ⅰ·Ⅱ 24문항. [`problem_bank/PLAN.md`](problem_bank/PLAN.md) |
 | ② 풀이·자동채점 앱 | ✅ [`problem_bank/index.html`](problem_bank/index.html)(세트 선택) + `bank.html?set=` |
-| ③ 약점 DB (3축 태그·재출제 상태) | ✅ v1.1 — 수학 9건(리허설) |
-| ④ 재출제 — 생성기 + 앱 | ✅ [`app/retest.html`](app/retest.html) · [`tools/build_retest.py`](tools/build_retest.py) |
+| ③ 약점 DB (3축 태그·재출제 상태) | ✅ v1.1 — 수학 9건(리허설). 기록 자동화 = [`tools/ingest_result.py`](tools/ingest_result.py) |
+| ④ 재출제 — 생성기 + 앱 | ✅ [`app/retest.html`](app/retest.html) · [`tools/build_retest.py`](tools/build_retest.py). **문제은행 항목은 그 문항을 앱에서 그대로 다시 푼다**(`bank.html?set=…&only=…`) |
 
 **보류:** 학교 시험지 경로(`02_text` → 채점 입력기 `app/grade.html`). 삭제하지 않고 남긴다 — 나중에 실제 시험 오답을 넣고 싶어지면 그대로 쓸 수 있다. 다만 **지금 파이프라인의 입력은 아니다.**
 

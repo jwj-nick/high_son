@@ -34,10 +34,29 @@ def d(s):
     return date(y, m, dd)
 
 
+def load_bank_index():
+    """문항 id -> 세트 id. 문제은행에서 온 약점을 앱에서 다시 풀리려면 이게 필요하다."""
+    bank = os.path.join(ROOT, "exam_track", "problem_bank", "data")
+    sets_js = os.path.join(bank, "sets.js")
+    index = {}
+    if not os.path.exists(sets_js):
+        return index
+    src = open(sets_js, encoding="utf-8").read()
+    for e in json.loads(src[src.index("["):src.rindex("]") + 1]):
+        p = os.path.join(bank, e["id"] + ".js")
+        if not os.path.exists(p):
+            continue
+        s = open(p, encoding="utf-8").read()
+        for it in json.loads(s[s.index("{"):s.rindex("}") + 1])["items"]:
+            index[it["id"]] = e["id"]
+    return index
+
+
 def build(today):
     db = load("weakness_db", "entries.json")
     policy = load("retest", "policy.json")
     causes_doc = load("taxonomy", "causes.json")
+    bank_item_index = load_bank_index()
 
     conf_policy = {c["id"]: c for c in causes_doc["confidence"]}
     cause_meta = {c["id"]: c for c in causes_doc["causes"]}
@@ -89,6 +108,7 @@ def build(today):
             "cause_detail": e["cause"].get("detail", ""),
             "confidence": e.get("confidence", "unknown"),
             "links": e.get("links", {}), "gaps": e.get("gaps", []),
+            "bank_set": bank_item_index.get(e["q"]),
             "meets": len(r.get("history", [])) + 1,
             "rung": r.get("rung", 0),
             "due": r["due"], "overdue": (today - due).days,
@@ -101,10 +121,20 @@ def build(today):
     picked, deferred = scheduled[:cap], scheduled[cap:]
     multi_subject = len({x["subject"] for x in picked}) > 1
 
+    # 교차의 축은 출처마다 다르다(policy.interleaving.axis_by_source).
+    # 문제은행은 한 세트가 한 단원이라 topic이 전부 같아 축으로 쓸 수 없다 — 유형을 쓴다.
+    axis_by = policy["interleaving"].get("axis_by_source", {})
+
+    def axis(x):
+        key = axis_by.get("bank" if x.get("bank_set") else "exam", "topic")
+        if key == "format":
+            return {"format:" + str(x.get("format"))}
+        return {"topic:" + t for t in x["topic"]}
+
     def ok(out, cand):
         if not out:
             return True
-        if set(out[-1]["topic"]) & set(cand["topic"]):
+        if axis(out[-1]) & axis(cand):
             return False
         if multi_subject and len(out) >= max_run:
             if all(o["subject"] == cand["subject"] for o in out[-max_run:]):
@@ -132,7 +162,7 @@ def build(today):
         ordered = list(picked)
     conflicts = [ordered[i]["q"] + "↔" + ordered[i + 1]["q"]
                  for i in range(len(ordered) - 1)
-                 if set(ordered[i]["topic"]) & set(ordered[i + 1]["topic"])]
+                 if axis(ordered[i]) & axis(ordered[i + 1])]
 
     # ----- 누적 통계 (부모용 신호) -----
     def tally(key):
@@ -162,10 +192,30 @@ def build(today):
         "gaps_pending": sum(1 for e in entries if e.get("gaps")),
     }
 
+    # 문제은행에서 온 항목은 링크만 주지 말고 **그 문항을 실제로 다시 풀게** 한다.
+    # 인출(retrieval)이 간격 반복의 전부인데, 링크만 주면 다시 '읽기'가 된다.
+    # bank.html이 여러 세트를 읽고 only= 순서 그대로 내주므로 URL 하나면 된다.
+    bank_ids = [x["q"] for x in ordered if x["q"] in bank_item_index]
+    bank_sets = []
+    for q in bank_ids:
+        sid = bank_item_index[q]
+        if sid not in bank_sets:
+            bank_sets.append(sid)
+    retest_url = ""
+    if bank_ids:
+        retest_url = ("../problem_bank/bank.html?set=" + ",".join(bank_sets) +
+                      "&only=" + ",".join(bank_ids))
+
     data = {
         "generated": today.isoformat(),
         "cap": cap,
         "ladder": ladder,
+        "bank": {
+            "url": retest_url,
+            "count": len(bank_ids),
+            "sets": bank_sets,
+            "note": "문제은행 문항은 앱에서 그대로 다시 푼다. 나머지는 오답노트를 연다.",
+        },
         "interleave": {
             "resolved": interleave_ok,
             "multi_subject": multi_subject,
