@@ -1,7 +1,7 @@
 // 고난도 문제은행 — 한국사2 Ⅰ. 근대 국가 수립 운동 (개항~국권 피탈)
 // 근거 학습앱: subject_hub/한국사2/10_app/kh2_modern.html (팩트검증 완료, 연표 1863~1910)
 // ⭐ 오답 보기의 cause = "그 보기를 고른 이유"의 진단 코드. 정답 보기에는 cause를 붙이지 않는다.
-//    코드 정의: exam_track/_core/taxonomy/causes.json
+//    코드 정의·작성 규칙은 저장소 문서(problem_bank/PLAN.md) 참조
 window.BANK_SET = {
   "id": "kh2_01",
   "subject": "한국사",

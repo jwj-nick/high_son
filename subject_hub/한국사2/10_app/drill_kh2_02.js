@@ -1,7 +1,7 @@
 // 고난도 문제은행 — 한국사2 Ⅱ. 일제의 식민 지배와 민족 운동 (1910~1945)
 // 근거 학습앱: subject_hub/한국사2/10_app/kh2_colonial.html (팩트검증 완료, 연표 1910~1945)
 // ⭐ 오답 보기의 cause = "그 보기를 고른 이유"의 진단 코드. 정답 보기에는 cause를 붙이지 않는다.
-//    코드 정의: exam_track/_core/taxonomy/causes.json
+//    코드 정의·작성 규칙은 저장소 문서(problem_bank/PLAN.md) 참조
 window.BANK_SET = {
   "id": "kh2_02",
   "subject": "한국사",
