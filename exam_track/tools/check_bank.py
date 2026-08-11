@@ -131,7 +131,9 @@ def main():
 
         total_items += len(items)
         total_v += len(v)
-        print("%-8s %2d문항 · 정답위치 %s" % (sid, len(items), dict(sorted(Counter(i["a"] for i in items).items()))))
+        vmark = ("게이트 %s" % e["verified"]) if e.get("verified") else "⚠️ 미검증 — 배포 차단"
+        print("%-8s %2d문항 · 정답위치 %s · %s" % (
+            sid, len(items), dict(sorted(Counter(i["a"] for i in items).items())), vmark))
         print("         유형 %s" % dict(types))
         print("         난이도 %s" % dict(levels))
         print("         오답원인 %s" % dict(sorted(causes.items())))
@@ -142,7 +144,10 @@ def main():
         else:
             print("         ✅ 위반 없음")
 
+    pend = [e["id"] for e in reg if not e.get("verified")]
     print("\n세트 %d · 문항 %d · 위반 %d" % (len(reg), total_items, total_v))
+    if pend:
+        print("⚠️ 검증 게이트 대기: %s — 배포가 차단된다" % ", ".join(pend))
     print("※ 정답키 정확성·why의 사실성·C3 혼동쌍·복수정답 위험은 기계가 못 본다 — 검증 게이트에서 본다.")
     return 1 if total_v else 0
 

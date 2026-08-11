@@ -22,6 +22,7 @@ deploy.py — 단원앱을 공개 저장소로 복사한다.
 """
 import argparse
 import hashlib
+import json
 import os
 import re
 import shutil
@@ -41,6 +42,21 @@ SUBJECTS = {
     "공통수학1": "math",
     "공통수학2": "math",
 }
+
+def unverified_sets():
+    """검증 게이트를 통과하지 않은 세트 id. 이 문항 데이터는 공개하지 않는다.
+
+    기계 검사(check_bank.py)는 정답키 오류·복수정답을 못 잡는다 — 실측으로 확인됐다
+    (kh2_03의 치명 2건이 스키마·문법을 전부 통과했다). 게이트가 유일한 방어선이므로,
+    통과하지 않은 세트가 아이 손에 가지 않도록 배포 단계에서 막는다.
+    """
+    p = os.path.join(ROOT, "exam_track", "problem_bank", "data", "sets.js")
+    if not os.path.exists(p):
+        return set()
+    src = open(p, encoding="utf-8").read()
+    reg = json.loads(src[src.index("["):src.rindex("]") + 1])
+    return {e["id"] for e in reg if not e.get("verified")}
+
 
 # 나가면 안 되는 것 — 하나라도 걸리면 그 파일은 복사하지 않는다
 FORBIDDEN = [
@@ -97,9 +113,16 @@ def main():
     if not jobs:
         raise SystemExit("복사할 것이 없다.")
 
+    pending = unverified_sets()
     same = new = upd = blocked = 0
     for subj, src, dst in jobs:
         rel = os.path.relpath(dst, PUBLIC)
+        base = os.path.basename(src)
+        sid = base[len("drill_"):-3] if base.startswith("drill_") and base.endswith(".js") else None
+        if sid and sid in pending:
+            print("  🔒 미검증  %-44s %s — 검증 게이트 통과 전" % (rel, sid))
+            blocked += 1
+            continue
         bad = scan(src)
         if bad:
             print("  🚫 차단  %-44s %s" % (rel, ", ".join(bad)))
@@ -121,7 +144,8 @@ def main():
 
     print("\n동일 %d · 신규 %d · 갱신 %d · 차단 %d" % (same, new, upd, blocked))
     if blocked:
-        print("⚠️ 차단된 파일이 있다. 공개하면 안 되는 내용이 섞여 있다는 뜻이다.")
+        print("⚠️ 차단된 파일이 있다 — 공개하면 안 되는 내용이거나, 검증 게이트를 통과하지 않은 세트다.")
+        print("   검증 후 data/sets.js의 해당 세트에 \"verified\": \"YYYY-MM-DD\" 를 채운다.")
         return 1
     if not a.write:
         print("dry-run이다. 실제로 내보내려면 --write")
