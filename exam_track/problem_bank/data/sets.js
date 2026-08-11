@@ -50,14 +50,14 @@ window.BANK_SETS = [
     "unit": "사회:세계화와평화",
     "title": "Ⅷ. 세계화와 평화",
     "range": "세계화의 명·암 · 지역화 · 갈퉁의 폭력 3분류와 평화 · 국제 협력·한반도",
-    "n": 12, "verified": null
+    "n": 12, "verified": "2026-08-12"
   },
   {
     "id": "soc2_05", "subject": "통합사회", "course": "통합사회2",
     "unit": "사회:미래와지속가능",
     "title": "Ⅸ. 미래와 지속가능한 삶",
     "range": "인구·기술·자원 변화 · 지속가능발전과 SDGs · 세계/생태 시민 · 통합적 관점",
-    "n": 12, "verified": null
+    "n": 12, "verified": "2026-08-12"
   },
   {
     "id": "sci2_01", "subject": "통합과학", "course": "통합과학2",
