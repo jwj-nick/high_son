@@ -58,5 +58,12 @@ window.BANK_SETS = [
     "title": "Ⅸ. 미래와 지속가능한 삶",
     "range": "인구·기술·자원 변화 · 지속가능발전과 SDGs · 세계/생태 시민 · 통합적 관점",
     "n": 12, "verified": null
+  },
+  {
+    "id": "sci2_01", "subject": "통합과학", "course": "통합과학2",
+    "unit": "과학:산화환원",
+    "title": "Ⅰ. 산화·환원 반응",
+    "range": "전자 이동 · 연소/부식/호흡/광합성 · 금속 반응성 · 전지",
+    "n": 12, "verified": null
   }
 ];
