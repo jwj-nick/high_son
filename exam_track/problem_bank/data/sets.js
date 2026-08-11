@@ -37,5 +37,12 @@ window.BANK_SETS = [
     "title": "Ⅵ. 사회 정의와 불평등",
     "range": "분배 기준 3종 · 자유주의↔공동체주의·롤스 · 불평등과 복지",
     "n": 12, "verified": null
+  },
+  {
+    "id": "soc2_03", "subject": "통합사회", "course": "통합사회2",
+    "unit": "사회:시장경제",
+    "title": "Ⅶ. 시장경제와 지속가능발전",
+    "range": "수요·공급과 가격 · 시장 실패 4종과 정부 · 무역·금융·ESG",
+    "n": 12, "verified": null
   }
 ];
