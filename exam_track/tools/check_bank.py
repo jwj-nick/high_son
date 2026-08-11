@@ -14,6 +14,8 @@ check_bank.py — 문제은행 세트의 기계 검사. 커밋 전에 돌린다.
     · 오답 보기의 cause·why 누락 → 진단이 '미분류'로 샌다
     · causes.json에 없는 cause 코드
     · 순서배열 외 단일 원인 → 어느 보기를 골라도 같은 진단이 나온다
+    · material 없는 문항에 C4 → 적용할 상황이 없으면 '적용실패'가 성립하지 않는다
+      (게이트에서 세 번 연속 걸린 항목이라 기계 검사로 내렸다)
     · a 범위 · 보기 수 · id 중복 · solve 완전성
     · sets.js의 n·unit이 데이터와 일치하는가
     · unit이 topics.json canonical에 있는가
@@ -123,6 +125,12 @@ def main():
                 cs = {opt.get("cause") for k, opt in enumerate(o) if k != a}
                 if len(cs) == 1:
                     v.append((qid, "단일 원인 %s — 어느 보기를 골라도 같은 진단" % cs.pop()))
+            # C4(적용실패)는 '개념은 아는데 이 상황에 쓰지 못함'이다. 상황(material)이 없으면
+            # 성립하지 않는다. 게이트에서 세 번 연속 걸린 항목이라 기계 검사로 내렸다.
+            if not it.get("material"):
+                for k, opt in enumerate(o):
+                    if k != a and opt.get("cause") == "C4":
+                        v.append((qid, "material 없는 문항의 보기%d에 C4 — 적용할 상황이 없다(C2/C3)" % (k + 1)))
 
         ids = [i["id"] for i in items]
         dup = [x for x, n in Counter(ids).items() if n > 1]

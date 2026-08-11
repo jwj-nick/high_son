@@ -37,6 +37,7 @@ MAP = {
     "soc2_01": "subject_hub/통합사회2/10_app",
     "soc2_02": "subject_hub/통합사회2/10_app",
     "soc2_03": "subject_hub/통합사회2/10_app",
+    "soc2_04": "subject_hub/통합사회2/10_app",
 }
 
 
