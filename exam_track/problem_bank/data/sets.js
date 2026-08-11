@@ -43,6 +43,6 @@ window.BANK_SETS = [
     "unit": "사회:시장경제",
     "title": "Ⅶ. 시장경제와 지속가능발전",
     "range": "수요·공급과 가격 · 시장 실패 4종과 정부 · 무역·금융·ESG",
-    "n": 12, "verified": null
+    "n": 12, "verified": "2026-08-11"
   }
 ];
