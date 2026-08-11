@@ -19,8 +19,8 @@ window.BANK_SET = {
       "o": [
         { "t": "능력에 따른 분배 — 매출을 올릴 수 있는 역량을 평가했기 때문이다.", "cause": "C3", "why": "능력과 업적을 갈라 둔다 — **능력은 할 수 있는 힘(재능·자격)** 이고 **업적은 실제로 이룬 결과**다. 성과급은 이미 낸 결과에 대한 보상이다." },
         { "t": "업적에 따른 분배 — 실제로 이룬 성과를 기준으로 삼았기 때문이다." },
-        { "t": "필요에 따른 분배 — 직원마다 사정이 다르므로 다르게 지급했기 때문이다.", "cause": "C4", "why": "'다르게 지급했다'는 표면만 보고 필요 기준으로 옮겨 갔다. **왜 다르게 주었는지**를 봐야 한다 — 처지가 달라서인지, 성과가 달라서인지." },
-        { "t": "업적에 따른 분배 — 모든 직원에게 똑같이 나누었기 때문이다.", "cause": "C1", "why": "앞 절(업적)은 맞지만 뒤 절이 사례와 어긋난다. 사례는 '가장 많이 올린 직원에게'다. 절이 둘인 보기는 **각각 따로 판정**한다." }
+        { "t": "필요에 따른 분배 — 직원마다 사정이 다르므로 다르게 지급했기 때문이다.", "cause": "C4", "why": "'가장 많이 올린 직원에게'만 주는 차등이라는 점에 끌려 필요 기준으로 옮겨 갔다. **왜 차등을 두었는지**를 봐야 한다 — 처지가 달라서인지, 성과가 달라서인지." },
+        { "t": "업적에 따른 분배 — 직원들의 근속 연수를 함께 고려했기 때문이다.", "cause": "C1", "why": "앞 절(업적)은 맞지만 뒤 절이 사례에 없다. 사례가 말하는 기준은 매출뿐이다 — 절이 둘인 보기는 **앞이 맞다고 통째로 맞다 하지 말고 각각 따로 판정**한다." }
       ],
       "a": 1,
       "solve": {
@@ -34,9 +34,9 @@ window.BANK_SET = {
       "material": "직장인 D씨는 매달 월급에서 건강 보험료를 낸다. 최근 큰 병으로 입원했을 때 치료비의 상당 부분을 보험에서 지원받았다.",
       "o": [
         { "t": "공공 부조", "cause": "C3", "why": "갈라 둔다 — **사회 보험은 보험료를 미리 내고 위험에 대비**하는 것이고, **공공 부조는 보험료 없이 국가가 어려운 사람을 지원**하는 것이다. 이 사례에는 '매달 보험료를 낸다'가 있다." },
-        { "t": "사회 서비스", "cause": "C3", "why": "무엇을 주는지로 갈라 둔다 — 사회 서비스는 돌봄·재활처럼 **서비스**를 제공하고, 이 사례는 치료비라는 **비용**을 지원받은 것이다." },
+        { "t": "사회 서비스", "cause": "C2", "why": "사회 서비스가 무엇을 제공하는 범주인지 아직 모르는 상태다. 사회 서비스는 돌봄·재활처럼 **서비스**를 주는 제도이고, 이 사례에서 받은 것은 치료비라는 **비용**이다." },
         { "t": "사회 보험" },
-        { "t": "적극적 우대 조치", "cause": "C4", "why": "'지원받았다'는 낱말에 끌려 우대 정책을 떠올렸다. 적극적 우대 조치는 사회적 약자에게 **기회를 더 주는** 정책이지 비용을 대는 제도가 아니다." }
+        { "t": "민간 보험", "cause": "C3", "why": "'보험료를 낸다'는 점이 같아 헷갈린다. 갈라 둔다 — **사회 보험은 법으로 가입이 정해지고 보험료가 소득에 비례**하고, 민간 보험은 본인이 선택하고 보험료가 위험에 비례한다." }
       ],
       "a": 2,
       "solve": {
@@ -47,12 +47,12 @@ window.BANK_SET = {
     {
       "id": "soc2_02_003", "type": "자료해석", "level": "중상",
       "stem": "다음 자료에서 알 수 있는 것으로 옳은 것은?",
-      "material": "<b>가상의 A국 지니 계수 변화</b><table style='width:100%;border-collapse:collapse;margin-top:8px;font-size:13px'><tr><th style='border:1px solid #cbd5e1;padding:6px'>연도</th><th style='border:1px solid #cbd5e1;padding:6px'>2015</th><th style='border:1px solid #cbd5e1;padding:6px'>2020</th><th style='border:1px solid #cbd5e1;padding:6px'>2025</th></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>지니 계수</td><td style='border:1px solid #cbd5e1;padding:6px'>0.34</td><td style='border:1px solid #cbd5e1;padding:6px'>0.36</td><td style='border:1px solid #cbd5e1;padding:6px'>0.39</td></tr></table><span class='tr'>지니 계수는 0에 가까울수록 평등, 1에 가까울수록 불평등하다.</span>",
+      "material": "<b>가상의 A국 소득 지니 계수 변화</b><table style='width:100%;border-collapse:collapse;margin-top:8px;font-size:13px'><tr><th style='border:1px solid #cbd5e1;padding:6px'>연도</th><th style='border:1px solid #cbd5e1;padding:6px'>2015</th><th style='border:1px solid #cbd5e1;padding:6px'>2020</th><th style='border:1px solid #cbd5e1;padding:6px'>2025</th></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>지니 계수</td><td style='border:1px solid #cbd5e1;padding:6px'>0.34</td><td style='border:1px solid #cbd5e1;padding:6px'>0.36</td><td style='border:1px solid #cbd5e1;padding:6px'>0.39</td></tr></table><span class='tr'>지니 계수는 0에 가까울수록 평등, 1에 가까울수록 불평등하다.</span>",
       "o": [
         { "t": "소득 분배의 불평등이 점점 심해지고 있다." },
-        { "t": "지니 계수가 커졌으므로 소득 분배가 고르게 되고 있다.", "cause": "C3", "why": "지니 계수의 방향을 반대로 잡았다. 자료 아래에 '0에 가까울수록 평등'이라고 적혀 있다 — **커진다 = 불평등해진다**로 붙여 둔다." },
-        { "t": "2025년에 절대적 빈곤층의 수가 늘어났다.", "cause": "C7", "why": "지니 계수는 **나눠 가진 정도가 고른가**만 보여 준다. 빈곤층이 몇 명인지는 이 표에서 알 수 없다 — 표가 말하지 않는 것을 읽어 낸 것이다." },
-        { "t": "계층 간 이동이 활발해지고 있다.", "cause": "C7", "why": "자료에 계층 이동에 관한 항목이 없다. 표를 볼 때는 **가로·세로에 무엇이 적혀 있는지**부터 확인한다." }
+        { "t": "지니 계수가 커졌으므로 소득 분배가 고르게 되고 있다.", "cause": "C7", "why": "자료 아래에 '0에 가까울수록 평등'이라고 **적혀 있는데** 읽지 않았다. 지표 문제는 각주부터 확인한다 — 커진다 = 불평등해진다." },
+        { "t": "2025년에 생활이 어려운 사람의 수가 늘어났다.", "cause": "C7", "why": "지니 계수는 **나눠 가진 정도가 고른가**만 보여 준다. 몇 명이 어려운지는 이 표에서 알 수 없다 — 표가 말하지 않는 것을 읽어 낸 것이다." },
+        { "t": "2025년에는 상위 39%가 전체 소득을 가져갔다.", "cause": "C2", "why": "지니 계수를 **소득 점유율**로 오해한 것이다. 0.39는 '상위 39%'라는 뜻이 아니라 분포가 고른 정도를 0~1로 나타낸 값이다." }
       ],
       "a": 0,
       "solve": {
@@ -114,7 +114,7 @@ window.BANK_SET = {
       "o": [
         { "t": "공공 부조에 해당하며, 생활이 어려운 사람에게 급여를 주는 제도다.", "cause": "C4", "why": "'도와준다'는 인상에 끌려 복지 제도 중 하나를 골랐다. 이 정책이 주는 것은 돈이 아니라 **기회**다 — 무엇을 주는지를 먼저 확인한다." },
         { "t": "적극적 우대 조치에 해당하며, 사회적 약자에게 기회를 더 주는 정책이다." },
-        { "t": "모두에게 똑같은 기준을 적용한 것이므로 평등에 어긋난다.", "cause": "C3", "why": "갈라 둔다 — 누구에게나 같은 기준을 적용하는 것과, **출발선이 다른 점을 고려해 기회를 더 주는 것**. 이 정책은 뒤쪽이고, 그래서 오히려 평등을 실질적으로 만들려는 시도다." },
+        { "t": "업적에 따른 분배 원칙에 어긋나므로 정의롭지 않다.", "cause": "C3", "why": "두 기준이 서로 다른 자리에서 작동한다는 것을 갈라 둔다 — 업적 기준은 **결과를 어떻게 나눌지**를 정하고, 적극적 우대 조치는 그 앞에서 **출발선을 맞추는** 조치다." },
         { "t": "역차별에 해당하므로 허용될 수 없는 정책이다.", "cause": "C4", "why": "'우대'라는 말에서 곧바로 '역차별'을 떠올린 것이다. **반발이 있을 수 있다는 것과 허용될 수 없다는 것은 다르다** — 그래서 정교한 설계가 필요하다고 말한다." }
       ],
       "a": 1,
@@ -141,16 +141,16 @@ window.BANK_SET = {
     {
       "id": "soc2_02_009", "type": "자료해석", "level": "상",
       "stem": "다음 자료가 보여 주는 문제로 가장 적절한 것은?",
-      "material": "<b>가상의 B국 지역별 비교</b><table style='width:100%;border-collapse:collapse;margin-top:8px;font-size:13px'><tr><th style='border:1px solid #cbd5e1;padding:6px'>구분</th><th style='border:1px solid #cbd5e1;padding:6px'>수도권</th><th style='border:1px solid #cbd5e1;padding:6px'>비수도권</th></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>인구 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>51%</td><td style='border:1px solid #cbd5e1;padding:6px'>49%</td></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>종합병원 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>63%</td><td style='border:1px solid #cbd5e1;padding:6px'>37%</td></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>대학 정원 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>60%</td><td style='border:1px solid #cbd5e1;padding:6px'>40%</td></tr></table>",
+      "material": "<b>가상의 B국 지역별 비교</b> <span style='font-weight:400;font-size:12px'>(실제 통계가 아님)</span><table style='width:100%;border-collapse:collapse;margin-top:8px;font-size:13px'><tr><th style='border:1px solid #cbd5e1;padding:6px'>구분</th><th style='border:1px solid #cbd5e1;padding:6px'>수도권</th><th style='border:1px solid #cbd5e1;padding:6px'>비수도권</th></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>인구 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>40%</td><td style='border:1px solid #cbd5e1;padding:6px'>60%</td></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>종합병원 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>72%</td><td style='border:1px solid #cbd5e1;padding:6px'>28%</td></tr><tr><td style='border:1px solid #cbd5e1;padding:6px'>대학 정원 비중</td><td style='border:1px solid #cbd5e1;padding:6px'>68%</td><td style='border:1px solid #cbd5e1;padding:6px'>32%</td></tr></table>",
       "o": [
-        { "t": "소득 불평등", "cause": "C4", "why": "표에 소득 항목이 없다. '불평등'이라는 말에서 가장 익숙한 종류로 곧바로 옮겨 간 것이다 — **표에 실제로 적힌 항목**만 근거가 된다." },
+        { "t": "소득 불평등", "cause": "C3", "why": "표에 소득 항목이 없다. 불평등의 종류를 **비교 축**으로 갈라 둔다 — 소득 구간끼리 견주면 소득 불평등, **지역끼리 견주면 공간 불평등**이다." },
         { "t": "공간 불평등" },
         { "t": "사회 계층의 양극화", "cause": "C7", "why": "이 표의 가로축은 **지역**이지 계층이 아니다. 표를 볼 때는 무엇과 무엇을 비교하고 있는지부터 확인한다." },
-        { "t": "사회적 약자에 대한 차별", "cause": "C4", "why": "'병원이 적으면 약자가 더 힘들다'는 데까지 한 걸음 더 나아간 것이다. 자료가 **직접** 보여 주는 것은 지역 사이의 격차다." }
+        { "t": "사회적 약자에 대한 차별", "cause": "C7", "why": "'병원이 적으면 약자가 더 힘들다'는 데까지 한 걸음 더 나아갔다. 표에서 **직접** 읽히는 것만 근거로 삼는다 — 이 표가 보여 주는 것은 지역 사이의 격차다." }
       ],
       "a": 1,
       "solve": {
-        "key": "인구 비중은 51 : 49로 비슷한데 종합병원과 대학 정원은 60% 이상이 수도권에 몰려 있다. 지역 사이에 기반 시설이 고르지 않은 <b>공간 불평등</b>이다.",
+        "key": "인구는 40%인데 종합병원 72%, 대학 정원 68%가 수도권에 몰려 있다. 인구보다 훨씬 치우쳐 있으므로, 지역 사이에 기반 시설이 고르지 않은 <b>공간 불평등</b>이다.",
         "trap": "표는 '무엇을 비교했는가'가 곧 답의 종류다. 지역끼리 비교했으면 공간, 계층끼리 비교했으면 양극화, 소득 구간끼리 비교했으면 소득 불평등이다. **인구 비중을 함께 준 이유**는 비교 기준을 만들어 주기 위해서다."
       }
     },
@@ -176,7 +176,7 @@ window.BANK_SET = {
       "o": [
         { "t": "사회 서비스는 생활이 어려운 사람에게 현금을 지급하는 제도다.", "cause": "C3", "why": "무엇을 주는지로 갈라 둔다 — 사회 서비스는 돌봄·재활 같은 **서비스**를 제공하고, 현금을 주는 쪽은 공공 부조다." },
         { "t": "사회 보험은 위험에 미리 대비하고, 공공 부조는 이미 어려운 사람을 돕는다." },
-        { "t": "적극적 우대 조치는 결과를 완전히 같게 만드는 것을 목표로 한다.", "cause": "C4", "why": "'우대'를 '결과를 같게 만든다'로 넓혀 적용했다. 이 조치가 손대는 것은 결과가 아니라 **기회**다 — 출발선을 맞춰 주는 것이지 결승선을 맞추는 것이 아니다." },
+        { "t": "적극적 우대 조치는 결과를 완전히 같게 만드는 것을 목표로 한다.", "cause": "C3", "why": "무엇을 손대는지로 갈라 둔다 — **기회를 더 주는 것**과 **결과를 같게 만드는 것**. 이 조치는 출발선을 맞추는 쪽이지 결승선을 맞추는 쪽이 아니다." },
         { "t": "공간 불평등은 사회 복지 제도만으로 해결할 수 있다.", "cause": "C1", "why": "'만'이라는 한 글자가 서술을 거짓으로 만든다. 지역 균형 발전처럼 다른 정책이 함께 필요하다 — 한정어가 붙은 보기는 그 한정어부터 의심한다." }
       ],
       "a": 1,
@@ -193,7 +193,7 @@ window.BANK_SET = {
         { "t": "업적에 따른 분배이며, 사회 보험에 해당한다.", "cause": "C3", "why": "두 축이 모두 어긋났다. 갈라 둔다 — 기준은 성과가 아니라 **처지(필요)** 이고, 제도는 보험료를 미리 낸 것이 아니라 국가가 지원하는 **공공 부조**다." },
         { "t": "필요에 따른 분배이며, 공공 부조에 해당한다." },
         { "t": "필요에 따른 분배이며, 사회 보험에 해당한다.", "cause": "C1", "why": "앞 절은 맞고 뒤 절이 틀렸다. 보험료를 미리 내지 않았으므로 사회 보험이 아니다 — 절이 둘인 보기는 **각각 따로 판정**한다." },
-        { "t": "능력에 따른 분배이며, 사회 서비스에 해당한다.", "cause": "C4", "why": "'정부가 준다'는 표면만 보고 복지 범주 하나를 골랐다. 사례에서 **기준(소득이 낮은 가구)** 과 **형태(현금 급여)** 를 각각 확인해야 한다." }
+        { "t": "필요에 따른 분배이며, 사회 서비스에 해당한다.", "cause": "C3", "why": "앞 절은 맞지만 제도를 잘못 짚었다. 무엇을 주는지로 갈라 둔다 — **현금 급여는 공공 부조**, 돌봄·재활 같은 **서비스는 사회 서비스**다." }
       ],
       "a": 1,
       "solve": {

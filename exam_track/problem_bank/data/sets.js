@@ -36,7 +36,7 @@ window.BANK_SETS = [
     "unit": "사회:정의와불평등",
     "title": "Ⅵ. 사회 정의와 불평등",
     "range": "분배 기준 3종 · 자유주의↔공동체주의·롤스 · 불평등과 복지",
-    "n": 12, "verified": null
+    "n": 12, "verified": "2026-08-11"
   },
   {
     "id": "soc2_03", "subject": "통합사회", "course": "통합사회2",
