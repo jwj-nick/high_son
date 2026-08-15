@@ -65,5 +65,12 @@ window.BANK_SETS = [
     "title": "Ⅰ. 산화·환원 반응",
     "range": "전자 이동 · 연소/부식/호흡/광합성 · 금속 반응성 · 전지",
     "n": 12, "verified": null
+  },
+  {
+    "id": "sci2_02", "subject": "통합과학", "course": "통합과학2",
+    "unit": "과학:산염기와중화",
+    "title": "Ⅱ. 산과 염기, 중화 반응",
+    "range": "H⁺·OH⁻ · 지시약 3종 · pH 로그 척도 · 중화 반응과 중화점",
+    "n": 12, "verified": null
   }
 ];
