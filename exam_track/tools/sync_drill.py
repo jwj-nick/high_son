@@ -46,6 +46,7 @@ MAP = {
     "sci2_05": "subject_hub/통합과학2/10_app",
     "sci2_06": "subject_hub/통합과학2/10_app",
     "sci2_07": "subject_hub/통합과학2/10_app",
+    "sci2_08": "subject_hub/통합과학2/10_app",
 }
 
 
