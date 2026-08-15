@@ -92,7 +92,7 @@ Claude가 단원별  →  아이가 bank.html에서  →  ingest_result.py   →
 | **1** | **sci2_02·sci2_03 검증 게이트** (둘 다 작성·기계검사 완료, 게이트만 남음) | — | 소 |
 | **2** | **통합과학2 Ⅳ-4~Ⅵ 출제** — 진화 → 생태계 → 에너지 → 기후 → 문명 → 미래 (6단원) | — | **대** |
 | **3** | 공통수학2 — 문항 대량생산 대신 **유형별 대표문제**(단원당 5~6) | — | 중 |
-| **4** | **세션 키트**(과목별 폴더를 아이 PC로, Claude Code) | Nick PC 세팅 | 중 |
+| **4** | **세션 키트** — 🟨 **한국사2 파일럿 완성**(`tutor/한국사2/`), 확인 후 나머지 과목 반복 | Nick 형태 확인 · PC 세팅 | 중 |
 | **5** | 재시험 **브라우저 자율화**(localStorage JS 스케줄러, 확정 18) | — | 중 |
 | **6** | 부모 주간 요약 | 데이터 축적 | 중 |
 | — | 아이 반응·결과 텍스트 반영 | **아이** | 소 |
@@ -201,6 +201,9 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 │   │                       ingest_result · build_retest · build_grade
 │   ├─ 26_High_1-1/         1학기 (02_text 5과목 109문항, 수학 오답노트 9) — 출제 참고자료
 │   └─ 2607_High1_Final/    비어 있음
+├─ tutor/                   ★ 세션 키트 (아이 PC로 복사해 쓰는 Claude Code 워크스페이스)
+│   ├─ README.md            Nick용 — 개념·구조·전달법·과목별 상태
+│   └─ 한국사2/              🟨 파일럿 완성. CLAUDE.md·00_START·10_core(3)·20_problems(2)·30_log·skills(4)
 └─ subject_hub/             ★ 단원 학습앱 32개 (개념 + ⚡실전 통합)
     ├─ _shared/drill.js     ⭐ 실전 탭 공용 엔진 (정본)
     ├─ 한국사2/10_app/       kh2_*.html + drill.js·drill_kh2_*.js (sync_drill 복사본)
