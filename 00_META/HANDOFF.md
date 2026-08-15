@@ -2,15 +2,18 @@
 
 > **이 문서 하나만 읽으면 이어서 일할 수 있어야 한다.** compact·세션 종료·시간 공백 뒤 여기서 시작한다.
 > 설계 근거와 논의 원문은 [`LEARNING_DESIGN.md`](LEARNING_DESIGN.md)에 있다. 이 문서는 **지금 무엇을 할 차례인가**만 다룬다.
-> 최종 갱신: 2026-08-10 (라운드 4 개편 반영) · 작업트리 클린 · 원격 동기
+> 최종 갱신: 2026-08-12 · 작업트리 클린 · 원격 동기
+> **출제 절차는 [`exam_track/problem_bank/RUNBOOK.md`](../exam_track/problem_bank/RUNBOOK.md) 하나만 따라 하면 된다.**
 
 ---
 
 ## 0. 한 줄 요약
 
-**2026-08-10 라운드 4에서 계획이 바뀌었다.** 내신을 별도 앱·별도 배포로 두던 것을 접고, **심화·시험 준비를 기존 단원앱의 `⚡실전` 탭으로 통합**한다. Vercel/AI 튜터는 보류하고 **Claude Code 세션 키트**로 대체한다. 근거·원문 = [`LEARNING_DESIGN.md` 라운드 4](LEARNING_DESIGN.md).
+심화·시험 문항이 **기존 단원앱의 `⚡실전` 탭 안에서** 돌아간다(라운드 4 개편). 지금까지 **10세트 120문항**을 만들었고, 그중 **96문항이 검증 게이트를 통과해 공개 배포**돼 있다 — 아이가 폰에서 링크 하나로 푼다.
 
-지금은 **파일럿(한국사2 Ⅱ단원 실전 탭)이 나온 시점**이고, 다음 차례는 **Nick의 톤 확인 → 공개 배포 → 세션 키트 1개**다.
+지금 하는 일은 **단원 하나씩 반복**이다: 출제 → 기계 검사 → 실전 탭 이식 → 검증 게이트 → 반영 → 배포. 절차는 [`RUNBOOK.md`](../exam_track/problem_bank/RUNBOOK.md)에 고정돼 있다.
+
+**다음 차례 = 통합과학2 Ⅲ 지질 시대와 화석** (순서배열이 예외적으로 살아나는 단원).
 
 ## 1. 재개하면 먼저 할 것
 
@@ -27,23 +30,23 @@
 ## 2. 지금 서 있는 위치
 
 ```
-S1~S4 ✅ → L1~L4 ✅ → 출제·검증 ✅ → 재시험 인출 ✅ → **R4 개편** → [지금] 실전탭 파일럿 → 배포 → 세션키트 → 사회2·과학2
+시스템 구축 ✅ → 라운드4 개편 ✅ → [지금] 단원별 출제 반복 → 세션 키트 → 재시험 자율화
 ```
 
-| 단계 | 내용 | 상태 | 커밋 |
-|---|---|---|---|
-| S1 | NCC 2개 + 목적함수 계약 | ✅ | `fb75435` |
-| S2 | 오답 taxonomy·약점DB·재출제 정책 + 스킬 2종 | ✅ | `4e204cf` `121d87a` |
-| S4 | 리허설 — 수학 9건 투입, 결함 9개 발견·반영 | ✅ | `d5cb9fb` |
-| L1·L3 | 재시험 앱 + 생성 스크립트 | ✅ | `a9b4e02` |
-| L2·L4 | 채점 입력기(현재 미사용) + 고난도 문제은행 이관 | ✅ | `f733bd5` |
-| — | **파이프라인 입력단 전환 + 한국사2 Ⅰ 12문항 + 풀이앱** | ✅ | `2476442` |
-| — | 인수인계 문서 | ✅ | `04cdc61` |
-| — | **한국사2 Ⅱ 12문항 + 세트 레지스트리·선택 화면** | ✅ | |
-| — | 재시험 인출 경로(`bank.html?only=`) + 사다리 전진 | ✅ | `d8b18c3` |
-| **R4** | **계획 개편** — 실전 탭 통합 · Vercel 보류 · 세션 키트 | ✅ 기록 | |
-| **지금** | **실전 탭 파일럿(kh2_colonial) → Nick 톤 확인** | 🟨 | |
-| ~~V~~ | ~~Vercel · AI 튜터~~ | **R4 보류** | |
+| 과목 | 단원 | 문항 | 게이트 | 배포 |
+|---|---|---|---|---|
+| **한국사2** | Ⅰ·Ⅱ·Ⅲ (3/3 완결) | 36 | ✅ | ✅ 라이브 |
+| **통합사회2** | Ⅴ·Ⅵ·Ⅶ·Ⅷ·Ⅸ (5/5 완결) | 60 | ✅ | ✅ 라이브 |
+| **통합과학2** | Ⅰ 산화환원 · Ⅱ 산염기 | 24 | 🔒 대기 | 차단 |
+| 통합과학2 | Ⅲ~Ⅸ (7단원) | — | — | — |
+| 공통수학2 | 7단원 | — | — | — |
+| 한국사1 · 통합사회1 · 통합과학1 · 공통수학1 | (1학기분) | — | — | 기말·복습용 |
+
+**라이브 URL**
+- `https://jwj-nick.github.io/high1/history/kh2_hub.html`
+- `https://jwj-nick.github.io/high1/society/soc2_hub.html`
+
+**검증 게이트 7회 실행** — 치명 2건(복수정답, kh2_03)을 잡았고 나머지는 전부 진단 품질. 회차별 기록 = [`REVIEW.md`](../exam_track/problem_bank/REVIEW.md).
 
 ## 3. 시스템이 어떻게 도는가
 
@@ -77,44 +80,51 @@ Claude가 단원별  →  아이가 bank.html에서  →  ingest_result.py   →
 | 확신도 | 앱에서 푸는 즉시 4버튼 | R3 |
 | 제작 방법 | **Claude 직접 순차 제작.** 서브에이전트 대량쓰기 = 스트림 스톨(6/6). 서브에이전트는 **검증 전용** | — |
 | 검증 | 새 세트는 **반드시 검증 게이트**. 기계 검사는 복수정답을 못 잡는다(실측) | 08-04 |
+| **모델** | 출제는 **Sonnet xhigh 가능**(게이트 지적 건수가 늘 뿐) / **검증 게이트는 Opus 권장** — 복수정답의 유일한 방어선이다. Agent 호출에 `model: "opus"`로 분리 | 08-12 |
+| 미검증 배포 | **도구가 막는다.** `sets.js`의 `verified`가 null이면 `deploy.py`가 차단 | 08-11 |
 
-## 5. 남은 작업 (R4 개편 반영)
+## 5. 남은 작업
 
 | # | 작업 | 선행 | 규모 |
 |---|---|---|---|
-| **1** | **실전 탭 파일럿 톤 확인** → 한국사2 나머지 2단원 이식 | **Nick 확인** | 소 |
-| **2** | **공개 배포** — 아이가 폰에서 사용 시작 | 1 | 소 |
-| **3** | **세션 키트 1개**(한국사2) → 형태 확인 후 템플릿 확정 | **Nick 확인** | 중 |
-| **4** | **통합사회2** 5단원 — 앞부분부터 순차 출제·검증·이식 | — | 대 |
-| **5** | **통합과학2** 9단원 — 앞부분부터 순차 | — | 대 |
-| **6** | 수학2·국어2·영어2 **세션 키트**(핵심지식+대표문제, 문항 대량생산 안 함) | 3 | 중 |
-| **7** | **재시험 브라우저 자율화** — localStorage 기반 JS 스케줄러(확정 18) | 2 | 중 |
-| **8** | 부모 주간 요약 | 데이터 축적 | 중 |
-| ~~V~~ | ~~Vercel · AI 튜터~~ | **R4에서 보류** — 세션 키트로 대체 | — |
+| **1** | **sci2_01·sci2_02 검증 게이트** (세션 한도로 두 번 밀렸다) | 한도 | 소 |
+| **2** | **통합과학2 Ⅲ~Ⅸ 출제** — 지질시대 → 진화 → 생태계 → 에너지 → 기후 → 문명 → 미래 | — | **대** |
+| **3** | 공통수학2 — 문항 대량생산 대신 **유형별 대표문제**(단원당 5~6) | — | 중 |
+| **4** | **세션 키트**(과목별 폴더를 아이 PC로, Claude Code) | Nick PC 세팅 | 중 |
+| **5** | 재시험 **브라우저 자율화**(localStorage JS 스케줄러, 확정 18) | — | 중 |
+| **6** | 부모 주간 요약 | 데이터 축적 | 중 |
+| — | 아이 반응·결과 텍스트 반영 | **아이** | 소 |
+| ~~V~~ | ~~Vercel · AI 튜터~~ | **R4 보류** | — |
 
 ## 6. Nick 대기 항목
 
 | 항목 | 왜 필요한가 |
 |---|---|
-| **실전 탭 파일럿 톤 확인** | 맞으면 나머지 31개 단원앱에 같은 형태로 반복한다. 뒤집으면 비싸다 |
-| **세션 키트 첫 형태 확인** | 아이 눈높이(`00_START.md`)가 여기서 정해진다 |
-| 공개 배포 승인 | 공개 repo에 올리는 일 |
-| 아이가 풀어본 반응·결과 텍스트 | 난이도 기준 + 약점 DB 첫 실데이터 |
+| **아이가 풀어본 반응·결과 텍스트** | 유일하게 내가 만들 수 없는 데이터. 난이도 기준 + 약점 DB 첫 실데이터 |
+| 세션 키트 형태 확인 | 아이 눈높이(`00_START.md`)가 여기서 정해진다 |
+| 아이 PC에 Claude Code 세팅 | 세션 키트 전달 단계 |
 | (나오면) 2학기 중간 범위 | 우선순위 조정용. 없어도 앞부분부터 진행 |
+
+**이미 승인받은 것(다시 묻지 않는다)**: 공개 배포 · 검증 에이전트 호출 · 실전 탭 톤.
 
 ## 7. 열어보는 법
 
+**아이가 쓰는 것 — 공개 URL (서버 불필요)**
+```
+https://jwj-nick.github.io/high1/history/kh2_hub.html     한국사2  36문항
+https://jwj-nick.github.io/high1/society/soc2_hub.html    통합사회2 60문항
+```
+각 단원앱의 **⚡ 실전** 탭에서 바로 푼다.
+
+**로컬 확인 (미배포분 포함)**
 | 무엇 | 경로 |
 |---|---|
-| ⭐ **실전 탭 파일럿** | `C:\Kids\70_HighSchool\subject_hub\한국사2\10_app\kh2_colonial.html` → **⚡ 실전** 탭 |
-| 내신 시작 화면(구 경로) | `C:\Kids\70_HighSchool\exam_track\app\index.html` |
-| 문제은행 — 세트 고르기 | `C:\Kids\70_HighSchool\exam_track\problem_bank\index.html` |
-| 문제은행 — 바로 풀기 | `…\problem_bank\bank.html?set=kh2_01` (또는 `kh2_02`) |
+| 단원앱 | `C:\Kids\70_HighSchool\subject_hub\<과목>\10_app\<앱>.html` → ⚡실전 |
+| 문제은행 세트 고르기 | `C:\Kids\70_HighSchool\exam_track\problem_bank\index.html` |
 | 오늘의 재시험 | `C:\Kids\70_HighSchool\exam_track\app\retest.html` |
-| 채점 입력기(미사용) | `C:\Kids\70_HighSchool\exam_track\app\grade.html` |
 
-브라우저로 **파일 직접 열기**가 된다(데이터가 `<script src>`라 `file://`에서도 동작).
-폰으로 볼 때만 로컬 서버: `python -m http.server 8000` (repo 루트에서) → `http://<PC-IP>:8000/exam_track/app/`
+`file://`로 바로 열린다(데이터가 `<script src>`). 폰으로 미배포분을 볼 때만 로컬 서버:
+`python -m http.server 8000` → `http://<PC-IP>:8000/subject_hub/...`
 
 ## 8. 명령어
 
@@ -138,9 +148,21 @@ python exam_track/tools/check_bank.py          # 또는 ... kh2_03
 python exam_track/tools/sync_drill.py            # 검사만
 python exam_track/tools/sync_drill.py --write    # 복사
 
+# 실전 탭 이식 (멱등 — 이미 붙었으면 skip)
+python exam_track/tools/add_drill_tab.py --all
+python exam_track/tools/add_drill_tab.py --check
+
+# 공개 배포 (기본 dry-run · 개인정보 스캔 · 미검증 세트 차단)
+python exam_track/tools/deploy.py --only <과목>
+python exam_track/tools/deploy.py --only <과목> --write
+cd /c/Nick/30_Apps/jwj-nick.github.io && git add high1/<폴더>/ && git commit && git push
+#   ⚠️ 공개 저장소는 중1 프로젝트와 공유한다 — high1/<폴더>/만 스테이징
+
 # 앱(HTML) 검증
 node --check <추출한 인라인 JS>     # 또는 아래 스캐너
 ```
+
+📘 **출제 한 단원의 전체 절차 = [`problem_bank/RUNBOOK.md`](../exam_track/problem_bank/RUNBOOK.md)** — 근거 확보부터 게이트 프롬프트 템플릿, 배포까지. 새 단원은 그 문서만 따라 하면 된다.
 
 ⚠️ **기계 검사는 정답키·복수정답을 못 잡는다.** 실측으로 확인됐다 — kh2_03의 치명 2건(복수정답)은 스키마·문법을 전부 통과했다. 새 세트는 **반드시 검증 게이트(에이전트)를 통과시킨다.** 절차·프롬프트는 [`problem_bank/REVIEW.md`](../exam_track/problem_bank/REVIEW.md).
 
@@ -171,10 +193,10 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 │   │   ├─ retest/          policy.json · daily/
 │   │   └─ REHEARSAL_S4.md  리허설 결함 9건 기록
 │   ├─ app/                 index · bank진입 · retest · grade · data.js(생성물)
-│   ├─ problem_bank/        PLAN.md(작성규칙) · REVIEW.md(검증이력) · index.html · bank.html?set=
-│   │   └─ data/            sets.js(레지스트리) · kh2_01 · kh2_02 · kh2_03
-│   ├─ tools/               check_bank.py · ingest_result.py · sync_drill.py
-│   │                       build_retest.py · build_grade.py
+│   ├─ problem_bank/        PLAN.md(작성규칙) · REVIEW.md(게이트 이력) · RUNBOOK.md(절차)
+│   │   └─ data/            sets.js(레지스트리+verified) · kh2_01~03 · soc2_01~05 · sci2_01~02
+│   ├─ tools/               check_bank · sync_drill · add_drill_tab · deploy
+│   │                       ingest_result · build_retest · build_grade
 │   ├─ 26_High_1-1/         1학기 (02_text 5과목 109문항, 수학 오답노트 9) — 출제 참고자료
 │   └─ 2607_High1_Final/    비어 있음
 └─ subject_hub/             ★ 단원 학습앱 32개 (개념 + ⚡실전 통합)
@@ -204,6 +226,7 @@ print('NODE','OK' if r.returncode==0 else r.stderr,'| 잘림',len(bad),'| div',h
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-12 | **10세트 120문항 시점 정리.** `RUNBOOK.md` 신설(근거확보→출제→검사→이식→게이트→배포 전 절차 + 게이트 프롬프트 템플릿). **모델 결정** — 출제 Sonnet 가능 / 게이트 Opus 권장. §2 진행표·§5 남은작업·§6~§9 최신화 |
 | 2026-08-10 | **라운드 4 개편 반영.** 실전 탭 통합·Vercel 보류·세션 키트·범위 순차. `_shared/drill.js` 공용 엔진 + `sync_drill.py` 신설, **kh2_colonial 파일럿** |
 | 2026-08-09 | **재시험 인출 경로 완성(§5-6).** `bank.html?set=a,b&only=…` 재시험 모드 — 여러 세트에서 정한 순서 그대로 다시 낸다. `ingest_result.py`가 **맞음도 받아 사다리를 전진**시키고 mastered까지 간다(수동 재시험 텍스트도 파싱). 실측 결함 1건 수정 — 문제은행은 한 세트=한 단원이라 topic 교차가 원리적으로 불가능해, **교차 축을 출처별로 분리**(시험=topic / 문제은행=문항유형, `policy.json`) |
 | 2026-08-04 | **kh2_03 2차 게이트 — 치명 2건(복수정답) 포함 15건 반영.** 기계 검사를 `tools/check_bank.py`로 고정. 교훈 5건 승격. 36문항 전량 검증 완료 |
