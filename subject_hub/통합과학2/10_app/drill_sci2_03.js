@@ -1,4 +1,4 @@
-// 고난도 문제은행 — 통합과학2 Ⅲ. 지질 시대와 화석
+// 고난도 문제은행 — 통합과학2 Ⅳ-3. 지질 시대와 화석 (단원 Ⅳ. 변화와 다양성)
 // 근거 학습앱: subject_hub/통합과학2/10_app/sci2_geotime.html (검증 완료)
 // ⭐ 오답 보기의 cause = "그 보기를 고른 이유"의 진단 코드. 정답 보기에는 cause를 붙이지 않는다.
 //    코드 정의·작성 규칙은 저장소 문서(problem_bank/PLAN.md) 참조
@@ -9,7 +9,7 @@ window.BANK_SET = {
   "id": "sci2_03",
   "subject": "통합과학",
   "unit": "과학:지질시대와화석",
-  "title": "Ⅲ. 지질 시대와 화석",
+  "title": "Ⅳ-3. 지질 시대와 화석",
   "source_app": "subject_hub/통합과학2/10_app/sci2_geotime.html",
   "created": "2026-08-12",
   "items": [

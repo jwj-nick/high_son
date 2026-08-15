@@ -1,4 +1,4 @@
-// 고난도 문제은행 — 통합과학2 Ⅱ. 산과 염기, 중화 반응
+// 고난도 문제은행 — 통합과학2 Ⅳ-2. 산과 염기, 중화 반응 (단원 Ⅳ. 변화와 다양성)
 // 근거 학습앱: subject_hub/통합과학2/10_app/sci2_acidbase.html (검증 완료)
 // ⭐ 오답 보기의 cause = "그 보기를 고른 이유"의 진단 코드. 정답 보기에는 cause를 붙이지 않는다.
 //    코드 정의·작성 규칙은 저장소 문서(problem_bank/PLAN.md) 참조
@@ -9,7 +9,7 @@ window.BANK_SET = {
   "id": "sci2_02",
   "subject": "통합과학",
   "unit": "과학:산염기와중화",
-  "title": "Ⅱ. 산과 염기, 중화 반응",
+  "title": "Ⅳ-2. 산과 염기, 중화 반응",
   "source_app": "subject_hub/통합과학2/10_app/sci2_acidbase.html",
   "created": "2026-08-12",
   "items": [

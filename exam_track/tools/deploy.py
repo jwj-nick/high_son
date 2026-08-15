@@ -68,6 +68,28 @@ FORBIDDEN = [
 ]
 
 
+DRILL_REF = re.compile(r"drill_([a-zA-Z0-9_]+)\.js")
+
+
+def referenced_pending(path, pending):
+    """이 파일(주로 단원앱 HTML)이 <script src="drill_<id>.js">로 참조하는 세트 중
+    미검증인 것이 있으면 그 id를 돌려준다.
+
+    실측: sci2_01만 검증됐는데 deploy.py가 drill_sci2_01.js는 막으면서도
+    sci2_acidbase.html(⚡실전 탭이 drill_sci2_02.js를 참조)은 "갱신"으로 통과시켰다.
+    그대로 나갔으면 공개 페이지에서 스크립트가 404 나 탭이 빈 채로 깨졌을 것이다.
+    HTML 자체도 자신이 참조하는 데이터의 검증 상태를 물려받아야 한다.
+    """
+    try:
+        s = open(path, encoding="utf-8").read()
+    except UnicodeDecodeError:
+        return None
+    for m in DRILL_REF.finditer(s):
+        if m.group(1) in pending:
+            return m.group(1)
+    return None
+
+
 def digest(p):
     if not os.path.exists(p):
         return None
@@ -121,6 +143,11 @@ def main():
         sid = base[len("drill_"):-3] if base.startswith("drill_") and base.endswith(".js") else None
         if sid and sid in pending:
             print("  🔒 미검증  %-44s %s — 검증 게이트 통과 전" % (rel, sid))
+            blocked += 1
+            continue
+        ref = referenced_pending(src, pending)
+        if ref:
+            print("  🔒 미검증  %-44s %s 참조 — 검증 게이트 통과 전" % (rel, ref))
             blocked += 1
             continue
         bad = scan(src)
