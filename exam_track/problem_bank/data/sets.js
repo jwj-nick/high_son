@@ -71,13 +71,13 @@ window.BANK_SETS = [
     "unit": "과학:산염기와중화",
     "title": "Ⅳ-2. 산과 염기, 중화 반응",
     "range": "H⁺·OH⁻ · 지시약 3종 · pH 로그 척도 · 중화 반응과 중화점",
-    "n": 12, "verified": null
+    "n": 13, "verified": "2026-08-15"
   },
   {
     "id": "sci2_03", "subject": "통합과학", "course": "통합과학2",
     "unit": "과학:지질시대와화석",
     "title": "Ⅳ-3. 지질 시대와 화석",
     "range": "4대 순서 · 표준화석↔시상화석 · 지층 누중 · 5대 대멸종",
-    "n": 12, "verified": null
+    "n": 13, "verified": "2026-08-15"
   }
 ];
