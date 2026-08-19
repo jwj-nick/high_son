@@ -41,6 +41,7 @@ SUBJECTS = {
     "통합과학2": "science",
     "공통수학1": "math",
     "공통수학2": "math",
+    "공통국어2": "korean",
 }
 
 def unverified_sets():
