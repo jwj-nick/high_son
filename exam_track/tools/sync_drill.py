@@ -31,6 +31,10 @@ BANK = os.path.join(ROOT, "exam_track", "problem_bank", "data")
 
 # 세트 id -> 그 문항이 붙는 단원앱 폴더 (repo 상대경로)
 MAP = {
+    "kh1_01": "subject_hub/한국사1/10_app",
+    "kh1_02": "subject_hub/한국사1/10_app",
+    "kh1_03": "subject_hub/한국사1/10_app",
+    "kh1_04": "subject_hub/한국사1/10_app",
     "kh2_01": "subject_hub/한국사2/10_app",
     "kh2_02": "subject_hub/한국사2/10_app",
     "kh2_03": "subject_hub/한국사2/10_app",
