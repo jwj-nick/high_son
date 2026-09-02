@@ -35,6 +35,7 @@
 |---|---|
 | 통합과학1·2, 공통수학1·2 | ✅ 단원앱 + 허브 배포 완료 |
 | 통합사회1·2, 한국사1·2 | ✅ 16단원앱 + 허브 4 배포 완료 (2026-07-25) |
+| 대수·미적분Ⅰ·확률과 통계 (고2, 2028 수능 공통) | 🟡 P0 정본 완료 (2026-09-02) — SSOT [`수능수학_PLAN.md`](수능수학_PLAN.md). 다음 = P1 대수(관문 특강 G6~G8 → 9단원 → 배포) |
 | 🔜 AI 튜터 레이어 | Vercel 프록시 경유. 설명해보기(파인만)·힌트 사다리 중심 |
 
 배포: public `C:/Nick/30_Apps/jwj-nick.github.io/high1/{science,math,society,history}/`
@@ -85,9 +86,11 @@ exam_track ◀────────────── subject_hub            
 | [`../00_META/LEARNING_DESIGN.md`](../00_META/LEARNING_DESIGN.md) | ⭐ 상위 SSOT — 두 갈래 설계 논의 |
 | [`CONTENT_PRINCIPLES.md`](CONTENT_PRINCIPLES.md) | 콘텐츠 8원칙 |
 | `{과목}/PLAN.md` | 과목별 단원 지도·진행 |
+| [`수능수학_PLAN.md`](수능수학_PLAN.md) | 고2 수학 3과목(대수·미적분Ⅰ·확통) 공통 결정 — prefix·관문 특강 7단계 규격·허브 시안·Phase·게이트 |
 | ~~사회과_고난도문제_PLAN.md~~ | ✅ **내신 갈래로 이관 완료** (2026-07-27) → [`../exam_track/problem_bank/PLAN.md`](../exam_track/problem_bank/PLAN.md). 시험 대비는 이 갈래의 일이 아니다 |
 
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
 | 2026-07-25 | 생성(S1). 흥미 갈래 NCC 목적함수·성공지표·금지사항 계약 명문화. LEARNING_DESIGN 라운드 3 반영. |
+| 2026-09-02 | 고2 수학 3과목 트랙 등재(P0). 범위 표·문서 인덱스에 `수능수학_PLAN.md` 추가. 앱 문구에 "수능 N문항" 금지(금지사항 1 적용)를 그 문서 §1에 명문화. |
