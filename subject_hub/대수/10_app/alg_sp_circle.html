@@ -195,7 +195,7 @@
       gen:function(){ var d=pick(ANG); var fn=pick(['sin','cos']); var v=fn==='sin'?sinS(d):cosS(d); var useRad=Math.random()<0.5; var lbl=useRad?rad(d):d+'°';
         var ch=distinct4(v,POOL).map(function(s){return '$'+s+'$';});
         return { q:'$\\'+fn+' '+lbl+'$ 의 값은?', choices:ch, ans:0, fig:{d:d,fn:fn,v:v},
-          steps:['카드 ①: $'+lbl+(useRad?'='+d+'°':'')+'$ 는 '+quad(d)+' → $'+fn+'$의 부호 '+((fn==='sin'?Math.sin(d*Math.PI/180):Math.cos(d*Math.PI/180))>0?'+':'−'), '카드 ②: 기준각 $'+ref(d)+'°$ → 크기 $'+(fn==='sin'?sinS(ref(d)):cosS(ref(d))).replace('-','')+'$', '카드 ③: $\\'+fn+' '+lbl+'='+v+'$'] }; },
+          steps:['카드 ①: $'+lbl+(useRad?'='+d+'°':'')+'$ 는 '+quad(d)+' → $\\'+fn+'$의 부호 '+((fn==='sin'?Math.sin(d*Math.PI/180):Math.cos(d*Math.PI/180))>0?'+':'−'), '카드 ②: 기준각 $'+ref(d)+'°$ → 크기 $'+(fn==='sin'?sinS(ref(d)):cosS(ref(d))).replace('-','')+'$', '카드 ③: $\\'+fn+' '+lbl+'='+v+'$'] }; },
       verify:function(p){ var g=p.fig; var num=g.fn==='sin'?Math.sin(g.d*Math.PI/180):Math.cos(g.d*Math.PI/180); return Math.abs(VAL[g.v]-num)<1e-9 && p.ans===0; } },
 
     type1:{ label:'① 값 읽기', anchor:'#type1',
@@ -219,16 +219,16 @@
         var eq='y='+(a===1?'':(a===-1?'-':a))+'\\'+fn+' '+(b===1?'x':b+'x')+LEC.term(d,'',false);
         if(mode===0) return { q:'$'+eq+'$ 의 <b>최댓값</b>은?', ans:d+Math.abs(a), fig:{v:d+Math.abs(a)}, steps:['$\\'+fn+'$ 의 최댓값은 $1$, 최솟값은 $-1$', (a<0?'$a\\lt0$ 이면 뒤집히므로 ':'')+'$|a|='+Math.abs(a)+'$ 만큼 위아래 → 최대 $d+|a|='+d+'+'+Math.abs(a)+'='+(d+Math.abs(a))+'$'] };
         if(mode===1) return { q:'$'+eq+'$ 의 <b>최솟값</b>은?', ans:d-Math.abs(a), fig:{v:d-Math.abs(a)}, steps:['$\\'+fn+'$ 의 최솟값은 $-1$ → $|a|$배', '최소 $d-|a|='+d+'-'+Math.abs(a)+'='+(d-Math.abs(a))+'$'] };
-        return { q:'$'+eq+'$ 의 <b>주기</b>는 $\\pi$의 몇 배인가? (분수는 1/2 처럼)', ans:2/b, fig:{v:2/b}, steps:['$x$에 $'+b+'$을 곱하면 $'+b+'$배 빨리 돈다', '주기 $=\\dfrac{2\\pi}{'+b+'}='+frac(2,b)+'\\pi$'] }; },
+        return { q:'$'+eq+'$ 의 <b>주기</b>는 $\\pi$의 몇 배인가? (분수는 1/2 처럼)', ans:2/b, fig:{v:2/b}, steps:['$x$에 $'+b+'$을 곱하면 $'+b+'$배 빨리 돈다', '주기 $=\\dfrac{2\\pi}{'+b+'}='+(frac(2,b)==='1'?'':frac(2,b))+'\\pi$'] }; },
       verify:function(p){ return Math.abs(p.fig.v-p.ans)<1e-9; } },
 
     type4:{ label:'④ 방정식·부채꼴', anchor:'#type4',
       gen:function(){ var mode=ri(0,2);
         if(mode===0){ var items=[['\\sin x=\\dfrac12',[30,150]],['\\sin x=\\dfrac{\\sqrt3}{2}',[60,120]],['\\cos x=\\dfrac12',[60,300]],['\\cos x=-\\dfrac12',[120,240]],['\\sin x=-\\dfrac12',[210,330]],['\\cos x=\\dfrac{\\sqrt2}{2}',[45,315]],['\\tan x=1',[45,225]],['\\tan x=-\\sqrt3',[120,300]]];
           var it=pick(items); var sum=it[1][0]+it[1][1];
-          return { q:'$0\\le x<2\\pi$ 에서 방정식 $'+it[0]+'$ 의 모든 해의 합은 $\\pi$의 몇 배인가?', ans:sum/180, fig:{v:sum/180}, steps:['원에서 조건을 만족하는 점을 찾는다: $'+rad(it[1][0])+'$ ('+it[1][0]+'°) 과 $'+rad(it[1][1])+'$ ('+it[1][1]+'°) — 대칭 위치', '합 $='+rad(it[1][0])+'+'+rad(it[1][1])+'='+frac(sum,180)+'\\pi$'] }; }
+          return { q:'$0\\le x\\lt 2\\pi$ 에서 방정식 $'+it[0]+'$ 의 모든 해의 합은 $\\pi$의 몇 배인가?', ans:sum/180, fig:{v:sum/180}, steps:['원에서 조건을 만족하는 점을 찾는다: $'+rad(it[1][0])+'$ ('+it[1][0]+'°) 과 $'+rad(it[1][1])+'$ ('+it[1][1]+'°) — 대칭 위치', '합 $='+rad(it[1][0])+'+'+rad(it[1][1])+'='+frac(sum,180)+'\\pi$'] }; }
         if(mode===1){ var k=pick(['0','\\dfrac12','1','-1','2','\\dfrac{\\sqrt3}{2}','-\\dfrac32','\\dfrac{\\sqrt2}{2}']); var kv=VAL[k]; if(kv===undefined) kv={'2':2,'-\\dfrac32':-1.5}[k]; var n=Math.abs(kv)<1?2:(Math.abs(kv)===1?1:0);
-          return { q:'$0\\le x<2\\pi$ 에서 방정식 $\\sin x='+k+'$ 의 서로 다른 실근의 개수는?', choices:['2개','1개','0개'], ans:[2,1,0].indexOf(n), fig:{kv:kv},
+          return { q:'$0\\le x\\lt 2\\pi$ 에서 방정식 $\\sin x='+k+'$ 의 서로 다른 실근의 개수는?', choices:['2개','1개','0개'], ans:[2,1,0].indexOf(n), fig:{kv:kv},
             steps:['높이가 $'+k+'$ 인 점을 원에서 찾는다', n===2?'$-1$과 $1$ 사이 → 좌우 대칭으로 2개':(n===1?'맨 위 또는 맨 아래 한 점 → 1개':'높이는 $-1$과 $1$ 사이뿐 → 없다')] }; }
         var r=pick([2,3,4,6]); var th=pick([[1,6],[1,4],[1,3],[1,2],[2,3],[3,4]]); var l=r*th[0]/th[1]; var S=0.5*r*r*th[0]/th[1]; var askL=Math.random()<0.5;
         return { q:'반지름 $'+r+'$, 중심각 $\\dfrac{'+(th[0]===1?'':th[0])+'\\pi}{'+th[1]+'}$ 인 부채꼴의 <b>'+(askL?'호의 길이':'넓이')+'</b>는 $\\pi$의 몇 배인가? (분수는 3/2 처럼)', ans:askL?l:S, fig:{v:askL?l:S},

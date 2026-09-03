@@ -238,6 +238,8 @@
 <script src="alg_app.js"></script>
 <script>
 var PI=Math.PI;
+function pm(fr){ return fr==='1'?'\\pi':(fr==='-1'?'-\\pi':fr+'\\pi'); }
+function fmtPi(n,d){ var g=LEC.gcd(n,d); var num=n/g, den=d/g; if(num===0) return '0'; return (num<0?'−':'')+(Math.abs(num)===1?'':Math.abs(num))+'π'+(den===1?'':'/'+den); }
 function piAxes(P,ymax){ var c=P.ctx; c.strokeStyle='#e2e8f0'; c.lineWidth=1; for(var y=-3;y<=3;y++){ if(y===0)continue; c.beginPath(); c.moveTo(0,P.Y(y)); c.lineTo(P.w,P.Y(y)); c.stroke(); }
   P.seg(P.xmin,0,P.xmax,0,'#64748b',1.6); P.seg(0,P.ymin,0,P.ymax,'#64748b',1.6);
   c.fillStyle='#94a3b8'; c.font='11px sans-serif'; c.textAlign='center'; c.textBaseline='top';
@@ -248,7 +250,7 @@ function piAxes(P,ymax){ var c=P.ctx; c.strokeStyle='#e2e8f0'; c.lineWidth=1; fo
 /* sin·cos */
 var P1=null, SH1=true, SH2=true;
 function setup1(){ var cv=document.getElementById('cv1'); if(!P1) P1=LEC.plane(cv,{xmin:-2*PI-0.3,xmax:2*PI+0.3,ymin:-1.6,ymax:1.6,h:260}); else P1.resize(); draw1(); }
-function draw1(){ if(!P1)return; var s=parseInt(document.getElementById('sh').value,10); var sh=s*PI/12; document.getElementById('shv').textContent=(s===0?'0':(s===6?'π/2':s+'π/12'));
+function draw1(){ if(!P1)return; var s=parseInt(document.getElementById('sh').value,10); var sh=s*PI/12; document.getElementById('shv').textContent=fmtPi(s,12);
   P1.clear(); piAxes(P1); if(SH1) P1.plot(Math.sin,'#dc2626',3); if(SH2) P1.plot(function(x){return Math.cos(x-sh);},'#2563eb',3);
   document.getElementById('out1').innerHTML='<span style="color:#fca5a5">빨강 $y=\\sin x$</span> · <span style="color:#93c5fd">파랑 $y=\\cos\\left(x'+(s?'-'+(s===6?'\\tfrac\\pi2':'\\tfrac{'+s+'\\pi}{12}'):'')+'\\right)$</span>'+(s===6?' → <b>정확히 겹친다</b>: $\\cos x=\\sin\\left(x+\\tfrac\\pi2\\right)$':''); LEC.tex(document.getElementById('out1')); }
 document.getElementById('bSin').addEventListener('click',function(){ SH1=!SH1; this.classList.toggle('on',SH1); draw1(); }); document.getElementById('bCos').addEventListener('click',function(){ SH2=!SH2; this.classList.toggle('on',SH2); draw1(); }); document.getElementById('sh').addEventListener('input',draw1);
@@ -262,12 +264,12 @@ function draw2(){ if(!P2)return; P2.clear(); piAxes(P2); for(var k=-2;k<=2;k++){
 /* 변형 */
 var P3=null, FN='sin';
 function setup3(){ var cv=document.getElementById('cv3'); if(!P3) P3=LEC.plane(cv,{xmin:-0.5,xmax:2*PI+0.5,ymin:-5,ymax:5,h:280}); else P3.resize(); draw3(); }
-function draw3(){ if(!P3)return; var a=parseInt(document.getElementById('ta').value,10)||1, b=parseInt(document.getElementById('tb').value,10), c=parseInt(document.getElementById('tc').value,10), d=parseInt(document.getElementById('td').value,10);
-  if(a===0){ a=1; document.getElementById('ta').value=1; } document.getElementById('tav').textContent=LEC.fmt(a); document.getElementById('tbv').textContent=b; document.getElementById('tcv').textContent=(c===0?'0':LEC.frac(c,6).replace(/\\frac\{(\d+)\}\{(\d+)\}/,'$1π/$2').replace(/^(-?)(\d+)$/,'$1$2π'))+(c!==0&&!/π/.test(String(c))?'':''); document.getElementById('tdv').textContent=LEC.fmt(d);
+function draw3(){ if(!P3)return; var araw=parseInt(document.getElementById('ta').value,10); var a=(araw===0?1:araw), b=parseInt(document.getElementById('tb').value,10), c=parseInt(document.getElementById('tc').value,10), d=parseInt(document.getElementById('td').value,10);
+  if(araw===0){ document.getElementById('ta').value=1; } document.getElementById('tav').textContent=LEC.fmt(a); document.getElementById('tbv').textContent=b; document.getElementById('tcv').textContent=fmtPi(c,6); document.getElementById('tdv').textContent=LEC.fmt(d);
   var cc=c*PI/6; var f=FN==='sin'?Math.sin:Math.cos;
   P3.clear(); piAxes(P3); P3.seg(P3.xmin,d,P3.xmax,d,'#94a3b8',1.5,[4,4]); P3.plot(function(x){return f(x);},'#e9d5ff',1.5); P3.plot(function(x){return a*f(b*x+cc)+d;},'#6d28d9',3);
-  var per=2*PI/b; var cs=(c===0?'':LEC.term(c,'\\cdot\\tfrac{\\pi}{6}',false)); var eq='y='+(a===1?'':(a===-1?'-':a))+'\\'+FN+'('+(b===1?'x':b+'x')+cs+')'+LEC.term(d,'',false);
-  document.getElementById('out3').innerHTML='$'+eq+'$ &nbsp;·&nbsp; 진폭 $'+Math.abs(a)+'$ · 주기 $'+LEC.frac(2,b)+'\\pi$ · 최대 $'+(d+Math.abs(a))+'$ · 최소 $'+(d-Math.abs(a))+'$'+(c?' · 왼쪽으로 $'+LEC.frac(c,6*b)+'\\pi$':''); LEC.tex(document.getElementById('out3')); }
+  var per=2*PI/b; var cs=(c===0?'':((c>0?'+':'')+pm(LEC.frac(c,6)))); var eq='y='+(a===1?'':(a===-1?'-':a))+'\\'+FN+'('+(b===1?'x':b+'x')+cs+')'+LEC.term(d,'',false);
+  document.getElementById('out3').innerHTML='$'+eq+'$ &nbsp;·&nbsp; 진폭 $'+Math.abs(a)+'$ · 주기 $'+LEC.frac(2,b)+'\\pi$ · 최대 $'+(d+Math.abs(a))+'$ · 최소 $'+(d-Math.abs(a))+'$'+(c?' · '+(c>0?'왼쪽':'오른쪽')+'으로 $'+pm(LEC.frac(Math.abs(c),6*b))+'$':''); LEC.tex(document.getElementById('out3')); }
 ['ta','tb','tc','td'].forEach(function(id){document.getElementById(id).addEventListener('input',draw3);});
 document.getElementById('fSin').addEventListener('click',function(){ FN='sin'; this.classList.add('on'); document.getElementById('fCos').classList.remove('on'); draw3(); }); document.getElementById('fCos').addEventListener('click',function(){ FN='cos'; this.classList.add('on'); document.getElementById('fSin').classList.remove('on'); draw3(); });
 

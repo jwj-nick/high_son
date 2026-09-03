@@ -155,11 +155,11 @@
     <ul>
       <li>지진 규모(리히터), 소리 크기(데시벨), 산성도(pH)는 전부 <b>로그 눈금</b>이에요. 규모 7은 규모 6보다 에너지가 약 32배예요. 큰 수를 사람이 읽을 수 있는 크기로 줄여 주는 도구가 로그예요.</li>
       <li>복리, 인구 증가, 감염 확산, 반도체 성능은 <b>지수적으로</b> 변해요. "매년 7%"는 10년이면 약 2배라는 감각(70의 법칙)은 로그에서 나와요.</li>
-      <li>로그는 곱셈을 덧셈으로 바꿔 줘요. 계산기가 없던 시절 항해사와 천문학자가 로그표로 거대한 곱셈을 했고, 그 덕에 대항해시대와 뉴턴의 계산이 가능했어요.</li>
+      <li>로그는 곱셈을 덧셈으로 바꿔 줘요. 계산기가 없던 시절 항해사와 천문학자가 로그표로 거대한 곱셈을 했고, 그 덕에 이후의 항해력과 천문 계산이 가능해졌어요.</li>
     </ul>
   </div>
   <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>이 특강의 "뒤집기"가 그대로 <b>지수함수와 로그함수의 그래프</b>(다음 단원)예요. 그래프의 점근선·정의역·증가와 감소는 전부 "역함수라서" 자동으로 따라와요. 그리고 로그의 "곱을 합으로"는 통계에서 데이터를 다룰 때 다시 만나요.</div>
-  <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>스마트폰 볼륨 단계, 카메라의 조리개·ISO 단계, 별의 밝기 등급, 그리고 "2의 10제곱이 대략 1000"이라서 컴퓨터의 킬로·메가·기가가 1024씩 커지는 것. 전부 지수와 로그예요.</div>
+  <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>스마트폰 볼륨 단계, 카메라의 조리개·ISO 단계, 별의 밝기 등급, 그리고 "2의 10제곱이 대략 1000"이라서 컴퓨터가 용량을 1024(=2¹⁰)씩 묶어 세는 것(KiB·MiB·GiB). 전부 지수와 로그예요.</div>
   <div class="reallife"><div class="rt">🏭 이걸로 먹고사는 사람들</div>정보량(비트)을 $\log_2$로 정의하는 정보통신, 복리·할인율을 다루는 금융, 데시벨·pH·지진 규모를 쓰는 음향·화학·지질, 손실 함수에 로그가 들어가는 인공지능. <span style="color:#312e81;font-weight:700">🎓 컴퓨터공학 · 금융공학 · 전자공학</span></div>
   <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:14px">단원 앱으로 이어서 → <a href="alg_explog.html">지수와 로그</a> · <a href="alg_expfn.html">지수함수</a> · <a href="alg_logfn.html">로그함수</a></p>
 </section>
@@ -180,17 +180,17 @@
   window.GEN = {
     tool:{ label:'지수 ↔ 로그 되돌려 쓰기', anchor:'#s3',
       gen:function(){ var a=pick([2,3,5,10]), x=ri(1,4); var b=Math.pow(a,x);
-        if(Math.random()<0.5) return { q:'$\\log_{'+a+'} '+b+'$ 을 지수 식 $'+a+'^{\\square}='+b+'$ 으로 되돌리면 $\\square$ 는?', ans:x, fig:{a:a,x:x}, steps:['"'+a+'를 몇 제곱하면 '+b+'?"', '$'+powStr(a,x)+'='+b+'$ → $'+x+'$'] };
+        if(Math.random()<0.5) return { q:'$\\log_{'+a+'} '+b+'$ 을 지수 식 $'+a+'^{\\square}='+b+'$ 으로 되돌리면 $\\square$ 는?', ans:x, fig:{a:a,x:x}, steps:['"'+a+'의 몇 제곱이 '+b+'?"', '$'+powStr(a,x)+'='+b+'$ → $'+x+'$'] };
         return { q:'$'+powStr(a,x)+'='+b+'$ 을 로그 식 $\\log_{'+a+'} '+b+'=\\square$ 로 바꾸면 $\\square$ 는?', ans:x, fig:{a:a,x:x}, steps:['밑 '+a+', 진수 '+b+', 지수 '+x, '$\\log_{'+a+'} '+b+'='+x+'$'] }; },
       verify:function(p){ var g=p.fig; return Math.pow(g.a,p.ans)===Math.pow(g.a,g.x); } },
 
     type1:{ label:'① 정의 변환', anchor:'#type1',
       gen:function(){ var mode=ri(0,3);
-        if(mode===0){ var a=pick([2,3,5,7]), x=ri(2,5); return { q:'$\\log_{'+a+'} '+Math.pow(a,x)+'$ 의 값은?', ans:x, fig:{v:x}, steps:['"'+a+'를 몇 제곱하면 '+Math.pow(a,x)+'?"', '$'+powStr(a,x)+'='+Math.pow(a,x)+'$ → $'+x+'$'] }; }
+        if(mode===0){ var a=pick([2,3,5,7]), x=ri(2,5); return { q:'$\\log_{'+a+'} '+Math.pow(a,x)+'$ 의 값은?', ans:x, fig:{v:x}, steps:['"'+a+'의 몇 제곱이 '+Math.pow(a,x)+'?"', '$'+powStr(a,x)+'='+Math.pow(a,x)+'$ → $'+x+'$'] }; }
         if(mode===1){ var a1=pick([2,3,5]), x1=ri(1,3); var b1=Math.pow(a1,x1); return { q:'$\\log_{'+a1+'} \\dfrac{1}{'+b1+'}$ 의 값은?', ans:-x1, fig:{v:-x1}, steps:['$\\dfrac1{'+b1+'}='+a1+'^{-'+x1+'}$ (역수는 음의 지수)', '$\\log_{'+a1+'} '+a1+'^{-'+x1+'}=-'+x1+'$'] }; }
         if(mode===2){ var base=pick([2,3]); var m=ri(2,3), n=ri(1,5); while(n===m||n%m===0) n=ri(1,5); var A=Math.pow(base,m), B=Math.pow(base,n); // log_{base^m} base^n = n/m
           return { q:'$\\log_{'+A+'} '+B+'$ 의 값은? (분수는 3/2 처럼)', ans:n/m, fig:{v:n/m}, steps:['밑과 진수를 같은 밑으로: $'+A+'='+base+'^{'+m+'}$, $'+B+'='+base+'^{'+n+'}$', '$\\log_{'+base+'^{'+m+'}} '+base+'^{'+n+'}=\\dfrac{'+n+'}{'+m+'}\\log_{'+base+'} '+base+'='+frac(n,m)+'$'] }; }
-        var a3=pick([2,3,4,5,10]); var kind=ri(0,1); return kind===0? { q:'$\\log_{'+a3+'} 1$ 의 값은?', ans:0, fig:{v:0}, steps:['"'+a3+'를 몇 제곱하면 1?" → 0제곱', '$\\log_a 1=0$'] } : { q:'$\\log_{'+a3+'} '+a3+'$ 의 값은?', ans:1, fig:{v:1}, steps:['"'+a3+'를 몇 제곱하면 '+a3+'?" → 1제곱', '$\\log_a a=1$'] }; },
+        var a3=pick([2,3,4,5,10]); var kind=ri(0,1); return kind===0? { q:'$\\log_{'+a3+'} 1$ 의 값은?', ans:0, fig:{v:0}, steps:['"'+a3+'를 몇 제곱하면 1?" → 0제곱', '$\\log_a 1=0$'] } : { q:'$\\log_{'+a3+'} '+a3+'$ 의 값은?', ans:1, fig:{v:1}, steps:['"'+a3+'의 몇 제곱이 '+a3+'?" → 1제곱', '$\\log_a a=1$'] }; },
       verify:function(p){ return Math.abs(p.fig.v-p.ans)<1e-9; } },
 
     type2:{ label:'② 로그의 성질', anchor:'#type2',
@@ -202,7 +202,7 @@
         if(mode===2){ var c=ri(2,3), e=ri(1,2); var base=Math.pow(a,e); // c·log_a base = c·e
           return { q:'$'+c+'\\log_{'+a+'} '+base+'$ 의 값은?', ans:c*e, fig:{a:a,val:Math.pow(a,c*e)}, steps:['앞의 수는 지수로: $\\log_{'+a+'} '+base+'^{'+c+'}$', '$'+base+'='+powStr(a,e)+'$ 이므로 $'+base+'^{'+c+'}='+a+'^{'+(c*e)+'}$ → $'+(c*e)+'$'] }; }
         var b=pick([4,8,9,27,25]); var ab={4:[2,2],8:[2,3],9:[3,2],27:[3,3],25:[5,2]}[b]; var A2=ab[0], nExp=ab[1]; // log_b A2 · log_A2 b... use 밑변환: log_{A2} b = nExp ; log_b A2 = 1/nExp
-        return { q:'$\\log_{'+b+'} '+A2+'$ 의 값은? (분수는 1/2 처럼)', ans:1/nExp, fig:{a:A2,val:null,v:1/nExp}, steps:['밑변환으로 밑을 $'+A2+'$로: $\\dfrac{\\log_{'+A2+'} '+A2+'}{\\log_{'+A2+'} '+b+'}=\\dfrac{1}{'+nExp+'}$', '또는 "'+b+'을 몇 제곱하면 '+A2+'?" → $'+b+'^{1/'+nExp+'}='+A2+'$'] }; },
+        return { q:'$\\log_{'+b+'} '+A2+'$ 의 값은? (분수는 1/2 처럼)', ans:1/nExp, fig:{a:A2,val:null,v:1/nExp}, steps:['밑변환으로 밑을 $'+A2+'$로: $\\dfrac{\\log_{'+A2+'} '+A2+'}{\\log_{'+A2+'} '+b+'}=\\dfrac{1}{'+nExp+'}$', '또는 "'+b+'의 몇 제곱이 '+A2+'?" → $'+b+'^{1/'+nExp+'}='+A2+'$'] }; },
       verify:function(p){ var g=p.fig; if(g.val!=null) return Math.abs(lg(g.a,g.val)-p.ans)<1e-9; return Math.abs(g.v-p.ans)<1e-9; } },
 
     type3:{ label:'③ 상용로그·자릿수', anchor:'#type3',
@@ -218,13 +218,13 @@
 
     type4:{ label:'④ 지수·로그 방정식', anchor:'#type4',
       gen:function(){ var mode=ri(0,3);
-        if(mode===0){ var a=pick([2,3,5]), c=ri(-2,3), k=ri(2,5); var x=k-c; var b=Math.pow(a,k);
+        if(mode===0){ var a=pick([2,3,5]), c=LEC.nz(-2,3), k=ri(2,5); var x=k-c; var b=Math.pow(a,k);
           return { q:'방정식 $'+a+'^{x'+LEC.term(c,'',false)+'}='+b+'$ 의 해는?', ans:x, fig:{v:x}, steps:['우변을 같은 밑으로: $'+b+'='+powStr(a,k)+'$', '밑이 같으면 지수끼리: $x'+LEC.term(c,'',false)+'='+k+'$ → $x='+x+'$'] }; }
         if(mode===1){ var base=pick([2,3]); var m=ri(1,3), n=ri(1,4); var A=Math.pow(base,m), B=Math.pow(base,n); var x1=n/m; // A^x = B → base^{mx} = base^n
           return { q:'방정식 $'+A+'^{x}='+B+'$ 의 해는? (분수는 3/2 처럼)', ans:x1, fig:{v:x1}, steps:['밑 통일: $'+A+'='+base+'^{'+m+'}$, $'+B+'='+base+'^{'+n+'}$ → $'+base+'^{'+m+'x}='+base+'^{'+n+'}$', '지수 비교: $'+m+'x='+n+'$ → $x='+frac(n,m)+'$'] }; }
         if(mode===2){ var a2=pick([2,3,5]), k2=ri(1,3), c2=ri(-4,4); var x2=Math.pow(a2,k2)-c2;
           return { q:'방정식 $\\log_{'+a2+'}(x'+LEC.term(c2,'',false)+')='+k2+'$ 의 해는?', ans:x2, fig:{v:x2}, steps:['지수 식으로 되돌리기: $x'+LEC.term(c2,'',false)+'='+powStr(a2,k2)+'='+Math.pow(a2,k2)+'$', '$x='+x2+'$', '진수 조건 확인: $x'+LEC.term(c2,'',false)+'='+Math.pow(a2,k2)+'>0$ ✓'] }; }
-        var a3=pick([2,3]); var k3=ri(2,3); var t=Math.pow(a3,k3); var p1=pick([1,2,3].filter(function(v){return v<t;})); var x3=t/p1; if(!Number.isInteger(x3)){ p1=1; x3=t; } // log_a x + log_a p1 = k3 → x·p1 = a^k3
+        var a3=pick([2,3]); var k3=ri(2,3); var t=Math.pow(a3,k3); var p1=pick([2,3].filter(function(v){return t%v===0;})); if(!p1){ p1=1; } var x3=t/p1; // log_a x + log_a p1 = k3 → x·p1 = a^k3
         return { q:'방정식 $\\log_{'+a3+'} x+\\log_{'+a3+'} '+p1+'='+k3+'$ 의 해는?', ans:x3, fig:{v:x3}, steps:['합은 곱의 로그: $\\log_{'+a3+'}('+p1+'x)='+k3+'$', '지수 식으로: $'+p1+'x='+powStr(a3,k3)+'='+t+'$ → $x='+x3+'$', '진수 조건 $x>0$ ✓'] }; },
       verify:function(p){ return Math.abs(p.fig.v-p.ans)<1e-9; } }
   };

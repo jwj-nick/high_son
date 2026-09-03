@@ -22,13 +22,13 @@
 <nav class="crumb"><a href="../index.html">고1</a><span>&rsaquo;</span><a href="index.html">Math_1_1</a><span>&rsaquo;</span><a href="alg_hub.html">대수</a><span>&rsaquo;</span><a class="cur" href="#">귀납적 정의와 수학적 귀납법</a></nav>
 <div class="hero">
   <span class="badge">Ⅲ. 수열</span>
-  <h1>🁢 귀납적 정의와 수학적 귀납법</h1>
+  <h1>🧩 귀납적 정의와 수학적 귀납법</h1>
   <p>"다음은 이전으로부터" — 두 문장으로 무한을 증명하는 법</p>
 </div>
 <div class="tabs" id="tabs">
   <button class="tab active" data-t="intro">📋 개요</button>
   <button class="tab" data-t="rec">🔁 귀납적 정의</button>
-  <button class="tab" data-t="ind">🁢 수학적 귀납법</button>
+  <button class="tab" data-t="ind">🧩 수학적 귀납법</button>
   <button class="tab" data-t="prf">🧮 증명 연습</button>
   <button class="tab" data-t="world">🌐 세상 속으로</button>
   <button class="tab" data-t="quiz">🔥 퀴즈</button>
@@ -48,12 +48,12 @@
         <div class="ava">🔺</div>
         <div>
           <div class="st">파스칼 (1623~1662) — 귀납법을 글로 쓴 사람</div>
-          <div class="sd">파스칼은 1654년 『산술삼각형론』에서 삼각형의 성질을 증명하며 "첫 줄에서 성립하고, 어떤 줄에서 성립하면 다음 줄에서도 성립한다"는 논법을 <b>명시적으로</b> 썼어요. 오늘날 교과서의 수학적 귀납법 서술은 이 형식이에요. 300년 뒤 컴퓨터 과학은 같은 생각으로 "프로그램이 모든 입력에 대해 옳다"를 증명해요.</div>
+          <div class="sd">파스칼은 『산술삼각형론』(1654년 집필, 1665년 출간)에서 삼각형의 성질을 증명하며 "첫 줄에서 성립하고, 어떤 줄에서 성립하면 다음 줄에서도 성립한다"는 논법을 <b>명시적으로</b> 썼어요. 오늘날 교과서의 수학적 귀납법 서술은 이 형식이에요. 300년 뒤 컴퓨터 과학은 같은 생각으로 "프로그램이 모든 입력에 대해 옳다"를 증명해요.</div>
         </div>
       </div>
       <div class="toc">
         <button onclick="go('rec')"><div class="ti">🔁</div><div class="tn">귀납적 정의</div><div class="td">점화식 시뮬레이터</div></button>
-        <button onclick="go('ind')"><div class="ti">🁢</div><div class="tn">수학적 귀납법</div><div class="td">도미노 애니메이션</div></button>
+        <button onclick="go('ind')"><div class="ti">🧩</div><div class="tn">수학적 귀납법</div><div class="td">도미노 애니메이션</div></button>
         <button onclick="go('prf')"><div class="ti">🧮</div><div class="tn">증명 연습</div><div class="td">등식·배수·부등식</div></button>
         <button onclick="go('world')"><div class="ti">🌐</div><div class="tn">세상 속으로</div><div class="td">재귀·프로그램 검증</div></button>
         <button onclick="go('quiz')"><div class="ti">🔥</div><div class="tn">퀴즈</div><div class="td">10문제</div></button>
@@ -96,11 +96,11 @@
 
   <div class="page" data-p="ind">
     <div class="card">
-      <h2>🁢 수학적 귀납법 — 도미노 두 문장</h2>
+      <h2>🧩 수학적 귀납법 — 도미노 두 문장</h2>
       <p class="lead">"모든 자연수 $n$에 대해 $P(n)$이 성립한다"를 증명하고 싶어요. 도미노를 보세요. <b>① 첫 개를 넘어뜨리기</b>(재생 버튼) → <b>② 넘어지면 다음도 넘어진다</b>는 것이 확인되면 끝까지 넘어져요.</p>
       <div class="widget">
         <canvas id="dcv" height="200"></canvas>
-        <div class="btns"><button id="pushBtn">▶ ① 첫 도미노 넘어뜨리기</button><button id="resetBtn" class="on">↺ 세우기</button></div>
+        <div class="btns"><button id="pushBtn" class="on">▶ ① 첫 도미노 넘어뜨리기</button><button id="resetBtn">↺ 세우기</button></div>
         <div class="out" id="dout">두 문장이 참이면 $n$이 아무리 커도 넘어진다</div>
       </div>
       <div class="box g"><div class="t">✅ 수학적 귀납법</div>자연수 $n$에 대한 명제 $P(n)$이<br>(ⅰ) $n=1$일 때 성립하고,<br>(ⅱ) $n=k$일 때 성립한다고 가정하면 $n=k+1$일 때도 성립한다<br>는 것을 보이면, $P(n)$은 <b>모든 자연수 $n$</b>에 대해 성립한다.</div>
@@ -172,7 +172,7 @@
       <div class="reallife">
         <div class="rt">🏠 귀납과 재귀가 보이는 곳</div>
         <div class="rgrid">
-          <div class="rcell"><div class="ri">🁢</div><div class="rn">도미노</div><div class="rd">첫 개 + 간격</div></div>
+          <div class="rcell"><div class="ri">🧩</div><div class="rn">도미노</div><div class="rd">첫 개 + 간격</div></div>
           <div class="rcell"><div class="ri">🪜</div><div class="rn">계단</div><div class="rd">한 칸 오를 수 있으면 끝까지</div></div>
           <div class="rcell"><div class="ri">🌀</div><div class="rn">피보나치</div><div class="rd">해바라기 씨·나선의 배열</div></div>
           <div class="rcell"><div class="ri">📁</div><div class="rn">폴더 속 폴더</div><div class="rd">재귀 구조</div></div>
@@ -227,7 +227,7 @@ var RULES={add3:{f:function(p){return p.a+3;},tex:'a_{n+1}=a_n+3',code:'a = a + 
 var RK='add3';
 function drawR(){ var a1=parseInt(document.getElementById('ra').value,10); document.getElementById('rav').textContent=LEC.fmt(a1); var r=RULES[RK]; var box=document.getElementById('rterms'); box.innerHTML=''; var vals=[a1];
   if(RK==='fib'){ vals=[a1,a1]; for(var i=2;i<7;i++) vals.push(vals[i-1]+vals[i-2]); } else { for(var n=1;n<7;n++){ vals.push(r.f({a:vals[n-1],n:n})); } }
-  vals.forEach(function(v,i){ if(i>0){ var s=document.createElement('span'); s.className='arrow'; s.textContent='→'; box.appendChild(s); } var t=document.createElement('div'); t.className='tm'; t.innerHTML='<small>a<sub>'+(i+1)+'</sub></small><b>'+LEC.fmt(v)+'</b>'; box.appendChild(t); });
+  vals.forEach(function(v,i){ if(i>0){ var s=document.createElement('span'); s.className='arrow'; s.textContent='→'; box.appendChild(s); } var t=document.createElement('div'); t.className='tm'; t.innerHTML='<small>a<sub>'+(i+1)+'</sub></small><b>'+(Math.abs(v)>1e9?'너무 큼':LEC.fmt(v))+'</b>'; box.appendChild(t); });
   document.getElementById('rloop').innerHTML='a = '+a1+(RK==='fib'?'; b = '+a1:'')+'\n<b>for</b> n = 1, 2, 3, …:\n    '+r.code+'   <span style="color:#94a3b8">← 점화식 = 갱신 규칙</span>';
   var el=document.getElementById('rout'); el.innerHTML='$a_1='+a1+'$, $'+r.tex+'$ &nbsp;·&nbsp; '+r.kind; LEC.tex(el); }
 document.getElementById('rulebtns').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; RK=b.dataset.r; this.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); drawR(); });
@@ -244,7 +244,7 @@ document.getElementById('pushBtn').addEventListener('click',function(){ if(raf)r
 document.getElementById('resetBtn').addEventListener('click',function(){ if(raf){cancelAnimationFrame(raf);raf=null;} prog=[]; fallen=0; drawD(); });
 APP.onTab({ind:setupD}); LEC.onResize(function(){ if(APP.current()==='ind') setupD(); });
 
-var TABNAME={rec:'🔁 귀납적 정의',ind:'🁢 수학적 귀납법',prf:'🧮 증명 연습'};
+var TABNAME={rec:'🔁 귀납적 정의',ind:'🧩 수학적 귀납법',prf:'🧮 증명 연습'};
 var QUIZ=[
  {q:'a₁=3, a_{n+1}=a_n+4 로 정의된 수열의 a₄는?',o:['15','19','12','7'],a:0,t:'rec',e:'3 → 7 → 11 → 15. 등차수열(공차 4).'},
  {q:'a₁=2, a_{n+1}=3a_n 으로 정의된 수열의 a₄는?',o:['54','18','162','24'],a:0,t:'rec',e:'2 → 6 → 18 → 54. 등비수열(공비 3).'},

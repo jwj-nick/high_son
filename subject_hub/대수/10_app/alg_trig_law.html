@@ -41,7 +41,7 @@
         <div class="ava">📜</div>
         <div>
           <div class="st">유클리드에서 레기오몬타누스까지</div>
-          <div class="sd">코사인법칙은 기원전 300년 유클리드의 『원론』에 "둔각삼각형의 변" 명제로 이미 있었어요(삼각함수 없이 넓이로 표현). 사인법칙을 포함해 삼각형을 푸는 방법을 하나의 책으로 체계화한 것은 15세기 독일의 레기오몬타누스예요. 그 책이 항해사와 천문학자의 교과서가 되어 대항해시대의 배들이 자기 위치를 계산했어요.</div>
+          <div class="sd">코사인법칙은 기원전 300년 유클리드의 『원론』에 "둔각삼각형의 변" 명제로 이미 있었어요(삼각함수 없이 넓이로 표현). 사인법칙을 포함해 삼각형을 푸는 방법을 한 권으로 체계화한 것은 15세기 독일의 레기오몬타누스예요(1464년 집필, 1533년 인쇄). 그 책은 천문학자들의 교과서가 되었고, 그가 만든 천문 역표는 콜럼버스 같은 항해자들이 실제로 썼어요.</div>
         </div>
       </div>
       <div class="toc">
@@ -63,7 +63,7 @@
         <div class="rd"><div>$\dfrac{a}{\sin A}$ <b id="r1"></b></div><div>$\dfrac{b}{\sin B}$ <b id="r2"></b></div><div>$\dfrac{c}{\sin C}$ <b id="r3"></b></div><div>외접원 지름 $2R$ <b id="r4"></b></div></div>
       </div>
       <div class="box g"><div class="t">✅ 사인법칙</div>$$\frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}=2R\quad(R\text{: 외접원의 반지름})$$</div>
-      <div class="box b"><div class="t">🔑 왜 그런가</div>변 $a$를 외접원의 지름과 함께 보면, 원주각의 성질로 $a=2R\sin A$가 돼요(지름을 빗변으로 하는 직각삼각형에서 $\sin A=\frac a{2R}$). 세 변 모두 같은 원의 지름을 쓰니까 비가 같아요. 그래서 사인법칙은 "<b>큰 각 앞에 큰 변</b>"을 숫자로 적은 것이에요.</div>
+      <div class="box b"><div class="t">🔑 왜 그런가</div>꼭짓점 $B$에서 지름을 그어 끝점을 $A'$이라 하면, 같은 호 위의 원주각이라 $\angle A'=\angle A$이고 반원의 각이라 $\angle A'CB=90°$예요. 그 직각삼각형에서 $\sin A'=\frac a{2R}$, 즉 $a=2R\sin A$가 돼요($A$가 둔각이면 $\angle A'=180°-A$인데 $\sin$ 값은 같아요). 세 변 모두 같은 원의 지름을 쓰니까 비가 같아요. 그래서 사인법칙은 "<b>큰 각 앞에 큰 변</b>"을 숫자로 적은 것이에요.</div>
       <h3>언제 쓰나 — 각을 두 개 알 때</h3>
       <div class="box b" style="text-align:center;font-size:15px">$\triangle ABC$에서 $A=45°$, $B=60°$, $a=4$ 일 때 $b$는?</div>
       <div class="steps"><button class="stepbtn" data-w="w1">▶ 풀이 단계별로 보기</button>
@@ -228,10 +228,10 @@ function draw1(){ if(!P1)return; P1.clear().grid().axes(false);
   P1.poly([[A.x,A.y],[B.x,B.y],[C.x,C.y]],'#6d28d9','rgba(109,40,217,.08)',2.5);
   P1.dot(A.x,A.y,'#dc2626',7,'A '+Math.round(aA/D2R)+'°','sw'); P1.dot(B.x,B.y,'#2563eb',7,'B '+Math.round(aB/D2R)+'°','se'); P1.dot(C.x,C.y,'#16a34a',7,'C '+Math.round(aC/D2R)+'°','n');
   P1.text((B.x+C.x)/2,(B.y+C.y)/2,'a='+a.toFixed(1),'#dc2626','ne'); P1.text((A.x+C.x)/2,(A.y+C.y)/2,'b='+b.toFixed(1),'#2563eb','nw'); P1.text((A.x+B.x)/2,(A.y+B.y)/2,'c='+c.toFixed(1),'#16a34a','s');
-  document.getElementById('r1').textContent=(a/Math.sin(aA)).toFixed(2); document.getElementById('r2').textContent=(b/Math.sin(aB)).toFixed(2); document.getElementById('r3').textContent=(c/Math.sin(aC)).toFixed(2); document.getElementById('r4').textContent=(Math.abs(d)>1e-6?(2*R).toFixed(2):'—'); }
+  var deg=Math.abs(d)>1e-6; document.getElementById('r1').textContent=deg?(a/Math.sin(aA)).toFixed(2):'—'; document.getElementById('r2').textContent=deg?(b/Math.sin(aB)).toFixed(2):'—'; document.getElementById('r3').textContent=deg?(c/Math.sin(aC)).toFixed(2):'—'; document.getElementById('r4').textContent=(Math.abs(d)>1e-6?(2*R).toFixed(2):'—'); }
 /* 코사인법칙 */
 var P2=null;
-function setup2(){ var cv=document.getElementById('cv2'); if(!P2) P2=LEC.plane(cv,{xmin:-1,xmax:8,ymin:-1,ymax:7,h:300,square:true}); else P2.resize(); draw2(); }
+function setup2(){ var cv=document.getElementById('cv2'); if(!P2) P2=LEC.plane(cv,{xmin:-6,xmax:7,ymin:-1,ymax:7,h:300,square:true}); else P2.resize(); draw2(); }
 function draw2(){ if(!P2)return; var a=parseInt(document.getElementById('ca').value,10), b=parseInt(document.getElementById('cb').value,10), Cd=parseInt(document.getElementById('cC').value,10); document.getElementById('cav').textContent=a; document.getElementById('cbv').textContent=b; document.getElementById('cCv').textContent=Cd+'°';
   var Cr=Cd*D2R; var Cp={x:0.5,y:0.5}, Bp={x:0.5+a,y:0.5}, Ap={x:0.5+b*Math.cos(Cr),y:0.5+b*Math.sin(Cr)}; var c2=a*a+b*b-2*a*b*Math.cos(Cr);
   P2.clear().grid().axes(false); P2.poly([[Cp.x,Cp.y],[Bp.x,Bp.y],[Ap.x,Ap.y]],'#6d28d9','rgba(109,40,217,.08)',2.5);
@@ -239,11 +239,11 @@ function draw2(){ if(!P2)return; var a=parseInt(document.getElementById('ca').va
   P2.dot(Cp.x,Cp.y,'#16a34a',6,'C='+Cd+'°','sw'); P2.dot(Bp.x,Bp.y,'#2563eb',6,'B','se'); P2.dot(Ap.x,Ap.y,'#dc2626',6,'A','n');
   P2.text((Cp.x+Bp.x)/2,Cp.y,'a='+a,'#0f172a','s'); P2.text((Cp.x+Ap.x)/2,(Cp.y+Ap.y)/2,'b='+b,'#0f172a','nw'); P2.text((Ap.x+Bp.x)/2,(Ap.y+Bp.y)/2,'c='+Math.sqrt(c2).toFixed(2),'#6d28d9','ne');
   var cosv=Math.cos(Cr); var term=(-2*a*b*cosv);
-  document.getElementById('out2').innerHTML='$c^2=a^2+b^2-2ab\\cos C='+(a*a)+'+'+(b*b)+(term>=0?'+':'−')+Math.abs(term).toFixed(2)+'='+c2.toFixed(2)+'$ → $c\\approx'+Math.sqrt(c2).toFixed(2)+'$'+(Cd===90?' <b>(직각: 피타고라스)</b>':(Cd<90?' (예각: $a^2+b^2$보다 작다)':' (둔각: $a^2+b^2$보다 크다)')); LEC.tex(document.getElementById('out2')); }
+  document.getElementById('out2').innerHTML='$c^2=a^2+b^2-2ab\\cos C='+(a*a)+'+'+(b*b)+(Math.abs(term)<1e-9?'':(term>=0?'+':'−')+Math.abs(term).toFixed(2))+'='+c2.toFixed(2)+'$ → $c\\approx'+Math.sqrt(c2).toFixed(2)+'$'+(Cd===90?' <b>(직각: 피타고라스)</b>':(Cd<90?' (예각: $a^2+b^2$보다 작다)':' (둔각: $a^2+b^2$보다 크다)')); LEC.tex(document.getElementById('out2')); }
 ['ca','cb','cC'].forEach(function(id){document.getElementById(id).addEventListener('input',draw2);});
 /* 넓이 */
 var P3=null;
-function setup3(){ var cv=document.getElementById('cv3'); if(!P3) P3=LEC.plane(cv,{xmin:-1,xmax:8,ymin:-1,ymax:7,h:280,square:true}); else P3.resize(); draw3(); }
+function setup3(){ var cv=document.getElementById('cv3'); if(!P3) P3=LEC.plane(cv,{xmin:-6,xmax:7,ymin:-1,ymax:7,h:280,square:true}); else P3.resize(); draw3(); }
 function draw3(){ if(!P3)return; var a=parseInt(document.getElementById('aa').value,10), b=parseInt(document.getElementById('ab').value,10), Cd=parseInt(document.getElementById('aC').value,10); document.getElementById('aav').textContent=a; document.getElementById('abv').textContent=b; document.getElementById('aCv').textContent=Cd+'°';
   var Cr=Cd*D2R; var Cp={x:0.5,y:0.5}, Bp={x:0.5+a,y:0.5}, Ap={x:0.5+b*Math.cos(Cr),y:0.5+b*Math.sin(Cr)}; var h=b*Math.sin(Cr); var S=0.5*a*h;
   P3.clear().grid().axes(false); P3.poly([[Cp.x,Cp.y],[Bp.x,Bp.y],[Ap.x,Ap.y]],'#6d28d9','rgba(109,40,217,.12)',2.5); P3.seg(Ap.x,Ap.y,Ap.x,Cp.y,'#dc2626',2,[5,4]); P3.text(Ap.x,(Ap.y+Cp.y)/2,'h=b·sinC='+h.toFixed(2),'#dc2626',Ap.x>Cp.x+a/2?'nw':'ne');

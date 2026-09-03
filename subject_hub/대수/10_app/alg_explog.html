@@ -45,9 +45,9 @@
   .splink{display:flex;align-items:center;gap:10px;background:#fffbeb;border:1.5px dashed #fcd34d;border-radius:12px;padding:12px 14px;margin:12px 0;font-size:13.5px}.splink a{font-weight:800;color:#b45309;text-decoration:none}
   .fcards{display:grid;grid-template-columns:1fr;gap:9px;margin:10px 0}.fcell{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;cursor:pointer}.fcell:hover{border-color:var(--accent);background:var(--accent-bg)}
   .fcell .flhs{font-size:15px}.fcell .frhs{display:none;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);color:var(--accent-d);font-size:14px}.fcell.show .frhs{display:block}.fcell .ftap{font-size:11px;color:var(--sub);float:right}
-  .widget{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}.widget canvas{display:block;width:100%;border-radius:8px;touch-action:none}
+  .widget{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}.widget canvas{display:block;width:100%;max-width:520px;margin:0 auto;border-radius:8px;touch-action:pan-y}
   .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 4px;font-size:13px}.row input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}.row .v{font-weight:800;color:var(--accent);min-width:50px;text-align:right}
-  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.btns button{background:#fff;border:1.5px solid #ddd6fe;color:var(--accent-d);border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer;min-height:40px}.btns button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.btns button{background:#fff;border:1.5px solid #ddd6fe;color:var(--accent-d);border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}.btns button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .out{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:12px 14px;margin-top:8px;font-size:14px;text-align:center;min-height:44px}.out b{color:#c4b5fd}
   .ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin:10px 0}.ladder div{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}.ladder b{display:block;color:var(--accent-d);margin-bottom:3px}
   .steps{margin:10px 0}.stepbtn{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:11px 16px;font:inherit;font-weight:700;font-size:13.5px;cursor:pointer;min-height:44px}
@@ -58,7 +58,7 @@
   .qq{font-size:16px;font-weight:700;text-align:center;margin:10px 0 16px}.qopts{display:grid;gap:10px}
   .qopt{border:2px solid var(--line);background:#fff;border-radius:12px;padding:14px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:52px;text-align:left}.qopt.correct{background:var(--green-bg);border-color:#6ee7b7;color:#065f46}.qopt.wrong{background:var(--red-bg);border-color:#fecaca;color:#991b1b}.qopt.dim{opacity:.5}
   .qexp{display:none;margin-top:14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:13.5px}.qexp.show{display:block}.qexp .et{font-weight:800;margin-bottom:4px}
-  .fix{display:inline-block;margin-top:8px;background:#fff7ed;border:1px solid #fed7aa;color:#c2410c;border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer;min-height:36px}
+  .fix{display:inline-block;margin-top:8px;background:#fff7ed;border:1px solid #fed7aa;color:#c2410c;border-radius:999px;padding:9px 12px;font-size:12.5px;font-weight:700;cursor:pointer;min-height:44px}
   .qnext{display:none;margin-top:14px;width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:13px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;min-height:48px}.qnext.show{display:block}
   .qdone{text-align:center;padding:10px 0}.qdone .big{font-size:40px;font-weight:800;color:var(--accent)}
   .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 18px;font:inherit;font-weight:700;font-size:13.5px;cursor:pointer;text-decoration:none;min-height:44px}
@@ -91,14 +91,14 @@
       <h2>📋 거듭제곱의 세계를 넓히기</h2>
       <div class="hook">
         <div class="ht">💥 왜 배우나</div>
-        체스판 발명가가 왕에게 "첫 칸에 쌀 1알, 다음 칸에 2알, 그다음 4알… 64칸까지"를 청했다는 이야기가 있어요. 마지막 칸은 $2^{63}$알, 전부 합치면 약 $1.8\times10^{19}$알로 <b>인류 역사 전체의 쌀 생산량보다 많아요</b>. 두 배씩 커지는 것(지수)은 사람의 직관을 배신해요. 그리고 그 거대한 수를 "몇 자리인가"로 줄여 읽는 도구가 <b>로그</b>예요.
+        체스판 발명가가 왕에게 "첫 칸에 쌀 1알, 다음 칸에 2알, 그다음 4알… 64칸까지"를 청했다는 이야기가 있어요. 마지막 칸은 $2^{63}$알, 전부 합치면 약 $1.8\times10^{19}$알로 <b>지금 전 세계가 900년 가까이 거둬야 하는 양이에요</b>. 두 배씩 커지는 것(지수)은 사람의 직관을 배신해요. 그리고 그 거대한 수를 "몇 자리인가"로 줄여 읽는 도구가 <b>로그</b>예요.
       </div>
-      <div class="splink">🚪 먼저 감부터 잡고 싶다면 → <a href="alg_sp_log.html">관문 특강: 지수→로그 완전정복</a> (2^x 곡선 뒤집기 · 유형 4 무한 연습)</div>
+      <div class="splink">🚪 먼저 감부터 잡고 싶다면 → <a href="alg_sp_log.html">관문 특강: 지수→로그 완전정복</a> ($2^x$ 곡선 뒤집기 · 유형 4 무한 연습)</div>
       <div class="sci">
         <div class="ava">📜</div>
         <div>
           <div class="st">존 네이피어 (1550~1617) — 로그의 발명</div>
-          <div class="sd">스코틀랜드의 네이피어는 천문학자들이 거대한 곱셈에 시달리는 것을 보고 <b>곱셈을 덧셈으로 바꾸는 표</b>를 20년에 걸쳐 만들었어요. 케플러는 이 표 덕에 행성 궤도 계산을 끝낼 수 있었고, "네이피어가 천문학자의 수명을 두 배로 늘렸다"는 말이 남았어요. 계산기가 나오기 전까지 400년 동안 공학자의 필수 도구였던 계산자(slide rule)도 로그예요.</div>
+          <div class="sd">스코틀랜드의 네이피어는 천문학자들이 거대한 곱셈에 시달리는 것을 보고 <b>곱셈을 덧셈으로 바꾸는 표</b>를 20년에 걸쳐 만들었어요. 케플러는 이 표로 행성 위치표(루돌프 표)를 완성했고, "네이피어가 천문학자의 수명을 두 배로 늘렸다"는 말이 남았어요. 계산기가 나오기 전까지 350년 가까이 공학자의 필수 도구였던 계산자(slide rule)도 로그예요.</div>
         </div>
       </div>
       <div class="toc">
@@ -221,7 +221,7 @@
         <ol>
           <li><b>지수적 증가는 직관을 배신한다.</b> 두 배씩 30번이면 10억 배. 복리·전염병·기술 발전은 처음엔 느려 보이다가 갑자기 폭발한다.</li>
           <li><b>로그는 큰 수를 사람 크기로 줄여 읽는 눈금이다.</b> 지진 규모·데시벨·pH는 한 칸이 10배(또는 그 근처)다.</li>
-          <li><b>$\log 2\approx0.30$</b>. "2의 10제곱이 대략 1000"과 같은 말이고, 컴퓨터의 킬로·메가·기가가 1024씩인 이유다.</li>
+          <li><b>$\log 2\approx0.30$</b>. "2의 10제곱이 대략 1000"과 같은 말이고, 컴퓨터가 용량을 1024(=2¹⁰)씩 묶어 세는(KiB·MiB·GiB) 이유다.</li>
         </ol>
       </div>
       <div class="insight">

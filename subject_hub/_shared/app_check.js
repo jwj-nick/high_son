@@ -31,6 +31,10 @@ const cut2 = body.match(new RegExp('[^<\\/]' + CUT.source, 'g')); if (cut2) fail
 const mcut = mathSegs(body).filter(s => MATHCUT.test(s)); if (mcut.length) fail('수식 안 <,> 뒤 알파벳(\\lt \\gt 로) ' + mcut.length + '건:', mcut.slice(0, 3).join(' | '));
 // JS 문자열 안의 $…$ 도 검사(innerHTML로 들어가는 해설·라벨)
 const jsKor = korInMath(jsAll.replace(/\/\*[\s\S]*?\*\//g, '')); if (jsKor.length) warnf('JS 문자열 수식 안 한글 ' + jsKor.length + '건:', jsKor.slice(0, 2).join(' | '));
+// JS 문자열 리터럴이 innerHTML로 들어갈 때 '<'+알파벳(태그 오인)으로 잘리는 것 — 실제 태그(<b>, <br>, <span …>)는 제외
+const strip = t => t.replace(/<\/?[a-zA-Z][a-zA-Z0-9]*(\s[^<>]*)?\/?>/g, '');
+const litHits = [...jsAll.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/'(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"/g)].map(m => m[0].slice(1, -1)).filter(l => CUT.test(strip(l)) || /<[a-zA-Z](?=\s*[$)\]}])/.test(strip(l)));
+if (litHits.length) fail("JS 문자열 innerHTML '<'+알파벳 잘림 " + litHits.length + '건:', litHits.slice(0, 3).map(s => s.slice(0, 70)));
 
 // ④ 태그 균형
 ['div', 'section', 'span', 'a', 'p', 'b', 'button', 'table', 'tr', 'td', 'th', 'ul', 'ol', 'li', 'svg', 'g', 'h1', 'h2', 'h3', 'h4', 'small', 'label', 'nav', 'i', 'sup', 'sub', 'code', 'canvas'].forEach(t => {
@@ -56,6 +60,7 @@ if (qm) {
       else if (new Set(q.o).size !== 4) fail('QUIZ#' + (i + 1) + ' 보기 중복:', q.o.join(' | '));
       if (!Number.isInteger(q.a) || q.a < 0 || q.a > 3) fail('QUIZ#' + (i + 1) + ' 정답 인덱스 이상');
       if (!q.e) warnf('QUIZ#' + (i + 1) + ' 해설 없음');
+      [q.q, q.e].concat(q.o || []).forEach(t => { if (typeof t === 'string' && CUT.test(strip(t))) fail('QUIZ#' + (i + 1) + " 문자열 '<'+알파벳 잘림:", t.slice(0, 60)); });
       if (q.t && TN && !(q.t in TN)) fail('QUIZ#' + (i + 1) + ' 고치는 곳 탭 없음:', q.t);
       if (q.t && !new RegExp('data-t="' + q.t + '"').test(html)) fail('QUIZ#' + (i + 1) + ' data-t 탭 없음:', q.t);
     });

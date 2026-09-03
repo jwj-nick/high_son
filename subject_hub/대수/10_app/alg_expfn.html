@@ -214,7 +214,7 @@ function setupG(){ var cv=document.getElementById('gcv'); if(!GP) GP=LEC.plane(c
 function drawG(){ if(!GP)return; var a=parseFloat(document.getElementById('ga').value); if(a===1){a=1.25; document.getElementById('ga').value=1.25;} document.getElementById('gav').textContent=a;
   GP.clear().grid().axes(); GP.plot(function(x){return Math.pow(a,x);},'#6d28d9',3); if(CMP) GP.plot(function(x){return Math.pow(1/a,x);},'#db2777',2.5);
   GP.dot(0,1,'#dc2626',6,'(0, 1)','ne'); GP.dot(1,a,'#dc2626',6,'(1, '+a+')','se');
-  document.getElementById('gout').innerHTML='$y='+a+'^x$ : '+(a>1?'<b>증가</b> (밑이 1보다 크다)':'<b>감소</b> (밑이 1보다 작다)')+' · 점근선 $y=0$ · 치역 $y>0$'+(CMP?' · <span style="color:#f9a8d4">분홍 = $y=('+LEC.frac(1,1).replace('1','')+'1/'+a+')^x$, $y$축 대칭</span>':''); LEC.tex(document.getElementById('gout')); }
+  document.getElementById('gout').innerHTML='$y='+a+'^x$ : '+(a>1?'<b>증가</b> (밑이 1보다 크다)':'<b>감소</b> (밑이 1보다 작다)')+' · 점근선 $y=0$ · 치역 $y>0$'+(CMP?' · <span style="color:#f9a8d4">분홍 = $y=\\left(\\tfrac{1}{'+a+'}\\right)^x$, $y$축 대칭</span>':''); LEC.tex(document.getElementById('gout')); }
 document.getElementById('ga').addEventListener('input',drawG); document.getElementById('cmpBtn').addEventListener('click',function(){ CMP=!CMP; this.classList.toggle('on',CMP); drawG(); });
 
 /* 이동 탭 */
@@ -231,7 +231,7 @@ document.getElementById('symbtns').addEventListener('click',function(e){ var b=e
 
 /* 부등식 밑 판정 */
 function ineq(a){ var el=document.getElementById('ineqout'); var flip=a<1; var A=String(a).replace('0.5','\\tfrac12').replace('0.2','\\tfrac15');
-  el.innerHTML='$'+A+'^{x}<'+A+'^{3}$ &nbsp;→&nbsp; 밑 '+(flip?'$0<a<1$ 감소함수 → 부등호 <b>반전</b>: $x>3$':'$a>1$ 증가함수 → 부등호 <b>유지</b>: $x<3$'); LEC.tex(el); }
+  el.innerHTML='$\\left('+A+'\\right)^{x}\\lt\\left('+A+'\\right)^{3}$ &nbsp;→&nbsp; 밑 '+(flip?'$0\\lt a\\lt 1$ 감소함수 → 부등호 <b>반전</b>: $x\\gt 3$':'$a\\gt 1$ 증가함수 → 부등호 <b>유지</b>: $x\\lt 3$'); LEC.tex(el); }
 document.getElementById('ineqbtns').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; this.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); ineq(parseFloat(b.dataset.a)); }); ineq(2);
 
 APP.onTab({graph:setupG, move:setupM});

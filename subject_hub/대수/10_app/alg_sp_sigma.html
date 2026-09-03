@@ -169,7 +169,7 @@
       <li>점화식("다음 = 이전으로부터")은 컴퓨터가 세상을 계산하는 기본 방식이에요. 날씨 예보도, 게임의 물리도, 매 순간 이전 상태에서 다음 상태를 만들어요.</li>
     </ul>
   </div>
-  <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>"다음 항 = 이전 항으로부터"를 무한히 반복해서 "모든 $n$에 대해 성립"을 증명하는 것이 <b>수학적 귀납법</b>(도미노)이에요. 그리고 $\sum$으로 직사각형 넓이를 무한히 더하는 것이 미적분Ⅰ의 <b>정적분</b>이에요. Σ 리터러시가 거기까지 이어져요.</div>
+  <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>"다음 항 = 이전 항으로부터"를 무한히 반복해서 "모든 $n$에 대해 성립"을 증명하는 것이 <b>수학적 귀납법</b>(도미노)이에요. 그리고 넓이를 잘게 쪼개 더하는 발상이 미적분Ⅰ의 <b>정적분</b>(그래프 아래 넓이)으로 이어져요. Σ 리터러시가 거기까지 이어져요.</div>
   <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>계단 오르기(등차), 세포 분열·바이러스 확산(등비), 적금 이자(등비 합), 달력의 날짜 세기(끝 − 시작 + 1). "규칙대로 하나씩 더해 간다"는 모든 곳에 수열이 있어요.</div>
   <div class="reallife"><div class="rt">🏭 이걸로 먹고사는 사람들</div>금융의 적금·대출 상환(등비수열의 합), 컴퓨터 프로그래밍의 반복문과 재귀, 통계의 평균·합계, 물리 시뮬레이션의 "다음 상태 = 이전 상태로부터"(점화식). <span style="color:#312e81;font-weight:700">🎓 컴퓨터공학 · 금융 · 통계학</span></div>
   <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:14px">단원 앱으로 이어서 → <a href="alg_seq.html">등차수열과 등비수열</a> · <a href="alg_sigma.html">수열의 합 Σ</a> · <a href="alg_induction.html">귀납적 정의와 수학적 귀납법</a></p>
@@ -202,13 +202,13 @@
         if(mode===2){ var n2=ri(4,7); var f2=function(k){return Math.pow(-1,k)*k;}; var v2=S(f2,1,n2);
           return { q:'$'+sig(1,n2,'(-1)^k k')+'$ 의 값은?', ans:v2, fig:{v:v2}, steps:['$(-1)^k$ 는 부호를 번갈아: $k$ 홀수면 $-$, 짝수면 $+$', '펼치기: $'+expand(f2,1,n2,function(k){return LEC.sgnParen(f2(k));})+'='+v2+'$'] }; }
         var r=pick([2,3]), n3=ri(3,5); var f3=function(k){return Math.pow(r,k);}; var v3=S(f3,1,n3);
-        return { q:'$'+sig(1,n3,r+'^k')+'$ 의 값은?', ans:v3, fig:{v:v3}, steps:['펼치기: $'+expand(f3,1,n3,function(k){return String(Math.pow(r,k));})+'$', '합 $='+v3+'$ (등비수열의 합: $\\dfrac{'+r+'('+r+'^{'+n3+'}-1)}{'+(r-1)+'}$)'] }; },
+        return { q:'$'+sig(1,n3,r+'^k')+'$ 의 값은?', ans:v3, fig:{v:v3}, steps:['펼치기: $'+expand(f3,1,n3,function(k){return String(Math.pow(r,k));})+'$', '합 $='+v3+'$ (등비수열의 합: $'+(r===2?'2(2^{'+n3+'}-1)':'\\dfrac{'+r+'('+r+'^{'+n3+'}-1)}{'+(r-1)+'}')+'$)'] }; },
       verify:function(p){ return p.fig.v===p.ans; } },
 
     type2:{ label:'② Σ로 쓰기', anchor:'#type2',
       gen:function(){ var mode=ri(0,2); var n=ri(5,10);
         var items=[
-          {f:function(k){return 2*k;}, body:'2k', words:'$2+4+6+\\cdots+'+(2*n)+'$', rule:'$k$번째 항이 $2k$', bad:['2k-1','k','2k+1'], badN:[n, 2*n, n-1]},
+          {f:function(k){return 2*k;}, body:'2k', words:'$2+4+6+\\cdots+'+(2*n)+'$', rule:'$k$번째 항이 $2k$', bad:['(2k-1)','k','(2k+1)'], badN:[n, 2*n, n-1]},
           {f:function(k){return 2*k-1;}, body:'(2k-1)', words:'$1+3+5+\\cdots+'+(2*n-1)+'$', rule:'$k$번째 홀수는 $2k-1$', bad:['2k','(2k+1)','k'], badN:[n, n, 2*n-1]},
           {f:function(k){return 3*k;}, body:'3k', words:'$3+6+9+\\cdots+'+(3*n)+'$', rule:'$k$번째 항이 $3k$', bad:['(3k-3)','k','3^k'], badN:[n, 3*n, n]},
           {f:function(k){return k*k;}, body:'k^2', words:'$1+4+9+\\cdots+'+(n*n)+'$', rule:'$k$번째 항이 $k^2$', bad:['2k','k^3','(k^2+1)'], badN:[n*n, n, n]},
@@ -224,12 +224,12 @@
     type3:{ label:'③ 성질로 쪼개기', anchor:'#type3',
       gen:function(){ var mode=ri(0,2);
         if(mode===0){ var a=nz(-2,3), b=ri(-3,4), n=ri(8,15); var f=function(k){return a*k+b;}; var v=S(f,1,n);
-          return { q:'$'+sig(1,n,'('+poly([a,b],'k')+')')+'$ 의 값은? (공식으로)', ans:v, fig:{v:v}, steps:['쪼개기: $'+a+'\\sum_{k=1}^{'+n+'}k+\\sum_{k=1}^{'+n+'}'+LEC.sgnParen(b)+'$', '$='+a+'\\cdot\\dfrac{'+n+'\\cdot'+(n+1)+'}{2}+'+LEC.sgnParen(b)+'\\cdot'+n+'='+(a*n*(n+1)/2)+LEC.term(b*n,'',false)+'='+v+'$', '상수항은 $n$번 더해진다는 것에 주의'] }; }
+          return { q:'$'+sig(1,n,'('+poly([a,b],'k')+')')+'$ 의 값은? (공식으로)', ans:v, fig:{v:v}, steps:['쪼개기: $'+LEC.term(a,'\\sum_{k=1}^{'+n+'}k',true)+'+\\sum_{k=1}^{'+n+'}'+LEC.sgnParen(b)+'$', '$='+a+'\\cdot\\dfrac{'+n+'\\cdot'+(n+1)+'}{2}+'+LEC.sgnParen(b)+'\\cdot'+n+'='+(a*n*(n+1)/2)+LEC.term(b*n,'',false)+'='+v+'$', '상수항은 $n$번 더해진다는 것에 주의'] }; }
         if(mode===1){ var n1=ri(5,10); var c=ri(1,3); var f1=function(k){return k*k+c*k;}; var v1=S(f1,1,n1);
           return { q:'$'+sig(1,n1,'(k^2'+LEC.term(c,'k',false)+')')+'$ 의 값은?', ans:v1, fig:{v:v1}, steps:['$\\sum k^2+'+c+'\\sum k$', '$\\dfrac{'+n1+'\\cdot'+(n1+1)+'\\cdot'+(2*n1+1)+'}{6}+'+c+'\\cdot\\dfrac{'+n1+'\\cdot'+(n1+1)+'}{2}='+(n1*(n1+1)*(2*n1+1)/6)+'+'+(c*n1*(n1+1)/2)+'='+v1+'$'] }; }
         var A=ri(5,30), B=ri(3,20), n2=ri(5,12); var p=pick([2,3,-1]), q=pick([1,-1,-2]), r=ri(1,3); var v2=p*A+q*B+r*n2;
         return { q:'$\\displaystyle\\sum_{k=1}^{'+n2+'}a_k='+A+'$, $\\displaystyle\\sum_{k=1}^{'+n2+'}b_k='+B+'$ 일 때 $\\displaystyle\\sum_{k=1}^{'+n2+'}('+LEC.term(p,'a_k',true)+LEC.term(q,'b_k',false)+'+'+r+')$ 의 값은?', ans:v2, fig:{v:v2},
-          steps:['합 분리·상수 밖으로: $'+p+'\\sum a_k'+LEC.term(q,'\\sum b_k',false)+'+\\sum_{k=1}^{'+n2+'}'+r+'$', '$='+p+'\\cdot'+A+LEC.term(q*B,'',false)+'+'+r+'\\cdot'+n2+'='+v2+'$', '함정: 마지막 $'+r+'$은 $'+n2+'$번 더해진다'] }; },
+          steps:['합 분리·상수 밖으로: $'+LEC.term(p,'\\sum a_k',true)+LEC.term(q,'\\sum b_k',false)+'+\\sum_{k=1}^{'+n2+'}'+r+'$', '$='+p+'\\cdot'+A+LEC.term(q*B,'',false)+'+'+r+'\\cdot'+n2+'='+v2+'$', '함정: 마지막 $'+r+'$은 $'+n2+'$번 더해진다'] }; },
       verify:function(p){ return p.fig.v===p.ans; } },
 
     type4:{ label:'④ 망원합·점화식', anchor:'#type4',

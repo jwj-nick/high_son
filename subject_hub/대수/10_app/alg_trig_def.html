@@ -71,7 +71,7 @@
       </table>
       <h3>부채꼴의 호의 길이와 넓이 — 라디안이면 곱셈 하나</h3>
       <div class="widget">
-        <canvas id="scv" height="240"></canvas>
+        <canvas id="scv" height="340"></canvas>
         <div class="row"><span>반지름 $r$</span><input type="range" id="sr" min="1" max="6" step="1" value="3"><span class="v" id="srv">3</span></div>
         <div class="row"><span>중심각 $\theta$ (π의 배수)</span><input type="range" id="sth" min="1" max="12" step="1" value="4"><span class="v" id="sthv">π/3</span></div>
         <div class="out" id="sout"></div>
@@ -212,6 +212,8 @@
 
 <script src="alg_app.js"></script>
 <script>
+function pm(fr){ return fr==='1'?'\\pi':(fr==='-1'?'-\\pi':fr+'\\pi'); }
+function fmtPi(n,d){ var g=LEC.gcd(n,d); var num=n/g, den=d/g; if(num===0) return '0'; return (num<0?'−':'')+(Math.abs(num)===1?'':Math.abs(num))+'π'+(den===1?'':'/'+den); }
 function fmtRad(d){ var g=LEC.gcd(Math.abs(d),180); var n=d/g, m=180/g; if(d===0) return '0'; return (m===1? (Math.abs(n)===1?(n<0?'−':''):n)+'π' : (Math.abs(n)===1?(n<0?'−':''):n)+'π/'+m); }
 /* 일반각 위젯 */
 var AP=null;
@@ -220,25 +222,25 @@ function drawA(){ if(!AP)return; var d=parseInt(document.getElementById('adeg').
   AP.clear().grid().axes(false); AP.circle(0,0,1,'#c4b5fd',2); AP.seg(0,0,1.3,0,'#94a3b8',2); AP.text(1.3,0,'시초선','#64748b','se');
   var r=d*Math.PI/180; var c=AP.ctx; c.strokeStyle='#f59e0b'; c.lineWidth=4; var turns=Math.floor(Math.abs(d)/360); var rem=Math.abs(d)%360;
   for(var t=0;t<turns;t++){ c.beginPath(); c.arc(AP.X(0),AP.Y(0),(0.25+0.1*t)/(AP.xmax-AP.xmin)*AP.w,0,Math.PI*2); c.stroke(); }
-  c.beginPath(); c.arc(AP.X(0),AP.Y(0),(0.25+0.1*turns)/(AP.xmax-AP.xmin)*AP.w,0,-r*Math.sign(d)*(rem/Math.abs(d||1))*(Math.abs(d)/(Math.abs(d)||1)), d>=0); c.stroke();
+  c.beginPath(); c.arc(AP.X(0),AP.Y(0),(0.25+0.1*turns)/(AP.xmax-AP.xmin)*AP.w,0,-Math.sign(d)*rem*Math.PI/180, d>=0); c.stroke();
   AP.seg(0,0,Math.cos(r),Math.sin(r),'#6d28d9',3); AP.dot(Math.cos(r),Math.sin(r),'#6d28d9',7,'동경','ne');
   var norm=((d%360)+360)%360;
   document.getElementById('aout').innerHTML='$'+d+'°='+fmtRad(d)+'$ rad ≈ '+r.toFixed(2)+' · 같은 동경의 각: $'+norm+'°+360°\\times n$'+(d<0?' (시계 방향 = 음의 각)':'')+(Math.abs(d)>=360?' (한 바퀴 이상)':''); LEC.tex(document.getElementById('aout')); }
 /* 부채꼴 */
 var SP=null;
-function setupS(){ var cv=document.getElementById('scv'); if(!SP) SP=LEC.plane(cv,{xmin:-7,xmax:7,ymin:-7,ymax:7,h:240,square:true,grid:1}); else SP.resize(); drawS(); }
+function setupS(){ var cv=document.getElementById('scv'); if(!SP) SP=LEC.plane(cv,{xmin:-7,xmax:7,ymin:-7,ymax:7,h:340,square:true,grid:1}); else SP.resize(); drawS(); }
 function drawS(){ if(!SP)return; var r=parseInt(document.getElementById('sr').value,10), k=parseInt(document.getElementById('sth').value,10); var th=k*Math.PI/6; document.getElementById('srv').textContent=r; document.getElementById('sthv').textContent=fmtRad(k*30);
   SP.clear().grid().axes(false); var c=SP.ctx; c.fillStyle='rgba(109,40,217,.15)'; c.strokeStyle='#6d28d9'; c.lineWidth=2.5; c.beginPath(); c.moveTo(SP.X(0),SP.Y(0)); c.arc(SP.X(0),SP.Y(0),r/(SP.xmax-SP.xmin)*SP.w,0,-th,true); c.closePath(); c.fill(); c.stroke();
   var l=r*th, S=0.5*r*r*th;
-  document.getElementById('sout').innerHTML='$l=r\\theta='+r+'\\cdot'+LEC.frac(k,6)+'\\pi='+LEC.frac(r*k,6)+'\\pi\\approx'+l.toFixed(2)+'$ &nbsp;·&nbsp; $S=\\tfrac12r^2\\theta=\\tfrac12\\cdot'+(r*r)+'\\cdot'+LEC.frac(k,6)+'\\pi='+LEC.frac(r*r*k,12)+'\\pi\\approx'+S.toFixed(2)+'$'; LEC.tex(document.getElementById('sout')); }
+  document.getElementById('sout').innerHTML='$l=r\\theta='+r+'\\cdot'+LEC.frac(k,6)+'\\pi='+pm(LEC.frac(r*k,6))+'\\approx'+l.toFixed(2)+'$ &nbsp;·&nbsp; $S=\\tfrac12r^2\\theta=\\tfrac12\\cdot'+(r*r)+'\\cdot'+LEC.frac(k,6)+'\\pi='+pm(LEC.frac(r*r*k,12))+'\\approx'+S.toFixed(2)+'$'; LEC.tex(document.getElementById('sout')); }
 /* 정의 위젯 (드래그) */
 var DP=null, PT={x:Math.cos(0.6),y:Math.sin(0.6)};
 function setupD(){ var cv=document.getElementById('dcv'); if(!DP){ DP=LEC.plane(cv,{xmin:-1.5,xmax:1.5,ymin:-1.5,ymax:1.5,h:320,square:true,grid:0.5}); DP.drag([PT],function(p){ var t=Math.atan2(p.y,p.x); p.x=Math.cos(t); p.y=Math.sin(t); drawD(); }); } else DP.resize(); drawD(); }
 function drawD(){ if(!DP)return; var t=Math.atan2(PT.y,PT.x); if(t<0)t+=Math.PI*2; var d=t*180/Math.PI;
   DP.clear().grid().axes(false); DP.circle(0,0,1,'#c4b5fd',2); var c=DP.ctx; c.strokeStyle='#f59e0b'; c.lineWidth=3; c.beginPath(); c.arc(DP.X(0),DP.Y(0),0.3/(DP.xmax-DP.xmin)*DP.w,0,-t,true); c.stroke();
   DP.seg(0,0,PT.x,PT.y,'#6d28d9',2.5); DP.seg(PT.x,0,PT.x,PT.y,'#dc2626',3); DP.seg(0,0,PT.x,0,'#2563eb',3); DP.dot(PT.x,PT.y,'#6d28d9',8,'P('+PT.x.toFixed(2)+', '+PT.y.toFixed(2)+')',PT.y>=0?'ne':'se');
-  var q=(Math.floor(d/90)%4)+1; var tan=Math.abs(PT.x)<0.02?'없음 (x=0)':(PT.y/PT.x).toFixed(3);
-  document.getElementById('dout').innerHTML='θ ≈ '+Math.round(d)+'° ('+q+'사분면) &nbsp; sin θ = <b>'+PT.y.toFixed(3)+'</b> &nbsp; cos θ = <b>'+PT.x.toFixed(3)+'</b> &nbsp; tan θ = <b>'+tan+'</b> &nbsp;<span style="color:#94a3b8">sin²+cos² = '+(PT.x*PT.x+PT.y*PT.y).toFixed(3)+'</span>'; }
+  var q=(Math.abs(d%90)<0.5||Math.abs(d%90)>89.5)?'축 위':((Math.floor(d/90)%4)+1)+'사분면'; var tan=Math.abs(PT.x)<0.02?'없음 (x=0)':(PT.y/PT.x).toFixed(3);
+  document.getElementById('dout').innerHTML='θ ≈ '+Math.round(d)+'° ('+q+') &nbsp; sin θ = <b>'+PT.y.toFixed(3)+'</b> &nbsp; cos θ = <b>'+PT.x.toFixed(3)+'</b> &nbsp; tan θ = <b>'+tan+'</b> &nbsp;<span style="color:#94a3b8">sin²+cos² = '+(PT.x*PT.x+PT.y*PT.y).toFixed(3)+'</span>'; }
 /* 각의 변환 위젯 */
 var YP=null, SK='pi-';
 var SYMS={'pi-':{n:'\\pi-\\theta',f:function(t){return Math.PI-t;},line:'y축 대칭',desc:'높이 그대로, 그림자 반대'},'pi+':{n:'\\pi+\\theta',f:function(t){return Math.PI+t;},line:'원점 대칭',desc:'둘 다 반대'},'neg':{n:'-\\theta',f:function(t){return -t;},line:'x축 대칭',desc:'높이만 반대'},'h-':{n:'\\tfrac\\pi2-\\theta',f:function(t){return Math.PI/2-t;},line:'y=x 대칭',desc:'높이와 그림자가 자리를 바꿈'},'h+':{n:'\\tfrac\\pi2+\\theta',f:function(t){return Math.PI/2+t;},line:'y=x 대칭 뒤 y축 대칭',desc:'자리를 바꾸고 그림자 반대'}};
@@ -248,7 +250,7 @@ function drawY(){ if(!YP)return; var d=parseInt(document.getElementById('ydeg').
   if(SK==='h-'||SK==='h+') YP.seg(-1.4,-1.4,1.4,1.4,'#cbd5e1',1.5,[5,4]);
   YP.seg(0,0,Math.cos(t),Math.sin(t),'#94a3b8',2); YP.dot(Math.cos(t),Math.sin(t),'#94a3b8',6,'P(θ)','ne');
   YP.seg(0,0,Math.cos(u),Math.sin(u),'#6d28d9',3); YP.dot(Math.cos(u),Math.sin(u),'#dc2626',7,'P′',Math.cos(u)>=0?(Math.sin(u)>=0?'ne':'se'):(Math.sin(u)>=0?'nw':'sw'));
-  var sv=Math.sin(u), cv=Math.cos(u); var ss=Math.abs(Math.abs(sv)-Math.abs(Math.sin(t)))<1e-9?'\\sin\\theta':'\\cos\\theta'; var cs=Math.abs(Math.abs(cv)-Math.abs(Math.cos(t)))<1e-9?'\\cos\\theta':'\\sin\\theta';
+  var sv=Math.sin(u), cv=Math.cos(u); var swap=(SK==='h-'||SK==='h+'); var ss=swap?'\\cos\\theta':'\\sin\\theta'; var cs=swap?'\\sin\\theta':'\\cos\\theta';
   document.getElementById('yout').innerHTML='$'+s.n+'$ → '+s.line+' ('+s.desc+') &nbsp;⇒&nbsp; $\\sin('+s.n+')='+(sv<0?'-':'')+ss+'$, $\\cos('+s.n+')='+(cv<0?'-':'')+cs+'$'; LEC.tex(document.getElementById('yout')); }
 document.getElementById('symbtns').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; SK=b.dataset.k; this.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); drawY(); });
 ['adeg'].forEach(function(id){document.getElementById(id).addEventListener('input',drawA);}); ['sr','sth'].forEach(function(id){document.getElementById(id).addEventListener('input',drawS);}); document.getElementById('ydeg').addEventListener('input',drawY);
