@@ -13,7 +13,7 @@
   .venn .reg{fill:#fff;cursor:pointer;transition:fill .15s}.venn .reg.on{fill:#c7d2fe}.venn .reg:hover{fill:#e0e7ff}.venn .reg.on:hover{fill:#a5b4fc}
   .venn .outline{fill:none;stroke:#4338ca;stroke-width:2}.venn .ulabel{font-size:13px;font-weight:800;fill:#4338ca}
   .vbtns{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
-  .vbtns button{border:1.5px solid #c7d2fe;background:#fff;color:#3730a3;border-radius:999px;padding:8px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;min-height:40px}
+  .vbtns button{border:1.5px solid #c7d2fe;background:#fff;color:#3730a3;border-radius:999px;padding:8px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
   .vbtns button.on{background:#4338ca;color:#fff;border-color:#4338ca}
   .vname{text-align:center;font-weight:800;color:#3730a3;margin-top:8px;min-height:1.4em;font-size:14px}
   .vq{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px}
@@ -116,7 +116,7 @@
     <tr><th>$p$</th><th>$q$</th><th>진리집합</th><th>$p$는 $q$이기 위한</th></tr>
     <tr><td>$x=2$</td><td>$x^2=4$</td><td>$\{2\}\subset\{-2,2\}$</td><td class="k">충분조건</td></tr>
     <tr><td>$x$는 4의 배수</td><td>$x$는 2의 배수</td><td>$P\subset Q$</td><td class="k">충분조건</td></tr>
-    <tr><td>$x$는 직사각형</td><td>$x$는 정사각형</td><td>$Q\subset P$</td><td class="k">필요조건</td></tr>
+    <tr><td>어떤 사각형이 직사각형</td><td>그 사각형이 정사각형</td><td>$Q\subset P$</td><td class="k">필요조건</td></tr>
     <tr><td>$x=1$</td><td>$2x=2$</td><td>$P=Q$</td><td class="k">필요충분조건</td></tr>
     <tr><td>$x>2$</td><td>$x<5$</td><td>어느 쪽도 포함 아님</td><td class="q">어느 것도 아님</td></tr>
   </table>
@@ -188,8 +188,9 @@
       <li>"A 또는 B가 아니다" = "A도 아니고 B도 아니다"(드모르간). 검색 조건, 프로그램 조건문, 약관 해석에서 그대로 쓰여요.</li>
     </ul>
   </div>
-  <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>집합은 확률에서 <b>사건</b>이 되고(확률과 통계), 명제의 "모든·어떤"은 수학적 귀납법과 증명(대수)의 언어가 돼요. 그리고 프로그래밍의 <code>if (A &amp;&amp; !B)</code>는 정확히 $A\cap B^{c}$예요.</div>
+  <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>집합은 확률에서 <b>사건</b>이 되고(확률과 통계), 명제의 "모든·어떤"은 수학적 귀납법과 증명(대수)의 언어가 돼요. 그리고 프로그래밍의 <code>if (A &amp;&amp; !B)</code>는 정확히 $A\cap B^{c}$예요. "모든·어떤"의 부정, 대우와 귀류법으로 하는 증명, 절대부등식은 단원 앱에서 이어서 다뤄요.</div>
   <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>쇼핑몰 필터("무료배송 <b>이고</b> 4점 이상")는 교집합, 검색의 OR는 합집합, "제외" 필터는 차집합이에요. 스팸 필터의 규칙도 결국 조건의 포함 관계예요.</div>
+  <div class="reallife"><div class="rt">🏭 이걸로 먹고사는 사람들</div>데이터베이스 검색(AND·OR·NOT 조건), 검색 엔진의 필터 규칙, 계약서·법 조문의 "필요·충분" 해석, 논리 회로 설계와 프로그램의 조건문 검증. <span style="color:#312e81;font-weight:700">🎓 컴퓨터공학 · 법학 · 수리논리학</span></div>
   <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:14px">단원 앱으로 이어서 → <a href="mat2_set.html">집합</a> · <a href="mat2_logic.html">명제</a></p>
 </section>
 
@@ -246,7 +247,7 @@
         var kind=ri(0,5); var P,Q,Psub,Qsub, why;
         if(kind===0){ var a=ri(-4,4), b=a; while(b===a)b=ri(-4,4); P='x>'+a; Q='x>'+b; Psub=a>b; Qsub=b>a; why='수직선에서 $x>'+a+'$ 와 $x>'+b+'$ 중 '+(a>b?'앞쪽이 작은 범위($P\\subset Q$)':'뒤쪽이 작은 범위($Q\\subset P$)'); }
         else if(kind===1){ var c=ri(1,5); if(Math.random()<0.5){ P='x='+c; Q='x^2='+(c*c); Psub=true; Qsub=false; why='$P=\\{'+c+'\\}$, $Q=\\{-'+c+','+c+'\\}$ → $P\\subset Q$'; } else { P='x^2='+(c*c); Q='x='+c; Psub=false; Qsub=true; why='$P=\\{-'+c+','+c+'\\}$, $Q=\\{'+c+'\\}$ → $Q\\subset P$'; } }
-        else if(kind===2){ var pair=pick([[4,2],[6,3],[9,3],[8,4],[10,5]]); if(Math.random()<0.5){ P='x\\text{는 }'+pair[0]+'\\text{의 배수}'; Q='x\\text{는 }'+pair[1]+'\\text{의 배수}'; Psub=true;Qsub=false; why=pair[0]+'의 배수는 모두 '+pair[1]+'의 배수 → $P\\subset Q$ (반대는 아님: '+pair[1]+'은 '+pair[0]+'의 배수가 아님)'; } else { P='x\\text{는 }'+pair[1]+'\\text{의 배수}'; Q='x\\text{는 }'+pair[0]+'\\text{의 배수}'; Psub=false;Qsub=true; why=pair[0]+'의 배수는 모두 '+pair[1]+'의 배수 → $Q\\subset P$'; } }
+        else if(kind===2){ var pair=pick([[4,2],[6,3],[9,3],[8,4],[10,5]]); if(Math.random()<0.5){ P='x\\text{는 }'+pair[0]+'\\text{의 배수}'; Q='x\\text{는 }'+pair[1]+'\\text{의 배수}'; Psub=true;Qsub=false; why=pair[0]+'의 배수는 모두 '+pair[1]+'의 배수 → $P\\subset Q$ (반대는 아님: 예를 들어 $x='+pair[1]+'$)'; } else { P='x\\text{는 }'+pair[1]+'\\text{의 배수}'; Q='x\\text{는 }'+pair[0]+'\\text{의 배수}'; Psub=false;Qsub=true; why=pair[0]+'의 배수는 모두 '+pair[1]+'의 배수 → $Q\\subset P$'; } }
         else if(kind===3){ var d=ri(1,6); P='|x|='+d; Q='x='+d; Psub=false; Qsub=true; why='$P=\\{-'+d+','+d+'\\}$, $Q=\\{'+d+'\\}$ → $Q\\subset P$'; }
         else if(kind===4){ var e=ri(1,6), t=ri(2,3); P='x='+e; Q=t+'x='+(t*e); Psub=true; Qsub=true; why='$P=Q=\\{'+e+'\\}$ → 서로 포함'; }
         else { var g=ri(-3,2), h=g+ri(2,5); P='x>'+g; Q='x<'+h; Psub=false; Qsub=false; why='$x>'+g+'$ 인데 $x<'+h+'$ 가 아닌 수(예: $x='+(h+1)+'$)와 그 반대(예: $x='+(g-1)+'$)가 모두 있다 → 어느 쪽도 포함 아님'; }
@@ -271,14 +272,14 @@
         if(Math.random()<0.5){
           var which=pick([['대우',contra,'바꾸고 부정'],['역',conv,'앞뒤 바꾸기'],['이',inv,'둘 다 부정']]);
           var choices=[contra,conv,inv,'$'+s.p+'$ 이면 $'+s.nq+'$ 이다']; var ans=choices.indexOf(which[1]);
-          return { q:'명제 "'+stmt+'"의 <b>'+which[0]+'</b>는?', choices:choices, ans:ans, fig:{kind:'form',which:which[0]},
+          return { q:'명제 "'+stmt+'"의 <b>'+which[0]+'</b>는?', choices:choices, ans:ans, fig:{kind:'form',which:which[0],expected:which[1]},
             steps:[which[0]+' = '+which[2], '역: '+conv, '이: '+inv, '대우: '+contra] };
         }
         var truth=s.convTrue;
         return { q:'참인 명제 "'+stmt+'"의 <b>역</b>은 참인가, 거짓인가?', choices:['참','거짓'], ans:truth?0:1, fig:{kind:'truth',convTrue:truth},
           steps:['역: '+conv, truth?'진리집합이 같으므로 역도 참 (필요충분조건)':'반례 $'+s.ce+'$: 가정은 만족하지만 결론은 아니므로 거짓', '대우였다면 원명제와 같이 항상 참'] };
       },
-      verify:function(p){ var f=p.fig; if(f.kind==='truth') return (f.convTrue?0:1)===p.ans; return typeof p.choices[p.ans]==='string' && (f.which==='대우'?/이면/.test(p.choices[p.ans]):true); } }
+      verify:function(p){ var f=p.fig; if(f.kind==='truth') return (f.convTrue?0:1)===p.ans; return p.choices[p.ans]===f.expected; } }
   };
 })();
 </script>
@@ -295,7 +296,7 @@ LEC.boot({ key:'mat2_sp_logic', color:'#4338ca', color2:'#818cf8' });
   function show(){ var k=key(); var el=document.getElementById('vname'); el.innerHTML=NAMES[k]||'선택한 영역'; LEC.tex(el); document.querySelectorAll('#vbtns button').forEach(function(b){ b.classList.toggle('on', b.dataset.set===k); }); }
   regs.forEach(function(r){ r.addEventListener('click',function(){ r.classList.toggle('on'); show(); }); });
   document.getElementById('vbtns').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; var set=b.dataset.set.split(','); regs.forEach(function(r){ r.classList.toggle('on', set.indexOf(r.dataset.r)>=0); }); show(); });
-  var QS=[['"둘 다 좋아한다"','ab'],['"축구는 좋아하지만 야구는 좋아하지 않는다"','a'],['"적어도 하나는 좋아한다"','a,b,ab'],['"둘 다 좋아하지 않는다"','none'],['"야구를 좋아하지 않는다"','a,none'],['"딱 하나만 좋아한다"','a,b']];
+  var QS=[['"둘 다 좋아한다"','ab'],['"축구는 좋아하지만 야구는 좋아하지 않는다"','a'],['"적어도 하나는 좋아한다"','a,b,ab'],['"축구도 야구도 좋아하지 않는다"','none'],['"야구를 좋아하지 않는다"','a,none'],['"딱 하나만 좋아한다"','a,b']];
   var qi=0; function setQ(){ document.getElementById('vqp').textContent='문장 '+(qi+1)+'/'+QS.length+' — '+QS[qi][0]; document.getElementById('vqo').textContent=''; }
   document.getElementById('vqb').addEventListener('click',function(){ var ok=key()===QS[qi][1]; var o=document.getElementById('vqo'); o.className='lec-out '+(ok?'ok':'bad'); o.innerHTML= ok? '⭕ 맞아요! 이 영역이 '+(NAMES[QS[qi][1]]||'')+' 예요.' : '❌ 다시 보세요. 힌트: '+(NAMES[QS[qi][1]]||'')+' 를 버튼으로 확인해도 돼요.'; LEC.tex(o); });
   document.getElementById('vqn').addEventListener('click',function(){ qi=(qi+1)%QS.length; regs.forEach(function(r){r.classList.remove('on');}); show(); setQ(); });

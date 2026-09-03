@@ -43,7 +43,7 @@
       <div>해의 뜻 <b id="pm" style="font-size:12.5px"></b></div>
     </div>
   </div>
-  <p>접힌 그래프는 V자예요. V의 꼭짓점은 $x=a$, 즉 <b>절댓값 안이 0이 되는 곳</b>이에요. 가로선 $y=b$와 만나는 두 점은 꼭짓점에서 <b>좌우로 $b$만큼</b> 떨어져 있어요. 그래서 $|x-a|=b$의 해는 $x=a-b$와 $x=a+b$. 절댓값은 "거리", 이게 전부예요.</p>
+  <p>접힌 그래프는 V자예요. V의 꼭짓점은 $x=a$, 즉 <b>절댓값 안이 0이 되는 곳</b>이에요. 가로선 $y=b$ ($b>0$)와 만나는 두 점은 꼭짓점에서 <b>좌우로 $b$만큼</b> 떨어져 있어요. 그래서 $|x-a|=b$의 해는 $x=a-b$와 $x=a+b$. 절댓값은 "거리", 이게 전부예요.</p>
   <div class="lec-card">
     <h4>함께 생각하기 ①</h4>
     <p style="margin-bottom:8px;font-size:14px">$|x-3|=2$ 의 두 해의 <b>합</b>은? (3에서 거리가 2인 두 점)</p>
@@ -98,13 +98,13 @@
 
 <section class="lec-type reveal" id="type1">
   <div class="lec-type-h"><span class="badge">①</span><span><div class="t">절댓값 방정식</div><div class="d">거리가 b인 두 점</div></span></div>
-  <div class="lec-key"><b>핵심</b> $|\,\text{안}\,|=b$ 이면 안 $=b$ 또는 안 $=-b$. 안이 $2x-a$처럼 복잡해도 똑같이 두 경우. 두 해의 합은 항상 대칭 중심의 2배.</div>
+  <div class="lec-key"><b>핵심</b> $|\ \square\ |=b$ 이면 $\square=b$ 또는 $\square=-b$. 안이 $2x-a$처럼 복잡해도 똑같이 두 경우. 두 해의 합은 항상 대칭 중심의 2배.</div>
   <div id="type1body"></div>
 </section>
 
 <section class="lec-type reveal" id="type2">
   <div class="lec-type-h"><span class="badge">②</span><span><div class="t">절댓값 부등식</div><div class="d">가까운 곳은 사이, 먼 곳은 바깥</div></span></div>
-  <div class="lec-key"><b>핵심</b> $|x-a|\lt b$ 는 $a-b\lt x\lt a+b$ (사이). $|x-a|\gt b$ 는 바깥. 정수 개수를 물으면 경계 포함 여부(등호)부터 확인.</div>
+  <div class="lec-key"><b>핵심</b> $|x-a|\lt b$ 는 $a-b\lt x\lt a+b$ (사이), $|x-a|\gt b$ 는 바깥 ($b>0$일 때). 정수 개수를 물으면 경계 포함 여부(등호)부터 확인.</div>
   <div id="type2body"></div>
 </section>
 
@@ -116,7 +116,7 @@
 
 <section class="lec-type reveal" id="type4">
   <div class="lec-type-h"><span class="badge">④</span><span><div class="t">절댓값 그래프</div><div class="d">접기와 꼭짓점</div></span></div>
-  <div class="lec-key"><b>핵심</b> $y=|x-a|+k$ 는 꼭짓점 $(a,k)$인 V자. 최솟값 $k$. 가로선 $y=m$과의 교점은 $m$이 $k$보다 위면 2개, 같으면 1개, 아래면 0개.</div>
+  <div class="lec-key"><b>핵심</b> $y=|x-a|+k$ 는 꼭짓점 $(a,k)$인 V자. 최솟값 $k$. 가로선 $y=m$과의 교점은 $m$이 $k$보다 위면 2개, 같으면 1개, 아래면 0개. (그래프의 평행이동은 공통수학2에서 다시 만나요)</div>
   <div id="type4body"></div>
 </section>
 
@@ -157,6 +157,7 @@
   </div>
   <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>절댓값 그래프의 <b>꺾인 점</b>은 미적분Ⅰ에서 "미분할 수 없는 점"의 대표 예가 돼요. 그리고 "접기"는 공통수학2 <b>도형의 이동</b>(대칭이동)과 같은 조작이에요.</div>
   <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>내비게이션의 "목적지까지 남은 거리", 온도계의 "설정 온도와의 차이", 게임의 "적과의 거리가 5 이내면 공격" 조건. 방향은 무시하고 <b>크기만</b> 보는 순간마다 절댓값이 있어요.</div>
+  <div class="reallife"><div class="rt">🏭 이걸로 먹고사는 사람들</div>허용 오차($|x-x_0|\le\varepsilon$)로 부품을 검사하는 품질 관리, 센서 값의 편차를 다루는 데이터 분석, "거리가 얼마 이내면"으로 판정하는 게임·자율주행 로직. <span style="color:#312e81;font-weight:700">🎓 산업공학 · 통계학 · 컴퓨터공학</span></div>
   <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:14px">단원 앱으로 이어서 → <a href="mat1_equation.html">여러 가지 방정식·부등식</a> · <a href="mat2_move.html">도형의 이동(대칭)</a></p>
 </section>
 
@@ -167,8 +168,9 @@
 <!-- ───────── 생성기(순수 함수 · Node 재검산 대상) ───────── -->
 <script id="gen">
 (function(){
-  var ri=LEC.ri, pick=LEC.pick, nz=LEC.nz, fmt=LEC.fmt, sp=LEC.sgnParen;
+  var ri=LEC.ri, pick=LEC.pick, nz=LEC.nz, fmt=LEC.fmt, sp=LEC.sgnParen, frac=LEC.frac;
   function num(v){ return fmt(v).replace('−','-'); }
+  function fx(r){ return r===0?'x':'(x'+LEC.term(-r,'',false)+')'; }
   function absx(a){ return '|x'+LEC.term(-a,'',false)+'|'; }   // |x-a|
   function countInt(lo,hi,incl){ var c=0; for(var x=Math.ceil(lo-1e-9);x<=Math.floor(hi+1e-9);x++){ if(incl||(x>lo+1e-9&&x<hi-1e-9)) c++; } return c; }
 
@@ -177,7 +179,7 @@
       gen:function(){
         var a=ri(-5,3), b=a+ri(1,6);
         return { q:'$'+absx(a)+'+'+absx(b)+'$ 의 <b>최솟값</b>은?', ans:b-a, fig:{a:a,b:b},
-          steps:['경계: $x='+a+'$, $x='+b+'$ → 구간 3개', '사이 $'+a+'\\le x\\le '+b+'$ 에서 $(x'+LEC.term(-a,'',false)+')-(x'+LEC.term(-b,'',false)+')='+(b-a)+'$ (일정)', '바깥에서는 더 커지므로 최솟값 $'+(b-a)+'$ = 두 점 사이의 거리'] };
+          steps:['경계: $x='+a+'$, $x='+b+'$ → 구간 3개', '사이 $'+a+'\\le x\\le '+b+'$ 에서 $'+fx(a)+'-'+fx(b)+'='+(b-a)+'$ (일정)', '바깥에서는 더 커지므로 최솟값 $'+(b-a)+'$ = 두 점 사이의 거리'] };
       },
       verify:function(p){ var g=p.fig; var best=Infinity; for(var x=g.a-5;x<=g.b+5;x+=0.5){ var v=Math.abs(x-g.a)+Math.abs(x-g.b); if(v<best)best=v; } return best===p.ans; } },
 
@@ -186,12 +188,12 @@
         if(Math.random()<0.5){
           var a=ri(-5,5), b=ri(1,6); var ask=ri(0,2); var s1=a-b, s2=a+b;
           var names=['두 해의 합','큰 해','두 해의 곱']; var ans=[s1+s2, s2, s1*s2][ask];
-          return { q:'방정식 $'+absx(a)+'='+b+'$ 의 <b>'+names[ask]+'</b>은?', ans:ans, fig:{kind:'a',a:a,b:b,ask:ask},
+          return { q:'방정식 $'+absx(a)+'='+b+'$ 의 <b>'+names[ask]+'</b>'+(ask===1?'는?':'은?'), ans:ans, fig:{kind:'a',a:a,b:b,ask:ask},
             steps:['거리로 읽기: $'+a+'$ 에서 거리가 $'+b+'$ 인 점', '$x'+LEC.term(-a,'',false)+'='+b+'$ 또는 $x'+LEC.term(-a,'',false)+'=-'+b+'$ → $x='+s2+'$ 또는 $x='+s1+'$', names[ask]+' $='+num(ans)+'$'] };
         }
         var c=ri(-6,6), d=ri(1,7); // |2x - c| = d → 2x = c ± d → 합 = c
         return { q:'방정식 $|2x'+LEC.term(-c,'',false)+'|='+d+'$ 의 두 해의 <b>합</b>은?', ans:c, fig:{kind:'b',c:c,d:d},
-          steps:['안이 $2x'+LEC.term(-c,'',false)+'$ 이어도 규칙은 같다: 안 $='+d+'$ 또는 안 $=-'+d+'$', '$2x='+(c+d)+'$ 또는 $2x='+(c-d)+'$ → $x=\\dfrac{'+(c+d)+'}{2}$ 또는 $x=\\dfrac{'+(c-d)+'}{2}$', '합 $=\\dfrac{'+(c+d)+'+'+sp(c-d)+'}{2}='+c+'$ (대칭 중심 $\\frac{c}{2}$ 의 2배)'] };
+          steps:['안이 $2x'+LEC.term(-c,'',false)+'$ 이어도 규칙은 같다: 안 $='+d+'$ 또는 안 $=-'+d+'$', '$2x='+(c+d)+'$ 또는 $2x='+(c-d)+'$ → $x='+frac(c+d,2)+'$ 또는 $x='+frac(c-d,2)+'$', '합 $=\\dfrac{'+(c+d)+'+'+sp(c-d)+'}{2}='+c+'$ (두 해의 중점 $'+frac(c,2)+'$ 의 2배)'] };
       },
       verify:function(p){ var g=p.fig; if(g.kind==='a'){ var s1=g.a-g.b,s2=g.a+g.b; return [s1+s2,s2,s1*s2][g.ask]===p.ans; } return ((g.c+g.d)/2+(g.c-g.d)/2)===p.ans; } },
 
@@ -208,7 +210,7 @@
         var c=ri(-5,5), d=ri(2,7); // |2x - c| <= d → (c-d)/2 <= x <= (c+d)/2
         var lo3=(c-d)/2, hi3=(c+d)/2; var cnt3=countInt(lo3,hi3,true);
         return { q:'부등식 $|2x'+LEC.term(-c,'',false)+'|\\le '+d+'$ 을 만족시키는 <b>정수 $x$의 개수</b>는?', ans:cnt3, fig:{mode:2,lo:lo3,hi:hi3},
-          steps:['안 $=2x'+LEC.term(-c,'',false)+'$ 이 $-'+d+'$ 이상 $'+d+'$ 이하: $-'+d+'\\le 2x'+LEC.term(-c,'',false)+'\\le '+d+'$', '$'+(c-d)+'\\le 2x\\le '+(c+d)+'$ → $'+num(lo3)+'\\le x\\le '+num(hi3)+'$', '그 사이의 정수: '+cnt3+'개'] };
+          steps:['안 $=2x'+LEC.term(-c,'',false)+'$ 이 $-'+d+'$ 이상 $'+d+'$ 이하: $-'+d+'\\le 2x'+LEC.term(-c,'',false)+'\\le '+d+'$', '$'+(c-d)+'\\le 2x\\le '+(c+d)+'$ → $'+frac(c-d,2)+'\\le x\\le '+frac(c+d,2)+'$', '그 사이의 정수: '+cnt3+'개'] };
       },
       verify:function(p){ var g=p.fig; if(g.mode===1) return p.ans===0; return countInt(g.lo,g.hi,g.mode===2?true:g.incl)===p.ans; } },
 
@@ -217,12 +219,12 @@
         var a=ri(-4,2), b=a+ri(1,5); var gap=b-a; var mode=ri(0,2);
         if(mode===0){ var c=gap+ri(1,4)*2; // 해 2개: 왼쪽 x = (a+b-c)/2, 오른쪽 (a+b+c)/2 → 합 a+b
           return { q:'방정식 $'+absx(a)+'+'+absx(b)+'='+c+'$ 의 두 해의 <b>합</b>은?', ans:a+b, fig:{mode:0,a:a,b:b,c:c},
-            steps:['사이에서는 합이 $'+gap+'$ 으로 일정 → $'+c+'\\ne '+gap+'$ 이므로 해는 바깥에 있다', '왼쪽 바깥 $x<'+a+'$: $-(x'+LEC.term(-a,'',false)+')-(x'+LEC.term(-b,'',false)+')='+c+'$ → $x='+num((a+b-c)/2)+'$', '오른쪽 바깥 $x>'+b+'$: $(x'+LEC.term(-a,'',false)+')+(x'+LEC.term(-b,'',false)+')='+c+'$ → $x='+num((a+b+c)/2)+'$', '합 $='+(a+b)+'$ (두 해는 중점 $\\frac{a+b}{2}$ 에 대칭)'] }; }
-        if(mode===1){ var rel=ri(0,2); var c2 = rel===0? gap-ri(1,Math.max(1,gap)) : (rel===1? gap : gap+ri(1,4)); if(c2<0)c2=0; var idx = c2<gap?0:(c2===gap?1:2);
+            steps:['사이에서는 합이 항상 $'+gap+'$ (일정) → $'+c+'\\ne '+gap+'$ 이므로 해는 바깥에 있다', '왼쪽 바깥 $x<'+a+'$: $-'+fx(a)+'-'+fx(b)+'='+c+'$ → $x='+num((a+b-c)/2)+'$', '오른쪽 바깥 $x>'+b+'$: $'+fx(a)+'+'+fx(b)+'='+c+'$ → $x='+num((a+b+c)/2)+'$', '합 $='+(a+b)+'$ (두 해는 중점 $\\frac{a+b}{2}$ 에 대칭)'] }; }
+        if(mode===1){ var rel=ri(0,2); if(rel===0&&gap<2) rel=2; var c2 = rel===0? gap-ri(1,gap-1) : (rel===1? gap : gap+ri(1,4)); var idx = c2<gap?0:(c2===gap?1:2);
           return { q:'방정식 $'+absx(a)+'+'+absx(b)+'='+c2+'$ 의 실근의 개수는?', choices:['0개','무수히 많다','2개'], ans:idx, fig:{mode:1,gap:gap,c:c2},
             steps:['두 점까지 거리의 합의 최솟값은 두 점 사이 거리 $'+gap+'$', (idx===0?'$'+c2+'\\lt '+gap+'$ → 최솟값보다 작다 → 해 없음':(idx===1?'$'+c2+'='+gap+'$ → 사이 구간 전체($'+a+'\\le x\\le '+b+'$)가 해 → 무수히 많다':'$'+c2+'\\gt '+gap+'$ → 양쪽 바깥에서 하나씩 → 2개'))] }; }
         return { q:'$y='+absx(a)+'+'+absx(b)+'$ 의 <b>최솟값</b>은?', ans:gap, fig:{mode:2,a:a,b:b},
-          steps:['경계 $x='+a+'$, $x='+b+'$ 로 세 구간', '사이에서 $(x'+LEC.term(-a,'',false)+')-(x'+LEC.term(-b,'',false)+')='+gap+'$ 일정, 바깥은 더 큼', '최솟값 $'+gap+'$'] };
+          steps:['경계 $x='+a+'$, $x='+b+'$ 로 세 구간', '사이에서 $'+fx(a)+'-'+fx(b)+'='+gap+'$ 일정, 바깥은 더 큼', '최솟값 $'+gap+'$'] };
       },
       verify:function(p){ var g=p.fig; if(g.mode===0){ var r=[]; for(var x=-30;x<=30;x+=0.5){ if(Math.abs(Math.abs(x-g.a)+Math.abs(x-g.b)-g.c)<1e-9) r.push(x); } return r.length===2 && r[0]+r[1]===p.ans; } if(g.mode===1){ return (g.c<g.gap?0:(g.c===g.gap?1:2))===p.ans; } return p.ans===g.b-g.a; } },
 
@@ -277,7 +279,7 @@ LEC.boot({ key:'mat1_sp_abs', color:'#1d4ed8', color2:'#60a5fa' });
 })();
 
 LEC.check('q1',6,{ok:'3에서 거리 2인 점은 $1$과 $5$. 합 $6$ = 대칭 중심 3의 2배.', bad:'$x-3=2$ 또는 $x-3=-2$. 두 해 $5, 1$을 더해요.'});
-LEC.check('q2',5,{ok:'$-4<x<2$ → 정수 $-3,-2,-1,0,1$ 로 5개.', bad:'$-1$에서 거리 3보다 가까운 곳: $-4<x<2$. 경계는 제외예요.'});
+LEC.check('q2',5,{ok:'$-4\\lt x\\lt 2$ → 정수 $-3,-2,-1,0,1$ 로 5개.', bad:'$-1$에서 거리 3보다 가까운 곳: $-4\\lt x\\lt 2$. 경계는 제외예요.'});
 
 /* 유형 그림: 수직선 / V자 */
 function vgraph(el,a,k,m){

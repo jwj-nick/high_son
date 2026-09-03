@@ -116,7 +116,7 @@ note · footer ("2022 개정 · 표준 커리큘럼 제작")
 | Phase | 내용 | 산출물 | 상태 |
 |---|---|---|---|
 | **P0 정본** | 플랜 이식 · 3과목 PLAN.md · prefix·특강 배치 확정 · 허브 시안 3 | 이 문서 + PLAN 3 + `*_hub.html` 시안 3 | ✅ 2026-09-02 |
-| **P0.5 고1 관문 특강** | 공용 엔진 `_shared/lecture.js` + 게이트 `_shared/lecture_check.js` · G5·G3·G1·G2·G4 5개 · `mat1_hub`/`mat2_hub` 섹션 · 배포 | 특강 5 + 엔진 | ✅ 2026-09-02 제작·게이트 (배포는 변경 이력 참조) |
+| **P0.5 고1 관문 특강** | 공용 엔진 `_shared/lecture.js` + 게이트 `_shared/lecture_check.js` · G5·G3·G1·G2·G4 5개 · `mat1_hub`/`mat2_hub` 섹션 · 배포 | 특강 5 + 엔진 | ✅ 2026-09-03 리뷰 반영·**배포 완료** (`high1/math/mat1_sp_*`, `mat2_sp_*`, `lecture.js`) |
 | **P1 대수** | G6·G7·G8 특강 → 9단원 앱 → 허브 연결·math index·high1 index 카드 → 배포 | `alg_*` 13파일 | ⬜ |
 | **P2 미적분Ⅰ** | G9·G10·G11 특강 → 8단원 앱 → 허브·배포 | `cal1_*` 12파일 | ⬜ |
 | **P3 확통** | G12·G13·G14 특강 → 7단원 앱 → 허브·배포 | `prob_*` 11파일 | ⬜ |

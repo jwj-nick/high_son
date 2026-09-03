@@ -11,14 +11,14 @@
 <style>
   .mrow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
   .mat{display:inline-grid;gap:4px;padding:6px 10px;border-left:3px solid #1e293b;border-right:3px solid #1e293b;border-radius:8px;background:#fff}
-  .mat .cell{min-width:44px;min-height:40px;display:grid;place-items:center;font-weight:800;font-size:15px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;cursor:default}
+  .mat .cell{min-width:44px;min-height:44px;display:grid;place-items:center;font-weight:800;font-size:15px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;cursor:default}
   .mat .cell.hr{background:#dbeafe;border-color:#93c5fd}.mat .cell.hc{background:#fee2e2;border-color:#fca5a5}.mat .cell.sel{background:#ede9fe;border-color:#c4b5fd;cursor:pointer}.mat .cell.sel:hover{background:#ddd6fe}
   .mat .lab{font-size:10.5px;color:var(--sub);font-weight:700;min-height:16px;display:grid;place-items:center}
   .op{font-size:22px;font-weight:800;color:var(--sub)}
   .mname{text-align:center;font-size:12px;color:var(--sub);margin-top:4px}
   .calcline{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:12px 14px;margin-top:10px;font-size:14px;text-align:center;min-height:44px}
   .calcline b{color:#93c5fd}
-  .mult .cell input{width:44px;height:40px;text-align:center;border:1px solid #cbd5e1;border-radius:8px;font:inherit;font-weight:800;font-size:15px}
+  .mult .cell input{width:44px;height:44px;text-align:center;border:1px solid #cbd5e1;border-radius:8px;font:inherit;font-weight:800;font-size:15px}
   .mult .cell input:focus{outline:none;border-color:var(--lec)}
   .sizetbl td.ok{color:#15803d;font-weight:800}.sizetbl td.no{color:#b91c1c;font-weight:800}
 </style>
@@ -28,9 +28,9 @@
 <div class="wrap">
 
 <div class="lec-hero">
-  <span class="tag">🚪 관문 특강 · 공통수학1 Ⅳ 행렬 (2022 개정 신설)</span>
+  <span class="tag">🚪 관문 특강 · 공통수학1 Ⅳ 행렬 (2022 개정 재도입)</span>
   <h1>🔲 행렬 첫만남 — 표를 통째로 계산한다</h1>
-  <p>행렬은 이번 교육과정에서 새로 들어온 단원이라 부모님 세대도 안 배웠고, 문제집도 얇아요. 그래서 오히려 기회예요. 핵심은 딱 하나, <b>"표를 통째로 계산한다"</b>. 덧셈은 칸끼리, 곱셈은 <b>행 × 열</b>. 이 곱셈 규칙 하나만 손에 익히면 이 단원은 끝나고, 컴퓨터 그래픽과 AI가 매일 하는 계산이 뭔지도 알게 돼요.</p>
+  <p>행렬은 한동안 고등학교 교과서에서 빠져 있다가 이번 교육과정에 다시 들어온 단원이에요. 지금 대학생인 형·누나 세대는 안 배웠고, 부모님 세대는 배웠던 내용이라 물어보면 아실 거예요. 문제집이 아직 얇아서 오히려 기회예요. 핵심은 딱 하나, <b>"표를 통째로 계산한다"</b>. 덧셈은 칸끼리, 곱셈은 <b>행 × 열</b>. 이 곱셈 규칙 하나만 손에 익히면 이 단원은 끝나고, 컴퓨터 그래픽과 AI가 매일 하는 계산이 뭔지도 알게 돼요.</p>
   <div class="lec-goal"><a href="#type1">① 덧셈·실수배</a><a href="#type2">② 곱셈</a><a href="#type3">③ 꼴과 성질</a><a href="#type4">④ 등식·미지수</a></div>
 </div>
 <nav class="lec-nav" id="lecNav"></nav>
@@ -71,7 +71,7 @@
   <p>곱셈은 감 잡기에서 본 그대로, <b>앞 행렬의 행</b>과 <b>뒤 행렬의 열</b>을 짝지어 곱해서 더해요. 그래서 앞의 열 개수와 뒤의 행 개수가 같아야 짝이 맞고, 결과의 꼴은 "앞의 행 × 뒤의 열"이에요.</p>
   <div class="lec-formula"><div class="f">$\begin{pmatrix} a & b \\ c & d \end{pmatrix}\begin{pmatrix} p & q \\ r & s \end{pmatrix}=\begin{pmatrix} ap+br & aq+bs \\ cp+dr & cq+ds \end{pmatrix}$</div><small>(m×n)(n×p) = m×p. 가운데 n이 같아야 정의된다. (1,2) 성분 = 앞의 1행 · 뒤의 2열.</small></div>
 
-  <p>여기서 제일 중요한 경고. 곱셈은 <b>순서를 바꾸면 결과가 달라져요</b>. 수량표 × 가격표는 뜻이 있지만 가격표 × 수량표는 뜻이 없잖아요. 그래서 $(A+B)^2=A^2+2AB+B^2$ 같은 공식이 행렬에서는 <b>성립하지 않아요</b>. $(A+B)^2=A^2+AB+BA+B^2$까지만 돼요.</p>
+  <p>여기서 제일 중요한 경고. 곱셈은 <b>순서를 바꾸면 결과가 달라져요</b>. 수량표 × 가격표는 뜻이 있지만 가격표 × 수량표는 계산은 되지만 뜻이 없는 표가 나오잖아요. 그래서 $(A+B)^2=A^2+2AB+B^2$ 같은 공식이 행렬에서는 일반적으로 <b>성립하지 않아요</b>($AB=BA$일 때만 성립). $(A+B)^2=A^2+AB+BA+B^2$까지만 돼요.</p>
   <div class="lec-formula"><div class="f">$AB\ne BA$ (일반적으로) · $A(B+C)=AB+AC$ · $(AB)C=A(BC)$ · $AE=EA=A$</div><small>E 는 단위행렬(대각선 1, 나머지 0). 숫자의 1 역할. A² 은 AA.</small></div>
 
   <div class="lec-card">
@@ -102,7 +102,7 @@
     <tr><td>$2\times2$</td><td>$2\times1$</td><td class="ok">$2\times1$</td><td class="no">정의 안 됨</td></tr>
     <tr><td>$1\times3$</td><td>$3\times1$</td><td class="ok">$1\times1$</td><td class="ok">$3\times3$</td></tr>
   </table>
-  <div class="lec-key"><b>불변 앵커</b> 곱셈은 "행 × 열, 짝지어 곱해서 더하기". 정의되려면 가운데 숫자가 같아야 하고, 결과는 바깥 숫자의 꼴. 순서를 바꾸면 다른 문제다.</div>
+  <div class="lec-key"><b>불변 앵커</b> 곱셈은 "행 × 열, 짝지어 곱해서 더하기". 정의되려면 가운데 숫자가 같아야 하고, 결과는 바깥 숫자의 꼴. 순서를 바꾸면 다른 문제다. (계산은 2×2 중심이고, 위 표의 3×3은 꼴만 확인)</div>
   <p style="margin-top:12px">계산 연습이에요. 행과 열을 손가락으로 짚으면서 하세요.</p>
   <div id="toolbody"></div>
 </section>
@@ -174,6 +174,7 @@
   </div>
   <div class="insight"><div class="it">💡 다음으로 이어지는 것</div>연립일차방정식은 $AX=B$ 한 줄로 쓸 수 있어요. 대학에서 배우는 선형대수는 이 한 줄을 파고드는 학문이고, 데이터 과학·공학·경제학이 전부 그 위에 서 있어요.</div>
   <div class="reallife"><div class="rt">🏠 이미 보고 있던 곳</div>게임 캐릭터의 회전, 지도 앱의 좌표 변환, 추천 알고리즘("이 영화를 본 사람은 이것도")의 점수표, 그리고 사진 앱의 밝기·대비 조정. 전부 표 × 표예요.</div>
+  <div class="reallife"><div class="rt">🏭 이걸로 먹고사는 사람들</div>그래픽 엔진(회전·확대), 추천 시스템(사용자×상품 점수표), 인공지능(신경망 = 행렬 곱의 반복), 통계(데이터 표)까지. GPU는 행렬 곱셈을 빨리 하려고 만든 칩이에요. <span style="color:#312e81;font-weight:700">🎓 컴퓨터공학 · 전자공학 · 데이터사이언스</span></div>
   <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:14px">단원 앱으로 이어서 → <a href="mat1_matrix.html">행렬의 뜻과 연산</a></p>
 </section>
 
@@ -224,7 +225,8 @@
       verify:function(p){ var g=p.fig; if(g.mode===0) return mul(g.A,g.B)[g.i][g.j]===p.ans; if(g.mode===1) return mul(g.A,g.A)[g.i][g.j]===p.ans; return (g.A[g.i][0]*g.v[0]+g.A[g.i][1]*g.v[1])===p.ans; } },
 
     type3:{ label:'③ 꼴과 성질', anchor:'#type3',
-      gen:function(){ var mode=ri(0,2);
+      gen:function(){ var mode=ri(0,3);
+        if(mode===3){ var T=['$AE=EA=A$','$A+O=A$','$AO=O$','$(A+B)^2=A^2+AB+BA+B^2$'], F=['$AE=E$','$A+O=O$','$AO=A$','$(A+B)^2=A^2+2AB+B^2$ (항상)','$AB=BA$ (항상)']; var tt=pick(T); var chT=[tt].concat(LEC.shuffle(F).slice(0,3)); return { q:'다음 중 <b>항상</b> 옳은 것은? ($E$는 단위행렬, $O$는 영행렬)', choices:chT, ans:0, fig:{mode:3,t:tt}, steps:['$E$는 숫자 1, $O$는 숫자 0 역할: $AE=EA=A$, $A+O=A$, $AO=O$', '곱셈은 순서가 있으므로 $(A+B)^2=A^2+AB+BA+B^2$ 까지만 (일반적으로 $AB\\ne BA$)', '옳은 것: '+tt] }; }
         if(mode===0){ var m=ri(1,3), n=ri(1,3), q=ri(1,3); while(q===m) q=ri(1,3); // A m×n, B n×q → AB m×q, BA 정의는 q===m 일 때만
           var ch=['$'+m+'\\times '+q+'$','$'+n+'\\times '+n+'$','$'+q+'\\times '+m+'$','정의되지 않는다'];
           return { q:'$A$가 $'+m+'\\times '+n+'$ 행렬, $B$가 $'+n+'\\times '+q+'$ 행렬일 때 $AB$의 꼴은?', choices:ch, ans:0, fig:{mode:0,m:m,n:n,q:q},
@@ -236,7 +238,7 @@
         var A=M(),B=M(); var AB=mul(A,B), BA=mul(B,A); var p=ij(); var i=p[0],j=p[1]; var d=AB[i][j]-BA[i][j];
         return { q:'$A='+pm(A)+'$, $B='+pm(B)+'$ 일 때 $AB-BA$ 의 $'+nm(i,j)+'$ 성분은?', ans:d, fig:{mode:2,A:A,B:B,i:i,j:j},
           steps:['$AB$의 $'+nm(i,j)+'$: $'+A[i][0]+'\\cdot'+sp(B[0][j])+'+'+sp(A[i][1])+'\\cdot'+sp(B[1][j])+'='+AB[i][j]+'$', '$BA$의 $'+nm(i,j)+'$: $'+B[i][0]+'\\cdot'+sp(A[0][j])+'+'+sp(B[i][1])+'\\cdot'+sp(A[1][j])+'='+BA[i][j]+'$', '차 $='+d+'$'+(d===0?' (이 칸은 우연히 같지만 다른 칸은 다를 수 있다)':' → $AB\\ne BA$')] }; },
-      verify:function(p){ var g=p.fig; if(g.mode===0) return p.ans===0; if(g.mode===1) return p.ans===0; return (mul(g.A,g.B)[g.i][g.j]-mul(g.B,g.A)[g.i][g.j])===p.ans; } },
+      verify:function(p){ var g=p.fig; if(g.mode===3) return ['$AE=EA=A$','$A+O=A$','$AO=O$','$(A+B)^2=A^2+AB+BA+B^2$'].indexOf(p.choices[p.ans])>=0; if(g.mode===0) return p.ans===0; if(g.mode===1) return p.ans===0; return (mul(g.A,g.B)[g.i][g.j]-mul(g.B,g.A)[g.i][g.j])===p.ans; } },
 
     type4:{ label:'④ 등식·미지수', anchor:'#type4',
       gen:function(){ var mode=ri(0,1);
@@ -245,7 +247,7 @@
             steps:['칸을 비교: $(1,1)$ 성분 $'+k+'x+'+sp(B[0][0])+'='+C[0][0]+'$, $(2,2)$ 성분 $'+k+'y+'+sp(B[1][1])+'='+C[1][1]+'$', '$x=\\dfrac{'+(C[0][0]-B[0][0])+'}{'+k+'}='+x+'$, $y=\\dfrac{'+(C[1][1]-B[1][1])+'}{'+k+'}='+y+'$'] }; }
         var a=nz(-3,3), b=ri(-3,3), c=ri(-3,3), d=nz(-3,3); while(a*d-b*c===0){ d=nz(-3,3); } var x2=ri(-3,3), y2=ri(-3,3); var p1=a*x2+b*y2, p2=c*x2+d*y2; var askX2=Math.random()<0.5;
         return { q:'$\\begin{pmatrix} '+a+' & '+b+' \\\\ '+c+' & '+d+' \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix}=\\begin{pmatrix} '+p1+' \\\\ '+p2+' \\end{pmatrix}$ 일 때 $'+(askX2?'x':'y')+'$ 의 값은?', ans:askX2?x2:y2, fig:{mode:1,a:a,b:b,c:c,d:d,p1:p1,p2:p2,askX:askX2},
-          steps:['곱을 전개하면 연립방정식: $'+LEC.poly([a,0],'x').replace('+0','')+LEC.term(b,'y',false)+'='+p1+'$, $'+LEC.term(c,'x',true)+LEC.term(d,'y',false)+'='+p2+'$', '연립방정식을 풀면 $x='+x2+'$, $y='+y2+'$', '검산: 대입하면 두 식 모두 성립'] }; },
+          steps:['곱을 전개하면 연립방정식: $'+LEC.poly([a,0],'x').replace('+0','')+LEC.term(b,'y',false)+'='+p1+'$, $'+LEC.term(c,'x',true)+LEC.term(d,'y',false)+'='+p2+'$', '가감법: 첫 식×'+sp(d)+' − 둘째 식×'+sp(b)+' → $'+(a*d-b*c)+'x='+(p1*d-b*p2)+'$ → $x='+x2+'$, 대입하면 $y='+y2+'$', '검산: 대입하면 두 식 모두 성립'] }; },
       verify:function(p){ var g=p.fig; if(g.mode===0) return p.ans===(g.askX?g.x:g.y); var det=g.a*g.d-g.b*g.c; var x=(g.p1*g.d-g.b*g.p2)/det, y=(g.a*g.p2-g.c*g.p1)/det; return Math.abs((g.askX?x:y)-p.ans)<1e-9; } }
   };
 })();
@@ -265,19 +267,19 @@ function hl(el, cls, pred){ el.querySelectorAll('.cell').forEach(function(c){ c.
 
 /* ① 판매표 위젯 */
 (function(){
-  var A,B,C; var names={rows:['매장 A','매장 B'],cols:['사과','배'],items:['가격(원)','무게(g)']};
+  var A,B,C; var names={rows:['매장 A','매장 B'],cols:['사과','배'],items:['가격(원)','무게(g)'],res:['매출(원)','총무게(g)']};
   function make(){ A=[[LEC.ri(1,6),LEC.ri(1,6)],[LEC.ri(1,6),LEC.ri(1,6)]]; B=[[LEC.pick([800,1000,1200]),LEC.pick([200,250,300])],[LEC.pick([1500,2000,2500]),LEC.pick([400,500,600])]];
     C=[[A[0][0]*B[0][0]+A[0][1]*B[1][0], A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0], A[1][0]*B[0][1]+A[1][1]*B[1][1]]];
     grid(document.getElementById('mA'),2,2,function(i,j){return A[i][j];},{rowLab:names.rows,colLab:names.cols});
     grid(document.getElementById('mB'),2,2,function(i,j){return B[i][j];},{rowLab:names.cols,colLab:names.items});
-    grid(document.getElementById('mC'),2,2,function(i,j){return C[i][j];},{rowLab:names.rows,colLab:names.items});
+    grid(document.getElementById('mC'),2,2,function(i,j){return C[i][j];},{rowLab:names.rows,colLab:names.res});
     document.querySelectorAll('#mC .cell').forEach(function(c){ c.classList.add('sel'); });
     document.getElementById('calc').textContent='결과표의 칸을 눌러 보세요';
     hl(document.getElementById('mA'),'hr',function(){return false;}); hl(document.getElementById('mB'),'hc',function(){return false;});
   }
   document.getElementById('mC').addEventListener('click',function(e){ var c=e.target.closest('.cell'); if(!c)return; var i=+c.dataset.i,j=+c.dataset.j;
     hl(document.getElementById('mA'),'hr',function(a){return a===i;}); hl(document.getElementById('mB'),'hc',function(a,b){return b===j;}); hl(document.getElementById('mC'),'hr',function(a,b){return a===i&&b===j;});
-    document.getElementById('calc').innerHTML=names.rows[i]+'의 '+names.items[j]+' = <b>'+A[i][0]+'</b>×'+B[0][j]+' + <b>'+A[i][1]+'</b>×'+B[1][j]+' = <b>'+C[i][j].toLocaleString()+'</b> &nbsp;<span style="color:#94a3b8">(A의 '+(i+1)+'행 · B의 '+(j+1)+'열)</span>';
+    document.getElementById('calc').innerHTML=names.rows[i]+'의 '+names.res[j]+' = <b>'+A[i][0]+'</b>×'+B[0][j]+' + <b>'+A[i][1]+'</b>×'+B[1][j]+' = <b>'+C[i][j].toLocaleString()+'</b> &nbsp;<span style="color:#94a3b8">(A의 '+(i+1)+'행 · B의 '+(j+1)+'열)</span>';
   });
   document.getElementById('newTbl').addEventListener('click',make); make();
 })();

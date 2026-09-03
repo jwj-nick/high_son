@@ -5,6 +5,7 @@
  *       형식(q·steps·ans|choices)과 verify(p)==true 확인 + 답 다양성 + 생성 문자열 '<'+알파벳 잘림
  *       ③ $…$ 안 한글 ④ '<'+알파벳 잘림 ⑤ 수식 안 <,> 뒤 알파벳(브라우저가 태그로 오인 → \lt \gt 로)
  *       ⑥ 태그 균형 ⑦ 앵커(#id) 실존 ⑧ data-step 섹션 5개 이상
+ *       ⑨ 모든 인라인 스크립트의 문자열 리터럴: 수식 안 <,> 뒤 알파벳 · 수식 안 한글 · 단일 백슬래시+알파벳(\lt 처럼 JS가 삼킴, \n 제외)
  */
 const fs = require('fs'), path = require('path');
 const file = process.argv[2]; const N = parseInt(process.argv[3] || '500', 10);
@@ -13,17 +14,35 @@ const html = fs.readFileSync(file, 'utf8');
 let bad = 0; const log = (...a) => { console.log(...a); };
 const fail = (...a) => { bad++; console.log('✗', ...a); };
 
-// $…$ 안(홀수 구간)만 뽑기 — $$…$$ 는 먼저 제거. \text{…} 안의 한글은 허용
 const mathSegs = t => t.replace(/\$\$[\s\S]*?\$\$/g, ' ').split('$').filter((_, i) => i % 2 === 1);
 const korInMath = t => mathSegs(t).filter(seg => /[가-힣]/.test(seg.replace(/\\text\{[^}]*\}/g, '')));
-// '<' 뒤에 알파벳이 오고 그 다음이 태그가 될 수 없는 문자(예: <r$, <x=)면 innerHTML에서 잘린다
 const CUT = /<[a-zA-Z](?=[^a-zA-Z0-9>\s\/])/;
-// 수식 안에서 < 또는 > 바로 뒤에 알파벳·백슬래시가 오면 HTML 태그로 오인된다 (x<b, <\alpha, a>b)
 const MATHCUT = /[<>](?=[a-zA-Z\\])/;
 
 // ① 인라인 스크립트 파싱
 const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].filter(m => !/src=/.test(m[0]));
 scripts.forEach((m, i) => { try { new Function(m[1]); } catch (e) { fail('script#' + i + ' 파싱 오류:', e.message); } });
+
+// ⑨ 문자열 리터럴 스캔 (부팅 스크립트의 LEC.check 문자열 등 — innerHTML로 들어간다)
+scripts.forEach((m, si) => {
+  const src = m[1].replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  // 이어붙인 조각('…$'+식+'$…')은 수식 경계를 알 수 없으므로 건너뛰고(생성기 출력은 ②에서 실제 값으로 검사),
+  // 홀로 쓰인 완결 문자열(LEC.check의 ok/bad, innerHTML 대입 등)만 수식 검사한다. 백슬래시 검사는 전부.
+  const lits = [...src.matchAll(/'(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"/g)].map(x => {
+    const before = src.slice(Math.max(0, x.index - 12), x.index), after = src.slice(x.index + x[0].length, x.index + x[0].length + 12);
+    return { t: x[0].slice(1, -1), chain: /\+\s*$/.test(before) || /^\s*\+/.test(after) };
+  });
+  let c1 = 0, c2 = 0, c3 = 0;
+  lits.forEach(({ t: l, chain }) => {
+    const esc = l.match(/(^|[^\\])\\([a-mo-zA-Z])/); // \n 만 허용
+    if (esc && !(esc[0].endsWith('\\\\'))) { c1++; if (c1 === 1) fail('script#' + si + " 문자열에 단일 백슬래시+알파벳 (JS가 삼킴 → \\\\ 두 개로):", l.slice(Math.max(0, esc.index - 20), esc.index + 25)); }
+    if (chain) return;
+    const segs = mathSegs(l);
+    if (segs.some(s => MATHCUT.test(s))) { c2++; if (c2 === 1) fail('script#' + si + ' 문자열 수식 안 <,> 뒤 알파벳(\\lt \\gt 로):', l.slice(0, 90)); }
+    if (segs.some(s => /[가-힣]/.test(s.replace(/\\text\{[^}]*\}/g, '')))) { c3++; if (c3 === 1) fail('script#' + si + ' 문자열 수식 안 한글:', l.slice(0, 90)); }
+  });
+  if (c1 + c2 + c3 > 1) log('   (script#' + si + ' 추가', (c1 + c2 + c3 - 1), '건)');
+});
 
 // ② 생성기 재검산
 const genM = html.match(/<script id="gen">([\s\S]*?)<\/script>/);
@@ -75,5 +94,6 @@ const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]));
 [...html.matchAll(/href="#([^"]+)"/g)].map(m => m[1]).forEach(a => { if (!ids.has(a)) fail('앵커 없음 #' + a); });
 [...html.matchAll(/anchor:\s*'#([^']+)'/g)].map(m => m[1]).forEach(a => { if (!ids.has(a)) fail('GEN anchor 없음 #' + a); });
 const steps = (html.match(/data-step="/g) || []).length; if (steps < 5) fail('data-step 섹션 ' + steps + '개(5 이상 필요)');
+if (!/🏭/.test(body)) fail('🏭 산업·직업 블록 없음(8원칙 최소 기준)');
 log(bad ? ('FAIL ' + bad) : 'ALL OK', '·', path.basename(file), (html.length / 1024).toFixed(1) + 'KB');
 process.exit(bad ? 1 : 0);
