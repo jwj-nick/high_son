@@ -28,6 +28,9 @@
     el.addEventListener('click', function (e) { var c = e.target.closest('.fcell'); if (c) c.classList.toggle('show'); });
     if (window.LEC) LEC.tex(el);
   };
+  // #탭id 해시로 열면 그 탭부터 (허브·특강에서 딥링크, 렌더 확인용)
+  var h0 = (location.hash || '').slice(1);
+  if (h0 && document.querySelector('.tab[data-t="' + h0 + '"]')) setTimeout(function () { window.go(h0); }, 0);
   document.addEventListener('click', function (e) {
     var b = e.target.closest('.stepbtn'); if (!b || !b.dataset.w) return;
     var w = document.getElementById(b.dataset.w); if (!w) return; w.classList.toggle('open');
