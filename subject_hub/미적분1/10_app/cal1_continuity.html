@@ -185,7 +185,7 @@
 
 <script src="alg_app.js"></script>
 <script>
-var FS={cont:{f:function(x){return 0.5*x*x+0.5;},fa:1,lim:1,name:'$f(x)=\\tfrac12x^2+\\tfrac12$',ok:[1,1,1]},hole:{f:function(x){return 0.5*x*x+0.5;},fa:null,lim:1,name:'$f(x)=\\dfrac{x^3-x}{2(x-1)}+\\tfrac12$ (x=1 제외)',ok:[0,1,0]},jump:{f:function(x){return x<1?0.5*x*x+0.5:0.5*x*x+2;},fa:2.5,lim:null,name:'계단: $x\\ge1$에서 위로 1.5 점프',ok:[1,0,0]},wrong:{f:function(x){return 0.5*x*x+0.5;},fa:2.5,lim:1,name:'$f(1)=2.5$ 로 따로 정의',ok:[1,1,0]}};
+var FS={cont:{f:function(x){return 0.5*x*x+0.5;},fa:1,lim:1,name:'$f(x)=\\tfrac12x^2+\\tfrac12$',ok:[1,1,1]},hole:{f:function(x){return 0.5*x*x+0.5;},fa:null,lim:1,name:'$f(x)=\\dfrac{x^3-x^2}{2(x-1)}+\\tfrac12$ (x=1 제외)',ok:[0,1,0]},jump:{f:function(x){return x<1?0.5*x*x+0.5:0.5*x*x+2;},fa:2.5,lim:null,name:'계단: $x\\ge1$에서 위로 1.5 점프',ok:[1,0,0]},wrong:{f:function(x){return 0.5*x*x+0.5;},fa:2.5,lim:1,name:'$f(1)=2.5$ 로 따로 정의',ok:[1,1,0]}};
 var FK='cont', P1=null;
 function setup1(){ var cv=document.getElementById('cv1'); if(!P1) P1=LEC.plane(cv,{xmin:-1.5,xmax:3,ymin:-0.5,ymax:4.5,h:260,grid:0.5}); else P1.resize(); draw1(); }
 function draw1(){ if(!P1)return; var F=FS[FK]; P1.clear().grid().axes(); P1.seg(1,P1.ymin,1,P1.ymax,'#f59e0b',1.5,[5,4]);

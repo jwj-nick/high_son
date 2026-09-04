@@ -206,7 +206,7 @@ function setup1(){ var cv=document.getElementById('cv1'); var F=FS[FK]; P1=LEC.p
 function draw1(){ if(!P1)return; var F=FS[FK]; var d=DS[parseInt(document.getElementById('sd').value,10)]; document.getElementById('sdv').textContent=d;
   P1.clear().grid().axes(); P1.seg(F.a,P1.ymin,F.a,P1.ymax,'#f59e0b',1.5,[5,4]);
   if(FK==='hole'){ P1.plot(F.f,'#be185d',3); var c=P1.ctx; c.fillStyle='#fff'; c.strokeStyle='#be185d'; c.lineWidth=2.5; c.beginPath(); c.arc(P1.X(1),P1.Y(2),6,0,Math.PI*2); c.fill(); c.stroke(); }
-  if(FK==='jump'){ P1.plot(F.f,'#be185d',3,P1.xmin,-1e-9); P1.plot(F.f,'#be185d',3,1e-9,P1.xmax); var c2=P1.ctx; c2.fillStyle='#fff'; c2.strokeStyle='#be185d'; c2.lineWidth=2.5; c2.beginPath(); c2.arc(P1.X(0),P1.Y(-1),6,0,Math.PI*2); c2.fill(); c2.stroke(); P1.dot(0,1,'#be185d',6); }
+  if(FK==='jump'){ P1.plot(F.f,'#be185d',3,P1.xmin,-1e-9); P1.plot(F.f,'#be185d',3,1e-9,P1.xmax); var c2=P1.ctx; c2.fillStyle='#fff'; c2.strokeStyle='#be185d'; c2.lineWidth=2.5; c2.beginPath(); c2.arc(P1.X(0),P1.Y(-1),6,0,Math.PI*2); c2.fill(); c2.stroke(); c2.beginPath(); c2.arc(P1.X(0),P1.Y(1),6,0,Math.PI*2); c2.fill(); c2.stroke(); c2.fillStyle='#64748b'; c2.font='11px sans-serif'; c2.textAlign='left'; c2.textBaseline='middle'; c2.fillText('f(0)은 정의되지 않음 (0/0)',P1.X(0.15),P1.Y(0.5)); }
   if(FK==='inf'){ P1.plot(F.f,'#be185d',3,P1.xmin,-0.02); P1.plot(F.f,'#be185d',3,0.02,P1.xmax); }
   var lx=F.a-d, rx=F.a+d; var lv=F.f(lx), rv=F.f(rx); if(isFinite(lv)&&lv<P1.ymax) P1.dot(lx,lv,'#2563eb',7); if(isFinite(rv)&&rv<P1.ymax) P1.dot(rx,rv,'#dc2626',7);
   var fmtv=function(v){ return v>1e5?'∞로 발산':LEC.fmt(Math.round(v*1e4)/1e4); };

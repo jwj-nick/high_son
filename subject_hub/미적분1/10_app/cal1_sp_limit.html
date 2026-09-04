@@ -213,7 +213,7 @@
           var names=['$a$','$b$','$k$']; var ans=[A,B,k][ask];
           return { q:'$'+lim(r,'\\frac{x^2+ax+b}{x'+LEC.term(-r,'',false)+'}')+'=k$ 일 때 '+names[ask]+' 의 값은?', ans:ans, fig:{v:ans}, steps:['극한이 존재하는데 분모→0 → 분자→0: $'+r+'^2+'+r+'a+b=0$ → 분자는 $'+fx(r)+'$을 인수로 가진다', '분자 $='+fx(r)+fx(s)+'=x^2'+LEC.term(A,'x',false)+LEC.term(B,'',false)+'$ → $a='+A+'$, $b='+B+'$', '약분 후 대입: $k='+r+LEC.term(-s,'',false)+'='+k+'$'] }; }
         var a=ri(-2,3), m=nz(-3,3), b=ri(-4,4), c=ri(-3,3); var kk=m*a+b-c*a; // f = mx+b (x<a), cx+k (x>=a) 연속 → k = m a + b − c a
-        return { q:'$f(x)=\\begin{cases}'+poly([m,b])+' & (x\\lt '+a+')\\\\ '+poly([c,0]).replace(/\+0$|^0$/,'')+(c===0?'':'')+'+k & (x\\ge '+a+')\\end{cases}$ 가 $x='+a+'$에서 연속일 때 $k$의 값은?', ans:kk, fig:{v:kk}, steps:['연속 ⟺ 좌극한 = 우극한 = 함숫값', '좌극한 $'+m+'\\cdot'+sp(a)+LEC.term(b,'',false)+'='+(m*a+b)+'$, 우극한(=함숫값) $'+c+'\\cdot'+sp(a)+'+k='+(c*a)+'+k$', '$'+(c*a)+'+k='+(m*a+b)+'$ → $k='+kk+'$'] }; },
+        return { q:'$f(x)=\\begin{cases}'+poly([m,b])+' & (x\\lt '+a+')\\\\ '+(c===0?'k':poly([c,0]).replace(/\+0$|^0$/,'')+'+k')+' & (x\\ge '+a+')\\end{cases}$ 가 $x='+a+'$에서 연속일 때 $k$의 값은?', ans:kk, fig:{v:kk}, steps:['연속 ⟺ 좌극한 = 우극한 = 함숫값', '좌극한 $'+m+'\\cdot'+sp(a)+LEC.term(b,'',false)+'='+(m*a+b)+'$, 우극한(=함숫값) $'+c+'\\cdot'+sp(a)+'+k='+(c*a)+'+k$', '$'+(c*a)+'+k='+(m*a+b)+'$ → $k='+kk+'$'] }; },
       verify:function(p){ return Math.abs(p.fig.v-p.ans)<1e-9; } }
   };
 })();
