@@ -170,8 +170,12 @@ cd /c/Nick/30_Apps/jwj-nick.github.io && git add high1/<폴더>/ && git commit &
 node   exam_track/tools/verify_set.js <set>              # problem_bank/verify/<set>.js 로 12/12 재계산 — 게이트 전 필수
 node   exam_track/tools/add_drill_fix.js <앱>.html        # DRILL_FIX 기본 매핑(개념 탭 자동) — add_drill_tab 뒤에
 node   exam_track/tools/add_app_box.js <앱>.html <탭> b "<제목>" "<본문>"   # "앱에 근거 없음" 지적을 앱 쪽에서 해소
+node   exam_track/tools/drill_render_check.js <set>       # 실제 렌더 — 이중 이스케이프·발문 누락(21차 신설, 배포 전 필수)
 ```
-게이트는 Opus, 세트 2개당 1에이전트. 실측(20차, 4세트): 정답키 오류 0 — 결함은 why 경로·cause 배정·앱 근거 부재에 몰린다.
+게이트는 Opus, 세트 2개당 1에이전트. 실측(20차 4세트·21차 3세트): 정답키 오류 0 — 결함은 why 경로·cause 배정·앱 근거 부재에 몰린다.
+
+⚠️ **화면 확인은 배포 폴더에서 한다.** 고1 단원 앱은 소스 폴더(`subject_hub/<과목>/10_app`)에 공용 엔진 `alg_app.js`가 없고 배포 폴더(`high1/math/`)에서만 나란히 놓인다. 소스에서 헤드리스로 찍으면 탭이 안 열려 딥링크 회귀로 오인한다. `deploy.py --write` 뒤 배포 폴더에서 `<앱>.html#drill`을 찍는다.
+21차 교훈: 기계 검사·정답키 재검산·게이트가 모두 데이터만 보기 때문에, **화면에서 어떻게 보이는지는 스크린샷 말고는 아무도 보지 않는다**(보기 이중 이스케이프가 라이브로 나갔다).
 
 ## 변경 이력
 | 날짜 | 내용 |
