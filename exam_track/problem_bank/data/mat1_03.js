@@ -8,7 +8,7 @@ window.BANK_SET = {
   "id": "mat1_03",
   "subject": "수학",
   "unit": "수학:이차함수",
-  "title": "Ⅲ. 이차함수와 이차부등식 — 점검",
+  "title": "Ⅱ. 방정식과 부등식 (2) 이차함수와 이차부등식 — 점검",
   "source_app": "subject_hub/공통수학1/10_app/mat1_quadratic.html",
   "created": "2026-09-06",
   "items": [

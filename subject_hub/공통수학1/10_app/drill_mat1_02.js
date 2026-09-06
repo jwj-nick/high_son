@@ -8,7 +8,7 @@ window.BANK_SET = {
   "id": "mat1_02",
   "subject": "수학",
   "unit": "수학:복소수",
-  "title": "Ⅱ. 복소수와 이차방정식 — 점검",
+  "title": "Ⅱ. 방정식과 부등식 (1) 복소수와 이차방정식 — 점검",
   "source_app": "subject_hub/공통수학1/10_app/mat1_complex.html",
   "created": "2026-09-06",
   "items": [

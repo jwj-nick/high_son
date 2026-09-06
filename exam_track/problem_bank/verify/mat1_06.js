@@ -53,10 +53,18 @@ module.exports = function ({ chk }) {
   const A8_3 = mul(mul(A8, A8), A8);
   chk(8, M(A8_3[0][1]), 'A² = ' + JSON.stringify(mul(A8, A8)) + ' A³ = ' + JSON.stringify(A8_3));
 
-  /* 9. 곱한 결과의 꼴 */
-  const A9 = Array.from({ length: 3 }, () => [0, 0]), B9 = Array.from({ length: 2 }, () => [0, 0, 0, 0]);
-  const P9 = mul(A9, B9);
-  chk(9, shape(P9).join(' × ') + ' 행렬', 'A는 ' + shape(A9).join('×') + ' B는 ' + shape(B9).join('×'));
+  /* 9. 세 행렬의 곱 조합을 전부 계산해 3 × 3 이 되는 것을 찾는다 */
+  const mk = (r, c) => Array.from({ length: r }, () => Array.from({ length: c }, () => 0));
+  const A9 = mk(3, 2), B9 = mk(2, 4), C9 = mk(4, 3);
+  const cand = { ABC: [A9, B9, C9], AB: [A9, B9], BC: [B9, C9], CA: [C9, A9] };
+  const hit = Object.keys(cand).filter((k) => {
+    const P = cand[k].reduce((acc, m) => (acc === null ? null : mul(acc, m)));
+    return P && P.length === 3 && P[0].length === 3;
+  });
+  chk(9, hit.join(', '), Object.keys(cand).map((k) => {
+    const P = cand[k].reduce((acc, m) => (acc === null ? null : mul(acc, m)));
+    return k + ':' + (P ? shape(P).join('×') : '정의안됨');
+  }).join(' '));
 
   /* 10. X = (A+X) − A */
   const A10 = [[2, 1], [0, 1]], S10 = [[5, 3], [2, 4]];

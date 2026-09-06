@@ -8,7 +8,7 @@ window.BANK_SET = {
   "id": "mat1_04",
   "subject": "수학",
   "unit": "수학:여러가지방정식",
-  "title": "Ⅳ. 여러 가지 방정식과 부등식 — 점검",
+  "title": "Ⅱ. 방정식과 부등식 (3) 여러 가지 방정식·부등식 — 점검",
   "source_app": "subject_hub/공통수학1/10_app/mat1_equation.html",
   "created": "2026-09-06",
   "items": [
