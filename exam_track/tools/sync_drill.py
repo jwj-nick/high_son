@@ -57,6 +57,9 @@ MAP = {
     "mat2_02": "subject_hub/공통수학2/10_app",
     "mat2_03": "subject_hub/공통수학2/10_app",
     "mat2_04": "subject_hub/공통수학2/10_app",
+    "mat2_05": "subject_hub/공통수학2/10_app",
+    "mat2_06": "subject_hub/공통수학2/10_app",
+    "mat2_07": "subject_hub/공통수학2/10_app",
 }
 
 
