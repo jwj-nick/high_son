@@ -21,18 +21,18 @@
 | mat2_06 | `mat2_function` | 함수·합성·역함수 | fn · comp · inv | ✅ 21차 · 배포 0984a1c |
 | mat2_07 | `mat2_ratirr` | 유리함수·무리함수 | rat · irr | ✅ 21차 · 배포 0984a1c |
 
-**배치 2 — 공통수학1 (1학기 복습 · 수능 토대)** — ⬜ 다음 세션은 여기부터
+**배치 2 — 공통수학1 (1학기 복습 · 수능 토대)** — ✅ 2026-09-06 완료, 공통수학1 6/6
 
 | 세트 | 앱 | 단원 | 개념 탭 | 상태 |
 |---|---|---|---|---|
-| mat1_01 | `mat1_polynomial` | 다항식의 연산·인수분해 | mul · rem · fac | ⬜ |
-| mat1_02 | `mat1_complex` | 복소수·이차방정식 | cx · quad · vieta | ⬜ |
-| mat1_03 | `mat1_quadratic` | 이차함수와 이차방정식·부등식 | graph · eq · ineq | ⬜ |
-| mat1_04 | `mat1_equation` | 여러 가지 방정식·부등식 | high · sys · ineq | ⬜ |
-| mat1_05 | `mat1_counting` | 순열과 조합 | rule · perm · comb | ⬜ |
-| mat1_06 | `mat1_matrix` | 행렬의 뜻과 연산 | what · add · mul | ⬜ |
+| mat1_01 | `mat1_polynomial` | 다항식의 연산·인수분해 | mul · rem · fac | ✅ 22~24차 · 배포 3f460e9 |
+| mat1_02 | `mat1_complex` | 복소수·이차방정식 | cx · quad · vieta | ✅ 22~24차 · 배포 3f460e9 |
+| mat1_03 | `mat1_quadratic` | 이차함수와 이차방정식·부등식 | graph · eq · ineq | ✅ 22~24차 · 배포 3f460e9 |
+| mat1_04 | `mat1_equation` | 여러 가지 방정식·부등식 | high · sys · ineq | ✅ 22~24차 · 배포 3f460e9 |
+| mat1_05 | `mat1_counting` | 순열과 조합 | rule · perm · comb | ✅ 22~24차 · 배포 3f460e9 |
+| mat1_06 | `mat1_matrix` | 행렬의 뜻과 연산 | what · add · mul | ✅ 22~24차 · 배포 3f460e9 |
 
-**배치 3 — Nick 결정 대기(둘 중 하나 또는 둘 다)**
+**배치 3 — Nick 결정 대기(둘 중 하나 또는 둘 다)** — ⬜ 다음 세션은 여기부터(Nick이 (a)/(b)를 정한 뒤)
 - (a) 고2 대수·미적분Ⅰ·확통 단원 앱 24개(`alg_`·`cal1_`·`prob_`) — 아들이 고2가 되는 2027년에 내신 갈래로 필요. 지금은 흥미 갈래 퀴즈 v2만. 세트 id는 `alg_NN`·`cal1_NN`·`prob_NN`, topics canonical 신설 필요.
 - (b) 통합사회1·통합과학1 앱 18개 — 세트 0. 수학과 다른 과목 프로파일(PLAN §2)이라 이 스킬이 아니라 기존 사회·과학 절차(RUNBOOK)로.
 - 별건: FLOW V2 로드맵 4단계(통합사회2·통합과학2 DRILL_FIX·훈련 탭 보강) — `add_drill_fix.js`로 매핑 삽입은 즉시 가능(각 앱의 훈련 탭 id를 JSON으로 지정).
