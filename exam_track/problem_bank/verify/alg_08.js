@@ -14,10 +14,10 @@ module.exports = function ({ chk }) {
   const S = (lo, hi, f) => { let s = 0; for (let k = lo; k <= hi; k++) s += f(k); return s; };
 
   chk(1, String(S(1, 8, (k) => 3 * k + 2)), '항 ' + [1, 2, 3, 8].map((k) => 3 * k + 2).join(',…,') + ' · 루프 합 ' + S(1, 8, (k) => 3 * k + 2) + ' (상수를 한 번만 더하면 ' + (S(1, 8, (k) => 3 * k) + 2) + ')');
-  chk(2, String(S(1, 6, (k) => k * k)), '1..6 제곱 합 ' + S(1, 6, (k) => k * k) + ' · 세제곱 합은 ' + S(1, 6, (k) => k * k * k) + ' · 그냥 합은 ' + S(1, 6, (k) => k));
+  chk(2, String(S(1, 7, (k) => k * k)), '1..7 제곱 합 ' + S(1, 7, (k) => k * k) + ' · 세제곱 합은 ' + S(1, 7, (k) => k * k * k) + ' · 그냥 합은 ' + S(1, 7, (k) => k));
 
   /* 3·10. 합의 식에서 항을 만들어 낸 뒤 되돌아오는지 확인 */
-  const Sa3 = (n) => n * n + 3 * n, a3 = (n) => Sa3(n) - Sa3(n - 1);
+  const Sa3 = (n) => 2 * n * n - n, a3 = (n) => Sa3(n) - Sa3(n - 1);
   chk(3, String(a3(6)), 'S₅=' + Sa3(5) + ' S₆=' + Sa3(6) + ' → a₆=' + a3(6) + ' · 만든 항을 6개 더하면 ' + S(1, 6, a3) + ' = S₆');
   const Sa10 = (n) => Math.pow(2, n + 1) - 2, a10 = (n) => Sa10(n) - Sa10(n - 1);
   chk(10, String(a10(5)), 'S₄=' + Sa10(4) + ' S₅=' + Sa10(5) + ' → a₅=' + a10(5) + ' · 만든 항 ' + [1, 2, 3, 4, 5].map(a10).join(',') + ' 의 합 ' + S(1, 5, a10));
@@ -36,7 +36,7 @@ module.exports = function ({ chk }) {
 
   chk(8, String(S(4, 10, () => 4)), 'k=4..10 은 ' + (10 - 4 + 1) + '개 · 합 ' + S(4, 10, () => 4) + ' · k=1..10 이면 ' + S(1, 10, () => 4));
 
-  const v9 = S(1, 12, (k) => 1 / (Math.sqrt(2 * k + 1) + Math.sqrt(2 * k - 1)));
+  const v9 = S(1, 24, (k) => 1 / (Math.sqrt(2 * k + 1) + Math.sqrt(2 * k - 1)));
   chk(9, frac(Math.round(v9 * 1e9) / 1e9), '루프 합 ' + R6(v9) + ' · 첫 항 ' + R6(1 / (Math.sqrt(3) + 1)) + ' = ½(√3−1)=' + R6((Math.sqrt(3) - 1) / 2) + ' · ½ 없이면 ' + R6(2 * v9));
 
   chk(11, String(S(1, 6, (k) => k * k * k - k)), '항 ' + [1, 2, 3, 4, 5, 6].map((k) => k * k * k - k).join('+') + ' = ' + S(1, 6, (k) => k * k * k - k) +

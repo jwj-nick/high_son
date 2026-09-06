@@ -19,8 +19,8 @@ module.exports = function ({ chk }) {
   const s1 = seq(5, (a) => 2 * a - 3, 6);
   chk(1, String(s1[3]), '항 ' + s1.slice(0, 5).join(', ') + ' → a₄=' + s1[3] + ' (2배만 하면 ' + seq(5, (a) => 2 * a, 4)[3] + ')');
 
-  const s2 = seq(2, (a, i) => a + 2 * i, 7);
-  chk(2, String(s2[4]), '항 ' + s2.slice(0, 6).join(', ') + ' → a₅=' + s2[4] + ' · a₆=' + s2[5]);
+  const s2 = seq(2, (a, i) => a + 2 * i - 1, 7);
+  chk(2, String(s2[4]), '항 ' + s2.slice(0, 6).join(', ') + ' → a₅=' + s2[4] + ' · a₆=' + s2[5] + ' · 2n 을 더하면 ' + seq(2, (a, i) => a + 2 * i, 5)[4]);
 
   const s3 = seq(1, (a) => a / (a + 1), 5);
   chk(3, frac(s3[3]), '항 ' + s3.slice(0, 4).map(frac).join(', ') + ' → a₄=' + frac(s3[3]) + ' · 뒤집어 읽으면 ' + frac(seq(1, (a) => (a + 1) / a, 4)[3]));
@@ -30,14 +30,16 @@ module.exports = function ({ chk }) {
 
   /* 5. 후보 점화식으로 항을 만들어 비가 일정한지 확인한다 */
   const isGP = (t) => { const r = t[1] / t[0]; return t.every((v, i) => i === 0 || Math.abs(t[i] / t[i - 1] - r) < 1e-9); };
+  const TARGET5 = [2, -6, 18, -54];
   const cand5 = {
-    'aₙ₊₁² = aₙ · aₙ₊₂': seq2(2, 6, (p, q) => (p * p) / q, 6),                 // 가운데 항의 제곱 = 양옆의 곱
-    '2aₙ₊₁ = aₙ + aₙ₊₂': seq2(2, 6, (p, q) => 2 * p - q, 6),                   // 가운데 항이 평균
-    'aₙ₊₁ = 2aₙ + 1': seq(2, (a) => 2 * a + 1, 6),
-    'aₙ₊₂ = aₙ₊₁ + aₙ': seq2(2, 6, (p, q) => p + q, 6),
+    'aₙ₊₁ = −3aₙ': seq(2, (a) => -3 * a, 4),
+    'aₙ₊₁ = aₙ − 8': seq(2, (a) => a - 8, 4),
+    'aₙ₊₁ = 3aₙ': seq(2, (a) => 3 * a, 4),
+    'aₙ₊₂ = aₙ₊₁ + aₙ': seq2(2, -6, (p, q) => p + q, 4),
   };
-  const hit5 = Object.keys(cand5).filter((k) => isGP(cand5[k]));
-  chk(5, hit5[0] || '없음', Object.keys(cand5).map((k) => k.slice(0, 12) + '→[' + cand5[k].slice(0, 4).map(R6).join(',') + ']' + (isGP(cand5[k]) ? ' 등비' : '')).join(' · '));
+  const hit5 = Object.keys(cand5).filter((k) => cand5[k].every((v, i) => v === TARGET5[i]));
+  chk(5, hit5[0] || '없음', Object.keys(cand5).map((k) => k + '→[' + cand5[k].join(',') + ']').join(' · ') +
+    ' · 목표 [' + TARGET5.join(',') + '] · 비 ' + TARGET5.slice(1).map((v, i) => v / TARGET5[i]).join(','));
 
   /* 6·9. 증명 문항 — k 에 여러 값을 넣어 옳은 식 하나만 남는지 본다 */
   const L6 = (n) => { let s = 0; for (let i = 1; i <= n; i++) s += i * (i + 1); return s; };   // 좌변을 실제로 더한다
@@ -55,8 +57,8 @@ module.exports = function ({ chk }) {
   const hit7 = Object.keys(cand7).filter((key) => KS.every((k) => { const m = (Math.pow(5, k) - 1) / 4; return Math.abs(cand7[key](m) - (Math.pow(5, k + 1) - 1)) < 1e-6; }));
   chk(7, hit7[0] || '없음', 'k=1 이면 m=' + ((5 - 1) / 4) + ' 이고 5²−1=' + (25 - 1) + ' · 일치하는 식 ' + hit7.join(', '));
 
-  const s8 = seq2(1, 1, (p, q) => p + q, 9);
-  chk(8, String(s8[6]), '항 ' + s8.slice(0, 8).join(', ') + ' → a₇=' + s8[6] + ' · 번호를 더하면 ' + seq2(1, 1, (p, q, i) => p + i - 1, 8).slice(0, 7).join(','));
+  const s8 = seq2(1, 3, (p, q) => p + q, 9);
+  chk(8, String(s8[6]), '항 ' + s8.slice(0, 8).join(', ') + ' → a₇=' + s8[6] + ' · 번호를 더하면 ' + seq2(1, 3, (p, q, i) => p + i - 1, 8).slice(0, 7).join(','));
 
   const s10 = seq(1, (a, i) => a + Math.pow(3, i), 6);
   chk(10, String(s10[3]), '항 ' + s10.slice(0, 5).join(', ') + ' → a₄=' + s10[3] + ' · 3n 을 더하면 ' + seq(1, (a, i) => a + 3 * i, 4)[3]);

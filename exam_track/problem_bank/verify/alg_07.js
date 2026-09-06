@@ -28,7 +28,7 @@ module.exports = function ({ chk }) {
     for (let a = -400; a <= 400; a += 0.5) for (let r = -12; r <= 12; r += 0.25) if (r !== 0 && cond(a, r)) out.push([a, r]);
     return out;
   };
-  const g2 = findGP((a, r) => near(GP(a, r, 2), 12) && near(GP(a, r, 5), 324));
+  const g2 = findGP((a, r) => near(GP(a, r, 1), 12) && near(GP(a, r, 4), 324));
   chk(2, String(g2[0][1]), '조건을 만족하는 (a, r) = ' + g2.map((p) => '(' + p[0] + ',' + p[1] + ')').join(' ') + ' · r 후보가 하나뿐이다');
 
   const g9 = findGP((a, r) => r > 0 && near(GP(a, r, 1) + GP(a, r, 2), 6) && near(GP(a, r, 3) + GP(a, r, 4), 54));

@@ -32,7 +32,7 @@
 | mat1_05 | `mat1_counting` | 순열과 조합 | rule · perm · comb | ✅ 22~24차 · 배포 3f460e9 |
 | mat1_06 | `mat1_matrix` | 행렬의 뜻과 연산 | what · add · mul | ✅ 22~24차 · 배포 3f460e9 |
 
-**배치 3 — 고2 대수 (Nick 지시 "a 를 진행해서 수학을 완료합시다", 2026-09-06)** — 대수 9/9
+**배치 3 — 고2 대수 (Nick 지시 "a 를 진행해서 수학을 완료합시다", 2026-09-06)** — ✅ 2026-09-07 완료, 대수 9/9 (108문항)
 
 | 세트 | 앱 | 단원 | 개념 탭 | 상태 |
 |---|---|---|---|---|
@@ -42,9 +42,9 @@
 | alg_04 | `alg_trig_def` | 일반각·호도법·삼각함수의 정의 | angle · def · sym | ✅ 26차 · 배포 3ef3f7c |
 | alg_05 | `alg_trig_graph` | 삼각함수의 그래프 | sc · tan · tr · eq | ✅ 27차 · 배포 bc73d9f |
 | alg_06 | `alg_trig_law` | 사인법칙·코사인법칙 | sine · cos · area | ✅ 27차 · 배포 bc73d9f |
-| alg_07 | `alg_seq` | 등차수열과 등비수열 | ap · gp · sum | ⬜ 28차 게이트 |
-| alg_08 | `alg_sigma` | 수열의 합 | sig · pow · var | ⬜ 28차 게이트 |
-| alg_09 | `alg_induction` | 수학적 귀납법 | rec · ind · prf | ⬜ 29차 게이트 |
+| alg_07 | `alg_seq` | 등차수열과 등비수열 | ap · gp · sum | ✅ 28차 · 배포 fa0c17e |
+| alg_08 | `alg_sigma` | 수열의 합 | sig · pow · var | ✅ 28차 · 배포 fa0c17e |
+| alg_09 | `alg_induction` | 수학적 귀납법 | rec · ind · prf | ✅ 29차 · 배포 232f770 |
 
 **배치 4 이후 — 남은 대상**
 - 미적분Ⅰ 8앱(`cal1_limit`·`continuity`·`derivative`·`tangent`·`graph`·`apply`·`integral`·`area`) · 확률과 통계 7앱(`prob_*`). 세트 id `cal1_NN`·`prob_NN`, topics canonical은 이미 있다.

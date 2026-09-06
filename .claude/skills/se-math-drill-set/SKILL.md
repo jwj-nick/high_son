@@ -27,9 +27,11 @@ description: 수학 단원 학습앱 하나에 "⚡ 실전" 점검 세트(12문�
 
 - 12문항. **점검 티어**: 중상 3~4 · 상 6~8 · 최상 2. 유형은 `유형판별`(material 필수) · `조건함정` · `계산` · `복합` (`그래프해석`은 실제 그래프·표 material이 있을 때만).
 - 4지선다. 정답 보기에는 `cause`·`why`를 붙이지 않는다. 오답 3개는 **서로 다른 원인**으로, 각각 why에 적힌 실수 경로로 **실제로 그 값이 나오는지** 숫자를 먼저 낸다(REVIEW 20차 치명 2건이 여기서 났다).
+- **산술이 실제로 맞으면 C5 가 아니다** — "제곱근을 안 취하고 멈춤"·"한 항 더·덜 만듦"은 계산이 정확하므로 C1(구할 것·범위)이다.
 - 원인 코드: C4(도구 판별 실패, material 있는 문항만) · C1(조건·구할 것 놓침, 끝점 포함, 순서) · C5(산술·부호 **실행** 실수 — 정의 오해면 C2) · C3(혼동 쌍 `(A ↔ B)` 명시 — 내분↔중점, 평행↔수직, x축↔y축, ∈↔⊂ 등) · C2(공식·규칙 부재). **C5를 문항마다 1개씩 채우지 않는다.** 같은 오류는 세트 안·세트 간에 같은 코드로.
-- 문구: 수식은 유니코드(x², √, −, ≤, ∈, ⊂, ᶜ), 부등호는 `&lt;` `&gt;`(innerHTML 삽입). `<`+알파벳·한글 금지. 보기 넷의 길이·형식을 나란히(정답만 두 식이면 형태 단서).
-- `solve.key`에 풀이 전 과정 + 검산 한 줄, `solve.trap`에 실점 지점과 습관 한 줄. 시험·점수·등수 문구는 쓰지 않는다.
+- 문구: 수식은 유니코드(x², √, −, ≤, ∈, ⊂, ᶜ, π, Σ 는 `Σ(k=1→n)` 꼴), 부등호는 `&lt;` `&gt;`(innerHTML 삽입). `<`+알파벳·한글 금지. **KaTeX 문법(`$…$`, `_{…}`, `rac`)을 쓰지 않는다 — 실전 탭에는 KaTeX 가 다시 돌지 않아 화면에 그대로 보인다.** 보기 넷의 길이·형식을 나란히(정답만 두 식이면 형태 단서).
+- **앱과 겹치는지 대조할 때는 수치가 아니라 정답값과 풀이 구조를 본다.** 수를 바꿔도 답이 같으면 아이는 기억으로 고른다. 앱의 QUIZ 배열·예제 블록뿐 아니라 **인터랙티브 위젯의 파라미터 범위**까지 확인한다(시뮬레이터가 정답을 화면에 띄운 전례가 있다).
+- `solve.key`에 풀이 전 과정 + 검산 한 줄, `solve.trap`에 실점 지점과 습관 한 줄. **검산 문구는 반증 가능해야 한다** — "…에 가까워진다"처럼 어떤 결과를 넣어도 통과하는 문장 대신 값을 실제로 되던지는 문장으로. 시험·점수·등수 문구는 쓰지 않는다.
 - 헤더 주석에 취지·범위 판단(무엇을 빼고 왜)을 남긴다.
 - ⚠️ **단원 번호는 앱의 배지를 먼저 읽고 그대로 쓴다.** `grep -o 'Ⅰ\.[^<"]*\|Ⅱ\.[^<"]*' <앱>.html | head -1`. drill.js가 세트 제목을 헤딩으로 찍으므로 어긋나면 한 화면에 두 번호가 같이 보인다(24차까지 4회 재발).
 - ⚠️ **오답 값은 하나씩 숫자를 내 본다.** 21~24차의 치명 11건이 전부 "why에 적힌 경로로 그 값이 나오지 않음"이었다. `verify_set.js`는 정답키만 보므로 이 층은 출제자만 막을 수 있다.
@@ -51,7 +53,7 @@ module.exports = function ({ S, chk, dist, near, solveLinear2, subsets, has, gcd
 # 등록 3곳: data/sets.js(한 줄, "verified": null) · tools/sync_drill.py MAP · topics.json canonical(공통수학1·2 목록은 이미 있음 — 기존 이름 사용)
 python exam_track/tools/check_bank.py <set>                       # 위반 0
 python exam_track/tools/sync_drill.py --write                     # 정본 → 앱 폴더 drill_<set>.js (+ drill.js)
-python exam_track/tools/add_drill_tab.py subject_hub/<과목>/10_app/<앱>.html <set>   # ⚡ 실전 탭·페이지·목차 카드·스크립트
+python exam_track/tools/add_drill_tab.py subject_hub/<과목>/10_app/<앱>.html <set>   # ⚡ 실전 탭·페이지·목차 카드·스크립트 (앵커=정리 탭. id 가 sum·fin 중 무엇이든 자동으로 뒤엣것을 고른다)
 node   exam_track/tools/add_drill_fix.js subject_hub/<과목>/10_app/<앱>.html          # DRILL_FIX 기본 매핑(개념 탭 자동), 필요하면 JSON 지정
 sed -i 's#<div class="td">심화 12문제</div>#<div class="td">점검 12문제</div>#' <앱>.html   # 목차 카드 문구
 node   subject_hub/_shared/app_check.js <앱>.html --links subject_hub/<과목>/10_app   # 태그 균형·잘림
