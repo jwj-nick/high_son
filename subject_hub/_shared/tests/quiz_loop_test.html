@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>quiz loop test</title>
+<link rel="stylesheet" href="../../대수/10_app/alg_app.css">
+<script src="../lecture.js"></script>
+</head><body>
+<div id="tabs"><button class="tab active" data-t="quiz">퀴즈</button><button class="tab" data-t="a">A</button></div>
+<div class="page active" data-p="quiz"><div class="card">
+  <div class="quizhud"><span class="qn" id="qNum">문제 1 / 4</span><span class="sc">점수 <b id="qScore">0</b> / 4</span><div class="qbar"><i id="qBar" style="width:0%"></i></div></div>
+  <div id="qArea"><div class="qq" id="qQ"></div><div class="qopts" id="qOpts"></div><div class="qexp" id="qExp"></div><button class="qnext" id="qNext">다음 문제 →</button></div>
+</div></div>
+<div class="page" data-p="a"></div>
+<pre id="log"></pre>
+<script src="../../대수/10_app/alg_app.js"></script>
+<script>
+var L = [];
+function log(s) { L.push(s); }
+function ok(cond, label) { log((cond ? 'PASS ' : 'FAIL ') + label); }
+function ymd(d) { d = d || new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+function plus(n) { var d = new Date(); d.setDate(d.getDate() + n); return ymd(d); }
+function box() { return JSON.parse(localStorage.getItem('quizbox:qtest') || '{}'); }
+function txt(id) { var e = document.getElementById(id); return e ? e.textContent : '(none)'; }
+function answer(i, correct) { var q = QUIZ[i]; var btns = [].slice.call(document.querySelectorAll('#qOpts .qopt')); var b = btns.filter(function (x) { return (+x.dataset.k === q.a) === correct; })[0]; b.click(); }
+function cur() { return CUR[document.getElementById('qNum').textContent]; }
+var QUIZ = [
+  { q: 'Q0', o: ['a0', 'b', 'c', 'd'], a: 0, t: 'a', e: 'e0' },
+  { q: 'Q1', o: ['a1', 'b', 'c', 'd'], a: 0, t: 'a', e: 'e1' },
+  { q: 'Q2', o: ['a2', 'b', 'c', 'd'], a: 0, t: 'a', e: 'e2' },
+  { q: 'Q3', o: ['a3', 'b', 'c', 'd'], a: 0, t: 'a', e: 'e3' }
+];
+try {
+  localStorage.setItem('quizbox:qtest', JSON.stringify({ 0: { w: 1, k: 0, due: ymd(), st: 'sch' }, 1: { w: 1, k: 1, due: plus(5), st: 'sch' }, 2: { w: 2, k: 3, due: plus(1), st: 'mst' } }));
+  APP.quiz(QUIZ, { a: 'A탭' }, { key: 'qtest', perfect: 'P' });
+  // 1) 배너: 때가 된 복습 1문항
+  ok(/때가 된 복습 1문항/.test(txt('qBox')) && !!document.getElementById('qReview'), '배너 due 1 + 복습 버튼');
+  ok(/정복 1/.test(txt('qBox')), '배너 정복 1');
+  // 2) 복습 모드
+  document.getElementById('qReview').click();
+  ok(txt('qNum') === '📬 복습 1 / 1', '복습 모드 HUD: ' + txt('qNum'));
+  ok(txt('qQ') === 'Q0', '복습 문항은 Q0');
+  answer(0, true);
+  ok(/사다리 전진 — 3일/.test(txt('qExp')), '복습 정답 → 3일 전진 노트');
+  ok(box()[0].k === 1 && box()[0].due === plus(3), 'box[0] k=1 due=+3');
+  ok(!document.getElementById('qReview'), '복습 중 배너에 버튼 없음');
+  document.getElementById('qNext').click();
+  ok(/복습 1문항 끝 — 전부 사다리 전진!/.test(txt('qArea')), '복습 완료 화면');
+  ok(/복습함 2 · 🏅 정복 1/.test(txt('qArea')), '완료 화면 상태: ' + txt('qArea').replace(/\s+/g, ' ').slice(0, 120));
+  ok(document.getElementById('qRestart').textContent === '전체 퀴즈 풀기 →', '복습 후 버튼 문구');
+  // 3) 본 퀴즈
+  document.getElementById('qRestart').click();
+  ok(txt('qNum') === '문제 1 / 4', '본 퀴즈 HUD');
+  ok(!/때가 된 복습/.test(txt('qBox')), 'due 소진 → 배너에 복습 권유 없음: ' + txt('qBox'));
+  answer(0, true); ok(!/사다리|복습함에 넣었어요/.test(txt('qExp')), 'Q0 due 전 정답 → 사다리 변화 없음'); ok(box()[0].k === 1, 'box[0] 그대로 k=1');
+  ok(!!document.getElementById('qGuess'), '정답에 찍었어 버튼');
+  document.getElementById('qNext').click();
+  answer(1, false); ok(/복습함에 넣었어요/.test(txt('qExp')), 'Q1 오답 → 복습함 노트'); ok(box()[1].k === 0 && box()[1].due === plus(1) && box()[1].w === 2, 'box[1] 리셋 w=2 due=+1');
+  ok(/🩹 지금 바로 고치기 → A탭/.test(txt('qExp')), '🩹 칩');
+  document.getElementById('qNext').click();
+  answer(2, true); ok(!/사다리/.test(txt('qExp')), 'Q2 정복 문항 정답 → 변화 없음');
+  document.getElementById('qGuess').click();
+  ok(box()[2].st === 'sch' && box()[2].g === true && box()[2].w === 2 && box()[2].due === plus(1), 'Q2 찍었어 → 복습함(sch, g, w 유지)');
+  ok(document.getElementById('qGuess').disabled, '찍었어 버튼 비활성');
+  document.getElementById('qNext').click();
+  answer(3, true); document.getElementById('qNext').click();
+  ok(/3 \/ 4/.test(txt('qArea')) && /정답률 75%/.test(txt('qArea')), '본 퀴즈 완료 3/4 75%');
+  ok(/틀린 2문항 되풀이/.test(txt('qArea')), '되풀이 버튼 2문항');
+  ok(/복습함 3/.test(txt('qArea')) && !/정복/.test(txt('qArea')), '상태: 복습함 3, 정복 0: ' + txt('qArea').replace(/\s+/g, ' ').slice(0, 160));
+  // 4) 되풀이
+  document.getElementById('qRetry').click();
+  ok(txt('qNum') === '🔁 되풀이 1회전 · 1 / 2', '되풀이 HUD: ' + txt('qNum'));
+  var b1 = JSON.stringify(box());
+  answer(1, false); ok(!document.getElementById('qGuess') && !/복습함에 넣었어요/.test(txt('qExp')), '되풀이 오답: 노트·찍었어 없음');
+  document.getElementById('qNext').click();
+  answer(2, true); ok(!document.getElementById('qGuess'), '되풀이 정답: 찍었어 버튼 없음');
+  ok(JSON.stringify(box()) === b1, '되풀이는 복습함을 안 건드림');
+  document.getElementById('qNext').click();
+  ok(/되풀이 1회전 끝 — 아직 1문항/.test(txt('qArea')) && /틀린 1문항 되풀이/.test(txt('qArea')), '되풀이 1회전 완료 화면');
+  document.getElementById('qRetry').click();
+  ok(txt('qNum') === '🔁 되풀이 2회전 · 1 / 1', '되풀이 2회전 HUD');
+  answer(1, true); document.getElementById('qNext').click();
+  ok(/남은 문항 전부 맞혔어요/.test(txt('qArea')) && !document.getElementById('qRetry'), '되풀이 종료');
+  ok(document.getElementById('qRestart').textContent === '전체 퀴즈 풀기 →', '되풀이 후 버튼 문구');
+  // 5) 3회전 소진
+  document.getElementById('qRestart').click();
+  for (var i = 0; i < 4; i++) { answer(i, i !== 3); document.getElementById('qNext').click(); }
+  for (var r = 1; r <= 3; r++) { document.getElementById('qRetry').click(); answer(3, false); document.getElementById('qNext').click(); }
+  ok(/되풀이 3회전을 다 썼어요/.test(txt('qArea')) && !document.getElementById('qRetry'), '3회전 소진 안내');
+  // 6) 리뷰 [M]: due 문항 정답 → 사다리 안내 뒤 "찍었어" → 안내문 제거 + 사다리 리셋
+  var bx = box(); bx[3] = { w: 1, k: 1, due: ymd(), st: 'sch' }; localStorage.setItem('quizbox:qtest', JSON.stringify(bx));
+  APP.quiz(QUIZ, { a: 'A탭' }, { key: 'qtest' });
+  document.getElementById('qReview').click();
+  answer(3, true);
+  ok(/사다리 전진 — 7일/.test(txt('qExp')), '복습 정답 → 7일 전진 안내');
+  document.getElementById('qGuess').click();
+  ok(!document.querySelector('#qExp .qnote'), '찍었어 → 낡은 사다리 안내 제거');
+  ok(box()[3].k === 0 && box()[3].due === plus(1) && box()[3].g === true, '찍었어 → 사다리 리셋');
+  log('BOX ' + JSON.stringify(box()));
+} catch (e) { log('ERROR ' + e.message + '\n' + e.stack); }
+document.getElementById('log').textContent = L.join('\n');
+</script>
+</body></html>

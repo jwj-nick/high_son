@@ -162,9 +162,21 @@ cd /c/Nick/30_Apps/jwj-nick.github.io && git add high1/<폴더>/ && git commit &
 | 기계로 판정 가능해진 규칙 | `tools/check_bank.py` (세 번 재발하면 내린다) |
 | 진행 상황 | `PLAN.md` §6 표 · `00_META/HANDOFF.md` |
 
+## 8. 수학 세트 — 추가 절차 (2026-09-06)
+
+수학은 위 절차에 **정답키 독립 재검산**이 한 단계 더 붙고, 범위(2022 개정)·원인 코드 규칙이 다르다. 정본은 스킬 `/se-math-drill-set`(`.claude/skills/se-math-drill-set/SKILL.md`)과 계획 `MATH_DRILL_PLAN.md`(대상 표·범위 표·원인 코드 규칙·모델 정책)이다.
+
+```bash
+node   exam_track/tools/verify_set.js <set>              # problem_bank/verify/<set>.js 로 12/12 재계산 — 게이트 전 필수
+node   exam_track/tools/add_drill_fix.js <앱>.html        # DRILL_FIX 기본 매핑(개념 탭 자동) — add_drill_tab 뒤에
+node   exam_track/tools/add_app_box.js <앱>.html <탭> b "<제목>" "<본문>"   # "앱에 근거 없음" 지적을 앱 쪽에서 해소
+```
+게이트는 Opus, 세트 2개당 1에이전트. 실측(20차, 4세트): 정답키 오류 0 — 결함은 why 경로·cause 배정·앱 근거 부재에 몰린다.
+
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
+| 2026-09-06 | §8 수학 세트 추가 절차 — 정답키 독립 재검산(`verify_set.js`)·DRILL_FIX·앱 박스 도구, 스킬 `/se-math-drill-set`, 계획 `MATH_DRILL_PLAN.md`. 20차(mat2_01~04) 실측 반영 |
 | 2026-08-19 | §6 게이트 템플릿에 **보기 길이 대조**(정답=단독최장 비율·평균 갭)와 **순서배열 순열 집합 대조**(은행 전체와) 항목 추가(17차: 길이 휴리스틱 하나로 전 세트가 풀렸고, 순서배열 10/11문항이 동일 순열 집합이었다) |
 | 2026-08-15 | §6 게이트 템플릿에 **SVG 그래프 좌표 검증** 항목 추가(11·13차: 좌표가 서술과 어긋나 복수정답 위험이 두 번 났다) |
 | 2026-08-12 | 생성. 10세트 120문항을 만들며 굳어진 절차를 고정. 모델 선택 결정(출제 Sonnet 가능 / 게이트 Opus 권장) 포함 |
