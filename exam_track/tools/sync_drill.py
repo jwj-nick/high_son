@@ -60,6 +60,12 @@ MAP = {
     "mat2_05": "subject_hub/공통수학2/10_app",
     "mat2_06": "subject_hub/공통수학2/10_app",
     "mat2_07": "subject_hub/공통수학2/10_app",
+    "mat1_01": "subject_hub/공통수학1/10_app",
+    "mat1_02": "subject_hub/공통수학1/10_app",
+    "mat1_03": "subject_hub/공통수학1/10_app",
+    "mat1_04": "subject_hub/공통수학1/10_app",
+    "mat1_05": "subject_hub/공통수학1/10_app",
+    "mat1_06": "subject_hub/공통수학1/10_app",
 }
 
 
