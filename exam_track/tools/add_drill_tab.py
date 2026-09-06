@@ -28,6 +28,9 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BANK = os.path.join(ROOT, "exam_track", "problem_bank", "data")
 
+# 정리 탭의 id 는 앱마다 다르다 — 대부분 "sum" 이지만 대수 수열 앱들은 "fin" 이다.
+# 실전 탭은 언제나 정리 탭 바로 앞에 들어가야 하므로, 파일에 있는 쪽을 앵커로 쓴다.
+SUMMARY_IDS = ("sum", "fin")
 TAB_ANCHOR = '<button class="tab" data-t="sum">'
 PAGE_ANCHOR = '<div class="page" data-p="sum">'
 TOC_RE = re.compile(r"( *<button onclick=\"go\('quiz'\)\">.*?</button>\n)")
@@ -52,19 +55,26 @@ def apply(path, set_id, write=True):
     if n is None:
         return ("fail", "문항 정본 없음: %s.js" % set_id)
 
-    for anchor in (TAB_ANCHOR, PAGE_ANCHOR, END_ANCHOR):
+    # 정리 탭은 언제나 마지막 탭이다 — 후보 중 파일에서 가장 뒤에 있는 것을 앵커로 고른다.
+    tab_anchor, page_anchor, at = TAB_ANCHOR, PAGE_ANCHOR, -1
+    for sid in SUMMARY_IDS:
+        t = '<button class="tab" data-t="%s">' % sid
+        p2 = '<div class="page" data-p="%s">' % sid
+        if s.count(t) == 1 and s.count(p2) == 1 and s.index(t) > at:
+            tab_anchor, page_anchor, at = t, p2, s.index(t)
+    for anchor in (tab_anchor, page_anchor, END_ANCHOR):
         if s.count(anchor) != 1:
             return ("fail", "앵커 %d회: %s" % (s.count(anchor), anchor[:40]))
     if not TOC_RE.search(s):
         return ("fail", "개요 목차의 퀴즈 카드를 찾지 못함")
 
     # ① 탭 버튼
-    s = s.replace(TAB_ANCHOR,
-                  '<button class="tab" data-t="drill">⚡ 실전</button>\n  ' + TAB_ANCHOR, 1)
+    s = s.replace(tab_anchor,
+                  '<button class="tab" data-t="drill">⚡ 실전</button>\n  ' + tab_anchor, 1)
     # ② 페이지 섹션
-    s = s.replace(PAGE_ANCHOR,
+    s = s.replace(page_anchor,
                   '<div class="page" data-p="drill">\n    <div id="drill"></div>\n  </div>\n\n  '
-                  + PAGE_ANCHOR, 1)
+                  + page_anchor, 1)
     # ③ 개요 목차 카드
     m = TOC_RE.search(s)
     indent = re.match(r" *", m.group(1)).group(0)

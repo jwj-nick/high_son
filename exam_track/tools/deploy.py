@@ -41,6 +41,9 @@ SUBJECTS = {
     "통합과학2": "science",
     "공통수학1": "math",
     "공통수학2": "math",
+    "대수": "math",
+    "미적분1": "math",
+    "확률과통계": "math",
     "공통국어2": "korean",
 }
 

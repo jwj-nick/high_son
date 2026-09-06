@@ -32,10 +32,24 @@
 | mat1_05 | `mat1_counting` | 순열과 조합 | rule · perm · comb | ✅ 22~24차 · 배포 3f460e9 |
 | mat1_06 | `mat1_matrix` | 행렬의 뜻과 연산 | what · add · mul | ✅ 22~24차 · 배포 3f460e9 |
 
-**배치 3 — Nick 결정 대기(둘 중 하나 또는 둘 다)** — ⬜ 다음 세션은 여기부터(Nick이 (a)/(b)를 정한 뒤)
-- (a) 고2 대수·미적분Ⅰ·확통 단원 앱 24개(`alg_`·`cal1_`·`prob_`) — 아들이 고2가 되는 2027년에 내신 갈래로 필요. 지금은 흥미 갈래 퀴즈 v2만. 세트 id는 `alg_NN`·`cal1_NN`·`prob_NN`, topics canonical 신설 필요.
-- (b) 통합사회1·통합과학1 앱 18개 — 세트 0. 수학과 다른 과목 프로파일(PLAN §2)이라 이 스킬이 아니라 기존 사회·과학 절차(RUNBOOK)로.
-- 별건: FLOW V2 로드맵 4단계(통합사회2·통합과학2 DRILL_FIX·훈련 탭 보강) — `add_drill_fix.js`로 매핑 삽입은 즉시 가능(각 앱의 훈련 탭 id를 JSON으로 지정).
+**배치 3 — 고2 대수 (Nick 지시 "a 를 진행해서 수학을 완료합시다", 2026-09-06)** — 대수 9/9
+
+| 세트 | 앱 | 단원 | 개념 탭 | 상태 |
+|---|---|---|---|---|
+| alg_01 | `alg_explog` | 지수와 로그 | root · exp · log · clog | ✅ 25차 · 배포 |
+| alg_02 | `alg_expfn` | 지수함수 | graph · move · eq | ✅ 25차 · 배포 |
+| alg_03 | `alg_logfn` | 로그함수 | graph · move · eq | ✅ 26차 · 배포 3ef3f7c |
+| alg_04 | `alg_trig_def` | 일반각·호도법·삼각함수의 정의 | angle · def · sym | ✅ 26차 · 배포 3ef3f7c |
+| alg_05 | `alg_trig_graph` | 삼각함수의 그래프 | sc · tan · tr · eq | ✅ 27차 · 배포 bc73d9f |
+| alg_06 | `alg_trig_law` | 사인법칙·코사인법칙 | sine · cos · area | ✅ 27차 · 배포 bc73d9f |
+| alg_07 | `alg_seq` | 등차수열과 등비수열 | ap · gp · sum | ⬜ 28차 게이트 |
+| alg_08 | `alg_sigma` | 수열의 합 | sig · pow · var | ⬜ 28차 게이트 |
+| alg_09 | `alg_induction` | 수학적 귀납법 | rec · ind · prf | ⬜ 29차 게이트 |
+
+**배치 4 이후 — 남은 대상**
+- 미적분Ⅰ 8앱(`cal1_limit`·`continuity`·`derivative`·`tangent`·`graph`·`apply`·`integral`·`area`) · 확률과 통계 7앱(`prob_*`). 세트 id `cal1_NN`·`prob_NN`, topics canonical은 이미 있다.
+- 통합사회1·통합과학1 앱 18개 — 세트 0. 수학과 다른 과목 프로파일(PLAN §2)이라 이 스킬이 아니라 기존 사회·과학 절차(RUNBOOK)로.
+- ✅ 완료(2026-09-06): 통합사회2·통합과학2 앱 14개에 `DRILL_FIX` 매핑 삽입 — 문항 170개가 라이브인데 틀렸을 때 갈 곳이 없었다. 배포 c7e976b.
 
 ## 2. 2022 개정 교육과정 범위 — 문항에 넣지 않는 것
 
@@ -101,9 +115,10 @@
 
 1. `git pull` → 이 문서 §1에서 ⬜ 첫 행 → `/se-math-drill-set <앱>` 반복(2~3세트) → 게이트는 세트 2개씩 묶어 Opus → 반영 → `verified` → 배포 → 기록.
 2. 세트가 끝날 때마다 §1 표의 상태와 REVIEW.md 이력을 갱신한다. 배치가 끝나면 HANDOFF 초점 문단 한 줄.
-3. 배치 3은 Nick 결정 후.
+3. 배치 3(고2 대수)은 Nick 지시로 착수했다. 배치 4는 미적분Ⅰ 8앱 → 확률과 통계 7앱 순서로, 한 세션에 2~3세트씩.
 
 ## 변경 이력
 | 날짜 | 내용 |
 |---|---|
+| 2026-09-07 | 배치 3(고2 대수) 표로 재작성. `deploy.py` SUBJECTS 에 대수·미적분1·확률과통계 추가(고2 수학은 배포 대상이 아니었다). `add_drill_tab.py` 앵커를 정리 탭 id 후보(`sum`·`fin`) 중 뒤에 오는 것으로 — 대수 수열 앱 둘은 정리 탭이 `fin` 이라 실전 탭이 엉뚱한 자리에 들어갈 뻔했다. |
 | 2026-09-06 | 생성. mat2_01~04 완료 반영, 배치 1~3 정의, 2022 개정 범위 표, 원인 코드 규칙(20차), 도구 표, 모델 정책. |
