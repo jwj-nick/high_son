@@ -29,18 +29,19 @@ module.exports = function ({ chk }) {
   chk(4, '165', 'x+y+z+w = 8 의 음이 아닌 정수해 ' + s4.length + ' 가지 · 그중 양의 정수해 ' + pos4.length + ' (보기 35) · ₁₂C₈ = ' + C(12, 8) + ' (보기 495)');
 
   // 5 — 각 종류 1권 이상인 해만
-  const s5 = sols(4, 9).filter((t) => t.every((v) => v >= 1));
-  const byFirst = [1, 2, 3, 4, 5, 6].map((k) => sols(4, 9).filter((t) => t.every((v) => v >= 1) && t[0] === k).length);
-  chk(5, '56', 'x+y+z+w = 9 의 해 중 넷 다 1 이상인 것 ' + s5.length + ' 가지 · 첫 종류를 k 권 사는 경우로 갈라 세면 ' + byFirst.join('+') + ' = ' + byFirst.reduce((a, b) => a + b, 0) + ' · 조건 없이 전부면 ' + sols(4, 9).length + ' (보기 220)');
+  const all5 = sols(6, 11);
+  const s5 = all5.filter((t) => t.every((v) => v >= 1));
+  const byFirst = [1, 2, 3, 4, 5, 6].map((k) => s5.filter((t) => t[0] === k).length);
+  chk(5, '252', '여섯 칸에 11 을 나누는 해 중 여섯 다 1 이상인 것 ' + s5.length + ' 가지 · 첫 종류를 k 권 사는 경우로 갈라 세면 ' + byFirst.join('+') + ' = ' + byFirst.reduce((a, b) => a + b, 0) + ' · 조건 없이 전부면 ' + all5.length + ' (보기 4368) · 종류와 개수를 뒤바꾸면 ' + sols(5, 6).length + ' (보기 210) · ₁₁C₅ = ' + C(11, 5) + ' (보기 462)');
 
   // 6 — 이항계수를 직접 더한다
-  const even = [0, 2, 4, 6, 8].map((r) => C(8, r));
-  const all8 = [...Array(9).keys()].map((r) => C(8, r));
-  chk(6, '128', '₈C 짝수 번째 = ' + even.join('+') + ' = ' + even.reduce((a, b) => a + b, 0) + ' · 전체 합 ' + all8.reduce((a, b) => a + b, 0) + ' (보기 256) · 전체−1 = ' + (256 - 1) + ' (보기 255) · 홀수 번째 합 ' + [1, 3, 5, 7].map((r) => C(8, r)).reduce((a, b) => a + b, 0));
+  const even = [0, 2, 4, 6, 8, 10, 12].map((r) => C(12, r));
+  const all12 = [...Array(13).keys()].map((r) => C(12, r));
+  chk(6, '2048', '₁₂C 짝수 번째 = ' + even.join('+') + ' = ' + even.reduce((a, b) => a + b, 0) + ' · 전체 합 ' + all12.reduce((a, b) => a + b, 0) + ' (보기 4096) · 전체−1 = ' + (4096 - 1) + ' (보기 4095) · 4 로 나누면 ' + 4096 / 4 + ' (보기 1024) · 홀수 번째 합 ' + [1, 3, 5, 7, 9, 11].map((r) => C(12, r)).reduce((a, b) => a + b, 0));
 
   // 7 — 음의 지수를 포함한 곱셈
-  const m7 = mpow({ 2: 1, '-1': 2 }, 6);
-  chk(7, '240', '(x²+2/x)⁶ 을 여섯 번 곱해 얻은 지수→계수 = ' + Object.keys(m7).sort((a, b) => a - b).map((k) => 'x^' + k + ':' + m7[k]).join(' ') + ' → 상수항 ' + m7[0] + ' · ₆C₄ 만 = ' + C(6, 4) + ' (보기 15) · ₆C₂×2² = ' + C(6, 2) * 4 + ' (보기 60)');
+  const m7 = mpow({ 3: 1, '-1': 2 }, 8);
+  chk(7, '1792', '(x³+2/x)⁸ 을 여덟 번 곱해 얻은 지수→계수 = ' + Object.keys(m7).sort((a, b) => a - b).map((k) => 'x^' + k + ':' + m7[k]).join(' ') + ' → 상수항 ' + m7[0] + ' · ₈C₆ 만 = ' + C(8, 6) + ' (보기 28) · ₈C₂×2² = ' + C(8, 2) * 4 + ' (보기 112)');
 
   // 8 — 두 표현의 개수를 열거로 맞춘다
   const s8 = sols(6, 3);

@@ -21,8 +21,9 @@ module.exports = function ({ chk }) {
 
   // 4 — 짝수 필터
   const p4 = perms('112333'.split(''));
-  const c4 = p4.filter((s) => Number(s[5]) % 2 === 0);
-  chk(4, '10개', '전체 ' + p4.length + ' 중 짝수 ' + c4.length + ' 개 · 전부: ' + c4.join(' ') + ' · 3! 로만 나누면 ' + 120 / 6 + ' (보기 20)');
+  const c4 = p4.filter((s) => Number(s[5]) % 2 === 1);
+  const ev4 = p4.filter((s) => Number(s[5]) % 2 === 0);
+  chk(4, '50개', '전체 ' + p4.length + ' 중 홀수 ' + c4.length + ' 개 · 짝수 ' + ev4.length + ' 개 (보기 10개) · 합이 ' + (c4.length + ev4.length) + ' · 일의 자리가 1 인 것 ' + p4.filter((s) => s[5] === '1').length + ' · 3 인 것 ' + p4.filter((s) => s[5] === '3').length);
 
   // 5 — 네 자리 수를 전부 만들어 맨 앞이 0 인 것을 뺀다
   const t5 = tuples(5, 4).filter((t) => t[0] !== 0);
@@ -39,8 +40,8 @@ module.exports = function ({ chk }) {
   chk(7, '120', '전체 ' + p7.length + ' 중 aa 가 들어 있지 않은 것 ' + c7.length + ' · 이웃하는 것 ' + (p7.length - c7.length) + ' (보기 60) · 예: ' + c7.slice(0, 3).join(' '));
 
   // 8 — 여덟 자리 이진 문자열 전수
-  const t8 = tuples(2, 8).filter((t) => t.reduce((a, b) => a + b, 0) === 3);
-  chk(8, '56', '2⁸ = ' + tuples(2, 8).length + ' 개 중 1 이 정확히 세 개인 것 ' + t8.length + ' · 5! 로만 나누면 ' + 40320 / 120 + ' (보기 336) · 3!+5! 로 나누면 ' + Math.round(40320 / 126) + ' (보기 320)');
+  const t8 = tuples(2, 9).filter((t) => t.reduce((a, b) => a + b, 0) === 3);
+  chk(8, '84', '2⁹ = ' + tuples(2, 9).length + ' 개 중 1 이 정확히 세 개인 것 ' + t8.length + ' · ₉P₃ = ' + (9 * 8 * 7) + ' (보기 504) · 3! 을 3 으로 보면 ' + Math.round(362880 / (3 * 720)) + ' (보기 168)');
 
   // 9 — 경로를 문자열로 만들어 막힌 변을 실제로 밟는지 좌표로 추적
   const p9 = perms('RRRRUUU'.split(''));
