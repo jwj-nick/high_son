@@ -46,8 +46,22 @@
 | alg_08 | `alg_sigma` | 수열의 합 | sig · pow · var | ✅ 28차 · 배포 fa0c17e |
 | alg_09 | `alg_induction` | 수학적 귀납법 | rec · ind · prf | ✅ 29차 · 배포 232f770 |
 
-**배치 4 이후 — 남은 대상**
-- 미적분Ⅰ 8앱(`cal1_limit`·`continuity`·`derivative`·`tangent`·`graph`·`apply`·`integral`·`area`) · 확률과 통계 7앱(`prob_*`). 세트 id `cal1_NN`·`prob_NN`, topics canonical은 이미 있다.
+**배치 4 — 완료 (2026-09-08)**
+
+| 앱 | 세트 | 상태 |
+|---|---|---|
+| `cal1_limit`·`continuity`·`derivative`·`tangent` | cal1_01~04 | ✅ 배포 (게이트 30·31차) |
+| `cal1_graph`·`cal1_apply` | cal1_05·06 | ✅ 배포 (게이트 32차) |
+| `cal1_integral`·`cal1_area` | cal1_07·08 | ✅ 배포 (게이트 33차) |
+| `prob_permutation`·`prob_combination` | prob_01·02 | ✅ 배포 (게이트 34차) |
+| `prob_probability`·`prob_conditional` | prob_03·04 | ✅ 배포 (게이트 35차) |
+| `prob_distribution`·`prob_normal`·`prob_estimation` | prob_05·06·07 | 🔶 게이트 36차 대기 |
+
+**고2 수학 세 과목 = 대수 9 + 미적분Ⅰ 8 + 확률과 통계 7 = 24단원 288문항.**
+고1 156문항을 더하면 수학 점검 세트는 **444문항**이다.
+
+**남은 대상 — 수학 밖**
+- 통합과학1 15앱 · 통합사회1 5앱 · 공통국어2 4앱. 이 셋은 수학과 규격이 달라(자료해석·개념 판별 비중) 별도 계획이 필요하다.
 - 통합사회1·통합과학1 앱 18개 — 세트 0. 수학과 다른 과목 프로파일(PLAN §2)이라 이 스킬이 아니라 기존 사회·과학 절차(RUNBOOK)로.
 - ✅ 완료(2026-09-06): 통합사회2·통합과학2 앱 14개에 `DRILL_FIX` 매핑 삽입 — 문항 170개가 라이브인데 틀렸을 때 갈 곳이 없었다. 배포 c7e976b.
 
@@ -115,7 +129,7 @@
 
 1. `git pull` → 이 문서 §1에서 ⬜ 첫 행 → `/se-math-drill-set <앱>` 반복(2~3세트) → 게이트는 세트 2개씩 묶어 Opus → 반영 → `verified` → 배포 → 기록.
 2. 세트가 끝날 때마다 §1 표의 상태와 REVIEW.md 이력을 갱신한다. 배치가 끝나면 HANDOFF 초점 문단 한 줄.
-3. 배치 3(고2 대수)은 Nick 지시로 착수했다. 배치 4는 미적분Ⅰ 8앱 → 확률과 통계 7앱 순서로, 한 세션에 2~3세트씩.
+3. 배치 3(고2 대수)은 Nick 지시로 착수했고, 배치 4(미적분Ⅰ 8앱 → 확률과 통계 7앱)까지 자율로 완주했다. 다음 배치는 Nick 결정 사항이다.
 
 ## 변경 이력
 | 날짜 | 내용 |
