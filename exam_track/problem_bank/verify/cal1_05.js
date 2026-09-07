@@ -33,9 +33,9 @@ module.exports = function ({ chk }) {
   };
 
   /* 1. 줄어드는 구간을 값으로 직접 읽는다 */
-  const r1 = decRange((x) => x * x * x - 12 * x, -6, 6);
+  const r1 = decRange((x) => 2 * x * x * x - 24 * x, -6, 6);
   chk(1, M(Math.round(r1[0])) + ' ≤ x ≤ ' + M(Math.round(r1[1])),
-    '값이 줄어드는 구간 ' + r1.join('~') + ' · f(−2)=' + ((-2) ** 3 - 12 * (-2)) + ' f(0)=0 f(2)=' + (8 - 24) + ' · x²=12 로 보면 ±' + R6(Math.sqrt(12)));
+    '값이 줄어드는 구간 ' + r1.join('~') + ' · f(−2)=' + (2 * (-2) ** 3 - 24 * (-2)) + ' f(0)=0 f(2)=' + (16 - 48) + ' · x²=24 로 보면 ±' + R6(Math.sqrt(24)));
 
   /* 2·11. 오르내림이 바뀌는 자리와 그때의 값 */
   const f2 = (x) => x * x * x - 3 * x * x - 9 * x;
@@ -68,9 +68,9 @@ module.exports = function ({ chk }) {
   chk(4, sw4.length === 1 ? 'x = ' + M(Math.round(sw4[0])) + ' 뿐이다' : sw4.map((v) => 'x = ' + M(Math.round(v))).join(' 과 ') + ' 다',
     "f′ 의 부호가 바뀌는 자리 " + sw4.join(', ') + ' · f′(−1.1)=' + R6(d4(-1.1)) + ' f′(−0.9)=' + R6(d4(-0.9)) + ' (바뀜) · f′(1.9)=' + R6(d4(1.9)) + ' f′(2.1)=' + R6(d4(2.1)) + ' (안 바뀜)');
 
-  const f8 = (x) => x * x * x + 3 * x * x + 3 * x + 1;
+  const f8 = (x) => 2 * x * x * x + 6 * x * x + 6 * x - 1;
   const t8 = turns(f8, -6, 6);
-  chk(8, t8.length + '개', '오르내림이 바뀌는 자리 ' + (t8.length ? t8.map((t) => t.kind + ' x≈' + t.x).join(', ') : '없다') + ' · f(x)=(x+1)³ 이라 계속 증가한다');
+  chk(8, t8.length + '개', '오르내림이 바뀌는 자리 ' + (t8.length ? t8.map((t) => t.kind + ' x≈' + t.x).join(', ') : '없다') + ' · f(x)=2(x+1)³−3 이라 계속 증가한다');
 
   /* 5. 닫힌 구간의 최대·최소 */
   const s5 = minmax((x) => x * x * x - 3 * x * x + 2, -1, 3);

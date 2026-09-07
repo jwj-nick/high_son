@@ -81,6 +81,10 @@ MAP = {
     "cal1_04": "subject_hub/미적분1/10_app",
     "cal1_05": "subject_hub/미적분1/10_app",
     "cal1_06": "subject_hub/미적분1/10_app",
+    "cal1_07": "subject_hub/미적분1/10_app",
+    "cal1_08": "subject_hub/미적분1/10_app",
+    "prob_01": "subject_hub/확률과통계/10_app",
+    "prob_02": "subject_hub/확률과통계/10_app",
 }
 
 

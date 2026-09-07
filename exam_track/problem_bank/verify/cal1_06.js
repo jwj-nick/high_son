@@ -37,12 +37,12 @@ module.exports = function ({ chk }) {
     '네 실근인 k 의 범위 ' + ok9[0] + '~' + ok9[ok9.length - 1] + ' · f(−1)=' + f9(-1) + ' f(0)=' + f9(0) + ' f(2)=' + f9(2));
 
   /* 2. 접하는 근까지 세되 서로 다른 실근으로 묶는다 */
-  const g2 = (x) => x * x * x - 3 * x * x + 4;
+  const g2 = (x) => 2 * x * x * x - 9 * x * x + 12 * x - 3;
   chk(2, touchCount(g2, -6, 6) + '개', '부호가 바뀌는 자리 ' + roots(g2, -6, 6) + '개 + 0 에 닿는 극값 ' + (touchCount(g2, -6, 6) - roots(g2, -6, 6)) + '개 · f(0)=' + g2(0) + ' f(2)=' + g2(2));
 
   /* 3. 정수 k 를 하나씩 넣어 세 실근인지 확인한다 */
-  const ks3 = []; for (let k = -10; k <= 20; k++) if (roots((x) => x * x * x - 6 * x * x + 9 * x - k, -5, 10) === 3) ks3.push(k);
-  chk(3, ks3.length + '개', '세 실근인 정수 k = ' + ks3.join(', ') + ' · k=0 이면 ' + roots((x) => x * x * x - 6 * x * x + 9 * x, -5, 10) + '개, k=4 이면 ' + roots((x) => x * x * x - 6 * x * x + 9 * x - 4, -5, 10) + '개');
+  const ks3 = []; for (let k = -20; k <= 10; k++) if (roots((x) => x * x * x + 6 * x * x + 9 * x - k, -10, 5) === 3) ks3.push(k);
+  chk(3, ks3.length + '개', '세 실근인 정수 k = ' + ks3.join(', ') + ' · k=0 이면 ' + roots((x) => x * x * x + 6 * x * x + 9 * x, -10, 5) + '개, k=−4 이면 ' + roots((x) => x * x * x + 6 * x * x + 9 * x + 4, -10, 5) + '개');
 
   /* 4·5·11. 조건이 성립하는 상수의 경계를 격자로 찾는다 */
   const pos4 = (a) => { for (let x = -6; x <= 8; x += 0.001) if (Math.pow(x, 4) - 4 * Math.pow(x, 3) + a <= 0) return false; return true; };
@@ -53,9 +53,9 @@ module.exports = function ({ chk }) {
   let k5 = null; for (let k = -10; k <= 20; k += 0.5) if (ok5(k) && k5 === null) k5 = k;
   chk(5, String(k5), 'x≥0 에서 성립하는 가장 작은 k = ' + k5 + ' · x=2 에서 값 ' + R6(8 - 12 + k5) + ' · x=0 에서 값 ' + k5);
 
-  const ok11 = (a) => { for (let x = 1; x <= 10; x += 0.001) if (x * x * x - 3 * x + a < -1e-9) return false; return true; };
-  let a11 = null; for (let a = -10; a <= 20; a += 0.5) if (ok11(a) && a11 === null) a11 = a;
-  chk(11, String(a11), 'x≥1 에서 성립하는 가장 작은 a = ' + a11 + ' · x=1 에서 값 ' + R6(1 - 3 + a11) + ' (구간의 왼쪽 끝이 최소)');
+  const ok11 = (a) => { for (let x = 5; x <= 15; x += 0.001) if (x * x * x - 9 * x * x + 15 * x + a < -1e-9) return false; return true; };
+  let a11 = null; for (let a = 0; a <= 40; a += 0.5) if (ok11(a) && a11 === null) a11 = a;
+  chk(11, String(a11), 'x≥5 에서 성립하는 가장 작은 a = ' + a11 + ' · x=5 에서 값 ' + R6(125 - 225 + 75 + a11) + ' (구간의 왼쪽 끝이 최소) · x=6 에서 ' + R6(216 - 324 + 90 + a11));
 
   /* 6·12. 속도의 부호가 바뀌는 자리 */
   const x6 = (t) => t * t * t - 9 * t * t + 24 * t;
@@ -70,10 +70,10 @@ module.exports = function ({ chk }) {
 
   /* 7. 속도와 가속도의 부호, 그리고 속력이 실제로 커지는지 */
   const x7 = (t) => t * t * t - 6 * t * t + 5;
-  const v7 = D(x7, 1), a7 = (D(x7, 1 + 1e-3) - D(x7, 1 - 1e-3)) / 2e-3;
-  const grow = Math.abs(D(x7, 1.5)) > Math.abs(D(x7, 1));
+  const v7 = D(x7, 3), a7 = (D(x7, 3 + 1e-3) - D(x7, 3 - 1e-3)) / 2e-3;
+  const grow = Math.abs(D(x7, 3.5)) > Math.abs(D(x7, 3));
   chk(7, (v7 < 0 ? '음' : '양') + '의 방향으로 움직이며 속력이 ' + (grow ? '커지고' : '줄고') + ' 있다',
-    'v(1)=' + R6(v7) + ' a(1)=' + R6(a7) + ' (부호 같음) · |v(1)|=' + R6(Math.abs(v7)) + ' → |v(1.5)|=' + R6(Math.abs(D(x7, 1.5))));
+    'v(3)=' + R6(v7) + ' a(3)=' + R6(a7) + ' (부호 다름) · |v(3)|=' + R6(Math.abs(v7)) + ' → |v(3.5)|=' + R6(Math.abs(D(x7, 3.5))));
 
   /* 8. 최고점은 속도가 0 이 되는 자리 */
   const h8 = (t) => 40 * t - 5 * t * t;
