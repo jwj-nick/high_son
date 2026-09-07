@@ -75,6 +75,12 @@ MAP = {
     "alg_07": "subject_hub/대수/10_app",
     "alg_08": "subject_hub/대수/10_app",
     "alg_09": "subject_hub/대수/10_app",
+    "cal1_01": "subject_hub/미적분1/10_app",
+    "cal1_02": "subject_hub/미적분1/10_app",
+    "cal1_03": "subject_hub/미적분1/10_app",
+    "cal1_04": "subject_hub/미적분1/10_app",
+    "cal1_05": "subject_hub/미적분1/10_app",
+    "cal1_06": "subject_hub/미적분1/10_app",
 }
 
 
