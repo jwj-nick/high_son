@@ -55,9 +55,9 @@
 | `cal1_integral`·`cal1_area` | cal1_07·08 | ✅ 배포 (게이트 33차) |
 | `prob_permutation`·`prob_combination` | prob_01·02 | ✅ 배포 (게이트 34차) |
 | `prob_probability`·`prob_conditional` | prob_03·04 | ✅ 배포 (게이트 35차) |
-| `prob_distribution`·`prob_normal`·`prob_estimation` | prob_05·06·07 | 🔶 게이트 36차 대기 |
+| `prob_distribution`·`prob_normal`·`prob_estimation` | prob_05·06·07 | ✅ 배포 (게이트 36차) |
 
-**고2 수학 세 과목 = 대수 9 + 미적분Ⅰ 8 + 확률과 통계 7 = 24단원 288문항.**
+**배치 4 완료 — 고2 수학 세 과목 = 대수 9 + 미적분Ⅰ 8 + 확률과 통계 7 = 24단원 288문항.**
 고1 156문항을 더하면 수학 점검 세트는 **444문항**이다.
 
 **남은 대상 — 수학 밖**
