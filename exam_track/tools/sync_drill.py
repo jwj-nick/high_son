@@ -39,6 +39,8 @@ MAP = {
     "kh2_02": "subject_hub/한국사2/10_app",
     "kh2_03": "subject_hub/한국사2/10_app",
     "kh2_04": "subject_hub/한국사2/10_app",
+    "sci1_01": "subject_hub/통합과학1/10_app",
+    "sci1_02": "subject_hub/통합과학1/10_app",
     "soc1_01": "subject_hub/통합사회1/10_app",
     "soc1_02": "subject_hub/통합사회1/10_app",
     "soc1_03": "subject_hub/통합사회1/10_app",

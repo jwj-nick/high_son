@@ -40,6 +40,7 @@ function appSource(subjectDir, appFile) {
 function structCheck(S, opts) {
   opts = opts || {};
   const bad = [];
+  let longest = 0;
   S.items.forEach(it => {
     const wrong = it.o.filter((_, i) => i !== it.a);
     const codes = wrong.map(o => o.cause);
@@ -71,7 +72,14 @@ function structCheck(S, opts) {
     const mx = Math.max.apply(null, others), mn = Math.min.apply(null, others);
     if (lens[it.a] > mx * 1.8) bad.push(it.id + ' 정답 보기가 오답들보다 유독 길다(' + lens[it.a] + ' vs 최대 ' + mx + ')');
     if (lens[it.a] * 1.8 < mn) bad.push(it.id + ' 정답 보기가 오답들보다 유독 짧다(' + lens[it.a] + ' vs 최소 ' + mn + ')');
+    if (lens[it.a] > mx) longest++;
   });
+
+  // ⭐ 세트 전체에서 '정답이 가장 긴 보기'인 문항이 몇인지 — 엔진은 순서를 섞지만 길이는 못 섞는다.
+  //    38차 게이트 실측: 한 세트에서 11/12 이면 아무것도 모르는 아이가 최장 보기만 골라 11점을 얻는다.
+  const cap = Math.max(3, Math.ceil(S.items.length / 4));
+  if (longest > cap) bad.push('세트 전체 — 정답이 네 보기 중 가장 긴 문항이 ' + longest + '/' + S.items.length +
+    ' 개다(허용 ' + cap + '). 길이만으로 찍히므로 정답을 줄이거나 오답을 늘린다');
 
   const code = {}, type = {}, lv = {};
   S.items.forEach(it => {
