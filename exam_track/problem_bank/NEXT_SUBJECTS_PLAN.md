@@ -501,15 +501,32 @@ C5 "🔥 퀴즈로 다시 풀기"                  C7 "🔎 자료에서 뽑아�
 | | `sci1_semicon` | sci1_06 | ⬜ |
 | | `sci1_earth` | sci1_07 | ⬜ |
 | | `sci1_life` | sci1_08 | ⬜ |
-| 통합사회1 | `soc1_perspective` | soc1_01 | ⬜ |
-| | `soc1_happiness` | soc1_02 | ⬜ |
-| | `soc1_nature` | soc1_03 | ⬜ |
-| | `soc1_culture` | soc1_04 | ⬜ |
+| 통합사회1 | `soc1_perspective` | soc1_01 | ✅ 2026-09-09 (게이트 37차) |
+| | `soc1_happiness` | soc1_02 | ✅ 2026-09-09 (게이트 37차) |
+| | `soc1_nature` | soc1_03 | ✅ 2026-09-09 (게이트 38차) |
+| | `soc1_culture` | soc1_04 | ✅ 2026-09-09 (게이트 38차) |
 | 공통국어2 | `kor2_oldsongs` | kor2_01 | ⬜ |
 | | `kor2_chunhyang` | kor2_02 | ⬜ |
 | | `kor2_unit2` | kor2_03 | ⬜ |
 
-**15단원 · 180문항** 예상.
+**15단원 · 180문항** 예상. **2026-09-09 현재 통합사회1 4세트 48문항 완료** — 남은 것은 통합과학1 8 · 공통국어2 3.
+
+### 통합사회1 을 하며 확정된 것 (남은 두 과목에도 그대로 쓴다)
+
+- **검산 파일을 도입했다(§8-⑤ 의 (가) 안).** 계산이 없어 다시 계산할 것이 없으므로, 검산이 **앱 HTML 을 읽어 정답 근거 구절을 찾게** 짰다. 공용 헬퍼 `exam_track/problem_bank/verify/_lib_concept.js` 에 `appSource(과목폴더, 앱파일)` 와 `structCheck(S, {set})` 두 개가 있고, 세트별 검산 파일은 이렇게 시작한다.
+  ```js
+  const { appSource, structCheck } = require('./_lib_concept');
+  const src = appSource('통합사회1', 'soc1_perspective.html');
+  module.exports = function ({ S, chk }) {
+    chk(1, '정답 보기 문구', 'lens 탭 · ' + src('앱에 있어야 할 근거 구절'));
+    …
+    structCheck(S, { set: 'soc1_01' });
+  };
+  ```
+  `structCheck` 는 `check_bank.py` 가 보지 않는 층을 본다 — 오답 코드 중복 · C3 혼동쌍 표기 · C4·C7 의 material 전제 · C5/C8 오용 · 금지 문구 · `확인:` 줄 · **보기 길이의 형태 단서**. 계산이 있는 과목(통합과학1 일부)은 `structCheck(S, { set, allowC5: true })` 로 켠다.
+- **말투 휴리스틱을 막는다.** 정답이 늘 온건하고 오답이 늘 극단이면 개념 없이 찍힌다. 세트마다 온건한 오답을 몇 개 심고 단정형 정답을 한둘 둔다.
+- **퀴즈는 문항뿐 아니라 `e:` 해설까지 대조한다.** 해설이 오답을 미리 지워 주는 사례가 나왔다.
+- **가상국 이름은 갑국·을국·병국·정국 순으로.**
 
 **드는 시간(수학 배치 실측 기준):** 세트 하나에 출제 + 검산 + 게이트 2회 + 반영 = **반나절**이다. 15세트면 **대략 7~8일치 작업**이고, 한 세션에 2~3세트씩 하면 여섯 세션쯤 걸린다.
 
