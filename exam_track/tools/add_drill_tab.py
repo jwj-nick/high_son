@@ -33,7 +33,25 @@ BANK = os.path.join(ROOT, "exam_track", "problem_bank", "data")
 SUMMARY_IDS = ("sum", "fin")
 TAB_ANCHOR = '<button class="tab" data-t="sum">'
 PAGE_ANCHOR = '<div class="page" data-p="sum">'
+# 목차 카드 앵커 — 퀴즈 탭이 없는 앱도 있어(kor2_chunhyang) 대안을 순서대로 시도한다.
+# 실전 카드는 목차의 **마지막 카드 뒤**에 들어가면 되므로, 정리 카드 → 마지막 카드 순으로 물러선다.
 TOC_RE = re.compile(r"( *<button onclick=\"go\('quiz'\)\">.*?</button>\n)")
+TOC_ALT = (
+    re.compile(r"( *<button onclick=\"go\('sum'\)\">.*?</button>\n)"),
+    re.compile(r"( *<button onclick=\"go\('[a-z0-9]+'\)\">(?:(?!</button>).)*?</button>\n)(?!(?:.|\n)*?<button onclick=\"go\()"),
+)
+
+
+def find_toc(s):
+    """목차의 마지막 카드를 찾는다. 퀴즈 카드가 있으면 그 뒤, 없으면 정리 카드나 맨 끝 카드 뒤."""
+    m = TOC_RE.search(s)
+    if m:
+        return m
+    for rx in TOC_ALT:
+        m = rx.search(s)
+        if m:
+            return m
+    return None
 END_ANCHOR = "</body>\n</html>"
 
 
@@ -65,8 +83,8 @@ def apply(path, set_id, write=True):
     for anchor in (tab_anchor, page_anchor, END_ANCHOR):
         if s.count(anchor) != 1:
             return ("fail", "앵커 %d회: %s" % (s.count(anchor), anchor[:40]))
-    if not TOC_RE.search(s):
-        return ("fail", "개요 목차의 퀴즈 카드를 찾지 못함")
+    if not find_toc(s):
+        return ("fail", "개요 목차의 카드를 하나도 찾지 못함")
 
     # ① 탭 버튼
     s = s.replace(tab_anchor,
@@ -76,10 +94,10 @@ def apply(path, set_id, write=True):
                   '<div class="page" data-p="drill">\n    <div id="drill"></div>\n  </div>\n\n  '
                   + page_anchor, 1)
     # ③ 개요 목차 카드
-    m = TOC_RE.search(s)
+    m = find_toc(s)
     indent = re.match(r" *", m.group(1)).group(0)
     card = ('%s<button onclick="go(\'drill\')"><div class="ti">⚡</div>'
-            '<div class="tn">실전</div><div class="td">심화 %d문제</div></button>\n' % (indent, n))
+            '<div class="tn">실전</div><div class="td">점검 %d문제</div></button>\n' % (indent, n))
     s = s[:m.end(1)] + card + s[m.end(1):]
     # ④ 스크립트
     s = s.replace(END_ANCHOR,
