@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>통합사회2 수행평가 — 경제생활 4대 질문</title>
+<style>
+  :root{--t:#0d9488;--td:#0f766e;--tl:#ccfbf1;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--soft:#f3f4f6;--key:#fef3c7;--bad:#dc2626;--good:#16a34a;--bg:#f8fafc}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.6;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  a{color:var(--td)}
+  header{background:#fff;border-bottom:1px solid var(--line);padding:12px 16px 10px}
+  header .crumb{font-size:12px;color:var(--mute);margin-bottom:4px}
+  header .crumb a{text-decoration:none}
+  header h1{font-size:17px;font-weight:800}
+  header .sub{font-size:12px;color:var(--mute)}
+  main{max-width:760px;margin:0 auto;padding:12px 14px 20px}
+  section.tab{display:none}
+  section.tab.on{display:block}
+  h2{font-size:16px;margin:8px 0 10px}
+  h3{font-size:15px;margin:10px 0 6px}
+  h4{font-size:14px;margin:10px 0 4px;color:var(--td)}
+  h5{font-size:13.5px;margin:8px 0 4px}
+  p{margin:6px 0}
+  ul,ol{margin:4px 0 6px 20px}
+  li{margin:3px 0}
+  blockquote{border-left:3px solid var(--t);background:var(--tl);padding:6px 10px;margin:6px 0;border-radius:4px;font-size:13.5px}
+  code{background:var(--soft);padding:0 4px;border-radius:3px;font-size:13px}
+  b.k{background:var(--key);padding:0 2px;border-radius:3px;cursor:pointer}
+  .mask b.k{background:#374151;color:transparent;border-radius:4px}
+  .mask b.k.show{background:var(--key);color:inherit}
+  .tw{overflow-x:auto;margin:6px 0;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:320px}
+  th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top;background:#fff}
+  th{background:var(--soft);font-weight:700;white-space:nowrap}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+  .card .t{font-weight:800;font-size:15px;margin-bottom:6px}
+  .lab{font-size:12px;color:var(--mute);font-weight:700;margin-top:10px;text-transform:uppercase;letter-spacing:.03em}
+  details.topic{background:#fff;border:1px solid var(--line);border-radius:12px;margin:8px 0;padding:0 12px}
+  details.topic>summary{cursor:pointer;padding:12px 0;font-weight:800;list-style:none;display:flex;align-items:center;gap:8px;min-height:44px}
+  details.topic>summary::before{content:"▸";color:var(--t)}
+  details.topic[open]>summary::before{content:"▾"}
+  details.topic>.body{padding:0 0 12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:14px;cursor:pointer;color:var(--ink);text-decoration:none;font-weight:600}
+  .btn.p{background:var(--t);color:#fff;border-color:var(--t)}
+  .btn.on{background:var(--tl);border-color:var(--t);color:var(--td)}
+  .btn.sm{min-height:36px;padding:4px 10px;font-size:13px}
+  .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+  .chip{min-height:36px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;cursor:pointer}
+  .chip.on{background:var(--td);color:#fff;border-color:var(--td)}
+  .panel{display:none;margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--soft)}
+  .panel.on{display:block}
+  .panel.ans{background:#ecfdf5;border:1px solid #a7f3d0}
+  .panel.hint{background:#fffbeb;border:1px solid #fde68a}
+  .bones li{padding:3px 6px;border-radius:6px;cursor:pointer}
+  .bones.mask li{background:#374151;color:transparent}
+  .bones.mask li.show{background:transparent;color:inherit}
+  .bones.mask li.show b.k{color:inherit}
+  .bones.mask li b.k{color:transparent;background:transparent}
+  .bones.mask li.show b.k{background:var(--key)}
+  .item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .item .id{font-weight:800;color:var(--td);font-size:13px}
+  .item .ty{font-size:11px;color:var(--mute)}
+  .item .st{font-size:13.5px;flex:1}
+  .badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--mute);white-space:nowrap}
+  .badge.g{background:#dcfce7;color:var(--good)}
+  .badge.b{background:#fee2e2;color:var(--bad)}
+  .badge.y{background:var(--key);color:#92400e}
+  .stem{font-size:15.5px;font-weight:600;margin:6px 0 10px;line-height:1.55}
+  .timer{font-variant-numeric:tabular-nums;font-weight:800;color:var(--td)}
+  .kw{list-style:none;margin:6px 0}
+  .kw li{display:flex;gap:8px;align-items:flex-start;padding:6px 4px;border-bottom:1px dashed var(--line)}
+  .kw input{width:22px;height:22px;margin-top:2px;flex-shrink:0}
+  textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;font-size:14px}
+  .score{font-size:20px;font-weight:800;margin:6px 0}
+  .score.g{color:var(--good)}.score.b{color:var(--bad)}
+  .small{font-size:12.5px;color:var(--mute)}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 10px;margin:8px 0;font-size:13.5px}
+  .check li.hid{background:#374151;color:transparent;border-radius:6px}
+  .check li{padding:4px 6px;display:flex;gap:8px;align-items:center;cursor:pointer}
+  .check li .tx{flex:1}
+  .check li .m{display:none;gap:4px}
+  .check li:not(.hid) .m{display:inline-flex}
+  .check li.ok{background:#dcfce7}.check li.ng{background:#fee2e2}
+  .check li.hid b.k{color:transparent;background:transparent}
+  .mbtn{min-width:36px;min-height:36px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer}
+  .todo label{display:flex;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px dashed var(--line);font-size:14px}
+  .todo input{width:22px;height:22px}
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+  nav.tabs button{flex:1;min-height:56px;border:0;background:#fff;font-size:12px;font-weight:700;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  nav.tabs button .i{font-size:20px}
+  nav.tabs button.on{color:var(--td);background:var(--tl)}
+  @media (min-width:640px){body{font-size:15.5px} main{padding:16px 20px}}
+  @media (max-width:640px){table{font-size:12.5px} h2{font-size:15.5px} .stem{font-size:15px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb"><a href="index.html">← 고1 사회</a> · <a href="soc2_market.html">시장경제 흥미 앱(복습용)</a></div>
+  <h1>통합사회2 수행평가 · 경제생활 4대 질문</h1>
+  <div class="sub">3단원(주제 11~16) · 서술형 4문항 × 5점 · 자료 없이 외워서 쓰는 시험</div>
+</header>
+<main>
+  <section class="tab on" id="tab-digest">
+    <h2>📖 부교재 정리 (빈칸 다 채운 완성본)</h2>
+    <div class="row">
+      <button class="btn sm" id="maskBtn">🙈 핵심 용어 가리기</button>
+      <button class="btn sm" id="openAll">전부 펼치기</button>
+      <button class="btn sm" id="closeAll">전부 접기</button>
+    </div>
+    <p class="small">가리기를 켜면 노란 용어가 검게 가려진다. 떠올린 뒤 눌러서 확인한다. 표는 옆으로 밀어 볼 수 있다.</p>
+    <div id="digest-root"></div>
+  </section>
+
+  <section class="tab" id="tab-keys">
+    <h2>⭐ 4대 질문 — 뼈대 → 모범답안</h2>
+    <p class="small">외울 것은 <b>뼈대</b>다. 뼈대를 가리고 순서대로 떠올린 다음, A(만점형)를 읽으며 문장으로 잇는 연습을 한다. B는 답안지가 짧을 때 쓰는 압축형.</p>
+    <div id="keys-root"></div>
+  </section>
+
+  <section class="tab" id="tab-practice">
+    <h2>✍️ 연습 — 답을 가리고 생각 → 힌트 → 모범답안</h2>
+    <div id="practice-root"></div>
+  </section>
+
+  <section class="tab" id="tab-check">
+    <h2>✅ 전날 점검</h2>
+    <p class="small">뼈대가 가려져 있다. 한 줄씩 머릿속으로 말한 뒤 눌러서 확인하고, 기억났으면 ○, 못 했으면 ✗. ✗가 남은 줄은 ⭐ 탭에서 다시 읽는다.</p>
+    <div id="check-root"></div>
+  </section>
+</main>
+<nav class="tabs">
+  <button data-tab="digest" class="on"><span class="i">📖</span>정리</button>
+  <button data-tab="keys"><span class="i">⭐</span>4대 질문</button>
+  <button data-tab="practice"><span class="i">✍️</span>연습</button>
+  <button data-tab="check"><span class="i">✅</span>점검</button>
+</nav>
+<script>
+const D = /*__DATA__*/null;
+const LS = 'soc_perf_econ_';
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(LS + k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(LS + k, JSON.stringify(v)); }catch(e){} }
+};
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+const TYPE_SHORT = {'통째 서술형':'통째','부분 서술형':'부분','비교형':'비교','사례 판별형':'사례','계산형':'계산','용어 정의형':'용어'};
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('section.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + name));
+  $$('nav.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === name));
+  store.set('tab', name);
+  window.scrollTo(0, 0);
+}
+$$('nav.tabs button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+/* ---------- 📖 digest ---------- */
+(function(){
+  const root = $('#digest-root');
+  root.innerHTML = D.digest.map((t, i) => `<details class="topic"${i === 0 ? ' open' : ''}><summary>주제 ${t.n} · ${t.title}</summary><div class="body">${t.html}</div></details>`).join('');
+  const masked = store.get('mask', false);
+  root.classList.toggle('mask', masked);
+  $('#maskBtn').classList.toggle('on', masked);
+  $('#maskBtn').addEventListener('click', () => {
+    const on = !root.classList.contains('mask');
+    root.classList.toggle('mask', on); $('#maskBtn').classList.toggle('on', on); store.set('mask', on);
+    if(!on) $$('b.k.show', root).forEach(b => b.classList.remove('show'));
+  });
+  root.addEventListener('click', e => {
+    const b = e.target.closest('b.k'); if(b && root.classList.contains('mask')) b.classList.toggle('show');
+  });
+  $('#openAll').addEventListener('click', () => $$('details.topic', root).forEach(d => d.open = true));
+  $('#closeAll').addEventListener('click', () => $$('details.topic', root).forEach(d => d.open = false));
+})();
+
+/* ---------- ⭐ keys ---------- */
+(function(){
+  const root = $('#keys-root');
+  root.innerHTML = D.keys.map(k => `
+    <div class="card" id="key-${k.n}">
+      <div class="t">질문 ${k.n} <span class="badge y">5점</span></div>
+      <div class="stem">${D.questions[k.n - 1]}</div>
+      <div class="lab">질문 분해</div>${k.decompose}
+      <div class="lab">암기용 뼈대 <button class="btn sm boneMask" data-n="${k.n}">🙈 가리기</button></div>
+      <ol class="bones" data-n="${k.n}">${k.bones.map(b => `<li>${b}</li>`).join('')}</ol>
+      <div class="row">
+        <button class="btn tg" data-p="A">모범답안 A · 만점형</button>
+        <button class="btn tg" data-p="B">B · 압축형</button>
+        <button class="btn tg" data-p="K">채점 키워드</button>
+        <button class="btn tg" data-p="D">감점 포인트</button>
+        <button class="btn tg" data-p="V">출제 변형</button>
+      </div>
+      <div class="panel ans" data-p="A">${k.A}</div>
+      <div class="panel ans" data-p="B">${k.B}</div>
+      <div class="panel" data-p="K"><ul>${k.keys.map(x => `<li>☐ ${x}</li>`).join('')}</ul></div>
+      <div class="panel" data-p="D">${k.deduct}</div>
+      <div class="panel" data-p="V">${k.variants}</div>
+    </div>`).join('');
+  root.addEventListener('click', e => {
+    const tg = e.target.closest('.tg');
+    if(tg){ const card = tg.closest('.card'); const p = $(`.panel[data-p="${tg.dataset.p}"]`, card); const on = !p.classList.contains('on'); p.classList.toggle('on', on); tg.classList.toggle('on', on); return; }
+    const bm = e.target.closest('.boneMask');
+    if(bm){ const ol = $(`.bones[data-n="${bm.dataset.n}"]`, root); const on = !ol.classList.contains('mask'); ol.classList.toggle('mask', on); bm.classList.toggle('on', on); if(!on) $$('li.show', ol).forEach(l => l.classList.remove('show')); return; }
+    const li = e.target.closest('.bones.mask li'); if(li) li.classList.toggle('show');
+  });
+})();
+
+/* ---------- ✍️ practice ---------- */
+(function(){
+  const root = $('#practice-root');
+  const prog = store.get('prog', {});      // id -> {score, tries}
+  const notes = store.get('notes', {});    // id -> text
+  let f = store.get('filter', {q: 0, t: '', rep: false});
+  let cur = null, timerId = null;
+
+  function visible(){
+    return D.bank.filter(it => (!f.q || it.q === f.q) && (!f.t || it.type === f.t) && (!f.rep || (prog[it.id] && prog[it.id].score < 100)));
+  }
+  function repeatCount(){ return D.bank.filter(it => prog[it.id] && prog[it.id].score < 100).length; }
+  function badge(it){
+    const p = prog[it.id]; if(!p) return '<span class="badge">미풀이</span>';
+    return `<span class="badge ${p.score >= 100 ? 'g' : (p.score >= 60 ? 'y' : 'b')}">${p.score}%</span>`;
+  }
+  function renderList(){
+    cur = null; if(timerId){ clearInterval(timerId); timerId = null; }
+    const list = visible();
+    const done = D.bank.filter(it => prog[it.id]).length;
+    root.innerHTML = `
+      <div class="chips">${[0,1,2,3,4].map(n => `<button class="chip ${f.q === n ? 'on' : ''}" data-q="${n}">${n ? '질문 ' + n : '전체'}</button>`).join('')}</div>
+      <div class="chips">${['', ...D.types].map(t => `<button class="chip ${f.t === t ? 'on' : ''}" data-t="${t}">${t ? TYPE_SHORT[t] : '모든 형태'}</button>`).join('')}
+        <button class="chip ${f.rep ? 'on' : ''}" data-rep="1">🔁 되풀이함 ${repeatCount()}</button></div>
+      <p class="small">${done}/${D.bank.length} 풀이 · 되풀이함 = 채점에서 키워드를 하나라도 빠뜨린 문항. <button class="btn sm" id="rnd">🔀 랜덤 한 문항</button></p>
+      ${list.length ? list.map(it => `<div class="item" data-id="${it.id}"><div><div class="id">${it.id} <span class="ty">${TYPE_SHORT[it.type]} · ${it.pts}</span></div><div class="st">${it.stem}</div></div>${badge(it)}</div>`).join('') : '<p class="note">조건에 맞는 문항이 없다.</p>'}`;
+    $$('.chip[data-q]', root).forEach(c => c.addEventListener('click', () => { f.q = +c.dataset.q; store.set('filter', f); renderList(); }));
+    $$('.chip[data-t]', root).forEach(c => c.addEventListener('click', () => { f.t = c.dataset.t; store.set('filter', f); renderList(); }));
+    $('.chip[data-rep]', root).addEventListener('click', () => { f.rep = !f.rep; store.set('filter', f); renderList(); });
+    $$('.item', root).forEach(el => el.addEventListener('click', () => openItem(el.dataset.id)));
+    $('#rnd').addEventListener('click', () => { const l = visible(); if(l.length) openItem(l[Math.floor(Math.random() * l.length)].id); });
+  }
+  function openItem(id){
+    cur = D.bank.find(it => it.id === id); if(!cur) return;
+    if(timerId){ clearInterval(timerId); timerId = null; }
+    const k = cur.full ? D.keys[cur.full - 1] : null;
+    const keys = cur.full ? k.keys : cur.keys;
+    const ansHtml = cur.full
+      ? `<div class="lab">모범답안 A · 만점형</div>${k.A}<div class="row"><button class="btn sm" id="showB">B · 압축형도 보기</button></div><div class="panel ans" id="ansB">${k.B}</div>`
+      : cur.ans;
+    const list = visible(); const idx = list.findIndex(it => it.id === id);
+    root.innerHTML = `
+      <div class="row"><button class="btn sm" id="back">← 목록</button><span class="badge y">${cur.id} · ${cur.type} · ${cur.pts}</span>${badge(cur)}</div>
+      <div class="card">
+        <div class="stem">${cur.stem}</div>
+        <div class="row">
+          <button class="btn p" id="think">⏱ 생각하기 60초</button>
+          <button class="btn" id="h1">💡 힌트 1</button>
+          <button class="btn" id="h2">🔑 힌트 2</button>
+          <button class="btn" id="ans">📖 모범답안</button>
+        </div>
+        <div id="timerBox" class="small"></div>
+        <div class="panel hint" id="p1"><b>힌트 1 (방향)</b> — ${cur.h1}</div>
+        <div class="panel hint" id="p2"><b>힌트 2 (키워드)</b> — ${cur.h2}</div>
+        <div class="panel ans" id="pa">${ansHtml}
+          <div class="lab">채점 키워드 — 내 답에 들어간 것만 체크</div>
+          <ul class="kw">${keys.map((x, i) => `<li><input type="checkbox" id="k${i}"><label for="k${i}">${x}</label></li>`).join('')}</ul>
+          <div class="row"><button class="btn p" id="grade">채점</button><span id="scoreBox" class="score"></span></div>
+          <div id="backTo" class="small">돌아갈 곳: ${cur.back} <a href="#" data-key="${cur.q}" class="goKey">⭐ 질문 ${cur.q} 열기</a></div>
+        </div>
+        <div class="lab">내가 떠올린 키워드 메모 (선택)</div>
+        <textarea id="note" placeholder="답을 보기 전에 떠오른 키워드를 적어 두면 채점이 정직해진다">${notes[cur.id] || ''}</textarea>
+      </div>
+      <div class="row">
+        <button class="btn" id="prev" ${idx <= 0 ? 'disabled' : ''}>◀ 이전</button>
+        <button class="btn" id="next" ${idx < 0 || idx >= list.length - 1 ? 'disabled' : ''}>다음 ▶</button>
+        <button class="btn" id="rnd2">🔀 랜덤</button>
+      </div>`;
+    $('#back').addEventListener('click', renderList);
+    $('#prev').addEventListener('click', () => openItem(list[idx - 1].id));
+    $('#next').addEventListener('click', () => openItem(list[idx + 1].id));
+    $('#rnd2').addEventListener('click', () => { const l = visible(); if(l.length) openItem(l[Math.floor(Math.random() * l.length)].id); });
+    $('#h1').addEventListener('click', () => { $('#p1').classList.add('on'); $('#h1').classList.add('on'); });
+    $('#h2').addEventListener('click', () => { $('#p2').classList.add('on'); $('#h2').classList.add('on'); });
+    $('#ans').addEventListener('click', () => { $('#pa').classList.add('on'); $('#ans').classList.add('on'); if(timerId){ clearInterval(timerId); timerId = null; $('#timerBox').textContent = ''; } });
+    const sb = $('#showB'); if(sb) sb.addEventListener('click', () => $('#ansB').classList.toggle('on'));
+    $('#think').addEventListener('click', () => {
+      if(timerId){ clearInterval(timerId); timerId = null; $('#timerBox').textContent = '멈춤'; return; }
+      let s = 60; const box = $('#timerBox');
+      box.innerHTML = `남은 시간 <span class="timer">${s}</span>초 — 답을 보지 말고 뼈대를 떠올린다`;
+      timerId = setInterval(() => { s--; const t = $('.timer', box); if(t) t.textContent = s; if(s <= 0){ clearInterval(timerId); timerId = null; box.textContent = '⏰ 시간 끝 — 이제 힌트나 모범답안을 확인한다'; } }, 1000);
+    });
+    $('#grade').addEventListener('click', () => {
+      const boxes = $$('.kw input', root); const hit = boxes.filter(b => b.checked).length;
+      const score = Math.round(hit / boxes.length * 100);
+      const p = prog[cur.id] || {tries: 0}; p.tries++; p.score = score; prog[cur.id] = p; store.set('prog', prog);
+      const el = $('#scoreBox'); el.textContent = `${hit}/${boxes.length} · ${score}%` + (score >= 100 ? ' 완벽' : ' → 빠진 키워드를 뼈대에서 다시');
+      el.className = 'score ' + (score >= 100 ? 'g' : 'b');
+    });
+    $('#note').addEventListener('input', e => { notes[cur.id] = e.target.value; store.set('notes', notes); });
+    $('.goKey').addEventListener('click', e => { e.preventDefault(); showTab('keys'); const c = $('#key-' + e.target.dataset.key); if(c){ c.scrollIntoView({behavior: 'smooth'}); } });
+    window.scrollTo(0, 0);
+  }
+  renderList();
+  window._openItem = openItem;
+})();
+
+/* ---------- ✅ check ---------- */
+(function(){
+  const root = $('#check-root');
+  const st = store.get('bones', {});   // n -> {i: 1|0}
+  const todo = store.get('todo', {});
+  const TODO = [
+    '부교재 p54(경제 체제 표)·p55(헌법·농산물) 빈칸을 00_fill_blanks대로 직접 채웠다',
+    '4대 질문 뼈대를 보지 않고 순서대로 말할 수 있다',
+    '모범답안 A 4개를 프린트 팩에 손으로 한 번씩 써 보았다',
+    '계산 3종(순편익 · 정기 예금/적금 이자 · 비교 우위 기회비용)을 손으로 풀었다',
+    '감점 포인트(방향 혼동: 외부 경제/불경제 과소·과다, 큰 정부/작은 정부, 절대/비교 우위 기준)를 읽었다'
+  ];
+  function render(){
+    root.innerHTML = D.keys.map(k => {
+      const s = st[k.n] || {};
+      const ok = Object.values(s).filter(v => v === 1).length, ng = Object.values(s).filter(v => v === 0).length;
+      return `<div class="card"><div class="t">질문 ${k.n} <span class="badge ${ng ? 'b' : (ok === k.bones.length ? 'g' : '')}">${ok}/${k.bones.length} 기억${ng ? ' · ✗ ' + ng : ''}</span></div>
+        <div class="small">${D.questions[k.n - 1]}</div>
+        <ol class="bones check" data-n="${k.n}">${k.bones.map((b, i) => `<li class="${s[i] == null ? 'hid' : (s[i] ? 'ok' : 'ng')}" data-i="${i}"><span class="tx">${b}</span><span class="m"><button class="mbtn" data-v="1">○</button><button class="mbtn" data-v="0">✗</button></span></li>`).join('')}</ol>
+        <div class="row"><button class="btn sm reset" data-n="${k.n}">다시 가리기</button><a class="btn sm" href="#" data-key="${k.n}">⭐ 질문 ${k.n} 읽기</a></div></div>`;
+    }).join('') + `<div class="card"><div class="t">시험 전 마지막 확인</div><div class="todo">${TODO.map((t, i) => `<label><input type="checkbox" data-i="${i}" ${todo[i] ? 'checked' : ''}> ${t}</label>`).join('')}</div></div>`;
+    $$('.todo input', root).forEach(c => c.addEventListener('change', () => { todo[c.dataset.i] = c.checked; store.set('todo', todo); }));
+  }
+  function onClick(e){
+    const mb = e.target.closest('.mbtn');
+    if(mb){ const li = mb.closest('li'); const n = li.closest('.check').dataset.n; st[n] = st[n] || {}; st[n][li.dataset.i] = +mb.dataset.v; store.set('bones', st); render(); return; }
+    const rs = e.target.closest('.reset');
+    if(rs){ delete st[rs.dataset.n]; store.set('bones', st); render(); return; }
+    const gk = e.target.closest('a[data-key]');
+    if(gk){ e.preventDefault(); showTab('keys'); const c = $('#key-' + gk.dataset.key); if(c) c.scrollIntoView({behavior: 'smooth'}); render(); return; }
+    const li = e.target.closest('.check li.hid');
+    if(li){ li.classList.remove('hid'); }
+  }
+  root.addEventListener('click', onClick);
+  render();
+})();
+
+function route(){
+  const h = (location.hash || '').replace('#', '');
+  const [t, arg] = h.split(':');
+  if(['digest','keys','practice','check'].includes(t)){ showTab(t); if(t === 'practice' && arg && window._openItem) window._openItem(arg); return true; }
+  return false;
+}
+if(!route()) showTab(store.get('tab', 'digest'));
+window.addEventListener('hashchange', route);
+
+/* ---------- selftest (?selftest — 빌드 게이트용, 사용자에게는 보이지 않음) ---------- */
+if(location.search.includes('selftest')){
+  const log = []; const ok = (name, cond) => log.push((cond ? 'PASS ' : 'FAIL ') + name);
+  try{
+    showTab('practice'); window._openItem('Q2-02');
+    $('#h1').click(); ok('hint1 opens', $('#p1').classList.contains('on'));
+    $('#h2').click(); ok('hint2 opens', $('#p2').classList.contains('on'));
+    $('#ans').click(); ok('answer opens', $('#pa').classList.contains('on'));
+    const boxes = $$('.kw input'); ok('Q2-02 has 4 keywords', boxes.length === 4);
+    boxes[0].checked = true; boxes[1].checked = true; $('#grade').click();
+    ok('grade 2/4', $('#scoreBox').textContent.indexOf('2/4') === 0);
+    ok('progress saved', store.get('prog', {})['Q2-02'] && store.get('prog', {})['Q2-02'].score === 50);
+    window._openItem('Q1-01'); ok('full item shows B button', !!$('#showB'));
+    ok('full item keywords = key.keys', $$('.kw input').length === D.keys[0].keys.length);
+    $('#back').click(); ok('repeat count 1', $('.chip[data-rep]').textContent.indexOf('1') >= 0);
+    showTab('keys'); const card = $('#key-1'); $('.tg[data-p="A"]', card).click(); ok('A panel opens', $('.panel[data-p="A"]', card).classList.contains('on'));
+    $('.boneMask', card).click(); ok('bones masked', $('.bones', card).classList.contains('mask'));
+    $('.bones li', card).click(); ok('bone reveals', $('.bones li', card).classList.contains('show'));
+    showTab('digest'); $('#maskBtn').click(); ok('digest masked', $('#digest-root').classList.contains('mask'));
+    const bk = $('#digest-root b.k'); bk.click(); ok('term reveals', bk.classList.contains('show'));
+    showTab('check'); const li = $('#check-root .check li.hid'); li.click(); ok('check line reveals', !li.classList.contains('hid'));
+    $('.mbtn[data-v="1"]', li).click(); ok('check line ok', $('#check-root .check li').classList.contains('ok'));
+    ok('digest topics 6', $$('#digest-root details.topic').length === 6);
+    ok('bank list 32', D.bank.length === 32);
+  }catch(e){ log.push('ERROR ' + e.message); }
+  const pre = document.createElement('pre'); pre.id = 'selftest'; pre.textContent = log.join(' | '); document.body.appendChild(pre);
+  try{ Object.keys(localStorage).filter(k => k.startsWith(LS)).forEach(k => localStorage.removeItem(k)); }catch(e){}
+}
+</script>
+</body>
+</html>
