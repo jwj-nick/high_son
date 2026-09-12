@@ -16,7 +16,7 @@
 ## 준비 전략 (라운드 1 확정, `PLAN.md` §3)
 
 - 정본(md): ⓪ `10_prep/00_fill_blanks.md` 빈칸 복원표 → ① `01_answer_keys.md` 4대 질문 답안(질문 분해·암기용 뼈대·A/B·채점 키워드·감점·변형) → ② `02_question_bank.md` 연습 문항 32개(힌트 2단계·모범답안·채점 키워드) → ③ `03_workbook_digest.md` 부교재 완성본 정리.
-- 산출물(HTML): ⑤ 학습 앱 `10_prep/app/perf_economy.html`(📖 부교재 정리 · ⭐ 4대 질문 · ✍️ 연습(답 가림→생각→힌트→모범답안→자가 채점) · ✅ 전날 점검) → 배포 `high1/society/2sem_perf_economy.html` / ⑥ 프린트 팩 `90_output/print_pack.html`(손글씨 줄 포함).
+- 산출물(HTML): ⑤ 학습 앱 `10_prep/app/2sem_perf_economy.html`(📖 부교재 정리 · ⭐ 4대 질문 · ✍️ 연습(답 가림→생각→힌트→모범답안→자가 채점) · ✅ 전날 점검) → 배포 `high1/society/2sem_perf_economy.html` / ⑥ 프린트 팩 `90_output/print_pack.html`(손글씨 줄 포함).
 - 진단 요지: 아들은 표 빈칸·계산은 정확하고, **주제 12 경제 체제 표가 통째로 비어 있으며**, 서술 활동은 대부분 미기입 → 약점은 지식이 아니라 **문장화·암기 순서**.
 - 콘텐츠 규칙: `inbox/README.md` 밖의 개념·용어를 쓰지 않는다. 채점 키워드는 부교재 용어만. 아이 취미·진로와 억지로 엮지 않는다. 전송 UI 없음(아웃루프 차단).
 

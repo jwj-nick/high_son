@@ -241,13 +241,17 @@ def main():
     data = {"questions": questions, "keys": keys, "bank": bank, "digest": digest,
             "types": TYPE_ORDER, "built": "2026-09-12"}
     js = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    # 파일명은 배포 경로(high1/society/)와 같게 두어 로컬·배포 링크가 동일하다.
     app_tpl = read(os.path.join(HERE, "template_app.html"))
     app = app_tpl.replace("/*__DATA__*/null", js)
-    io.open(os.path.join(HERE, "perf_economy.html"), "w", encoding="utf-8").write(app)
+    io.open(os.path.join(HERE, "2sem_perf_economy.html"), "w", encoding="utf-8").write(app)
     print_tpl = read(os.path.join(HERE, "template_print.html"))
     pp = print_pack_html(data, print_tpl)
+    io.open(os.path.join(HERE, "2sem_perf_economy_print.html"), "w", encoding="utf-8").write(pp.replace("__APP_LINK__", "2sem_perf_economy.html"))
     outdir = os.path.join(ROOT, "90_output"); os.makedirs(outdir, exist_ok=True)
-    io.open(os.path.join(outdir, "print_pack.html"), "w", encoding="utf-8").write(pp)
+    io.open(os.path.join(outdir, "print_pack.html"), "w", encoding="utf-8").write(pp.replace("__APP_LINK__", "../10_prep/app/2sem_perf_economy.html"))
+    stale = os.path.join(HERE, "perf_economy.html")
+    if os.path.exists(stale): os.remove(stale)
     sys.stdout.write("keys=%d bank=%d digest=%d  app=%dB print=%dB\n" % (len(keys), len(bank), len(digest), len(app.encode("utf-8")), len(pp.encode("utf-8"))))
 
 if __name__ == "__main__":

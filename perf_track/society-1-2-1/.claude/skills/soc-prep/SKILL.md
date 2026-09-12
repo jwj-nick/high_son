@@ -46,7 +46,7 @@ description: society-1-2-1 제작 절차. 부교재 정본(inbox/README.md)에�
 ### ④ 검산
 `se-agent-app-reviewer`에 ①~③을 넘겨 사실 오류·범위 밖 개념·키워드 부정확을 잡는다. 🔴 0이어야 다음 단계.
 
-### ⑤ `10_prep/app/perf_economy.html` — 학습 앱 (단일 HTML)
+### ⑤ `10_prep/app/2sem_perf_economy.html` — 학습 앱 (단일 HTML)
 - **정본 md → 앱·프린트는 `10_prep/app/build.py`가 생성한다.** `template_app.html`·`template_print.html`이 껍데기, ①·②·③ md가 데이터. 콘텐츠를 고칠 때는 md를 고치고 `python build.py`를 다시 돌린다(앱·프린트 직접 편집 금지). 파서가 기대하는 md 형식: ① `## 질문 N — …` + `### 1)~7)` 소제목, 뼈대는 번호 목록, 채점 키워드는 `- [ ] `; ② `### Qn-mm [형태 · 배점] 문항` + `- 힌트 1:`/`- 힌트 2:`/`- 모범답안:`/`- 채점 키워드:`/`- 돌아갈 곳:`; ③ `## 주제 N — …`.
 - 바닐라, 런타임 빌드 없음, **Canvas·KaTeX 없음**. DOM·CSS만. 데이터는 파일 안 JS 객체(빌드 시 삽입, 즉흥 작성 금지).
 - 탭: **📖 부교재 정리**(③, 주제별 접기, 용어 형광) · **⭐ 4대 질문**(①: 뼈대 → [A 보기] [B 보기], 키워드 형광, 뼈대 가리기 토글) · **✍️ 연습**(②: 문항만 먼저 → 한 화면에 버튼 [생각하기 60초] [힌트 1] [힌트 2] [모범답안] → 채점 키워드 체크박스 → 점수 → 틀린 문항 되풀이함, 형태별·질문별 필터, 랜덤) · **✅ 전날 점검**(4대 질문 뼈대를 가린 채 순서대로 재현, 다 되면 완료 표시).
@@ -56,7 +56,7 @@ description: society-1-2-1 제작 절차. 부교재 정본(inbox/README.md)에�
 `@media print` + `page-break-before`. 순서: 4대 질문 모범답안 카드(A·B·뼈대) → 부교재 정리 → 연습 문항 **문제 쪽(답 쓰는 줄 8~12줄 포함)** → (별도 쪽) 모범답안·채점표. 답안 쪽을 문제 쪽과 분리.
 
 ### ⑦ 게이트 → 배포
-1. 인라인 JS `node --check`  2. 데이터 안 태그 스캔(빌드가 `<`를 이스케이프하므로 생성 태그만 남아야 함)  3. 모바일 규약  4. app-reviewer 🔴 0  5. **자기 테스트**: 헤드리스 Chrome으로 `perf_economy.html?selftest=1`을 `--dump-dom` 하면 `<pre id="selftest">`에 PASS/FAIL 18줄이 찍힌다(힌트·모범답안·채점·되풀이함·가리기·점검 흐름). FAIL 0이어야 배포.  6. 시각 확인: `--screenshot --window-size=500,1300` + `#keys`/`#practice:Q2-02`/`#check` 해시로 탭별 캡처.
+1. 인라인 JS `node --check`  2. 데이터 안 태그 스캔(빌드가 `<`를 이스케이프하므로 생성 태그만 남아야 함)  3. 모바일 규약  4. app-reviewer 🔴 0  5. **자기 테스트**: 헤드리스 Chrome으로 `2sem_perf_economy.html?selftest=1`을 `--dump-dom` 하면 `<pre id="selftest">`에 PASS/FAIL 18줄이 찍힌다(힌트·모범답안·채점·되풀이함·가리기·점검 흐름). FAIL 0이어야 배포.  6. 시각 확인: `--screenshot --window-size=500,1300` + `#keys`/`#practice:Q2-02`/`#check` 해시로 탭별 캡처.
 7. 배포: `C:/Nick/30_Apps/jwj-nick.github.io/high1/society/2sem_perf_economy.html` + `high1/society/index.html` 카드 → **파일 단위 `git add`**(다른 앱 작업 공존) → push(네트워크 명령은 단독으로). 배포 리포는 public이므로 학교명·아이 이름·점수 기록을 넣지 않는다.
 
 ### ⑧ 피드백 반영
