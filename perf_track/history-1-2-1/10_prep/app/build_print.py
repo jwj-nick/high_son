@@ -95,7 +95,8 @@ def build():
             cells = ''.join(f'<span data-n="{i}"></span>' for i in range(1, 301))
             out.append(f'<div class="grid">{cells}</div><div class="rowlab"><span>13줄 끝 = 260자</span><span>14줄 끝 = 280자</span><span>15줄 끝 = 300자(한도)</span></div>')
             out.append('<p class="note">쓴 뒤: 글자 수(칸) ______ / 뼈대 5줄 들어갔나 ☐☐☐☐☐ / 연도·이름 맞나 ☐ / 마지막 문장이 이유인가 ☐ → 사진 찍어 아빠에게</p>')
-    out.append('<h2 class="pb">Ⅳ. 6장 연표 (■ = 시험 시대 범위 1910~1948) · 시험장 요령</h2>')
+    out.append('<h2 class="pb">Ⅳ. 이동 경로 지도 · 6장 연표 (■ = 시험 시대 범위 1910~1948) · 시험장 요령</h2>')
+    out.append('<img src="img/map_route.jpg" alt="홍범도 이동 경로" style="width:100%;max-height:520px;object-fit:contain;border:1px solid #bbb;border-radius:6px"><p class="note">지도: © OpenStreetMap contributors · 후치령·봉오동·청산리는 대략적인 위치</p>')
     out.append('<table><tr><th style="width:90px">연도</th><th>사건</th></tr>' + ''.join(f'<tr class="{"band" if b else ""}"><td>{E(y)}</td><td>{E(t)}</td></tr>' for y, t, b in TL) + '</table>')
     out.append('<h3>시험장 요령</h3><ul>'
                '<li>순서: 3번(12분) → 1번(12분) → 2번(12분) → 마지막 7분 글자 수·연도·글씨 확인.</li>'
