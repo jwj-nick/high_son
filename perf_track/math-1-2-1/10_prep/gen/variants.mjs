@@ -1,7 +1,7 @@
 // variants.mjs — core.js를 Node에서 실행하는 러너
 //   node variants.mjs verify          예시문항 + 고정 10세트 + 무작위 300세트 수치 검산 (게이트 1)
 //   node variants.mjs search          고정 세트 후보 탐색(스펙별 첫 유효 파라미터 출력)
-//   node variants.mjs docs            10_prep/02_answer_templates.md · 04_questions_for_son.md 생성
+//   node variants.mjs docs            10_prep/02_answer_templates.md 생성
 //   node variants.mjs bank            10_prep/03_variant_bank.md 생성
 //   node variants.mjs print           90_output/print_pack.html 생성
 //   node variants.mjs build           앱 HTML의 마커 사이에 core.js 인라인
@@ -40,7 +40,7 @@ if (mode === 'search') {
   const specs = [
     { id: 'V5', L1: 'xaxis', L2: 'yx', seed: 5, D: 13 },
     { id: 'V6', L1: 'yaxis', L2: 'yx', seed: 6, D: 5 },
-    { id: 'V7', L1: 'xaxis', L2: 'ynx', seed: 7, D: 17 },
+    { id: 'V7', L1: 'yaxis', L2: 'xaxis', seed: 7, D: 17 },
     { id: 'V8', L1: 'yx', L2: 'yaxis', seed: 8, r1: 3, r2: 1, D: 13 },
     { id: 'V9', L1: 'yx', L2: 'xaxis', seed: 9, D: 10 },
     { id: 'V10', L1: 'xaxis', L2: 'yx', seed: 10, fixedA: true, D: 5 }
@@ -125,22 +125,13 @@ function docsMd() {
   t.push('');
   t.push('| 구간 | 시간 | 내용 |'); t.push('|---|---|---|');
   for (const r of VG.TIMEPLAN) t.push(`| ${r[0]} | ${r[1]} | ${r[2]} |`);
-  const q = [];
-  q.push('# 04_questions_for_son — 아들에게 묻는 질문');
-  q.push('');
-  q.push(`> \`gen/core.js\`의 QUESTIONS_FOR_SON을 \`node variants.mjs docs\`로 뽑은 것(${today}). 프린트 팩 6절·앱 📋 시작 탭의 질문 카드와 같다. 답은 Nick이 이 세션에 넣고 라운드 5에서 반영한다.`);
-  q.push('');
-  q.push('| # | 질문 | 답 |'); q.push('|---|---|---|');
-  VG.QUESTIONS_FOR_SON.forEach((qq, i) => q.push(`| ${i + 1} | ${qq} |  |`));
-  q.push('');
-  return { t: t.join('\n') + '\n', q: q.join('\n') + '\n' };
+  return { t: t.join('\n') + '\n' };
 }
 
 if (mode === 'docs') {
   const d = docsMd();
   fs.writeFileSync(path.join(root, '10_prep', '02_answer_templates.md'), d.t, 'utf8');
-  fs.writeFileSync(path.join(root, '10_prep', '04_questions_for_son.md'), d.q, 'utf8');
-  console.log('wrote 02_answer_templates.md, 04_questions_for_son.md');
+  console.log('wrote 02_answer_templates.md');
 }
 
 if (mode === 'bank') {

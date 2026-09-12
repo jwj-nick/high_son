@@ -87,12 +87,6 @@
     <div id="plan"></div>
   </div>
   <div class="card">
-    <h2>아빠와 클로드가 궁금한 것</h2>
-    <p class="small">답을 적고 [전체 복사]를 눌러 카톡으로 아빠에게 보내 줘. 다음 판에 반영한다.</p>
-    <div id="qa"></div>
-    <div class="row"><button class="btn" id="qa-copy">📋 전체 복사</button><span class="small" id="qa-msg"></span></div>
-  </div>
-  <div class="card">
     <h2>개념이 흔들리면 (단원 앱 복습)</h2>
     <div class="links">
       <a href="mat2_circle.html">⭕ 원의 방정식 · 원과 직선의 위치 관계</a>
@@ -118,7 +112,7 @@
     <div class="svgbox"><svg id="tan-svg" viewBox="0 0 400 320"></svg></div>
     <div class="readout" id="tan-read"></div>
     <div class="why"><b>왜 "거리 = r"이 접선 조건인가.</b> 직선이 원과 한 점에서만 만나려면 원의 중심에서 직선까지의 거리 d가 반지름 r와 꼭 같아야 한다(d가 r보다 작으면 두 점에서 만나고, 크면 안 만난다). 그래서 답안에는 <b>"중심 C에서 직선까지의 거리가 반지름과 같아야 하므로"</b>라는 문장을 쓰고 점과 직선의 거리 공식을 세운다.<br><br>
-    <b>왜 접선 길이는 √(AC² − r²)인가.</b> 접점 P에서 CP ⊥ AP 이므로 △APC는 직각삼각형. AC = d, CP = r → AP = √(d² − r²). 예시문항은 5-3-4 삼각형이라 AP = 4이고, A와 C가 수평이면 접선의 기울기는 ±(r / AP) = ±3/4가 된다. 이건 <b>검산용</b>으로 쓰고, 답안은 거리 공식으로 쓴다.</div>
+    <b>왜 접선 길이는 √(AC² − r²)인가.</b> 접점 P에서 CP ⊥ AP 이므로 △APC는 직각삼각형. AC = d, CP = r → AP = √(d² − r²). 예시문항은 3-4-5 삼각형이라 AP = 4이고, A와 C가 수평이면 접선의 기울기는 ±(r / AP) = ±3/4가 된다. 이건 <b>검산용</b>으로 쓰고, 답안은 거리 공식으로 쓴다.</div>
   </div>
 </section>
 
@@ -126,7 +120,7 @@
 <section class="panel" id="tab-unf">
   <div class="card">
     <h2>원리 ② 대칭이동 = "꺾인 길을 곧게 펴기"</h2>
-    <p class="small">경로 A → P(직선 ①) → Q(직선 ②) → B. 단계 버튼을 차례로 눌러 보자. A를 직선 ①에, B를 직선 ②에 대칭이동하면 길이는 그대로인데 꺾인 길이 직선이 된다.</p>
+    <p class="small">경로 A → P(직선 ①) → Q(직선 ②) → B. 단계 버튼을 차례로 눌러 보자. A를 직선 ①에, B를 직선 ②에 대칭이동해도 길이는 그대로이고, 최단 경로에서는 그 길이 한 직선으로 펴진다.</p>
     <div class="row">
       <button class="btn sec" data-unf="sample">예시문항 2번</button>
       <button class="btn sec" data-unf="v5">변형 V5</button>
@@ -144,7 +138,7 @@
       <button class="btn gray" id="unf-wrong">⚠️ 함정: 대칭을 반대로 하면?</button>
     </div>
     <div class="readout" id="unf-read"></div>
-    <div class="why"><b>왜 대칭이동하면 되는가.</b> P가 직선 ① 위의 점이면 직선 ①은 A와 그 대칭점 A′을 잇는 선분의 수직이등분선이라 <b>AP = A′P</b>. 같은 이유로 <b>QB = QB′</b>. 그러면 AP + PQ + QB = A′P + PQ + QB′ 인데, A′에서 B′까지 가는 가장 짧은 길은 선분이므로 이 합은 <b>A′B′보다 짧을 수 없다</b>. A′과 B′이 각각 원 위를 움직이므로 A′B′의 최솟값은 <b>(두 중심 사이 거리) − r₁ − r₂</b>.<br><br>
+    <div class="why"><b>왜 대칭이동하면 되는가.</b> P가 직선 ① 위의 점이면 직선 ①은 A와 그 대칭점 A′을 잇는 선분의 수직이등분선이라 <b>AP = A′P</b>. 같은 이유로 <b>QB = QB′</b>. 그러면 AP + PQ + QB = A′P + PQ + QB′ 인데, A′에서 B′까지 가는 가장 짧은 길은 선분이므로 이 합은 <b>A′B′보다 짧을 수 없다</b>. A′과 B′이 각각 원 위를 움직이므로, 범위 안 사실 <b>"점에서 원 위의 점까지 거리의 최솟값 = 중심까지의 거리 − 반지름"</b>을 두 번 쓰면(두 원이 서로 밖일 때) A′B′의 최솟값은 <b>(두 중심 사이 거리) − r₁ − r₂</b>.<br><br>
     <b>순서가 함정.</b> "P(직선 ①) → Q(직선 ②) 차례로"이면 <b>A는 직선 ①에, B는 직선 ②에</b>. 반대로 하면 AP = A′P가 성립하지 않아 엉뚱한 수가 나온다. 위의 ⚠️ 버튼으로 직접 확인.</div>
   </div>
 </section>
@@ -220,7 +214,7 @@
     <div class="pp-toolbar">
       <button class="btn" id="pp-btn">🖨️ 인쇄 / PDF로 저장</button>
       <a class="btn sec" id="pp-dl" href="2sem_perf_circle_path_print.html" download="math2_perf_print_pack.html" style="text-decoration:none;display:inline-flex;align-items:center">⬇️ 파일로 저장</a>
-      <span class="small">인쇄 창에서 "PDF로 저장"을 고르면 파일로 남는다. 종이로 뽑아 3·4쪽(변형 문제·답)을 손으로 푸는 게 핵심.</span>
+      <span class="small">인쇄 창에서 "PDF로 저장"을 고르면 파일로 남는다. 종이로 뽑아 3·4절(변형 문제·답)을 손으로 푸는 게 핵심.</span>
     </div>
     <div id="pp-wrap"></div>
   </div>
@@ -372,8 +366,8 @@ var VG = (function () {
     var k1 = -ax, k0 = ay; // 상수항 k1 m + k0
     var mAbs; // |m|
     var L = [];
-    L.push('직선 y' + tail(-ay) + ' = m(x' + tail(-ax) + ')을 정리하면  mx − y' + (linM(k1, k0) === '0' ? '' : ' + (' + linM(k1, k0) + ')') + ' = 0');
-    L.push('직선이 원에 접하려면 **원의 중심 C' + pt(cx, cy) + '에서 이 직선까지의 거리가 반지름 ' + r + '과 같아야** 하므로');
+    L.push('직선 ' + josa('y' + tail(-ay) + ' = m(x' + tail(-ax) + ')', '을') + ' 정리하면  mx − y' + (linM(k1, k0) === '0' ? '' : ' + (' + linM(k1, k0) + ')') + ' = 0');
+    L.push('직선이 원에 접하려면 **원의 중심 C' + pt(cx, cy) + '에서 이 직선까지의 거리가 반지름 ' + josa(r, '과') + ' 같아야** 하므로');
     var inner = sumTerms([[cx, 'm'], [-cy, ''], [k1, 'm'], [k0, '']]);
     L.push('|' + inner + '| / √(m² + 1) = ' + r);
     var sq;
@@ -492,7 +486,8 @@ var VG = (function () {
     yx: { name: '직선 y = x', rule: '(x, y) → (y, x)', f: function (P) { return F(P[0]).sub(P[1]); }, refl: function (P) { return [F(P[1]), F(P[0])]; }, eqText: 'y = x' },
     ynx: { name: '직선 y = −x', rule: '(x, y) → (−y, −x)', f: function (P) { return F(P[0]).add(P[1]); }, refl: function (P) { return [F(P[1]).neg(), F(P[0]).neg()]; }, eqText: 'y = −x' }
   };
-  var LINE_IDS = ['xaxis', 'yaxis', 'yx', 'ynx'];
+  var LINE_IDS = ['xaxis', 'yaxis', 'yx'];        // 생성에 쓰는 직선. y = −x 대칭은 2022 개정 범위 밖(MATH_DRILL_PLAN §2)이라 뺀다
+  var LINE_IDS_ALL = ['xaxis', 'yaxis', 'yx', 'ynx'];
   var T2_STORIES = [
     { intro: '한 미술관에서는 칸딘스키풍 작품을 대형 미디어아트로 제작하려고 한다. 작품 속 두 원형 무늬 C₁, C₂와 두 직선 무늬를 따라 빛이 이어지도록 일부 구간에 LED라인을 설치할 계획이다.', obj: 'LED 라인', two: '두 직선 무늬' },
     { intro: '한 놀이공원에서는 두 원형 회전 놀이기구 C₁, C₂와 두 직선 도로를 따라 야간 조명 케이블을 설치하려고 한다.', obj: '조명 케이블', two: '두 직선 도로' },
@@ -544,7 +539,7 @@ var VG = (function () {
     ] });
     S.push({ title: '③ 꺾인 길을 곧은 길로', lines: [
       'AP + PQ + QB = A′P + PQ + QB′ ≥ **A′B′**',
-      '(두 점을 잇는 가장 짧은 길은 선분. 등호는 A′, P, Q, B′이 한 직선 위에 있을 때)'
+      '(두 점을 잇는 가장 짧은 길은 선분. 등호는 P, Q가 선분 A′B′ 위에 이 순서로 놓일 때)'
     ] });
     var L4 = [];
     if (fixedA) L4.push('A′ = ' + pt(c1p[0], c1p[1]));
@@ -556,19 +551,21 @@ var VG = (function () {
     var L5 = [];
     L5.push((fixedA ? 'A′' : 'C₁′') + 'C₂′ = √((' + c1p[0].s() + tail(F(c2p[0]).neg()) + ')² + (' + c1p[1].s() + tail(F(c2p[1]).neg()) + ')²) = √(' + ddx.sq().s() + ' + ' + ddy.sq().s() + ') = √' + D2.s() + ' = ' + D);
     if (fixedA) {
-      L5.push('점 A′에서 원 C₂′ 위의 점까지 거리의 최솟값은 (중심까지의 거리) − (반지름) 이므로');
-      L5.push('▶ A′B′의 최솟값 = ' + D + ' − ' + r2 + ' = **' + ans + '**');
+      L5.push(D + ' > ' + r2 + ' 이므로 A′은 원 C₂′ 밖에 있고, **점에서 원 위의 점까지 거리의 최솟값 = (중심까지의 거리) − (반지름)** 이므로');
+      L5.push('▶ A′B′의 최솟값 = ' + D + ' − ' + r2 + ' = **' + ans + '**   (등호: B′이 선분 A′C₂′ 위에 있을 때)');
     } else {
-      L5.push(D + ' > ' + r1 + ' + ' + r2 + ' 이므로 두 원은 서로 밖에 있고, **두 원 위의 점 사이 거리의 최솟값 = (중심 사이 거리) − r₁ − r₂**');
-      L5.push('▶ A′B′의 최솟값 = ' + D + ' − ' + r1 + ' − ' + r2 + ' = **' + ans + '**');
+      L5.push(D + ' > ' + r1 + ' + ' + r2 + ' 이므로 두 원은 서로 밖에 있다. **점에서 원 위의 점까지 거리의 최솟값 = (중심까지의 거리) − (반지름)** 을 두 번 쓴다.');
+      L5.push('A′을 고정하면 B′이 원 C₂′ 위를 움직이므로  A′B′ ≥ A′C₂′ − ' + r2);
+      L5.push('A′이 원 C₁′ 위를 움직이므로  A′C₂′ ≥ C₁′C₂′ − ' + r1 + ' = ' + D + ' − ' + r1 + ' = ' + (D - r1));
+      L5.push('▶ A′B′의 최솟값 = ' + D + ' − ' + r1 + ' − ' + r2 + ' = **' + ans + '**   (등호: A′, B′이 선분 C₁′C₂′ 위에 있을 때)');
     }
-    S.push({ title: '⑤ 두 원(점과 원) 위의 점 사이의 최소 거리', lines: L5 });
+    S.push({ title: fixedA ? '⑤ 점 A′과 원 C₂′ 위의 점 사이의 최소 거리' : '⑤ 두 원 위의 점 사이의 최소 거리', lines: L5 });
     var L6 = ['따라서 ' + st.obj + '의 최소 길이는 **' + ans + '**' + (unit ? '' : ' (좌표 단위)')];
     if (unit) { var realv = F(ans).mul(F(Math.round(unit.v * 100), 100)); L6.push('한 눈금 = ' + unit.v + ' ' + unit.n + ' 이므로 실제 길이 = ' + ans + ' × ' + unit.v + ' = **' + realStr(realv) + ' ' + unit.n + '**'); }
     S.push({ title: '⑥ 답', lines: L6 });
     var L7 = [];
     if (orderOK) {
-      L7.push('(선택 보강 — 시간이 남으면 한 줄) ' + (fixedA ? '점 A′' : '중심 C₁′') + josa(pt(c1p[0], c1p[1]), '과') + ' C₂′' + josa(pt(c2p[0], c2p[1]), '을') + ' 잇는 선분은 ' + josa(L1.name, '을') + ' P' + pt(Ppt[0], Ppt[1]) + '에서, ' + josa(L2.name, '을') + ' Q' + pt(Qpt[0], Qpt[1]) + '에서 **차례로** 지나므로 A → P → Q → B 순서의 경로가 실제로 존재한다.');
+      L7.push('(선택 보강 — 시간이 남으면) 최솟값을 주는 A′' + pt(Ap[0], Ap[1]) + ', B′' + pt(Bp[0], Bp[1]) + '에 대하여 선분 A′B′은 ' + josa(L1.name, '을') + ' P' + pt(Ppt[0], Ppt[1]) + '에서, ' + josa(L2.name, '을') + ' Q' + pt(Qpt[0], Qpt[1]) + '에서 **차례로** 지나므로 A → P → Q → B 순서의 경로가 실제로 존재한다.');
       L7.push('이때 A' + pt(A[0], A[1]) + ', B' + pt(B[0], B[1]) + '.');
     } else {
       L7.push('⚠️ 이 배치에서는 A′B′ 선분이 두 직선을 차례로 지나지 않아 등호가 성립하지 않는다(생성기 오류 — 이 세트는 쓰지 않는다).');
@@ -602,8 +599,9 @@ var VG = (function () {
   function genT2(rng, opt) {
     opt = opt || {};
     for (var tries = 0; tries < 4000; tries++) {
-      var L1 = opt.L1 || LINE_IDS[Math.floor(rng() * 4)];
-      var L2 = opt.L2 || LINE_IDS[Math.floor(rng() * 4)];
+      var pool = opt.allowYnx ? LINE_IDS_ALL : LINE_IDS;
+      var L1 = opt.L1 || pool[Math.floor(rng() * pool.length)];
+      var L2 = opt.L2 || pool[Math.floor(rng() * pool.length)];
       if (L1 === L2) continue;
       var v = PVEC[Math.floor(rng() * PVEC.length)];
       var a = v[0] * (rng() < 0.5 ? 1 : -1), b = v[1] * (rng() < 0.5 ? 1 : -1);
@@ -684,7 +682,7 @@ var VG = (function () {
     { id: 'V4', type: 1, tag: '1번형 · 수직 배치(A가 C 위), 삼조 4-3-5, 눈금 25 m', p: { cx: -1, cy: -2, r: 4, ax: -1, ay: 3, unit: { v: 25, n: 'm' }, pick: 'pos', story: 0 } },
     { id: 'V5', type: 2, tag: '2번형 · x축 → y = x (예시와 같은 직선), 다른 숫자, 삼조 5-12-13', p: { c1: [-7, -1], r1: 1, c2: [-4, 5], r2: 2, L1: 'xaxis', L2: 'yx', story: 1, unit: null } },
     { id: 'V6', type: 2, tag: '2번형 · y축 → y = x, 삼조 3-4-5', p: { c1: [1, 3], r1: 1, c2: [-1, 2], r2: 1, L1: 'yaxis', L2: 'yx', story: 2, unit: null } },
-    { id: 'V7', type: 2, tag: '2번형 · x축 → y = −x, 삼조 8-15-17', p: { c1: [6, -2], r1: 1, c2: [6, 9], r2: 1, L1: 'xaxis', L2: 'ynx', story: 3, unit: null } },
+    { id: 'V7', type: 2, tag: '2번형 · y축 → x축, 삼조 8-15-17', p: { c1: [-2, 8], r1: 2, c2: [-6, 7], r2: 1, L1: 'yaxis', L2: 'xaxis', story: 3, unit: null } },
     { id: 'V8', type: 2, tag: '2번형 · y = x → y축, 반지름이 서로 다름(3·1), 눈금 환산 0.5 m', p: { c1: [5, -3], r1: 3, c2: [-2, -7], r2: 1, L1: 'yx', L2: 'yaxis', story: 0, unit: { v: 0.5, n: 'm' } } },
     { id: 'V9', type: 2, tag: '함정 ① · 경유 순서가 바뀜(y = x 먼저, x축 나중) — P가 놓인 직선에 A를 대칭', p: { c1: [4, -3], r1: 1, c2: [5, 2], r2: 2, L1: 'yx', L2: 'xaxis', story: 1, unit: null } },
     { id: 'V10', type: 2, tag: '함정 ② · 출발점 A가 원이 아니라 고정점 — 반지름을 한쪽만 뺀다', p: { c1: [3, 1], r1: 0, c2: [2, -1], r2: 1, L1: 'xaxis', L2: 'yx', story: 2, unit: null } }
@@ -697,7 +695,7 @@ var VG = (function () {
   var TEMPLATES = {
     t1: [
       { h: '문제 1 — 원의 방정식', t: ['중심이 (▢, ▢)이고 반지름의 길이가 ▢인 원의 방정식은', '(x − ▢)² + (y − ▢)² = ▢²  →  ▢'] },
-      { h: '문제 2-1 — 기울기 m', t: ['직선 y − ▢ = m(x − ▢)를 정리하면  mx − y + (▢m + ▢) = 0', '직선이 원에 접하려면 **원의 중심 C(▢, ▢)에서 이 직선까지의 거리가 반지름 ▢과 같아야** 하므로', '|▢m + ▢| / √(m² + 1) = ▢  →  양변 제곱  →  ▢m² = ▢(m² + 1)  →  m² = ▢', '따라서 m = ▢ 또는 m = −▢  (둘 다 쓴다)'] },
+      { h: '문제 2-1 — 기울기 m', t: ['직선 y − ▢ = m(x − ▢)를 정리하면  mx − y + (▢m + ▢) = 0', '직선이 원에 접하려면 **원의 중심 C(▢, ▢)에서 이 직선까지의 거리가 반지름 ▢과 같아야** 하므로', '|▢m + ▢| / √(m² + 1) = ▢  →  양변 제곱  →  ▢m² = ▢(m² + 1)  →  m² = ▢', '(A와 C가 수직 배치면 m이 사라지고 상수만 남는다: |▢| / √(m² + 1) = ▢ → ▢ = ▢(m² + 1))', '따라서 m = ▢ 또는 m = −▢  (둘 다 쓴다)'] },
       { h: '문제 2-2 — 두 직선', t: ['m = ▢ :  y − ▢ = ▢(x − ▢)  →  y = ▢x + ▢', 'm = −▢ :  y − ▢ = −▢(x − ▢)  →  y = −▢x + ▢'] },
       { h: '문제 3 — 접점 P (방법 A: 대입 → 중근)', t: ['기울기가 ▢수인 직선 y = ▢x + ▢ 를 원에 대입하면', '(x − ▢)² + (▢x + ▢)² = ▢  →  양변에 ▢를 곱하고 전개·정리  →  ▢x² + ▢x + ▢ = 0', '접하므로 **중근**:  (▢x + ▢)² = 0  →  x = ▢,  y = ▢', '따라서 P(▢, ▢)   [검산: (▢ − ▢)² + (▢ − ▢)² = ▢ ✓]'] },
       { h: '문제 3 — 접점 P (방법 B: 수선의 발)', t: ['접점은 **중심 C에서 접선에 내린 수선의 발**이다. 접선에 수직이고 C(▢, ▢)를 지나는 직선:  y − ▢ = ▢(x − ▢)', '두 직선을 연립:  ▢x + ▢ = ▢x + ▢  →  양변에 ▢를 곱하면  ▢x + ▢ = ▢x + ▢  →  x = ▢,  y = ▢  →  P(▢, ▢)'] },
@@ -706,16 +704,16 @@ var VG = (function () {
     t2: [
       { h: '① 대칭이동 (P가 놓인 직선에 A를)', t: ['원 C₁ 위의 점 A를 **▢**에 대하여 대칭이동한 점을 A′이라 하자.  [▢ 대칭: (x, y) → (▢, ▢)]', '점 P는 ▢ 위의 점이고 ▢은 선분 AA′의 수직이등분선이므로  **AP = A′P**'] },
       { h: '② 대칭이동 (Q가 놓인 직선에 B를)', t: ['원 C₂ 위의 점 B를 **▢**에 대하여 대칭이동한 점을 B′이라 하자.  [▢ 대칭: (x, y) → (▢, ▢)]', '점 Q는 ▢ 위의 점이므로  **QB = QB′**'] },
-      { h: '③ 부등식', t: ['AP + PQ + QB = A′P + PQ + QB′ ≥ **A′B′**   (등호: A′, P, Q, B′이 한 직선 위)'] },
+      { h: '③ 부등식', t: ['AP + PQ + QB = A′P + PQ + QB′ ≥ **A′B′**   (등호: P, Q가 선분 A′B′ 위에 이 순서로 놓일 때)'] },
       { h: '④ 대칭이동한 원', t: ['A′은 원 C₁을 ▢에 대칭이동한 원 C₁′: (x − ▢)² + (y − ▢)² = ▢  (중심 (▢, ▢), 반지름 ▢) 위를 움직인다.', 'B′은 원 C₂를 ▢에 대칭이동한 원 C₂′: (x − ▢)² + (y − ▢)² = ▢  (중심 (▢, ▢), 반지름 ▢) 위를 움직인다.'] },
-      { h: '⑤ 두 원 위의 점 사이 최소 거리', t: ['C₁′C₂′ = √((▢ − ▢)² + (▢ − ▢)²) = √(▢ + ▢) = √▢ = ▢', '▢ > ▢ + ▢ 이므로 두 원은 서로 밖에 있고, 최솟값 = (중심 사이 거리) − r₁ − r₂ = ▢ − ▢ − ▢ = ▢'] },
+      { h: '⑤ 두 원 위의 점 사이 최소 거리 (점–원 최소 거리를 두 번)', t: ['C₁′C₂′ = √((▢ − ▢)² + (▢ − ▢)²) = √(▢ + ▢) = √▢ = ▢   (▢ > ▢ + ▢ 이므로 두 원은 서로 밖)', '**점에서 원 위의 점까지 거리의 최솟값 = (중심까지의 거리) − (반지름)** 이므로  A′B′ ≥ A′C₂′ − ▢,  A′C₂′ ≥ C₁′C₂′ − ▢', '따라서 A′B′의 최솟값 = ▢ − ▢ − ▢ = ▢   (등호: A′, B′이 선분 C₁′C₂′ 위에 있을 때)'] },
       { h: '⑥ 답 (+ 선택 보강)', t: ['따라서 최소 길이는 **▢**', '(선택) 중심 C₁′(▢, ▢)과 C₂′(▢, ▢)을 잇는 선분은 ▢을 P(▢, ▢)에서, ▢을 Q(▢, ▢)에서 차례로 지나므로 A → P → Q → B 순서의 경로가 실제로 존재한다.'] }
     ]
   };
 
   var PITFALLS = [
     { k: '2번 대칭 순서', t: '"차례로 P(직선 ①) → Q(직선 ②)"이면 **A는 직선 ①에, B는 직선 ②에** 대칭. 순서가 바뀐 문제(V9)에서 확인.' },
-    { k: '2번 반지름', t: '두 원이면 **r₁ + r₂ 둘 다** 뺀다. 한쪽이 점이면(V10) 그쪽은 빼지 않는다. 중심 거리를 그대로 답으로 쓰면 오답.' },
+    { k: '2번 반지름', t: '두 원이면 **r₁ + r₂ 둘 다** 뺀다("점–원 최소 거리 = 중심까지 거리 − 반지름"을 두 번). 한쪽이 점이면(V10) 그쪽은 빼지 않는다. 중심 거리를 그대로 답으로 쓰면 오답.' },
     { k: '2번 근거 문장', t: '"P가 직선 위의 점이므로 AP = A′P"처럼 **왜 같은지**를 한 문장으로. 좌표만 나열하면 감점.' },
     { k: '1번 단위', t: '문제 4는 **눈금 환산 문장 + 단위(m)**까지가 답. 4가 아니라 40 m.' },
     { k: '1번 기울기 둘 다', t: '|5m| = 3√(m²+1)에서 제곱하면 **m = ±3/4 둘 다** 나온다. 하나만 쓰면 감점.' },
@@ -735,13 +733,12 @@ var VG = (function () {
     ['검산', '7분', '위 검산 루틴 4개'],
     ['여유', '5분', '답안 깨끗이, 단위·둘 다·반지름 확인']
   ];
-  var QUESTIONS_FOR_SON = [
-    '시험 시간은 수업시간 50분 전부인가, 아니면 그중 일부인가?',
-    '1번 4소문항과 2번의 배점(15점 배분)을 선생님이 알려 주셨나?',
-    '계산기·자(직선자)를 쓸 수 있나? 답안은 문제지 여백에 쓰나, 별도 답안지인가?',
-    '선생님이 "숫자만 바뀐다", "대칭이동을 꼭 써라" 같은 힌트를 주셨나? 주셨다면 그대로 적어 줘.',
-    '중간고사에서 원의 접선·대칭이동 문제를 맞았나, 틀렸나? 틀렸다면 어디서 막혔나(공식? 계산? 서술?).',
-    '앱과 프린트에서 가장 헷갈린 부분 하나만 골라 줘. (다음 판에 반영)'
+  /* 시험 조건 확인 항목 — 아이에게 묻지 않고 Nick이 채팅에서 답한다(소통 규약 2026-09-12). 앱·프린트에는 넣지 않는다. */
+  var QUESTIONS_FOR_NICK = [
+    '시험 시간이 수업시간 50분 전부인지(기본 가정 50분)',
+    '계산기·자 사용 가능 여부(기본 가정: 둘 다 불가)',
+    '답안을 문제지 여백에 쓰는지, 별도 답안지인지(기본 가정: 문제지 여백)',
+    '선생님이 준 힌트가 있으면 그 문장 그대로'
   ];
 
   /* ---------- 프린트 팩 렌더러 (앱 🖨️ 탭 + 정적 파일 공용) ---------- */
@@ -840,25 +837,24 @@ var VG = (function () {
       '<tr><td>2</td><td>답안 틀 카드 2장 (▢에 숫자만 갈아끼움) + 원리 그림</td><td>9/13 — 순서와 근거 문장을 외운다</td></tr>' +
       '<tr><td>3</td><td>변형 문제 10세트 (문제 쪽)</td><td>9/14·15·16 — 하루 2~3세트, 반드시 종이에 손으로</td></tr>' +
       '<tr><td>4</td><td>변형 정답·풀이 (답 쪽)</td><td>풀고 나서만 본다. 틀린 자리 → 답안 틀로 돌아가기</td></tr>' +
-      '<tr><td>5</td><td>함정 체크리스트 · 검산 루틴 · 시험 당일 시간 배분</td><td>9/16 저녁 + 9/17 등교 전</td></tr>' +
-      '<tr><td>6</td><td>아빠·클로드가 묻는 질문 6개</td><td>9/13 답을 적어 아빠에게</td></tr></table>';
+      '<tr><td>5</td><td>함정 체크리스트 · 검산 루틴 · 시험 당일 시간 배분</td><td>9/16 저녁 + 9/17 등교 전</td></tr></table>';
     h += '<h2>정답 한눈에 (예시문항)</h2><table><tr><th>문항</th><th>정답</th></tr>' +
       '<tr><td>1-1</td><td>' + esc(s1.answers.circle) + '</td></tr><tr><td>1-2-1</td><td>m = ' + esc(s1.answers.m1.s()) + ' 또는 ' + esc(s1.answers.m2.s()) + '</td></tr>' +
       '<tr><td>1-2-2</td><td>' + esc(s1.answers.line1.slope) + ' , ' + esc(s1.answers.line2.slope) + '</td></tr><tr><td>1-3</td><td>P' + esc(pt(s1.answers.P[0], s1.answers.P[1])) + '</td></tr>' +
       '<tr><td>1-4</td><td>AP = ' + s1.answers.l + ' → ' + esc(realStr(s1.answers.real)) + ' ' + s1.answers.unit.n + '</td></tr><tr><td>2</td><td>' + s2.answers.ans + '</td></tr></table></div>';
     /* 1. 예시문항 + 모범답안 */
-    h += '<div class="pp-page"><h2>1. 예시문항 원문과 만점 답안 예시</h2>' + problemHtml(s1, '1.') + '<h3>만점 답안 예시 — 1번</h3>' + stepsHtml(s1.steps) + '</div>';
+    h += '<div class="pp-page"><h2>1. 예시문항(생성기로 재구성 — 원문은 inbox 사진)과 만점 답안 예시</h2>' + problemHtml(s1, '1.') + '<h3>만점 답안 예시 — 1번</h3>' + stepsHtml(s1.steps) + '</div>';
     h += '<div class="pp-page">' + problemHtml(s2, '2.') + '<h3>만점 답안 예시 — 2번</h3>' + stepsHtml(s2.steps) + '<div class="pp-note">같은 답이 나오는 다른 방법: A를 x축에 대칭 → A′, 다시 A′을 y = x에 대칭 → A″(중심 (−2, 8)) 으로 잡고 A″C₂ 거리 13에서 4를 빼도 9. 둘 다 정답. 기본은 위 방법(양 끝점을 각각 한 번씩).</div></div>';
     /* 2. 답안 틀 + 원리 */
     h += '<div class="pp-page"><h2>2. 답안 틀 카드 — ▢에 숫자만 갈아끼운다</h2><div class="pp-two"><div><h3>카드 ① 1번형</h3>' +
       TEMPLATES.t1.map(function (b) { return '<div class="pp-tpl"><div class="h">' + md(b.h) + '</div>' + b.t.map(function (t) { return '<div class="t">' + md(t) + '</div>'; }).join('') + '</div>'; }).join('') +
       '</div><div><h3>카드 ② 2번형</h3>' +
       TEMPLATES.t2.map(function (b) { return '<div class="pp-tpl"><div class="h">' + md(b.h) + '</div>' + b.t.map(function (t) { return '<div class="t">' + md(t) + '</div>'; }).join('') + '</div>'; }).join('') +
-      '<div class="pp-note">대칭 규칙표: x축 (x, y)→(x, −y) · y축 (x, y)→(−x, y) · y = x (x, y)→(y, x) · y = −x (x, y)→(−y, −x)</div></div></div></div>';
+      '<div class="pp-note">대칭 규칙표: x축 (x, y)→(x, −y) · y축 (x, y)→(−x, y) · y = x (x, y)→(y, x) · (참고, 범위 밖) y = −x (x, y)→(−y, −x)</div></div></div></div>';
     h += '<div class="pp-page"><h2>원리 그림 — 왜 이 방법이 되는가</h2><div class="pp-two"><div><h3>접선 = 중심에서 거리가 r인 직선</h3>' + svgTangent(SAMPLE_T1) +
       '<div class="pp-small">A에서 원에 그을 수 있는 접선은 두 개(실선·점선). 접점 P에서 반지름 CP ⊥ 접선이라 △APC는 직각삼각형: AC = d, CP = r, AP = ℓ = √(d² − r²). 그래서 "중심에서 직선까지의 거리 = r"이 접선 조건이고, A가 C와 수평이면 기울기는 ±r/ℓ.</div></div>' +
       '<div><h3>대칭이동 = 꺾인 길 펴기</h3>' + svgUnfold(SAMPLE_T2) +
-      '<div class="pp-small">실선 A→P→Q→B가 실제 경로. A를 x축에, B를 y = x에 대칭이동하면(점선 원) 경로 길이는 그대로인데 모양이 직선 C₁′→C₂′(초록 점선)으로 펴진다. 두 원 위의 점 사이 최소 거리 = 중심 거리 − r₁ − r₂ = 13 − 2 − 2 = 9.</div></div></div></div>';
+      '<div class="pp-small">실선 A→P→Q→B가 실제 경로. A를 x축에, B를 y = x에 대칭이동하면(점선 원) 경로 길이는 그대로인데 모양이 직선 C₁′→C₂′(초록 점선)으로 펴진다. "점에서 원 위의 점까지 최소 거리 = 중심까지 거리 − 반지름"을 두 번 쓰면 최솟값 = 중심 거리 − r₁ − r₂ = 13 − 2 − 2 = 9.</div></div></div></div>';
     /* 3. 변형 문제 쪽 */
     var sols = sets.map(function (st) { var sol = solveAny(st.type, st.p); sol.id = st.id; sol.tag = st.tag; return sol; });
     h += '<div class="pp-page"><h2>3. 변형 문제 10세트 — 문제 쪽 (반드시 종이에 손으로)</h2><div class="pp-note">V1~V4 = 1번형, V5~V8 = 2번형, V9·V10 = 함정. 한 세트 목표 시간: 1번형 20분, 2번형 18분.</div>';
@@ -882,8 +878,7 @@ var VG = (function () {
     h += '<div class="pp-page"><h2>5. 함정 체크리스트 (전날 저녁·등교 전)</h2><table class="pp-chk">' + PITFALLS.map(function (q) { return '<tr><td>☐</td><td><b>' + esc(q.k) + '</b></td><td>' + md(q.t) + '</td></tr>'; }).join('') + '</table>' +
       '<h2>검산 루틴 (1분)</h2><ol>' + CHECKS.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ol>' +
       '<h2>시험 당일 시간 배분 (50분 기준, 시간 확인 후 조정)</h2><table><tr><th>구간</th><th>시간</th><th>내용</th></tr>' + TIMEPLAN.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('') + '</table>';
-    /* 6. 질문 */
-    h += '<h2>6. 아빠·클로드가 묻는 질문 — 답을 적어 아빠에게</h2><table>' + QUESTIONS_FOR_SON.map(function (q, i) { return '<tr><td style="width:24px">' + (i + 1) + '</td><td>' + esc(q) + '<div class="pp-ans sm" style="min-height:44px;margin:4px 0 0"></div></td></tr>'; }).join('') + '</table></div>';
+    h += '</div>';
     h += '</div>';
     return h;
   }
@@ -893,7 +888,7 @@ var VG = (function () {
     T1_STORIES: T1_STORIES, T2_STORIES: T2_STORIES, TRIPLES: TRIPLES, UNITS: UNITS, LINES: LINES, LINE_IDS: LINE_IDS,
     solveT1: solveT1, solveT2: solveT2, solveAny: solveAny, genT1: genT1, genT2: genT2, validT2: validT2,
     verifyT1: verifyT1, verifyT2: verifyT2, verifyAny: verifyAny, parseNum: parseNum, near: near, mulberry32: mulberry32,
-    SAMPLE_T1: SAMPLE_T1, SAMPLE_T2: SAMPLE_T2, FIXED_SETS: FIXED_SETS, TEMPLATES: TEMPLATES, PITFALLS: PITFALLS, CHECKS: CHECKS, TIMEPLAN: TIMEPLAN, QUESTIONS_FOR_SON: QUESTIONS_FOR_SON,
+    SAMPLE_T1: SAMPLE_T1, SAMPLE_T2: SAMPLE_T2, FIXED_SETS: FIXED_SETS, TEMPLATES: TEMPLATES, PITFALLS: PITFALLS, CHECKS: CHECKS, TIMEPLAN: TIMEPLAN, QUESTIONS_FOR_NICK: QUESTIONS_FOR_NICK,
     stepsHtml: stepsHtml, problemHtml: problemHtml, svgTangent: svgTangent, svgUnfold: svgUnfold, PRINT_CSS: PRINT_CSS, renderPrintPack: renderPrintPack
   };
 })();
@@ -935,16 +930,6 @@ var VG = (function () {
     var done = LS.get('plan', {});
     $('#plan').innerHTML = PLAN.map(function (p, i) { return '<label class="chk"><input type="checkbox" data-i="' + i + '"' + (done[i] ? ' checked' : '') + '><span><b>' + esc(p[0]) + '</b><br><span class="small">' + esc(p[1]) + '</span></span></label>'; }).join('');
     $$('#plan input').forEach(function (c) { c.addEventListener('change', function () { done[c.dataset.i] = c.checked; LS.set('plan', done); }); });
-    var qa = LS.get('qa', {});
-    $('#qa').innerHTML = VG.QUESTIONS_FOR_SON.map(function (q, i) { return '<div style="margin:8px 0"><div style="font-size:14px"><b>Q' + (i + 1) + '.</b> ' + esc(q) + '</div><textarea data-i="' + i + '" placeholder="답을 적어 줘">' + esc(qa[i] || '') + '</textarea></div>'; }).join('');
-    $$('#qa textarea').forEach(function (t) { t.addEventListener('input', function () { qa[t.dataset.i] = t.value; LS.set('qa', qa); }); });
-    $('#qa-copy').addEventListener('click', function () {
-      var txt = VG.QUESTIONS_FOR_SON.map(function (q, i) { return 'Q' + (i + 1) + '. ' + q + '\n→ ' + (qa[i] || '(미답)'); }).join('\n\n');
-      var done2 = function () { $('#qa-msg').textContent = '복사됨 — 카톡에 붙여넣기'; };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done2, function () { fallback(); });
-      else fallback();
-      function fallback() { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done2(); } catch (e) { $('#qa-msg').textContent = '복사 실패 — 길게 눌러 복사'; } document.body.removeChild(ta); }
-    });
   })();
 
   /* ---------- 접선 실험 ---------- */
@@ -991,7 +976,7 @@ var VG = (function () {
         '두 접선의 기울기: m = ' + frac(m1) + ',  m = ' + frac(m2) +
         (aligned === 'h' ? '   (A와 C가 수평 → m = ±r/ℓ = ±' + frac(r / l) + ')' : aligned === 'v' ? '   (A와 C가 수직 → m = ±ℓ/r = ±' + frac(l / r) + ')' : '   (대각 배치: 거리 공식으로 m의 이차방정식을 푼다)') + '\n' +
         '접점: P₁(' + frac(T[0].x) + ', ' + frac(T[0].y) + '),  P₂(' + frac(T[1].x) + ', ' + frac(T[1].y) + ')' +
-        (Number.isInteger(d) && Number.isInteger(l) ? '\n★ ' + r + '-' + frac(l) + '-' + frac(d) + ' 직각삼각형 — 시험은 이런 "예쁜 수"로 나온다' : '\n(이 배치는 AC가 정수가 아니라 시험에는 안 나올 모양)');
+        (Number.isInteger(d) && Number.isInteger(l) ? '\n★ ' + Math.min(r, l) + '-' + Math.max(r, l) + '-' + frac(d) + ' 직각삼각형 — 시험은 이런 "예쁜 수"로 나온다' : '\n(이 배치는 AC가 정수가 아니라 시험에는 안 나올 모양)');
     } else read = 'A가 원 안(또는 위)에 있으면 접선을 그을 수 없다. A를 원 밖으로 끌어 보자.';
     s += '<circle cx="' + X(C.x) + '" cy="' + Y(C.y) + '" r="3.5" fill="#2563eb"/><text x="' + (X(C.x) + 6) + '" y="' + (Y(C.y) + 14) + '" font-size="12">C</text>';
     s += '<circle id="tan-A" cx="' + X(A.x) + '" cy="' + Y(A.y) + '" r="9" fill="#111" stroke="#fff" stroke-width="2" style="cursor:grab"/><text x="' + (X(A.x) - 16) + '" y="' + (Y(A.y) + 18) + '" font-size="13" font-weight="700">A</text>';

@@ -10,7 +10,7 @@
 - 시험: **2026-09-17(목)** 수업시간, 논술형, 15점. 손글씨 서술(풀이 과정·단위 요구).
 - 형식: **예시문항 2문제가 공개됨. 실전 = 유형 그대로, 숫자만 조정**(Nick 전언). 1번 = 원형 공원과 접선 산책로(4소문항, 계단식), 2번 = 칸딘스키풍 LED 라인(대칭이동 최단 경로, 논술 1문항).
 - 목적함수 = **숫자가 바뀐 같은 유형 2문제를 시간 안에, 감점 없는 서술로, 손으로 쓸 수 있게 한다.**
-- 아이 접점: **프린트 팩**(`90_output/print_pack.html`, 손 연습이 본질) + **경량 앱**(폰, `high1/math/2sem_perf_circle_path.html`). 아이에게 묻는 질문은 앱·프린트 안에 적고, 답은 Nick이 이 세션에 넣는다.
+- 아이 접점: **프린트 팩**(`90_output/print_pack.html`, 손 연습이 본질) + **경량 앱**(폰, `high1/math/2sem_perf_circle_path.html`). **아이에게 질문지·응답 수집 UI를 두지 않는다** — 시험 조건 확인은 Nick이 채팅에서 답한다(소통 규약 `feedback_chat_self_contained`, 2026-09-12). 채팅은 자기완결(파일명·문항 번호만으로 지칭 금지, 답안 전문을 채팅에 붙인다).
 
 ## 2. 운영 방식
 
@@ -27,7 +27,6 @@ inbox/*.jpg + inbox/README.md          예시문항 2쪽 원본 + 색인(문제 
 10_prep/02_answer_templates.md         만점 답안 골격(빈칸 틀) + 근거 문장 뱅크
 10_prep/gen/variants.mjs               변형 생성기(파라미터 → 문제·정답·풀이, 수치 검산)
 10_prep/03_variant_bank.md             변형 문제 은행 10세트 (생성기 출력을 정리)
-10_prep/04_questions_for_son.md        아들에게 묻는 질문
         ▼
 90_output/print_pack.html              프린트 팩 (정본을 옮김)
 10_prep/app/perf_circle_path.html      경량 앱 (정본을 옮김; ⚡드릴은 생성기 함수를 그대로 내장)
@@ -77,7 +76,6 @@ math-1-2-1/
 │   ├── 01_analysis.md            ← 손으로 쓴 정본 (풀이·변형 축·감점 포인트)
 │   ├── 02_answer_templates.md    ← 생성물 (core.js TEMPLATES)
 │   ├── 03_variant_bank.md        ← 생성물 (core.js FIXED_SETS)
-│   ├── 04_questions_for_son.md   ← 생성물 (core.js QUESTIONS_FOR_SON)
 │   ├── gen/core.js               ← ⭐ 단일 정본: 분수 연산·solve/gen/verify·고정 세트·답안 틀·프린트 렌더러
 │   ├── gen/variants.mjs          ← 러너 (verify·search·docs·bank·print·build)
 │   ├── gen/cdp_smoke.mjs         ← 헤드리스 Chrome 상호작용 스모크
@@ -92,4 +90,4 @@ math-1-2-1/
 |---|---|
 | 2026-09-12 | 골격 생성(perf-intake, 상위 커밋 5bc870a). |
 | 2026-09-12 | 라운드 1: inbox 2장 + README, `10_prep/01_analysis.md`(수치 검산), `PLAN.md` 제안, 이 파일 전면 개정, `mat-start`·`mat-log` 생성. |
-| 2026-09-12 | 라운드 2 확정 → 라운드 3·4 자율 진행: 생성기 core.js(분수 정확·조사 처리·342건 검산), 정본 md 3종 생성, 프린트 팩, 앱 7탭(앱 내 프린트 포함), 게이트 4종(gate.sh·cdp_smoke), `perf-math-variant` 스킬. §4 게이트를 실제 명령으로 갱신. |
+| 2026-09-12 | 라운드 2 확정 → 라운드 3·4 자율 진행: 생성기 core.js(분수 정확·조사 처리·342건 검산), 정본 md 생성, 프린트 팩, 앱 7탭(앱 내 프린트 포함), 게이트 4종(gate.sh·cdp_smoke), `perf-math-variant` 스킬. §4 게이트를 실제 명령으로 갱신. 리뷰어 반영 후 배포. 소통 규약에 따라 아이 질문지(P4·앱 질문 카드·프린트 §6) 제거. |

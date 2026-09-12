@@ -3,7 +3,10 @@
 set -e
 cd "$(dirname "$0")"
 echo "[1/6] verify"; node variants.mjs verify
-echo "[2/6] docs · bank · print"; node variants.mjs docs && node variants.mjs bank && node variants.mjs print
+echo "[2/6] docs · bank · print"
+node variants.mjs docs
+node variants.mjs bank
+node variants.mjs print
 echo "[3/6] build (core 인라인)"; node variants.mjs build
 echo "[4/6] 인라인 스크립트 node --check"
 python - <<'PY'
