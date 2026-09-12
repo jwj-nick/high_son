@@ -37,13 +37,14 @@ C:\Nick\30_Apps\jwj-nick.github.io\high1\math\2sem_perf_circle_path.html   배�
 
 **규칙:** 콘텐츠는 정본 `.md`에 먼저 적고 앱·프린트는 그것을 옮긴다. 변형 문제의 숫자는 **생성기로 산출하고 검산된 것만** 쓴다(손으로 지어낸 숫자 금지). 범위 밖 기법(벡터·삼각함수 접선 공식)은 검산 코멘트로만 둔다.
 
-## 4. 게이트 (배포 전 필수)
+## 4. 게이트 (배포 전 필수) — `cd 10_prep/gen && sh gate.sh` 한 번에
 
-1. 생성기: 각 변형 세트를 무차별 탐색(원 위 점 격자)으로 재검산 → 이론값과 오차 < 1e-2.
-2. 인라인 `<script>` 추출 → `node --check`.
-3. innerHTML 문자열의 `<`+알파벳 스캔(태그로 파싱돼 잘림 → `&lt;`). 부등호는 공백 규칙(`a < b`).
-4. viewport meta · 고정 px 없음 · 터치 44px · `@media (max-width:640px)` · breadcrumb nav.
+1. `node variants.mjs verify` — 예시·고정 10세트·무작위 330세트를 무차별 탐색(원 위 점 격자)으로 재검산 → "실패 0건".
+2. `docs`·`bank`·`print`·`build` — 정본 md·프린트 팩·앱 인라인을 core.js에서 **다시 생성**(손으로 고친 생성물은 여기서 덮인다).
+3. 인라인 `<script>` 추출 → `node --check`; viewport·`@media (max-width:640px)` 존재 확인. 텍스트는 전부 `esc()`를 거치므로 `<`+알파벳 잘림은 구조적으로 막혀 있다.
+4. `node cdp_smoke.mjs` — 헤드리스 Chrome을 CDP로 조작: 탭 전환·펼치기 단계 4·함정 토글·접선 프리셋·빈칸 퀴즈 13/13·드릴 채점(정답/오답→복습함)·무작위 50회 생성·프린트 탭 렌더링·콘솔 에러 0. 스크린샷은 `/tmp/mat2perf_shots/`.
 5. `se-agent-app-reviewer`로 수학 정확성 검토 → 🔴 0.
+⚠️ 이 머신의 헤드리스 Chrome은 창폭이 약 500px 아래로 내려가지 않는다. 폰 폭 레이아웃은 520px 스크린샷으로 근사 확인한다.
 
 ## 5. 배포
 
@@ -58,7 +59,7 @@ C:\Nick\30_Apps\jwj-nick.github.io\high1\math\2sem_perf_circle_path.html   배�
 |---|---|---|
 | `mat-start` | `.claude/skills/mat-start/` | 재진입: 정본 읽기 → 현재 라운드 파악 → 자율 진행 |
 | `mat-log` | `.claude/skills/mat-log/` | 라운드 기록: Nick 원문 → SESSION_LOG, PLAN 이력, 경로 지정 커밋 |
-| `perf-math-variant` | `.claude/skills/perf-math-variant/` | (라운드 2 확정 후 생성 예정) 유형 고정·숫자 변형 논술형 수학 수행평가 대비 파이프라인. 승격 후보 |
+| `perf-math-variant` | `.claude/skills/perf-math-variant/` | 유형 고정·숫자 변형 논술형 수학 수행평가 대비 파이프라인(단일 정본 core.js → md·프린트·앱 생성 → 게이트 → 배포). 다음 수학 수행에서 solve/gen만 갈아끼워 재사용 |
 
 공통 스킬(`../.claude/skills/`)은 아직 없음. 루트 스킬 `se-perf-study-app`·`se-math-drill-set`은 이번에 호출하지 않는다(전자는 Canvas·KaTeX 중심이라 과함, 후자는 단원 앱용 12문항 세트 절차라 형식이 다름). 개념 복습이 필요하면 앱에서 `subject_hub/공통수학2` 단원 앱으로 딥링크만 건다.
 
@@ -69,11 +70,20 @@ math-1-2-1/
 ├── CLAUDE.md
 ├── SESSION_LOG.md    ← 라운드별 Nick 원문 + Claude 답변 전문
 ├── PLAN.md           ← 산출물·앱 설계·라운드 계획·열린 질문
-├── .claude/skills/   ← mat-start · mat-log · (perf-math-variant)
+├── .claude/skills/   ← mat-start · mat-log · perf-math-variant
 ├── inbox/            ← 예시문항 사진 2장 + README.md 색인 (수정 금지)
 ├── 00_notice/        ← (비어 있음; 예시문항 원본은 inbox/)
-├── 10_prep/          ← 01_analysis.md ✅ · 02~04 정본 · gen/variants.mjs · app/perf_circle_path.html
-└── 90_output/        ← print_pack.html
+├── 10_prep/
+│   ├── 01_analysis.md            ← 손으로 쓴 정본 (풀이·변형 축·감점 포인트)
+│   ├── 02_answer_templates.md    ← 생성물 (core.js TEMPLATES)
+│   ├── 03_variant_bank.md        ← 생성물 (core.js FIXED_SETS)
+│   ├── 04_questions_for_son.md   ← 생성물 (core.js QUESTIONS_FOR_SON)
+│   ├── gen/core.js               ← ⭐ 단일 정본: 분수 연산·solve/gen/verify·고정 세트·답안 틀·프린트 렌더러
+│   ├── gen/variants.mjs          ← 러너 (verify·search·docs·bank·print·build)
+│   ├── gen/cdp_smoke.mjs         ← 헤드리스 Chrome 상호작용 스모크
+│   ├── gen/gate.sh               ← 게이트 일괄
+│   └── app/perf_circle_path.html ← 앱 (core.js가 /* @core */ 마커 사이에 인라인됨)
+└── 90_output/print_pack.html     ← 생성물 (프린트 팩 정적 파일)
 ```
 
 ## 8. 변경 이력
@@ -82,3 +92,4 @@ math-1-2-1/
 |---|---|
 | 2026-09-12 | 골격 생성(perf-intake, 상위 커밋 5bc870a). |
 | 2026-09-12 | 라운드 1: inbox 2장 + README, `10_prep/01_analysis.md`(수치 검산), `PLAN.md` 제안, 이 파일 전면 개정, `mat-start`·`mat-log` 생성. |
+| 2026-09-12 | 라운드 2 확정 → 라운드 3·4 자율 진행: 생성기 core.js(분수 정확·조사 처리·342건 검산), 정본 md 3종 생성, 프린트 팩, 앱 7탭(앱 내 프린트 포함), 게이트 4종(gate.sh·cdp_smoke), `perf-math-variant` 스킬. §4 게이트를 실제 명령으로 갱신. |
