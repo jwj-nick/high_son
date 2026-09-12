@@ -48,8 +48,8 @@ C:\Nick\30_Apps\jwj-nick.github.io\high1\math\2sem_perf_circle_path.html   배�
 
 ## 5. 배포
 
-1. `cp 10_prep/app/perf_circle_path.html → C:\Nick\30_Apps\jwj-nick.github.io\high1\math\2sem_perf_circle_path.html`
-2. `high1/math/index.html`(또는 `_shared/math_index.html` — 배포 시 실측)에 카드 추가(파일명 영어, `2sem_perf_` prefix).
+1. `cp 10_prep/app/perf_circle_path.html → C:\Nick\30_Apps\jwj-nick.github.io\high1\math\2sem_perf_circle_path.html`, `cp 90_output/print_pack.html → …\high1\math\2sem_perf_circle_path_print.html` (앱의 ⬇️ 파일로 저장 링크가 이 파일을 가리킨다).
+2. `high1/math/index.html`의 "1학년 2학기" details 블록 `PERF12` 배열에 카드(앱·프린트 각 한 줄). 2026-09-12에 "준비 중" 자리표시자를 이 블록으로 바꿨다.
 3. 두 리포 커밋·푸시: public `jwj-nick.github.io` + private `high_son`(= `C:\Kids\70_HighSchool`, 경로 지정 커밋).
 4. 네트워크 명령(git push·curl)은 **단독 명령**으로.
 

@@ -589,7 +589,7 @@ var VG = (function () {
     '.pp .pp-step{margin:8px 0}.pp .pp-st{font-weight:700;background:#eef2ff;padding:3px 6px;border-left:3px solid #4f46e5}.pp .pp-ln{padding:2px 0 2px 12px}.pp .pp-hl{font-weight:700;color:#1d4ed8}' +
     '.pp .pp-opt .pp-st{background:#f1f5f9;border-left-color:#94a3b8}' +
     '.pp .pp-ans{border:1px dashed #666;min-height:150px;margin:6px 0 12px;padding:4px;background:repeating-linear-gradient(#fff 0 27px,#e5e7eb 27px 28px)}' +
-    '.pp .pp-ans.sm{min-height:100px}.pp .pp-ans.lg{min-height:260px}' +
+    '.pp .pp-ans.sm{min-height:100px}.pp .pp-ans.md{min-height:200px}.pp .pp-ans.lg{min-height:440px}' +
     '.pp .pp-svg{width:100%;max-width:380px;display:block;margin:6px auto;background:#fff;border:1px solid #ddd}' +
     '.pp .pp-tpl{margin:6px 0 10px}.pp .pp-tpl .h{font-weight:700;margin:6px 0 2px}.pp .pp-tpl .t{padding-left:10px}' +
     '.pp .pp-two{display:flex;gap:14px}.pp .pp-two>*{flex:1;min-width:0}.pp .pp-small{font-size:11.5px;color:#444}' +
@@ -632,16 +632,20 @@ var VG = (function () {
     /* 3. 변형 문제 쪽 */
     var sols = sets.map(function (st) { var sol = solveAny(st.type, st.p); sol.id = st.id; sol.tag = st.tag; return sol; });
     h += '<div class="pp-page"><h2>3. 변형 문제 10세트 — 문제 쪽 (반드시 종이에 손으로)</h2><div class="pp-note">V1~V4 = 1번형, V5~V8 = 2번형, V9·V10 = 함정. 한 세트 목표 시간: 1번형 20분, 2번형 18분.</div>';
+    var pend = 0; // 2번형은 두 세트를 한 쪽에, 1번형은 한 세트가 한 쪽
     sols.forEach(function (sol, i) {
-      h += '<h3>' + esc(sol.id) + '<span class="pp-tag">' + esc(sol.tag) + '</span></h3>' + problemHtml(sol, sol.type === 1 ? '1.' : '2.') + '<div class="pp-ans ' + (sol.type === 1 ? 'lg' : '') + '"></div>';
-      if (i % 2 === 1 && i < sols.length - 1) h += '</div><div class="pp-page">';
+      h += '<h3>' + esc(sol.id) + '<span class="pp-tag">' + esc(sol.tag) + '</span></h3>' + problemHtml(sol, sol.type === 1 ? '1.' : '2.') + '<div class="pp-ans ' + (sol.type === 1 ? 'lg' : 'md') + '"></div>';
+      pend += sol.type === 1 ? 2 : 1;
+      if (pend >= 2 && i < sols.length - 1) { h += '</div><div class="pp-page">'; pend = 0; }
     });
     h += '</div>';
     /* 4. 답 쪽 */
     h += '<div class="pp-page"><h2>4. 변형 정답·풀이 — 답 쪽 (풀고 나서만 본다)</h2>';
+    var pend2 = 0;
     sols.forEach(function (sol, i) {
       h += '<h3>' + esc(sol.id) + ' 정답: ' + esc(sol.brief.join('  |  ')) + '</h3>' + stepsHtml(sol.steps);
-      if (i % 2 === 1 && i < sols.length - 1) h += '</div><div class="pp-page">';
+      pend2 += sol.type === 1 ? 2 : 1;
+      if (pend2 >= 2 && i < sols.length - 1) { h += '</div><div class="pp-page">'; pend2 = 0; }
     });
     h += '</div>';
     /* 5. 함정·검산·시간 */

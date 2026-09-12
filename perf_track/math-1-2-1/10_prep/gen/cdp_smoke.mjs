@@ -10,6 +10,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const APP = 'file:///' + path.resolve(here, '..', 'app', 'perf_circle_path.html').replace(/\\/g, '/');
 const OUT = process.argv[2] || path.join(here, '_shots');
 fs.mkdirSync(OUT, { recursive: true });
+fs.rmSync(path.join(OUT, '_prof'), { recursive: true, force: true }); // 이전 실행의 localStorage(복습함 등)를 지워 매번 같은 조건에서 검사
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const PORT = 9333;
 const chrome = spawn(CHROME, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--allow-file-access-from-files', '--remote-debugging-port=' + PORT, '--window-size=520,1400', '--user-data-dir=' + path.join(OUT, '_prof'), 'about:blank'], { stdio: 'ignore' });
