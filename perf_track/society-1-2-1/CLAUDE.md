@@ -22,7 +22,7 @@
 
 ## 이 과제에서 쓰는 스킬
 
-- 공통: (아직 없음 — 과학 과제의 `perf-essay-prep`과 이 과제의 `soc-prep`을 두 과제가 끝난 뒤 합쳐 승격하는 것이 후속 과제, `PLAN.md` Q7)
+- 공통: 없음. 승격은 아이디어로만 남김(Nick 라운드 2) — 필요한 것은 이 폴더에서 자체 제작·사용
 - 전용: `soc-start`(재진입) · `soc-log`(라운드 기록) · `soc-prep`(제작 절차)
 
 ## 기존 자산과의 관계
@@ -45,6 +45,6 @@ society-1-2-1/
 ├── inbox/            ← ⭐ 대화 seed. 부교재 사진 16장(p50~75) + README.md 색인 (2026-09-12)
 ├── 00_notice/
 │   └── questions.md  ← 핵심 질문 4개 원문 (수정 금지)
-├── 10_prep/          ← 00_fill_blanks · 01_answer_keys · 02_question_bank · 03_workbook_digest · app/perf_economy.html
+├── 10_prep/          ← 00_fill_blanks · 01_answer_keys · 02_question_bank · 03_workbook_digest · 04_review · app/(build.py → 2sem_perf_economy.html · 2sem_perf_economy_print.html)
 └── 90_output/        ← print_pack.html (최종 준비 형태)
 ```
