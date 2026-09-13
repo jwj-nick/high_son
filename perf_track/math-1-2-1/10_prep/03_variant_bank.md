@@ -1,6 +1,6 @@
 # 03_variant_bank — 변형 문제 은행 (생성기 출력, 검산 완료)
 
-> `gen/core.js`의 FIXED_SETS 10세트를 `node variants.mjs bank`로 뽑은 것(2026-09-12). 손으로 고치지 않는다 — 숫자를 바꾸려면 core.js의 FIXED_SETS를 고치고 다시 생성한다. 각 세트는 `node variants.mjs verify`에서 무차별 탐색으로 재검산된다.
+> `gen/core.js`의 FIXED_SETS 10세트를 `node variants.mjs bank`로 뽑은 것(2026-09-13). 손으로 고치지 않는다 — 숫자를 바꾸려면 core.js의 FIXED_SETS를 고치고 다시 생성한다. 각 세트는 `node variants.mjs verify`에서 무차별 탐색으로 재검산된다.
 > V1~V4 = 1번형, V5~V8 = 2번형, V9·V10 = 함정 변형. 프린트 팩·앱 🖨️ 탭의 3·4절과 같은 내용.
 
 | ID | 유형 | 태그 | 정답 요약 |
