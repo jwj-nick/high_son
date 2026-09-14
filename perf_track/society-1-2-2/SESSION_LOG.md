@@ -63,3 +63,12 @@
 **배포:** `high1/society/2sem_perf_mockingbird.html` · `2sem_perf_mockingbird_print.html` · 허브 카드 2장. 커밋 9e60a134 push.
 
 **보류:** 대안 책(지글러) 앱은 책 선언 결과를 본 뒤. 그쪽으로 가면 목차 사진이 필요(장 구조를 정확히 잡기 위해).
+
+## Round 4 — 2026-09-14 (책 확정 · compact 준비)
+
+**Nick 원문:**
+> 앵무새 죽이기로 확정. 지글러 앱은 불필요, compact 준비 바람. compact 후  step 2 준비 순조롭게 해야함.
+
+**결정:** 『앵무새 죽이기』(열린책들·김욱동) 확정. 지글러 대안 앱·카드 폐기(`90_output/step1_card_alt_ziegler.html` 삭제). STEP2 준비 절차를 `PLAN.md` §8에 고정.
+
+**compact 뒤 첫 행동:** `PLAN.md` §8을 읽고, Nick이 넣는 아들의 답 5개·사진을 받아 절차 1번부터. 오늘(9/14) STEP1 수업 결과(선생님 반응·구두 질문 여부)가 오면 여기 Round 5로 기록.
